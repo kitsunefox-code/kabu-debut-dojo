@@ -241,6 +241,10 @@
   .dmm-alert .bd{padding:20px 16px 16px; font-size:13.5px; font-weight:600;}
   .dmm-alert .ok{border-top:1px solid #d8d8dc; color:#0a66ff; font-weight:700; padding:12px; cursor:pointer;}
   .dmm-updated{text-align:right; font-size:9.5px; color:#6f7480; padding:4px 10px;}
+  .dmm-loz{display:flex; align-items:center; gap:8px; padding:8px 12px; flex-shrink:0;}
+  .dmm-loz .lz{flex:1; background:transparent; color:#fff; border-radius:999px; padding:9px 8px; font-size:12px; font-weight:800; cursor:pointer; font-family:inherit;}
+  .dmm-loz .lz.bid{border:2px solid #288ee0;}
+  .dmm-loz .lz.ask{border:2px solid #ff9125;}
   .t-dmm .plus{color:#fff;} .t-dmm .minus{color:#fc155b;}
   .t-neo .plus{color:#fff;} .t-neo .minus{color:#eb625d;}
 
@@ -943,6 +947,40 @@ function candleSVG(up, dn, bodyDn){
   return `<svg viewBox="0 0 ${W} ${H}" height="104">${s}</svg>`;
 }
 
+/* ===== MACD風サブチャート ===== */
+function macdSVG(){
+  const W=326, H=54, n=24, cw=W/n;
+  let bars='', mid=H/2;
+  const hs=[-8,-5,-2,2,5,8,6,3,-1,-4,-2,3,7,10,8,5,2,6,9,12,9,6,8,11];
+  hs.forEach((h,i)=>{
+    const x=i*cw+cw*0.25;
+    bars+=`<rect x="${x}" y="${h>=0?mid-h:mid}" width="${cw*0.5}" height="${Math.abs(h)}" fill="${h>=0?'#de4f4f':'#2a72c4'}"/>`;
+  });
+  const line=(pts,c)=>`<polyline points="${pts}" fill="none" stroke="${c}" stroke-width="1.3"/>`;
+  return `<svg viewBox="0 0 ${W} ${H}" height="54"><line x1="0" y1="${mid}" x2="${W}" y2="${mid}" stroke="rgba(128,128,128,.3)"/>${bars}
+    ${line('0,36 40,32 80,30 120,25 160,22 200,24 240,20 280,16 326,14','#5bce5d')}
+    ${line('0,40 40,37 80,33 120,29 160,26 200,26 240,23 280,20 326,17','#ff9125')}</svg>`;
+}
+
+/* ===== ミニローソク足(デモ用・終値履歴から擬似OHLC) ===== */
+function candleMini(hist, up, dn){
+  if(hist.length<2) return '<span style="font-size:9px; opacity:.5;">(値動きなし)</span>';
+  const W=96, H=30, n=hist.length-1, cw=W/Math.max(n,8);
+  let min=Infinity, max=-Infinity;
+  hist.forEach(v=>{ if(v<min)min=v; if(v>max)max=v; });
+  const rng=(max-min)||1, pad=rng*0.15;
+  const y=v=>H-((v-(min-pad))/(rng+pad*2))*H;
+  let s='';
+  for(let i=1;i<hist.length;i++){
+    const o=hist[i-1], c=hist[i], rise=c>=o, col=rise?up:dn;
+    const x=(i-1)*cw+cw/2;
+    const hi=Math.max(o,c)+rng*0.06, lo=Math.min(o,c)-rng*0.06;
+    s+=`<line x1="${x}" y1="${y(hi)}" x2="${x}" y2="${y(lo)}" stroke="${col}" stroke-width="1"/>`;
+    s+=`<rect x="${x-cw*0.3}" y="${y(Math.max(o,c))}" width="${cw*0.6}" height="${Math.max(1.5, Math.abs(y(o)-y(c)))}" fill="${col}"/>`;
+  }
+  return `<svg width="${W}" height="${H}" style="display:block; margin-top:3px;">${s}</svg>`;
+}
+
 /* ===== 板(SBI気配値) ===== */
 function itaSBI(){
   return `<table class="ita">
@@ -1096,7 +1134,7 @@ monex: {
 },
 /* ---------------- FX(一般型) ---------------- */
 fx: {
-  cls:'t-fx', last:5,
+  cls:'t-fx', last:5, tick:3,
   guides:[
     {g:'まずはレート一覧。<b>USD/JPY(米ドル/円)</b>の行をタップ', s:'FXは通貨の交換。左の青が売る値段(Bid)、右の赤が買う値段(Ask)です。',
      l:'BidとAskの差を<b>スプレッド</b>といい、これがFXの実質的な取引コストです。「0.2」は0.2銭のこと。1万通貨の取引なら20円に相当します。ほとんどのFXアプリはこの「青・赤の2枚板」でレートを表示します。'},
@@ -1115,10 +1153,12 @@ fx: {
 },
 /* ---------------- FXネオ風 ---------------- */
 fxneo: {
-  cls:'t-neo', last:6,
+  cls:'t-neo', last:7, tick:5,
   guides:[
     {g:'レート一覧です。<b>USD/JPY</b>の行をタップ', s:'左がBID(売る値段)、右がASK(買う値段)。真ん中の小さな数字がスプレッドです。',
      l:'pipsの2桁だけ大きく表示するのはFXアプリ共通の作法。レートの矢印は<b>上昇=赤、下降=水色</b>です。BIDとASKの差(スプレッド)0.2銭が実質の取引コスト。'},
+    {g:'ローソク足で流れを確認したら、下の<b>「トレード」</b>タブをタップ', s:'FXネオのチャートは黒背景。陽線=赤、陰線=シアンです。',
+     l:'ローソク1本が一定時間の値動き(始値・高値・安値・終値)を表します。<b>赤い陽線=その時間で上がった、シアンの陰線=下がった</b>。上のSMA(5/13/25)は移動平均線=平均の流れ、右端のオレンジのタグが現在値です。全部読めなくても、「いま上り調子か下り調子か」が見えれば十分。'},
     {g:'上がると思ったので、右の赤い<b>「(買) ASK」</b>パネルをタップ', s:'盾のような形の2枚パネルがFXネオの看板UIです。',
      l:'下がると思ったときは左の青い「BID(売)」から。FXは<b>売りからも入れます</b>。下半分の「建玉サマリ」に保有中の取引(建玉=ポジション)が並びます。売買バッジは<b>買=赤、売=水色</b>。'},
     {g:'数量は<b>0.1(=1,000通貨)</b>のまま、ティール色の<b>「確認画面へ」</b>をタップ', s:'注文タイプは「成行」が選ばれています。',
@@ -1136,12 +1176,12 @@ fxneo: {
 },
 /* ---------------- DMM FX風 ---------------- */
 dmmfx: {
-  cls:'t-dmm', last:6,
+  cls:'t-dmm', last:6, tick:4,
   guides:[
     {g:'レート一覧です。<b>USD/JPY</b>の行をタップ', s:'Bid(売)とAsk(買)の下の色付きラインが売り/買いの目印です。',
      l:'DMM FXは黒地に<b>ライム黄緑</b>がブランド色。通貨ペア名や選択中のタブがライムで光ります。数字のpips2桁が大きいのは他のFXアプリと同じ作法。'},
-    {g:'上がると思ったので、右の<b>Ask/買の円</b>をタップ', s:'2つの巨大な円形パネルがDMM FXの看板UIです。',
-     l:'<b>売=シアン→青、買=オレンジ→赤のグラデーションリング</b>。円の間の小さな丸がスプレッド。下のライム色の線は直近の値動き(スパークライン)です。'},
+    {g:'上がると思ったので、右の<b>Ask/買の円</b>をタップ', s:'右上の「切替」でローソク足チャート表示にもできます(陽線=赤/陰線=青)。',
+     l:'<b>売=シアン→青、買=オレンジ→赤のグラデーションリング</b>。円の間の小さな丸がスプレッド。下のライム色の線は直近の値動き(スパークライン)です。「切替」をタップするとチャート+横長のBid/Askボタンに切り替わるのも本物どおり。現在値のタグはライム色です。'},
     {g:'売買で<b>「買」</b>を選んで、<b>「確認画面」</b>をタップ', s:'「新規 即時注文」画面。即時=成行のことです。',
      l:'DMMは<b>1Lot=1万通貨</b>(約151万円分の取引、必要証拠金 約6万円)が最小単位。1,000通貨から始めたい人は他社(FXネオ・松井FXなど)を選ぶ、という判断材料になります。スリッページ2.0pips、「損切:OFF」は予約損切り機能で慣れたらON推奨。'},
     {g:'ライム緑の<b>「注 文」</b>をタップ', s:'選んだ「買」側の円だけ点灯し、反対側はグレーになります。',
@@ -1160,12 +1200,12 @@ dmmfx: {
 /* ---- FXネオ風ビルダー ---- */
 function neoNum(h,p,l,arr){ return `<span class="neo-num">${h}<b>${p}</b><sup>${l}</sup>${arr?`<span class="${arr==='up'?'arrup':'arrdn'}">${arr==='up'?'▲':'▼'}</span>`:''}</span>`; }
 function buildNeo(i){
-  const tabbar = (hl)=>`<div class="tabbar">
+  const tabbar = (hl, tapTrade)=>`<div class="tabbar">
     <div class="${hl===0?'on':''}">${ico('grid')}ホーム</div>
-    <div class="${hl===1?'on':''}">${ico('reload')}トレード</div>
+    <div class="${hl===1?'on':''} ${tapTrade?'tap':''}" ${tapTrade?'onclick="simNext()"':''}>${ico('reload')}トレード</div>
     <div><i style="font-style:italic; font-weight:800; font-size:12px; display:block;">SPEED</i>スピード注文</div>
     <div>${ico('globe')}マーケット</div>
-    <div>${ico('chart')}チャート</div>
+    <div class="${hl===4?'on':''}">${ico('chart')}チャート</div>
     <div class="gold ${hl===5?'on':''}">${ico('coin')}通貨ペア</div></div>`;
   const pairbar = `<div class="neo-pairbar"><span>USD/JPY</span><span class="hlv">前日比 +0.10　<span style="color:#de4f4f;">H:</span> 151.625　<span style="color:#0daddc;">L:</span> 151.084</span></div>`;
   const panels = (mode)=>`<div class="neo-panels">
@@ -1199,11 +1239,27 @@ function buildNeo(i){
       </div><span class="nr-sub">前日比 -0.08　<span style="color:#de4f4f;">H:</span> 98.712　<span style="color:#0daddc;">L:</span> 98.301</span></div>
     </div>` + tabbar(5);
 
-  if(i===1) return sbarHTML('#000','#fff') + pairbar + panels('tap') + flap('トレード') + subtabs(0) + `
+  if(i===1) return sbarHTML('#000','#fff') + `
+    <div class="aphead" style="background:#2a3648; font-size:12.5px;"><span>USD/JPY <span class="neo-chip" style="padding:1px 8px; font-size:10px;">SP:0.2</span></span><span style="font-weight:400; font-size:10.5px;">O:151.084 H:151.625 L:151.084 C:151.232</span></div>
+    <div style="display:flex; gap:6px; padding:6px 10px; background:#0a0d14; flex-shrink:0;">
+      <span style="background:#e4e4e4; color:#111; border-radius:3px; padding:3px 10px; font-size:11px; font-weight:700;">日足 BID</span>
+      <span style="background:#5bce5d; color:#fff; border-radius:3px; padding:3px 12px; font-size:11px; font-weight:800;">Action</span>
+      <span style="margin-left:auto; font-size:10px; color:#0daddc; padding-top:4px;">SMA: 5 / 13 / 25</span>
+    </div>
+    <div class="apbody" style="background:#000;">
+      <div style="position:relative; padding:10px 4px;">
+        ${candleSVG('#ea1419','#03b5e0','#03b5e0')}
+        <span style="position:absolute; right:0; top:26%; background:#ff7800; color:#fff; font-size:10px; font-weight:800; padding:1px 7px; border-radius:2px;">151.232</span>
+      </div>
+      <div style="padding:4px 12px; font-size:10px; color:#8a93a5;">MACD(12,26,9)</div>
+      <div style="padding:0 4px 10px;">${macdSVG()}</div>
+    </div>` + tabbar(4, true);
+
+  if(i===2) return sbarHTML('#000','#fff') + pairbar + panels('tap') + flap('トレード') + subtabs(0) + `
     <div class="neo-th"><span>通貨ペア (売買)</span><span>建玉数量/発注中</span><span>評価損益/累計SW</span></div>
     <div class="apbody"><div style="padding:16px 12px; font-size:12px; color:#8a93a5;">建玉はありません。上の(買) ASKパネルをタップすると新規注文へ進みます。</div></div>` + tabbar(1);
 
-  if(i===2) return sbarHTML('#000','#fff') + pairbar + flap('新規') + `
+  if(i===3) return sbarHTML('#000','#fff') + pairbar + flap('新規') + `
     <div class="sbi-toptabs" style="border-bottom:1px solid #2a3040;"><div class="on" style="border-bottom-color:#a8e6fc; color:#fff;">成行</div><div onclick="simWarnFxLimit()">通常</div><div onclick="simWarnFxLimit()">OCO</div><div onclick="simWarnFxLimit()">IFD</div><div onclick="simWarnFxLimit()">IFD-OCO</div></div>
     <div class="apbody">
       <div class="fx-frow"><span class="fl">売買区分</span><span>買 <span class="neo-badge b">買</span></span></div>
@@ -1218,7 +1274,7 @@ function buildNeo(i){
       </div>
     </div>` + tabbar(1);
 
-  if(i===3) return sbarHTML('#000','#fff') + pairbar + panels('dimbid') + `<div class="apbody" style="background:rgba(0,0,0,.4);">
+  if(i===4) return sbarHTML('#000','#fff') + pairbar + panels('dimbid') + `<div class="apbody" style="background:rgba(0,0,0,.4);">
       <div class="menuovl center"><div class="neo-modal">
         <div class="mh">注文確認</div>
         <div style="padding:6px 16px 2px;">
@@ -1235,7 +1291,7 @@ function buildNeo(i){
       </div></div>
     </div>`;
 
-  if(i===4) return sbarHTML('#000','#fff') + pairbar + panels('') + flap('トレード') + subtabs(0) + `
+  if(i===5) return sbarHTML('#000','#fff') + pairbar + panels('') + flap('トレード') + subtabs(0) + `
     <div class="neo-th"><span>通貨ペア (売買)</span><span>数量/建玉レート・評価レート</span><span>評価損益</span></div>
     <div class="apbody">
       <div class="neo-prow">
@@ -1249,7 +1305,7 @@ function buildNeo(i){
       <div class="fx-frow"><span class="fl">証拠金維持率</span><span style="font-weight:800; color:#66d2d0;">${Math.round(100000/(151.232*sim.qty/25)*100).toLocaleString()}%</span></div>
     </div>` + tabbar(1);
 
-  if(i===5) return sbarHTML('#000','#fff') + pairbar + panels('goldbid') + flap('決済') + `
+  if(i===6) return sbarHTML('#000','#fff') + pairbar + panels('goldbid') + flap('決済') + `
     <div class="sbi-toptabs" style="border-bottom:1px solid #2a3040;"><div class="on" style="border-bottom-color:#a8e6fc; color:#fff;">成行</div><div onclick="simWarnFxLimit()">通常</div><div onclick="simWarnFxLimit()">OCO</div></div>
     <div class="apbody">
       <div class="fx-frow"><span class="fl">売買区分</span><span>売 <span class="neo-badge s">売</span><span class="neo-chip" style="margin-left:10px;">建玉レート 151.232</span></span></div>
@@ -1319,12 +1375,27 @@ function buildDMM(i){
       <div class="dmm-updated">Updated 2026/08/07 15:00:00</div>
     </div>` + tabbar(2);
 
-  if(i===1) return head('トレード') + pairbar + circles('tap') + spark + `
+  if(i===1){
+    const pairbarT = `<div class="dmm-pairbar"><span class="dmm-pair">USD/JPY</span><span style="display:flex; align-items:center; gap:12px;"><span class="hlv">前日比 : +0.103<br><span style="color:#f26b34;">H</span> 151.594 / <span style="color:#11a1e8;">L</span> 151.278</span><span onclick="dmmToggleChart()" style="font-size:9.5px; text-align:center; cursor:pointer; color:#cfd3da;">${ico('chart')}切替</span></span></div>`;
+    const main = sim.chart
+      ? `<div style="position:relative; padding:8px 4px 2px;">
+           ${candleSVG('#dc353c','#288ee0','#288ee0')}
+           <span style="position:absolute; right:0; top:24%; background:#9ff82e; color:#111; font-size:10px; font-weight:800; padding:1px 7px; border-radius:2px;">151.232</span>
+         </div>
+         <div style="padding:0 12px 4px; font-size:9.5px; color:#9aa0ad;">移動平均1(10) <span style="color:#ff9125;">─</span>　移動平均2(25) <span style="color:#9bd820;">─</span>　移動平均3(75) <span style="color:#11a1e8;">─</span></div>
+         <div class="dmm-loz">
+           <button class="lz bid" onclick="simWarnFxSell()">Bid/売<span class="dmm-num" style="font-size:11px;"> 151.<b>23</b><sup>0</sup></span></button>
+           <span style="width:30px; height:30px; border:1.5px solid #8a93a5; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:10.5px; flex-shrink:0;">0.2</span>
+           <button class="lz ask tap" onclick="simNext()">Ask/買<span class="dmm-num" style="font-size:11px;"> 151.<b>23</b><sup>2</sup></span></button>
+         </div>`
+      : circles('tap') + spark;
+    return head('トレード') + pairbarT + main + `
     <div class="dmm-subtabs"><div class="on">ポジションサマリ</div><div>ポジション照会</div><div>注文照会</div><div>約定履歴</div></div>
     <div class="apbody">
-      <div style="padding:14px 12px; font-size:12px; color:#9aa0ad;">ポジションはありません。上のAsk/買の円をタップすると新規注文へ。</div>
+      <div style="padding:14px 12px; font-size:12px; color:#9aa0ad;">ポジションはありません。${sim.chart?'下のAsk/買ボタン':'上のAsk/買の円'}をタップすると新規注文へ。</div>
       <div class="dmm-updated" style="margin-top:auto;">Updated 2026/08/07 15:00:00</div>
     </div>` + tabbar(0);
+  }
 
   if(i===2) return head('新規 即時注文', true) + circles(sim.otype?'dim-none':'', true) + `
     <div class="dmm-subtabs"><div class="on">即時</div><div onclick="simWarnFxLimit()">指値/逆指値</div><div onclick="simWarnFxLimit()">IFD</div><div onclick="simWarnFxLimit()">OCO</div><div onclick="simWarnFxLimit()">IFO</div></div>
@@ -1401,9 +1472,10 @@ function buildDMM(i){
       </div>
     </div>` + tabbar(0);
 }
-function neoBack(){ sim.i = 1; renderSim(); }
-function neoBackForm(){ sim.i = 2; renderSim(); }
+function neoBack(){ sim.i = 2; renderSim(); }
+function neoBackForm(){ sim.i = 3; renderSim(); }
 function dmmSide(){ sim.otype = 'buy'; renderSim(); }
+function dmmToggleChart(){ sim.chart = !sim.chart; renderSim(); }
 function dmmBack(){ sim.i = 1; sim.otype = null; renderSim(); }
 function dmmBackForm(){ sim.i = 2; renderSim(); }
 function dmmBackPos(){ sim.i = 4; renderSim(); }
@@ -1935,7 +2007,7 @@ function renderSim(){
   scr.innerHTML = S.build(sim.i);
   const body = scr.querySelector('.apbody'); if(body) body.scrollTop = 0;
   clearInterval(window._fxT);
-  if((sim.broker==='fx' && sim.i===3) || ((sim.broker==='fxneo'||sim.broker==='dmmfx') && sim.i===4)){ startFxTick(); }
+  if(S.tick !== undefined && sim.i === S.tick){ startFxTick(); }
 }
 function startFxTick(){
   let bid = 151.245;
@@ -2080,14 +2152,27 @@ function demoFxClose(idx){
   demoLog(`USD/JPY ${p.side} ${p.u.toLocaleString()}通貨 を決済(実現損益 ${pl>=0?'+':''}${pl.toLocaleString()}円)`);
   demoSave(); renderDemo();
 }
+function demoSparkPts(){
+  const h = window._demoFxHist || [];
+  if(h.length < 2) return '0,20 320,20';
+  let min=Infinity, max=-Infinity;
+  h.forEach(v=>{ if(v<min)min=v; if(v>max)max=v; });
+  const rng=(max-min)||0.01;
+  return h.map((v,i)=>`${(i/(h.length-1)*320).toFixed(1)},${(38-((v-min)/rng)*36).toFixed(1)}`).join(' ');
+}
 function demoTick(){
   demoFxRate = Math.max(140, Math.min(160, demoFxRate + (Math.random()-0.5)*0.02));
+  if(!window._demoFxHist) window._demoFxHist = [];
+  window._demoFxHist.push(demoFxRate);
+  if(window._demoFxHist.length > 60) window._demoFxHist.shift();
   if(!D || !document.getElementById('page-demo').classList.contains('active')) return;
   if(D.mode!=='fx') return;
   const {bid, ask} = demoFxBidAsk();
   const be = document.getElementById('demoFxBid'), ae = document.getElementById('demoFxAsk');
   if(!be) return;
   be.innerHTML = fxFmt(bid); ae.innerHTML = fxFmt(ask);
+  const sp = document.getElementById('demoFxSpark');
+  if(sp) sp.querySelector('polyline').setAttribute('points', demoSparkPts());
   D.fxPos.forEach((p,i)=>{
     const el = document.getElementById('demoFxPl'+i); if(!el) return;
     const pl = Math.round(p.side==='買' ? (bid-p.r)*p.u : (p.r-ask)*p.u);
@@ -2159,6 +2244,7 @@ function demoStockScreen(){
     rows += `<div class="sbi-idxrow">
       <div><div class="inm">${DST[k].n} <span style="font-size:10px; color:#7A7E8E;">${DST[k].c} 特定</span></div>
         <div class="itm">${h.q>0 ? '保有 '+h.q.toLocaleString()+'株 / 平均 '+h.avg.toLocaleString()+'円' : '保有なし'}</div>
+        ${candleMini(hist,'#68E73F','#D45B40')}
         <div style="margin-top:5px; display:flex; gap:6px;">
           <button class="dm-b" onclick="demoBuy('${k}')">現物買</button>
           <button class="dm-s" ${h.q<100?'disabled':''} onclick="demoSell('${k}')">現物売</button>
@@ -2198,6 +2284,10 @@ function demoFxScreen(){
       <div class="neo-shield bid" onclick="demoFxOpen('売')"><span class="lab">BID (売) ⬇</span><span class="neo-num" id="demoFxBid" style="font-size:16px; display:block; margin-top:3px;">${fxFmt(bid)}</span></div>
       <div class="neo-spread">0.2</div>
       <div class="neo-shield ask" onclick="demoFxOpen('買')"><span class="lab">⬇ (買) ASK</span><span class="neo-num" id="demoFxAsk" style="font-size:16px; display:block; margin-top:3px;">${fxFmt(ask)}</span></div>
+    </div>
+    <div style="padding:2px 12px 0; flex-shrink:0;">
+      <svg id="demoFxSpark" viewBox="0 0 320 40" preserveAspectRatio="none" style="display:block; width:100%; height:40px; background:rgba(255,255,255,.03);"><polyline points="${demoSparkPts()}" fill="none" stroke="#66d2d0" stroke-width="1.5"/></svg>
+      <div style="font-size:9px; color:#8a93a5; text-align:right;">値動き(ライブ)</div>
     </div>
     <div class="fx-frow" style="border-bottom:1px solid #202838;"><span class="fl">取引数量(×10,000)</span><span class="sbi-seg">
       <button class="${D.fxUnits===1000?'sel':''}" onclick="demoFxUnitsSet(1000)">0.1</button>
