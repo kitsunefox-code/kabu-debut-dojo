@@ -98,8 +98,54 @@
   .brokerpick p{font-size:12px; color:var(--sub); line-height:1.7;}
   .brokerpick .go{display:block; margin-top:10px; font-size:12.5px; font-weight:800; color:var(--bp);}
 
+  /* ---------- FXシミュレーター(一般型) ---------- */
+  .t-fx .screen{background:#10151c; color:#e8eaee;}
+  .t-fx .sbar{background:#161d26; color:#fff;}
+  .t-fx .aphead{background:#161d26; color:#fff;}
+  .t-fx .tabbar{background:#0c1117; color:#6f7885;}
+  .t-fx .tabbar .on{color:#fff; font-weight:700;}
+  .fx-row{display:flex; align-items:center; justify-content:space-between; padding:8px 12px; border-bottom:1px solid #1d2530;}
+  .fx-pair{font-size:13px; font-weight:700;}
+  .fx-pair small{display:block; font-size:9.5px; color:#6f7885; font-weight:400;}
+  .fx-q{width:104px; border-radius:5px; padding:5px 8px; text-align:right; color:#fff; cursor:pointer;}
+  .fx-q .side{font-size:9px; opacity:.85; display:block; text-align:left;}
+  .fx-q .r{font-family:"Helvetica Neue",Arial,sans-serif; font-size:12px;}
+  .fx-q .r b{font-size:19px;}
+  .fx-q.bid{background:#2F6FD1;} .fx-q.ask{background:#E8483F;}
+  .fx-sp{font-size:9px; color:#8b95a3; text-align:center; width:28px;}
+  .fx-2btn{display:flex; gap:8px; padding:10px 12px; align-items:center; flex-shrink:0;}
+  .fx-2btn .fx-q{flex:1; width:auto; padding:9px 12px;}
+  .fx-2btn .fx-q .r b{font-size:25px;}
+  .fx-frow{display:flex; align-items:center; padding:10px 12px; border-bottom:1px solid #1d2530; gap:8px; font-size:12.5px;}
+  .fx-frow .fl{width:96px; color:#8b95a3; flex-shrink:0; font-size:11.5px;}
+  .fx-poscard{margin:10px 12px; border:1px solid #263140; border-radius:8px; padding:12px; background:#151c25;}
+  .fx-poscard .plv{font-size:26px; font-weight:800; font-family:"Helvetica Neue",Arial,sans-serif;}
+  .fx-btn{display:block; width:calc(100% - 28px); margin:12px 14px 0; border:none; border-radius:6px; padding:13px; font-size:15px; font-weight:800; cursor:pointer; color:#fff; font-family:inherit;}
+
+  /* ---------- デモトレード ---------- */
+  .demo-stats{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;}
+  .demo-stats div{flex:1; min-width:130px; border:1px solid var(--line); padding:10px 12px; background:#fafaf8;}
+  .demo-stats small{display:block; font-size:10.5px; color:var(--sub);}
+  .demo-stats b{font-size:17px; font-family:"Helvetica Neue",Arial,sans-serif;}
+  .demo-tabs{display:flex; margin-top:16px; gap:6px;}
+  .demo-tabs button{border:1px solid var(--line); background:#f0f0ed; padding:9px 22px; font-size:13.5px; font-weight:700; cursor:pointer; font-family:inherit; color:var(--sub);}
+  .demo-tabs button.on{background:var(--ink); color:#fff; border-color:var(--ink);}
+  table.demo{border-collapse:collapse; width:100%; font-size:12.5px; margin-top:12px; background:#fff;}
+  table.demo th, table.demo td{border:1px solid var(--line); padding:7px 8px; text-align:right; white-space:nowrap;}
+  table.demo th{background:#f4f4f1; font-size:11px;}
+  table.demo td:first-child, table.demo th:first-child{text-align:left;}
+  .demo-buy{background:#c0392b; color:#fff; border:none; padding:6px 12px; font-size:12px; font-weight:700; cursor:pointer; font-family:inherit;}
+  .demo-sell{background:#1b3a68; color:#fff; border:none; padding:6px 12px; font-size:12px; font-weight:700; cursor:pointer; font-family:inherit;}
+  .demo-sell:disabled, .demo-buy:disabled{background:#c6c8cc; cursor:not-allowed;}
+  .demo-log{margin-top:14px; border:1px solid var(--line); background:#fafaf8; padding:10px 12px; font-size:11.5px; color:#3c4046; max-height:150px; overflow-y:auto; line-height:1.8;}
+  .plus{color:#c0392b; font-weight:700;} .minus{color:#1b3a68; font-weight:700;}
+  .demo-next{background:var(--ink); color:#fff; border:none; padding:11px 22px; font-size:13.5px; font-weight:800; cursor:pointer; font-family:inherit; margin-top:12px;}
+  .demo-fxq{display:flex; gap:10px; margin-top:12px; max-width:340px;}
+  .demo-fxq .fx-q{flex:1; text-align:right;}
+  .demo-fxq .fx-q .r b{font-size:22px;}
+  .demo-spark{vertical-align:middle;}
+
   /* ---------- sim shell ---------- */
-  #simArea{display:none;}
   .guide{background:#fff; border:1px solid var(--line); border-left:4px solid var(--navy); padding:12px 16px; margin:18px auto 14px; max-width:430px; font-size:14px;}
   .guide .gtag{display:block; font-size:10px; font-weight:800; letter-spacing:.16em; color:var(--navy); margin-bottom:2px;}
   .guide .gsub{font-weight:400; font-size:12px; color:var(--sub); margin-top:3px; line-height:1.7;}
@@ -391,7 +437,9 @@
   <button class="active" data-page="home">はじめに</button>
   <button data-page="compare">証券会社の選び方</button>
   <button data-page="kaisetsu">口座開設の練習</button>
-  <button data-page="order">注文の練習</button>
+  <button data-page="order">株の注文練習</button>
+  <button data-page="fx">FXの練習</button>
+  <button data-page="demo">デモトレード</button>
   <button data-page="gloss">用語辞典</button>
 </div></nav>
 
@@ -399,7 +447,7 @@
 <section class="page active" id="page-home">
   <div class="hero"><div class="wrap">
     <h1>口座は作った。アプリも入れた。<br>その先で挫折した人のための、練習場。</h1>
-    <p>証券アプリの「注文画面」は、初心者向けにできていません。このサイトでは、SBI証券・楽天証券(iSPEED)・マネックス証券の実際の画面遷移を再現した練習モードで、口座開設から最初の買い注文までを本番前に予習できます。</p>
+    <p>証券アプリの「注文画面」は、初心者向けにできていません。このサイトでは、SBI証券・楽天証券(iSPEED)・マネックス証券の実際の画面遷移を再現した練習モードで、口座開設から最初の買い注文までを本番前に予習できます。FXの練習モードと、仮想資金100万円で売買を試せるデモトレードも用意しました。</p>
   </div></div>
   <div class="wrap">
     <div class="card">
@@ -410,6 +458,7 @@
         <li><div><h3>口座を開設する</h3><p>スマホで10分ほど。途中に出てくる「特定口座」「NISA」の選択だけ、先に予習しておくと迷いません。</p><a class="jump" data-page="kaisetsu">開設の流れを練習する</a></div></li>
         <li><div><h3>はじめての注文を出す</h3><p>自分の証券会社のアプリの画面遷移を再現した練習モードで、買い注文を一度通しで体験します。</p><a class="jump" data-page="order">注文を練習する</a></div></li>
       </ol>
+      <p class="muted" style="margin-top:10px;">株の注文に慣れたら:<a class="jump" data-page="fx" style="color:var(--navy); font-weight:700; cursor:pointer; text-decoration:underline;">FXの練習</a> ／ 実戦の感覚をつかむ:<a class="jump" data-page="demo" style="color:var(--navy); font-weight:700; cursor:pointer; text-decoration:underline;">デモトレード(仮想資金100万円)</a></p>
     </div>
 
     <div class="card">
@@ -431,6 +480,9 @@
       </details>
       <details class="qa"><summary>アプリを入れたけど難しくて挫折した</summary>
         <div class="a">それはあなたのせいではありません。証券アプリは中上級者向けの機能がぎっしりで、初心者が最初に使うボタンは実は数個だけです。マネックスのように「アプリが複数あってどれで買うのか分からない」構造の会社もあります。「注文の練習」で、自分の証券会社の画面遷移をそのまま予習してください。</div>
+      </details>
+      <details class="qa"><summary>FXと株、どっちから始めればいい?</summary>
+        <div class="a">性質がまったく違います。株の現物取引は、損しても投資した金額まで。FXはレバレッジ(てこ)で資金の何倍もの取引ができるぶん、利益も損失も速く動きます。迷うならまず株の現物か、FXをやるなら数量を小さくして実質レバレッジを低く抑えるのが定石です。どちらも「FXの練習」「デモトレード」で感覚を試してから決められます。</div>
       </details>
       <details class="qa"><summary>証券会社が倒産したらお金は消える?</summary>
         <div class="a">証券会社は顧客の資産を自社の資産と分けて管理すること(分別管理)が法律で義務付けられています。さらに万一に備えて、投資者保護基金により1人あたり1,000万円まで補償される仕組みがあります。</div>
@@ -576,13 +628,86 @@
       </div>
       <p class="muted" style="margin-top:12px;">※各社の公開情報(公式操作ガイド・ストア掲載画像等)をもとにした非公式の再現イメージです。ロゴは使用しておらず、実際のアプリとは画面・文言が異なる場合があります(2026年8月時点)。</p>
     </div>
+  </div>
+</section>
 
+<!-- ================= FX ================= -->
+<section class="page" id="page-fx">
+  <div class="wrap">
+    <div class="card">
+      <h2>FXとは — 株と何が違う?</h2>
+      <p class="muted">FX(外国為替証拠金取引)は、通貨を交換して差益を狙う取引です。株とは性質がまったく違うので、違いを知ってから触るのが安全です。</p>
+      <div class="tblwrap">
+        <table class="cmp" style="min-width:560px;">
+          <tr><th style="width:110px;"></th><th>株(現物)</th><th>FX</th></tr>
+          <tr><td class="name">取引するもの</td><td>会社の株式</td><td>通貨ペア(米ドル/円など)</td></tr>
+          <tr><td class="name">取引時間</td><td>平日 9:00〜15:30</td><td>平日ほぼ24時間</td></tr>
+          <tr><td class="name">必要資金</td><td>株価×100株(単元未満株なら少額)</td><td>数千円から(証拠金)</td></tr>
+          <tr><td class="name">レバレッジ</td><td>なし(現物)</td><td>最大25倍</td></tr>
+          <tr><td class="name">最大損失</td><td>投資した金額まで</td><td>急変時は預けた証拠金を超えることも</td></tr>
+          <tr><td class="name">売りから入る</td><td>できない(現物)</td><td>できる(下落でも利益を狙える)</td></tr>
+        </table>
+      </div>
+      <div class="note"><span class="notetag">重要</span>レバレッジは「少ないお金で大きな取引ができる」仕組みですが、<b>損失も同じ倍率で速くなります</b>。初心者は取引数量を小さくして、実質レバレッジを数倍以内に抑えるのが定石です。FXは資金を失う速度が株より速い取引だと理解してから始めてください。</div>
+    </div>
+
+    <div class="card">
+      <h2>FX注文シミュレーター</h2>
+      <p class="muted">一般的なFXアプリに共通する画面構成(レート一覧 → 売Bid/買Askの2大ボタン → 新規注文 → ポジション → 決済)で、「新規→保有→決済」の1サイクルを練習します。レバレッジとスプレッドの意味も、この練習の中で体感できます。</p>
+      <div class="brokerpick">
+        <button style="--bp:#2F6FD1;" onclick="startSim('fx')"><h3>FXアプリ(一般型)で練習</h3><p>米ドル/円を1,000通貨、「買い→決済」まで通しで体験。多くのFXアプリはこの画面構成です。</p><span class="go">練習をはじめる →</span></button>
+      </div>
+      <p class="muted" style="margin-top:12px;">※特定のFX会社のアプリではなく、業界で一般的な画面構成を模した練習用UIです。</p>
+    </div>
+
+    <div class="card">
+      <h2>FX会社の選び方(ざっくり)</h2>
+      <p class="muted">国内の主要FX会社は、スプレッド(取引コスト)・最小取引単位・アプリの使いやすさで比べます。2026年8月時点の一般的な傾向です。最新の条件は必ず公式サイトで確認してください。</p>
+      <div class="tblwrap">
+        <table class="cmp" style="min-width:560px;">
+          <tr><th>会社</th><th>特徴</th><th>最小取引単位</th></tr>
+          <tr><td class="name">GMOクリック証券(FXネオ)</td><td>取引高で世界有数。ツール・アプリの評価が高い定番</td><td>1,000通貨</td></tr>
+          <tr><td class="name">DMM FX</td><td>口座数最大級。シンプルなアプリで初心者に人気</td><td>10,000通貨</td></tr>
+          <tr><td class="name">外為どっとコム</td><td>情報コンテンツ・学習素材が充実。1,000通貨から</td><td>1,000通貨</td></tr>
+          <tr><td class="name">松井証券(MATSUI FX)</td><td>1通貨から取引可能。超少額で練習したい人向け</td><td>1通貨</td></tr>
+        </table>
+      </div>
+      <div class="note"><span class="notetag">選び方</span>初心者は「最小取引単位が小さい会社」を選ぶと、実質レバレッジを低く抑えて練習できます。1通貨〜1,000通貨単位なら、数百円〜数千円の証拠金で本番の感覚を体験できます。</div>
+      <div id="ctaFx"></div>
+    </div>
+
+    <div class="note"><span class="notetag">免責</span>FXは元本を保証する取引ではなく、相場急変時には預けた証拠金を上回る損失が生じるおそれがあります。当サイトは学習用であり、取引を推奨・勧誘するものではありません。</div>
+  </div>
+</section>
+
+<!-- ================= デモトレード ================= -->
+<section class="page" id="page-demo">
+  <div class="wrap">
+    <div class="card">
+      <h2>デモトレード — 仮想資金100万円</h2>
+      <p class="muted">練習画面で操作を覚えたら、次は「値動きの中で売買する感覚」です。仮想資金100万円で、株(1日ずつ進めるターン制)とFX(リアルタイムに動くレート)を体験できます。記録はこのブラウザにだけ保存されます。</p>
+      <div class="demo-stats" id="demoStats"></div>
+      <div class="demo-tabs">
+        <button id="demoTabStock" onclick="demoMode('stock')">株デモ</button>
+        <button id="demoTabFx" onclick="demoMode('fx')">FXデモ</button>
+      </div>
+      <div id="demoBody"></div>
+      <div class="demo-log" id="demoLog"></div>
+      <div class="btnrow" style="margin-top:12px;"><button class="ghost" onclick="demoReset()">最初からやり直す</button><span></span></div>
+      <div class="note"><span class="notetag">注意</span>これは学習用のゲームです。値動きは乱数で、実際の相場はもっと荒く、思い通りに約定しないこともあります。デモで勝てても本番で勝てるとは限りません——逆に、デモで負けたときの「嫌な感覚」は本物です。よく覚えておいてください。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= シミュレーター(共通枠) ================= -->
+<section class="page" id="page-sim">
+  <div class="wrap">
     <div id="simArea">
       <div class="guide" id="guideBox"></div>
       <div class="phone" id="phoneBox"><div class="screen" id="simScreen"></div></div>
       <div class="simfoot">
         <div class="card"><h4>解説</h4><div class="lbody" id="lessonBox"></div></div>
-        <span class="backlink" onclick="exitSim()">アプリ選択にもどる</span>
+        <span class="backlink" onclick="exitSim()">練習の選択にもどる</span>
       </div>
     </div>
   </div>
@@ -609,6 +734,12 @@
         <dt>NISA(ニーサ)</dt><dd>投資の利益(通常は約20%課税)が非課税になる制度。株を買うなら「成長投資枠」を使います。NISA口座は1人1社まで。</dd>
         <dt>板(いた)/気配値(けはいね)</dt><dd>「いくらで買いたい/売りたい人が何株いるか」の一覧表。SBIでは「気配値」タブ。最初は読めなくても問題ありません。</dd>
         <dt>即時入金</dt><dd>ネットバンキングから証券口座へ手数料無料・即時反映で入金できるサービス。注文の前に、まずこれでお金を入れます。</dd>
+        <dt>レバレッジ<span class="pill">FX・超重要</span></dt><dd>証拠金を担保に、資金の何倍もの金額を取引できる仕組み。国内FXは最大25倍。利益も損失も同じ倍率で速くなるため、初心者は取引数量を小さくして実質レバレッジを低く抑えるのが基本。</dd>
+        <dt>スプレッド<span class="pill">FX</span></dt><dd>売値(Bid)と買値(Ask)の差。FXの実質的な取引コストで、買った瞬間はスプレッド分だけマイナスから始まる。ドル/円で0.2銭なら1万通貨で20円。</dd>
+        <dt>pips(ピップス)<span class="pill">FX</span></dt><dd>FXの値動きの単位。ドル/円では1pip=0.01円(1銭)。1,000通貨持っていれば、1pip動くと10円の損益。</dd>
+        <dt>ポジション/建玉(たてぎょく)<span class="pill">FX</span></dt><dd>保有中の未決済の取引。「買いポジションを持つ」=買って、まだ決済(反対売買)していない状態。決済して初めて損益が確定する。</dd>
+        <dt>証拠金維持率<span class="pill">FX</span></dt><dd>預けた証拠金が、取引に必要な証拠金に対してどれだけ余裕があるかを示す%。下がるほど危険信号。</dd>
+        <dt>ロスカット<span class="pill">FX</span></dt><dd>損失が膨らんで証拠金維持率が一定水準(例:50%)を下回ったとき、FX会社が強制的に全ポジションを決済する仕組み。資金を守る最後の安全装置だが、これに頼る前に自分で損切りするのが基本。</dd>
       </dl>
     </div>
   </div>
@@ -658,6 +789,8 @@ const AFF = {
   sbi:    {name:'SBI証券',       url:'https://www.sbisec.co.jp/',      pr:false},
   ispeed: {name:'楽天証券',      url:'https://www.rakuten-sec.co.jp/', pr:false},
   monex:  {name:'マネックス証券', url:'https://www.monex.co.jp/',      pr:false},
+  gmofx:  {name:'GMOクリック証券(FXネオ)', url:'https://www.click-sec.com/', pr:false},
+  matsuifx:{name:'松井証券(MATSUI FX・1通貨から)', url:'https://www.matsui.co.jp/fx/', pr:false},
 };
 function ctaHTML(key, lead){
   const a = AFF[key];
@@ -734,6 +867,9 @@ function showPage(id){
   document.getElementById('page-'+id).classList.add('active');
   document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.toggle('active', b.dataset.page===id));
   window.scrollTo({top:0});
+  if(id!=='sim'){ try{history.replaceState(null,'','#'+id);}catch(e){} }
+  if(id==='demo'){ demoStart(); } else { clearInterval(window._demoT); }
+  if(id!=='sim'){ clearInterval(window._fxT); }
 }
 document.querySelectorAll('nav.tabs button, a.jump').forEach(el=>{
   el.addEventListener('click', ()=>showPage(el.dataset.page));
@@ -742,6 +878,9 @@ document.getElementById('ctaCompare').innerHTML =
   ctaHTML('sbi','SBI証券 — 迷ったらの定番。口座数最大級') +
   ctaHTML('ispeed','楽天証券 — 楽天ポイント派はこちら') +
   ctaHTML('monex','マネックス証券 — 米国株・dポイント派はこちら');
+document.getElementById('ctaFx').innerHTML =
+  ctaHTML('gmofx','練習が済んだら — 定番のFXネオ(1,000通貨から)') +
+  ctaHTML('matsuifx','超少額で試したい人 — 1通貨から取引できる');
 
 /* ===== badges ===== */
 const BADGES = [
@@ -749,6 +888,7 @@ const BADGES = [
   {id:'sbi',    label:'SBI 株アプリ'},
   {id:'ispeed', label:'楽天 iSPEED'},
   {id:'monex',  label:'マネックス'},
+  {id:'fx',     label:'FXの練習'},
 ];
 function getBadges(){ try{return JSON.parse(localStorage.getItem('kabudojo_badges'))||{};}catch(e){return {};} }
 function earnBadge(id){ const b=getBadges(); b[id]=true; localStorage.setItem('kabudojo_badges', JSON.stringify(b)); renderBadges(); }
@@ -851,7 +991,133 @@ monex: {
   ],
   build: buildMX,
 },
+/* ---------------- FX(一般型) ---------------- */
+fx: {
+  cls:'t-fx', last:5,
+  guides:[
+    {g:'まずはレート一覧。<b>USD/JPY(米ドル/円)</b>の行をタップ', s:'FXは通貨の交換。左の青が売る値段(Bid)、右の赤が買う値段(Ask)です。',
+     l:'BidとAskの差を<b>スプレッド</b>といい、これがFXの実質的な取引コストです。「0.2」は0.2銭のこと。1万通貨の取引なら20円に相当します。ほとんどのFXアプリはこの「青・赤の2枚板」でレートを表示します。'},
+    {g:'上がると思ったので、右の赤い<b>「買 Ask」</b>をタップ', s:'下がると思ったときは左の「売 Bid」。FXは売りからも入れます。',
+     l:'株(現物)と違い、FXは<b>「売り」から入って下落で利益を狙うこともできます</b>。チャートはローソク足で、見方は株と同じ。まずは上がるか下がるかの2択に賭ける、と考えれば十分です。'},
+    {g:'数量はそのまま(1,000通貨)、<b>「買 注文確定」</b>をタップ', s:'1,000通貨=約15万円分の取引。でも必要証拠金は約6,000円です。',
+     l:'これが<b>レバレッジ(国内最大25倍)</b>。約6,000円の証拠金で15万円分の取引ができる=損益も15万円分の値動きで発生します。<b>数量を小さくすることが、実質レバレッジを下げる唯一の方法</b>です。「スリッページ」は注文時の価格ズレの許容幅で、最初はデフォルトのままで問題ありません。'},
+    {g:'損益が動いています。頃合いを見て<b>「決済」</b>をタップ', s:'含み損益は、決済するまで確定しません。',
+     l:'保有中の取引を<b>ポジション(建玉)</b>といいます。下の「証拠金維持率」が下がるとロスカット(強制決済)に近づきます——この画面のように数千%あれば余裕ですが、数量を増やすほど余裕は消えます。'},
+    {g:'<b>「決済注文確定」</b>をタップ', s:'決済=反対売買。買いポジションは「売って」終了します。',
+     l:'決済は売値(Bid)側で行われるため、<b>買った瞬間はスプレッド分だけマイナスから始まっています</b>。数pips動いてはじめて利益になる、という感覚を覚えてください。'},
+    {g:'取引完了。これがFXの1サイクルです', s:'',
+     l:'新規→保有→決済で1サイクル。<b>1pip=0.01円、1,000通貨なら1pipで10円</b>の損益です。生き残るための定番ルール:①数量は小さく(実質レバレッジ数倍以内)②ロスカットに頼らず自分で損切り③寝る前に大きなポジションを持たない。デモトレードでもFXを体験できます。'},
+  ],
+  build: buildFX,
+},
 };
+
+/* ---- FX(一般型) ---- */
+function buildFX(i){
+  const tabbar = (hl)=>`<div class="tabbar">
+    <div class="${hl===0?'on':''}">${ico('chart')}レート</div>
+    <div>${ico('news')}ニュース</div>
+    <div class="${hl===2?'on':''}">${ico('cart')}トレード</div>
+    <div class="${hl===3?'on':''}">${ico('doc')}ポジション</div>
+    <div>${ico('menu')}メニュー</div></div>`;
+  const head = (t)=>sbarHTML()+`<div class="aphead"><span>${t}</span><span class="hicons">${ico('gear')}</span></div>`;
+  const margin = Math.round(151.232 * sim.qty / 25);
+  const gross = Math.round(151.232 * sim.qty);
+
+  if(i===0) return head('レート') + `<div class="apbody">
+      <div class="fx-row tap" onclick="simNext()">
+        <span class="fx-pair">USD/JPY<small>米ドル/円</small></span>
+        <span class="fx-q bid"><span class="side">売 Bid</span><span class="r">151.<b>23</b>0</span></span>
+        <span class="fx-sp">0.2</span>
+        <span class="fx-q ask"><span class="side">買 Ask</span><span class="r">151.<b>23</b>2</span></span>
+      </div>
+      <div class="fx-row">
+        <span class="fx-pair">EUR/JPY<small>ユーロ/円</small></span>
+        <span class="fx-q bid"><span class="side">売 Bid</span><span class="r">163.<b>54</b>1</span></span>
+        <span class="fx-sp">0.4</span>
+        <span class="fx-q ask"><span class="side">買 Ask</span><span class="r">163.<b>54</b>5</span></span>
+      </div>
+      <div class="fx-row">
+        <span class="fx-pair">GBP/JPY<small>ポンド/円</small></span>
+        <span class="fx-q bid"><span class="side">売 Bid</span><span class="r">192.<b>88</b>2</span></span>
+        <span class="fx-sp">0.9</span>
+        <span class="fx-q ask"><span class="side">買 Ask</span><span class="r">192.<b>89</b>1</span></span>
+      </div>
+      <div class="fx-row">
+        <span class="fx-pair">EUR/USD<small>ユーロ/ドル</small></span>
+        <span class="fx-q bid"><span class="side">売 Bid</span><span class="r">1.08<b>12</b>3</span></span>
+        <span class="fx-sp">0.3</span>
+        <span class="fx-q ask"><span class="side">買 Ask</span><span class="r">1.08<b>12</b>6</span></span>
+      </div>
+    </div>` + tabbar(0);
+
+  if(i===1) return head('USD/JPY') + `<div class="apbody">
+      <div style="padding:8px 12px 0; display:flex; justify-content:space-between; align-items:baseline;">
+        <span style="font-size:15px; font-weight:800;">USD/JPY <span style="font-size:10px; color:#6f7885;">米ドル/円</span></span>
+        <span style="font-size:11px; color:#6DE79E;">高 151.312 / 安 151.084</span>
+      </div>
+      <div class="itab" style="color:#8b95a3;"><span>1分</span><span>5分</span><span class="on">1時間</span><span>日足</span></div>
+      <div class="chartbox">${candleSVG('#E8483F','#5aa2ff','#10151c')}</div>
+      <div class="grow"></div>
+      <div class="fx-2btn">
+        <span class="fx-q bid" onclick="simWarnFxSell()"><span class="side">売 Bid</span><span class="r">151.<b>23</b>0</span></span>
+        <span class="fx-sp">0.2</span>
+        <span class="fx-q ask tap" onclick="simNext()"><span class="side">買 Ask</span><span class="r">151.<b>23</b>2</span></span>
+      </div>
+    </div>` + tabbar(2);
+
+  if(i===2) return head('新規注文 USD/JPY') + `<div class="apbody">
+      <div class="fx-frow"><span class="fl">注文方式</span><span class="sbi-seg">
+        <button class="sel">ストリーミング</button><button onclick="simWarnFxLimit()">指値</button><button onclick="simWarnFxLimit()">逆指値</button>
+      </span></div>
+      <div class="fx-frow"><span class="fl">数量(通貨)</span><span class="sbi-step">
+        <button onclick="qtyChange(-1000)">−</button><span class="v">${sim.qty.toLocaleString()}</span><button onclick="qtyChange(1000)">+</button>
+      </span></div>
+      <div class="fx-frow"><span class="fl">概算取引額</span><span style="font-weight:700; font-family:'Helvetica Neue',Arial,sans-serif;">${gross.toLocaleString()}円</span></div>
+      <div class="fx-frow"><span class="fl">必要証拠金<br>(レバレッジ25倍)</span><span style="font-weight:700; font-family:'Helvetica Neue',Arial,sans-serif;">${margin.toLocaleString()}円</span></div>
+      <div class="fx-frow"><span class="fl">スリッページ</span><span>0.3銭まで許容</span></div>
+      <div class="fx-frow"><span class="fl">レート</span><span style="font-weight:700; font-family:'Helvetica Neue',Arial,sans-serif;">買 Ask 151.232</span></div>
+      <button class="fx-btn tap" style="background:#E8483F;" onclick="simNext()">買 注文確定</button>
+    </div>` + tabbar(2);
+
+  if(i===3){
+    const mrate = Math.round(100000 / (151.232 * sim.qty / 25) * 100);
+    return head('ポジション') + `<div class="apbody">
+      <div class="fx-poscard">
+        <div style="display:flex; justify-content:space-between; font-size:13px;"><b>USD/JPY 買</b><span style="color:#8b95a3;">${sim.qty.toLocaleString()}通貨</span></div>
+        <div style="display:flex; justify-content:space-between; font-size:12px; margin-top:6px; color:#8b95a3;">
+          <span>建値 151.232</span><span>現在(Bid) <b id="fxNow" style="color:#e8eaee;">151.245</b></span>
+        </div>
+        <div style="margin-top:10px; font-size:11px; color:#8b95a3;">評価損益</div>
+        <div class="plv" id="fxPL" style="color:#E8483F;">+13円</div>
+        <button class="fx-btn tap" style="background:#2F6FD1; width:100%; margin:12px 0 0;" onclick="simNext()">決済</button>
+      </div>
+      <div class="fx-frow"><span class="fl">口座残高</span><span>100,000円</span></div>
+      <div class="fx-frow"><span class="fl">必要証拠金</span><span>${margin.toLocaleString()}円</span></div>
+      <div class="fx-frow"><span class="fl">証拠金維持率</span><span style="font-weight:800; color:#6DE79E;">${mrate.toLocaleString()}%</span></div>
+    </div>` + tabbar(3);
+  }
+
+  if(i===4) return head('決済注文') + `<div class="apbody">
+      <div class="fx-frow"><span class="fl">対象</span><span><b>USD/JPY 買</b> ${sim.qty.toLocaleString()}通貨(建値 151.232)</span></div>
+      <div class="fx-frow"><span class="fl">決済方式</span><span class="sbi-seg"><button class="sel">成行</button><button onclick="simWarnFxLimit()">指値</button></span></div>
+      <div class="fx-frow"><span class="fl">数量</span><span>全量(${sim.qty.toLocaleString()}通貨)</span></div>
+      <div class="fx-frow"><span class="fl">決済レート</span><span style="font-weight:700; font-family:'Helvetica Neue',Arial,sans-serif;">売 Bid 151.267</span></div>
+      <div class="fx-frow"><span class="fl">予想損益</span><span class="plus" style="font-family:'Helvetica Neue',Arial,sans-serif;">+${Math.round(0.035*sim.qty).toLocaleString()}円</span></div>
+      <button class="fx-btn tap" style="background:#2F6FD1;" onclick="simNext()">決済注文確定</button>
+    </div>` + tabbar(3);
+
+  return head('約定') + `<div class="apbody">
+      <div class="done" style="color:#e8eaee;">
+        <div class="okmark" style="width:56px; height:56px; margin:20px auto 12px; border-radius:50%; border:2.5px solid #6DE79E; display:flex; align-items:center; justify-content:center;"><svg class="i" viewBox="0 0 24 24" style="width:28px; height:28px; stroke:#6DE79E; stroke-width:2.5;">${ICON.check}</svg></div>
+        <h4>決済が完了しました</h4>
+        <p style="font-size:12px; color:#8b95a3;">USD/JPY 買 ${sim.qty.toLocaleString()}通貨 151.232 → 151.267</p>
+        <p style="margin-top:10px; font-size:12px; color:#8b95a3;">実現損益</p>
+        <div style="font-size:28px; font-weight:800; color:#E8483F; font-family:'Helvetica Neue',Arial,sans-serif;">+${Math.round(0.035*sim.qty).toLocaleString()}円 <span style="font-size:13px;">(+3.5pips)</span></div>
+      </div>
+      <button class="exitbtn" onclick="exitSim()">ほかの練習にもどる</button>
+    </div>` + tabbar(3);
+}
 
 /* ---- SBI ---- */
 function buildSBI(i){
@@ -1238,16 +1504,14 @@ function buildMX(i){
 
 /* ---- 進行制御 ---- */
 function startSim(broker){
-  sim = {broker, i:0, qty:100, otype:null, kubun:null, sheet:false};
-  document.getElementById('brokerChooser').style.display='none';
-  document.getElementById('simArea').style.display='block';
+  sim = {broker, i:0, qty: broker==='fx'?1000:100, otype:null, kubun:null, sheet:false, origin: broker==='fx'?'fx':'order'};
+  showPage('sim');
   document.getElementById('phoneBox').className = 'phone ' + SIMS[broker].cls;
   renderSim();
-  document.getElementById('guideBox').scrollIntoView({behavior:'smooth', block:'start'});
 }
 function exitSim(){
-  document.getElementById('simArea').style.display='none';
-  document.getElementById('brokerChooser').style.display='block';
+  clearInterval(window._fxT);
+  showPage(sim.origin || 'order');
 }
 function guideHTML(g){
   return `<span class="gtag">つぎの操作</span>${g.g}` + (g.s?`<div class="gsub">${g.s}</div>`:'');
@@ -1266,6 +1530,21 @@ function renderSim(){
   const scr = document.getElementById('simScreen');
   scr.innerHTML = S.build(sim.i);
   const body = scr.querySelector('.apbody'); if(body) body.scrollTop = 0;
+  clearInterval(window._fxT);
+  if(sim.broker==='fx' && sim.i===3){ startFxTick(); }
+}
+function startFxTick(){
+  let bid = 151.245;
+  window._fxT = setInterval(()=>{
+    bid = Math.max(151.20, Math.min(151.32, bid + (Math.random()-0.5)*0.012));
+    const el = document.getElementById('fxNow'), pe = document.getElementById('fxPL');
+    if(!el || !pe){ clearInterval(window._fxT); return; }
+    const pl = Math.round((bid - 151.232) * sim.qty / 1 * 1) / 1;
+    const yen = Math.round((bid - 151.232) * sim.qty);
+    el.textContent = bid.toFixed(3);
+    pe.textContent = (yen>=0?'+':'') + yen.toLocaleString() + '円';
+    pe.style.color = yen>=0 ? '#E8483F' : '#5aa2ff';
+  }, 900);
 }
 function simNext(){
   const S = SIMS[sim.broker];
@@ -1273,7 +1552,11 @@ function simNext(){
   if(sim.i === S.last){ earnBadge(sim.broker); }
   renderSim();
 }
-function qtyChange(d){ sim.qty = Math.max(100, Math.min(1000, sim.qty + d)); renderSim(); }
+function qtyChange(d){
+  if(sim.broker==='fx'){ sim.qty = Math.max(1000, Math.min(10000, sim.qty + d)); }
+  else { sim.qty = Math.max(100, Math.min(1000, sim.qty + d)); }
+  renderSim();
+}
 function setOtype(t){ sim.otype = t; renderSim(); }
 function setKubun(k){
   sim.kubun = k; renderSim();
@@ -1299,6 +1582,8 @@ function simWarnGyaku(){ toastGuide('「逆指値」は損切り用の上級者�
 function simWarnTrader(){ toastGuide('「マネックストレーダー」は板発注などの上級者向け。最初は総合アプリで'); }
 function simWarnUS(){ toastGuide('それは米国株専用アプリです。日本株は総合アプリ「マネックス証券アプリ」で'); }
 function simWarnSOR(){ toastGuide('SOR=複数の市場から最も有利な価格を自動で探す仕組み。そのままでOK'); }
+function simWarnFxSell(){ toastGuide('今回は「買い」の練習。売り(ショート)は下がると思ったときに使います。売りから入れるのが株との大きな違い'); }
+function simWarnFxLimit(){ toastGuide('指値・逆指値は価格を指定する予約注文。まずは成行(ストリーミング)で流れをつかみましょう'); }
 function simWarnSkabu(){ toastGuide('S株=1株から買える単元未満株。今日は100株の練習なのでOFFのままで'); }
 function simWarnOCO(){ toastGuide('OCO/IFDは条件付きの上級者向け注文。最初は「通常」のままで大丈夫です'); }
 function simWarnCond(){ toastGuide('執行条件・期間はデフォルトのままで大丈夫。慣れたら使い分けましょう'); }
@@ -1313,6 +1598,191 @@ function toastGuide(msg){
     gb.innerHTML = guideHTML(SIMS[sim.broker].guides[sim.i]);
   }, 2800);
 }
+
+/* =====================================================================
+   デモトレード(仮想資金100万円/localStorage保存)
+   ===================================================================== */
+const DST = {s1:{n:'サンプル食品',c:'0001'}, s2:{n:'れんしゅう自動車',c:'0002'}, s3:{n:'ダミー電機',c:'0003'}};
+let D = null;
+let demoFxRate = 151.20;
+function demoInitState(){
+  D = {mode:'stock', cash:1000000, day:1,
+       px:{s1:1234,s2:2850,s3:890}, hist:{s1:[1234],s2:[2850],s3:[890]},
+       hold:{s1:{q:0,avg:0},s2:{q:0,avg:0},s3:{q:0,avg:0}},
+       fxPos:[], fxRealized:0,
+       log:['デモ開始:仮想資金 1,000,000円。まずは1銘柄100株から試してみましょう']};
+}
+function demoLoad(){ if(D) return; try{ D = JSON.parse(localStorage.getItem('kabudojo_demo')); }catch(e){} if(!D || !D.px) demoInitState(); }
+function demoSave(){ localStorage.setItem('kabudojo_demo', JSON.stringify(D)); }
+function demoReset(){ if(!confirm('デモトレードを最初からやり直しますか?(記録は消えます)')) return; demoInitState(); demoSave(); renderDemo(); }
+function demoLog(m){ D.log.unshift(`【${D.day}日目】` + m); D.log = D.log.slice(0,14); }
+function demoMode(m){ demoLoad(); D.mode = m; demoSave(); renderDemo(); }
+function demoStart(){ demoLoad(); renderDemo(); clearInterval(window._demoT); window._demoT = setInterval(demoTick, 1000); }
+
+function demoNextDay(){
+  ['s1','s2','s3'].forEach(k=>{
+    const p = D.px[k];
+    const np = Math.max(50, Math.round(p * (1 + (Math.random()-0.49)*0.06)));
+    D.px[k] = np; D.hist[k].push(np); if(D.hist[k].length>30) D.hist[k].shift();
+  });
+  D.day++;
+  demoLog('相場が動きました(値動きは乱数です)');
+  demoSave(); renderDemo();
+}
+function demoBuy(k){
+  const cost = D.px[k]*100;
+  if(D.cash < cost){ demoLog('買付余力が足りません'); renderDemo(); return; }
+  const h = D.hold[k];
+  h.avg = Math.round((h.avg*h.q + cost) / (h.q+100));
+  h.q += 100; D.cash -= cost;
+  demoLog(`${DST[k].n} 100株を ${D.px[k].toLocaleString()}円で買付`);
+  demoSave(); renderDemo();
+}
+function demoSell(k){
+  const h = D.hold[k];
+  if(h.q < 100) return;
+  const pl = (D.px[k]-h.avg)*100;
+  h.q -= 100; if(h.q===0) h.avg = 0;
+  D.cash += D.px[k]*100;
+  demoLog(`${DST[k].n} 100株を売却(実現損益 ${pl>=0?'+':''}${pl.toLocaleString()}円)`);
+  demoSave(); renderDemo();
+}
+function demoFxBidAsk(){ return {bid: demoFxRate-0.001, ask: demoFxRate+0.001}; }
+function demoFxUnrealized(){
+  const {bid, ask} = demoFxBidAsk();
+  return D.fxPos.reduce((s,p)=> s + Math.round(p.side==='買' ? (bid-p.r)*p.u : (p.r-ask)*p.u), 0);
+}
+function demoFxMargin(){ return D.fxPos.reduce((s,p)=> s + p.r*p.u/25, 0); }
+function demoFxOpen(side){
+  const u = parseInt(document.getElementById('demoFxUnits').value, 10);
+  const {bid, ask} = demoFxBidAsk();
+  const r = side==='買' ? ask : bid;
+  const needMargin = demoFxMargin() + r*u/25;
+  if(needMargin > D.cash){ demoLog('証拠金が足りません'); renderDemo(); return; }
+  D.fxPos.push({side, u, r: Math.round(r*1000)/1000});
+  demoLog(`USD/JPY ${side} ${u.toLocaleString()}通貨 @${r.toFixed(3)} を建てました`);
+  demoSave(); renderDemo();
+}
+function demoFxClose(idx){
+  const p = D.fxPos[idx]; if(!p) return;
+  const {bid, ask} = demoFxBidAsk();
+  const pl = Math.round(p.side==='買' ? (bid-p.r)*p.u : (p.r-ask)*p.u);
+  D.cash += pl; D.fxRealized += pl;
+  D.fxPos.splice(idx,1);
+  demoLog(`USD/JPY ${p.side} ${p.u.toLocaleString()}通貨 を決済(実現損益 ${pl>=0?'+':''}${pl.toLocaleString()}円)`);
+  demoSave(); renderDemo();
+}
+function demoTick(){
+  demoFxRate = Math.max(140, Math.min(160, demoFxRate + (Math.random()-0.5)*0.02));
+  if(!D || !document.getElementById('page-demo').classList.contains('active')) return;
+  if(D.mode!=='fx') return;
+  const {bid, ask} = demoFxBidAsk();
+  const be = document.getElementById('demoFxBid'), ae = document.getElementById('demoFxAsk');
+  if(!be) return;
+  be.innerHTML = fxFmt(bid); ae.innerHTML = fxFmt(ask);
+  D.fxPos.forEach((p,i)=>{
+    const el = document.getElementById('demoFxPl'+i); if(!el) return;
+    const pl = Math.round(p.side==='買' ? (bid-p.r)*p.u : (p.r-ask)*p.u);
+    el.textContent = (pl>=0?'+':'')+pl.toLocaleString()+'円';
+    el.className = pl>=0 ? 'plus' : 'minus';
+  });
+  const m = demoFxMargin();
+  const me = document.getElementById('demoFxMr');
+  if(me && m>0){
+    const mr = Math.round((D.cash + demoFxUnrealized()) / m * 100);
+    me.textContent = mr.toLocaleString() + '%';
+    me.style.color = mr<300 ? '#c0392b' : '#1c7a3d';
+    if(mr < 50){
+      let total = 0;
+      D.fxPos.slice().forEach(()=>{ const {bid,ask}=demoFxBidAsk(); const p=D.fxPos[0];
+        const pl = Math.round(p.side==='買' ? (bid-p.r)*p.u : (p.r-ask)*p.u);
+        total += pl; D.cash += pl; D.fxRealized += pl; D.fxPos.shift(); });
+      demoLog(`⚠ ロスカット発動:証拠金維持率が50%を下回り、全ポジションが強制決済されました(${total>=0?'+':''}${total.toLocaleString()}円)。これが本番で一番会いたくない画面です`);
+      demoSave(); renderDemo();
+    }
+  }
+  const st = document.getElementById('demoStats');
+  if(st) st.innerHTML = demoStatsHTML();
+}
+function fxFmt(v){ const s = v.toFixed(3); return s.slice(0,4) + '<b>' + s.slice(4,6) + '</b>' + s.slice(6); }
+function sparkline(arr){
+  if(arr.length<2) return '';
+  const W=90, H=24, min=Math.min(...arr), max=Math.max(...arr), rng=(max-min)||1;
+  const pts = arr.map((v,i)=>`${(i/(arr.length-1)*W).toFixed(1)},${(H-(v-min)/rng*(H-4)-2).toFixed(1)}`).join(' ');
+  const upTrend = arr[arr.length-1] >= arr[0];
+  return `<svg class="demo-spark" width="${W}" height="${H}"><polyline points="${pts}" fill="none" stroke="${upTrend?'#c0392b':'#1b3a68'}" stroke-width="1.5"/></svg>`;
+}
+function demoStockValue(){ return ['s1','s2','s3'].reduce((s,k)=> s + D.px[k]*D.hold[k].q, 0); }
+function demoStatsHTML(){
+  const total = D.cash + demoStockValue() + demoFxUnrealized();
+  const diff = total - 1000000;
+  return `<div><small>総資産(評価額)</small><b>${total.toLocaleString()}円</b></div>
+    <div><small>現金</small><b>${D.cash.toLocaleString()}円</b></div>
+    <div><small>スタートからの損益</small><b class="${diff>=0?'plus':'minus'}">${diff>=0?'+':''}${diff.toLocaleString()}円</b></div>`;
+}
+function renderDemo(){
+  demoLoad();
+  document.getElementById('demoStats').innerHTML = demoStatsHTML();
+  document.getElementById('demoTabStock').className = D.mode==='stock'?'on':'';
+  document.getElementById('demoTabFx').className = D.mode==='fx'?'on':'';
+  const body = document.getElementById('demoBody');
+  if(D.mode==='stock'){
+    let rows = '';
+    ['s1','s2','s3'].forEach(k=>{
+      const h = D.hold[k], hist = D.hist[k];
+      const prev = hist.length>1 ? hist[hist.length-2] : hist[0];
+      const chg = D.px[k]-prev;
+      const pl = h.q>0 ? (D.px[k]-h.avg)*h.q : 0;
+      rows += `<tr>
+        <td><b>${DST[k].n}</b> <span style="color:var(--sub); font-size:10.5px;">${DST[k].c}</span><br>${sparkline(hist)}</td>
+        <td>${D.px[k].toLocaleString()}円<br><span class="${chg>=0?'plus':'minus'}" style="font-size:11px;">${chg>=0?'+':''}${chg.toLocaleString()}</span></td>
+        <td>${h.q>0 ? h.q+'株<br><span style="font-size:10.5px; color:var(--sub);">平均 '+h.avg.toLocaleString()+'円</span>' : '—'}</td>
+        <td>${h.q>0 ? `<span class="${pl>=0?'plus':'minus'}">${pl>=0?'+':''}${pl.toLocaleString()}円</span>` : '—'}</td>
+        <td><button class="demo-buy" onclick="demoBuy('${k}')">買う</button> <button class="demo-sell" ${h.q<100?'disabled':''} onclick="demoSell('${k}')">売る</button></td>
+      </tr>`;
+    });
+    body.innerHTML = `<p class="muted" style="margin-top:12px;">${D.day}日目。売買は100株単位。「1日進める」で相場が動きます。</p>
+      <div class="tblwrap"><table class="demo" style="min-width:540px;">
+      <tr><th>銘柄</th><th>現在値</th><th>保有</th><th>評価損益</th><th>売買</th></tr>${rows}</table></div>
+      <button class="demo-next" onclick="demoNextDay()">1日進める →</button>`;
+  } else {
+    const {bid, ask} = demoFxBidAsk();
+    let posRows = '';
+    D.fxPos.forEach((p,i)=>{
+      const pl = Math.round(p.side==='買' ? (bid-p.r)*p.u : (p.r-ask)*p.u);
+      posRows += `<tr><td><b>USD/JPY ${p.side}</b></td><td>${p.u.toLocaleString()}通貨</td><td>${p.r.toFixed(3)}</td>
+        <td><span id="demoFxPl${i}" class="${pl>=0?'plus':'minus'}">${pl>=0?'+':''}${pl.toLocaleString()}円</span></td>
+        <td><button class="demo-sell" onclick="demoFxClose(${i})">決済</button></td></tr>`;
+    });
+    const m = demoFxMargin();
+    const mr = m>0 ? Math.round((D.cash + demoFxUnrealized())/m*100) : null;
+    body.innerHTML = `<p class="muted" style="margin-top:12px;">USD/JPYがリアルタイムに動いています(1秒ごと・乱数)。売りからも入れます。</p>
+      <div class="demo-fxq">
+        <span class="fx-q bid" onclick="demoFxOpen('売')"><span class="side">売 Bid</span><span class="r" id="demoFxBid">${fxFmt(bid)}</span></span>
+        <span class="fx-q ask" onclick="demoFxOpen('買')"><span class="side">買 Ask</span><span class="r" id="demoFxAsk">${fxFmt(ask)}</span></span>
+      </div>
+      <p style="margin-top:10px; font-size:12.5px;">数量:
+        <select id="demoFxUnits" style="padding:6px; font-size:13px; font-family:inherit;">
+          <option value="1000">1,000通貨(証拠金 約6千円)</option>
+          <option value="5000">5,000通貨(約3万円)</option>
+          <option value="10000">10,000通貨(約6万円)</option>
+        </select> → 上の<b>青(売)/赤(買)</b>をタップで注文</p>
+      ${D.fxPos.length ? `<div class="tblwrap"><table class="demo" style="min-width:480px;">
+        <tr><th>ポジション</th><th>数量</th><th>建値</th><th>評価損益</th><th></th></tr>${posRows}</table></div>
+        <p style="font-size:12.5px; margin-top:8px;">証拠金維持率:<b id="demoFxMr">${mr?mr.toLocaleString()+'%':'—'}</b> <span class="muted">(50%を下回るとロスカット)</span></p>`
+        : `<p class="muted" style="margin-top:8px;">ポジションはありません。</p>`}
+      <p style="font-size:12.5px;">FX実現損益の累計:<span class="${D.fxRealized>=0?'plus':'minus'}">${D.fxRealized>=0?'+':''}${D.fxRealized.toLocaleString()}円</span></p>`;
+  }
+  document.getElementById('demoLog').innerHTML = D.log.map(l=>`<div>${l}</div>`).join('');
+}
+
+/* ===== URLハッシュ(ページ直リンク) ===== */
+function routeHash(){
+  const h = location.hash.replace('#','');
+  if(h && h!=='sim' && document.getElementById('page-'+h) && !document.getElementById('page-'+h).classList.contains('active')){ showPage(h); }
+}
+window.addEventListener('hashchange', routeHash);
+routeHash();
 </script>
 </body>
 </html>
