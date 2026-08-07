@@ -148,6 +148,102 @@
   .dm-next{display:block; width:calc(100% - 24px); margin:12px; background:#6B80F7; color:#fff; border:none; border-radius:4px; padding:12px; font-size:13.5px; font-weight:800; cursor:pointer; font-family:inherit;}
   .t-fx .plus{color:#FF6B5E;} .t-fx .minus{color:#5aa2ff;}
 
+  /* ---------- FXネオ風 ---------- */
+  .t-neo .screen{background:#06111a; color:#fff;}
+  .t-neo .sbar{background:#000; color:#fff;}
+  .t-neo .aphead{background:#202838; color:#fff;}
+  .t-neo .tabbar{background:#151e2d; color:#8a93a5;}
+  .t-neo .tabbar .on{color:#95e8ff; font-weight:700; background:#393f4c;}
+  .t-neo .tabbar .gold{color:#d8bb92;}
+  .neo-num{font-family:"Helvetica Neue",Arial,sans-serif; font-weight:800; font-size:13px; line-height:1;}
+  .neo-num b{font-size:2.1em;}
+  .neo-num sup{font-size:1em; vertical-align:.7em; margin-left:1px;}
+  .neo-num .arrup{color:#de4f4f; font-size:.85em;} .neo-num .arrdn{color:#0daddc; font-size:.85em;}
+  .neo-row{padding:8px 10px; border-bottom:1px solid #202838;}
+  .nr-top{display:flex; justify-content:space-between; align-items:center; gap:8px;}
+  .nr-pair{font-size:13.5px; font-weight:800; min-width:86px;}
+  .nr-sp{display:block; width:max-content; background:#354153; border:1px solid #293341; border-radius:4px; font-size:10px; padding:0 9px; margin-top:3px; font-weight:400;}
+  .nr-sub{background:#393b49; border-radius:4px; font-size:10.5px; color:#dfe2e8; padding:2px 9px; margin-top:6px; display:inline-block;}
+  .neo-pairbar{display:flex; justify-content:space-between; align-items:center; padding:8px 12px; background:#212736; font-size:13px; font-weight:800; flex-shrink:0;}
+  .neo-pairbar .hlv{font-size:11px; font-weight:400; color:#dfe2e8;}
+  .neo-panels{display:flex; align-items:stretch; padding:10px 8px; position:relative; flex-shrink:0; gap:6px;}
+  .neo-shield{flex:1; padding:9px 14px 11px; color:#fff; cursor:pointer;}
+  .neo-shield.bid{background:linear-gradient(#59b8ea,#4491d3); clip-path:polygon(9% 0,100% 0,100% 100%,9% 100%,0 50%);}
+  .neo-shield.ask{background:linear-gradient(#e26b67,#d14c46); clip-path:polygon(0 0,91% 0,100% 50%,91% 100%,0 100%); text-align:right;}
+  .neo-shield .lab{font-size:11.5px; font-weight:700; opacity:.95;}
+  .neo-shield .neo-num{font-size:16px; margin-top:3px; display:block;}
+  .neo-shield.dim{filter:grayscale(1) brightness(.6);}
+  .neo-shield.gold{outline:2.5px solid #fdb43b; outline-offset:-2px;}
+  .neo-spread{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:46px; height:46px; background:#374151; clip-path:polygon(30% 0,70% 0,100% 30%,100% 70%,70% 100%,30% 100%,0 70%,0 30%); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; z-index:2;}
+  .neo-flap{display:flex; align-items:center; background:#0a0d14; border-bottom:1px solid #2a3040; flex-shrink:0;}
+  .neo-flap .f{background:linear-gradient(#2a2f3d,#171b25); border:1px solid #d8bb92; border-bottom:none; font-size:12.5px; font-weight:800; padding:6px 24px 6px 14px; clip-path:polygon(0 0,86% 0,100% 100%,0 100%);}
+  .neo-flap .tick{flex:1; font-size:10.5px; color:#cfd3da; padding:0 10px; white-space:nowrap; overflow:hidden;}
+  .neo-subtabs{display:flex; gap:4px; padding:6px 8px 0; flex-shrink:0;}
+  .neo-subtabs div{flex:1; text-align:center; font-size:11px; padding:8px 2px; background:#0d0f14; border:1px solid #6b5f47; color:#8a93a5; border-bottom:none;}
+  .neo-subtabs .on{background:#212736; color:#fff; border-color:#212736; box-shadow:inset 0 2.5px 0 #a8e6fc;}
+  .neo-th{display:flex; justify-content:space-between; background:#212737; font-size:9.5px; color:#cfd3da; padding:6px 12px; flex-shrink:0;}
+  .neo-badge{display:inline-block; width:19px; height:19px; border-radius:3px; color:#fff; font-size:11.5px; font-weight:800; text-align:center; line-height:19px; margin-left:6px;}
+  .neo-badge.b{background:#cd5954;} .neo-badge.s{background:#4eaad7;}
+  .neo-in{background:#fff; color:#111; border:none; border-radius:3px; padding:8px 10px; font-size:14px; font-weight:700; width:88px; text-align:right; font-family:inherit;}
+  .neo-pill{border:none; border-radius:999px; padding:11px 26px; font-size:13.5px; font-weight:800; cursor:pointer; font-family:inherit;}
+  .neo-pill.gray{background:#44536c; color:#fff;}
+  .neo-pill.teal{background:#66d2d0; color:#06283a;}
+  .neo-pill.orange{background:linear-gradient(#ffd27a,#fdb43b); color:#4a2f00;}
+  .neo-modal{background:#202838; border-radius:14px; overflow:hidden; width:100%; box-shadow:0 10px 40px rgba(0,0,0,.6);}
+  .neo-modal .mh{background:#1aaabd; color:#fff; text-align:center; font-weight:800; font-size:14px; padding:10px;}
+  .neo-chip{display:inline-block; background:#45536c; border:1px solid #5a6a86; border-radius:4px; padding:3px 10px; font-size:11.5px;}
+  .neo-prow{display:flex; justify-content:space-between; align-items:center; padding:10px 12px; border-bottom:1px solid #1a2230; font-size:12.5px;}
+
+  /* ---------- DMM FX風 ---------- */
+  .t-dmm .screen{background:#1c1f29; color:#fff;}
+  .t-dmm .sbar{background:#0f1116; color:#fff;}
+  .t-dmm .aphead{background:#0f1116; color:#fff; justify-content:center; position:relative;}
+  .t-dmm .aphead .hl{position:absolute; left:12px;} .t-dmm .aphead .hr{position:absolute; right:12px;}
+  .t-dmm .tabbar{background:#262a37; color:#9aa0ad;}
+  .t-dmm .tabbar .on{color:#87bb22; font-weight:700; box-shadow:inset 0 2.5px 0 #87bb22;}
+  .dmm-pair{color:#95cf21; font-size:19px; font-weight:800; font-family:"Helvetica Neue",Arial,sans-serif;}
+  .dmm-pairbar{display:flex; justify-content:space-between; align-items:center; padding:8px 14px; flex-shrink:0; border-bottom:1px solid #262a37;}
+  .dmm-pairbar .hlv{font-size:11px; color:#dfe2e8;}
+  .dmm-circles{display:flex; justify-content:space-around; align-items:center; padding:14px 10px 26px; position:relative; flex-shrink:0;}
+  .dmm-c{width:126px; height:126px; border-radius:50%; padding:5px; cursor:pointer;}
+  .dmm-c.bid{background:linear-gradient(160deg,#00d7ff,#215ad7);}
+  .dmm-c.ask{background:linear-gradient(160deg,#ff9125,#d40144);}
+  .dmm-c.dim{filter:grayscale(1) brightness(.55);}
+  .dmm-c .inner{width:100%; height:100%; border-radius:50%; background:#1c1f29; display:flex; flex-direction:column; align-items:center; justify-content:center;}
+  .dmm-c .h{font-size:13px; color:#cfd3da; font-family:"Helvetica Neue",Arial,sans-serif;}
+  .dmm-c .p{font-size:36px; font-weight:700; line-height:1.05; font-family:"Helvetica Neue",Arial,sans-serif;}
+  .dmm-c .p sup{font-size:14px; vertical-align:.9em;}
+  .dmm-c .lab{font-size:11.5px; color:#e8e9eb; border-top:1px solid #6c7280; margin-top:5px; padding-top:4px; width:68%; text-align:center;}
+  .dmm-spread{position:absolute; left:50%; bottom:10px; transform:translateX(-50%); width:38px; height:38px; border:1.5px solid #8a93a5; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; background:#1c1f29; z-index:2;}
+  .dmm-row{padding:10px 12px; border-bottom:1px solid #262a37;}
+  .dmm-num{font-family:"Helvetica Neue",Arial,sans-serif; font-weight:700; font-size:13px;}
+  .dmm-num b{font-size:2em;}
+  .dmm-num sup{font-size:1em; vertical-align:.6em;}
+  .dmm-uline{height:2.5px; margin-top:3px;}
+  .dmm-subtabs{display:flex; border-bottom:1px solid #262a37; font-size:11px; flex-shrink:0;}
+  .dmm-subtabs div{flex:1; text-align:center; padding:9px 2px; color:#9aa0ad;}
+  .dmm-subtabs .on{color:#9bd820; font-weight:800; box-shadow:inset 0 -2.5px 0 #86fa25;}
+  .dmm-posrow{display:flex; justify-content:space-between; align-items:center; padding:10px 12px; background:#272f28; box-shadow:inset 3px 0 0 #95cf21; font-size:12.5px;}
+  .dmm-bbuy{display:inline-block; width:20px; height:20px; border-radius:50%; background:linear-gradient(#e8802b,#d02340); color:#fff; font-size:11px; font-weight:800; text-align:center; line-height:20px;}
+  .dmm-bsell{display:inline-block; width:20px; height:20px; border-radius:50%; background:linear-gradient(#10cce5,#2a72c4); color:#fff; font-size:11px; font-weight:800; text-align:center; line-height:20px;}
+  .dmm-rad{display:inline-flex; align-items:center; margin-right:18px; cursor:pointer;}
+  .dmm-rad i{width:17px; height:17px; border:1.5px solid #8a93a5; border-radius:50%; margin-right:7px; position:relative;}
+  .dmm-rad.on i::after{content:""; position:absolute; inset:3px; background:#fff; border-radius:50%;}
+  .dmm-stp{display:inline-flex; align-items:center; background:#262a37; border-radius:999px; overflow:hidden;}
+  .dmm-stp button{width:40px; height:36px; border:none; background:transparent; color:#fff; font-size:18px; cursor:pointer; font-family:inherit;}
+  .dmm-stp .v{min-width:56px; text-align:center; font-weight:700; font-family:"Helvetica Neue",Arial,sans-serif;}
+  .dmm-pill{border:none; border-radius:999px; padding:11px 28px; font-size:13.5px; font-weight:800; cursor:pointer; font-family:inherit;}
+  .dmm-pill.gray{background:#282a37; color:#dfe2e8; border:1px solid #3a3f4e;}
+  .dmm-pill.lime{background:#87ba22; color:#111;}
+  .dmm-quick{background:#0cc52b; color:#fff; border:none; border-radius:4px; padding:8px 14px; font-size:12px; font-weight:800; cursor:pointer; font-family:inherit;}
+  .dmm-card{background:#262a37; border-radius:14px; overflow:hidden; width:100%; box-shadow:0 10px 40px rgba(0,0,0,.6); padding:14px 16px 16px;}
+  .dmm-alert{background:#fff; color:#111; border-radius:14px; width:82%; margin:auto; text-align:center; overflow:hidden;}
+  .dmm-alert .bd{padding:20px 16px 16px; font-size:13.5px; font-weight:600;}
+  .dmm-alert .ok{border-top:1px solid #d8d8dc; color:#0a66ff; font-weight:700; padding:12px; cursor:pointer;}
+  .dmm-updated{text-align:right; font-size:9.5px; color:#6f7480; padding:4px 10px;}
+  .t-dmm .plus{color:#fff;} .t-dmm .minus{color:#fc155b;}
+  .t-neo .plus{color:#fff;} .t-neo .minus{color:#eb625d;}
+
   /* ---------- sim shell ---------- */
   .guide{background:#fff; border:1px solid var(--line); border-left:4px solid var(--navy); padding:12px 16px; margin:18px auto 14px; max-width:430px; font-size:14px;}
   .guide .gtag{display:block; font-size:10px; font-weight:800; letter-spacing:.16em; color:var(--navy); margin-bottom:2px;}
@@ -658,9 +754,10 @@
       <h2>FX注文シミュレーター</h2>
       <p class="muted">一般的なFXアプリに共通する画面構成(レート一覧 → 売Bid/買Askの2大ボタン → 新規注文 → ポジション → 決済)で、「新規→保有→決済」の1サイクルを練習します。レバレッジとスプレッドの意味も、この練習の中で体感できます。</p>
       <div class="brokerpick">
-        <button style="--bp:#2F6FD1;" onclick="startSim('fx')"><h3>FXアプリ(一般型)で練習</h3><p>米ドル/円を1,000通貨、「買い→決済」まで通しで体験。多くのFXアプリはこの画面構成です。</p><span class="go">練習をはじめる →</span></button>
+        <button style="--bp:#4491d3;" onclick="startSim('fxneo')"><h3>GMOクリック証券「FXネオ」</h3><p>盾形のBID/ASKパネルが目印。0.1(1,000通貨)で「新規→建玉→決済」を再現。</p><span class="go">練習をはじめる →</span></button>
+        <button style="--bp:#87bb22;" onclick="startSim('dmmfx')"><h3>DMM FX</h3><p>2つの巨大な円形Bid/Askが看板。1Lot(1万通貨)の「即時注文→クイック決済」を再現。</p><span class="go">練習をはじめる →</span></button>
       </div>
-      <p class="muted" style="margin-top:12px;">※特定のFX会社のアプリではなく、業界で一般的な画面構成を模した練習用UIです。</p>
+      <p class="muted" style="margin-top:12px;">※各社の公開情報(公式操作マニュアル・ストア掲載画像等)をもとにした非公式の再現イメージです。ロゴは使用しておらず、実際のアプリとは画面・文言が異なる場合があります(2026年8月時点)。</p>
     </div>
 
     <div class="card">
@@ -794,6 +891,7 @@ const AFF = {
   ispeed: {name:'楽天証券',      url:'https://www.rakuten-sec.co.jp/', pr:false},
   monex:  {name:'マネックス証券', url:'https://www.monex.co.jp/',      pr:false},
   gmofx:  {name:'GMOクリック証券(FXネオ)', url:'https://www.click-sec.com/', pr:false},
+  dmmfx:  {name:'DMM FX', url:'https://fx.dmm.com/', pr:false},
   matsuifx:{name:'松井証券(MATSUI FX・1通貨から)', url:'https://www.matsui.co.jp/fx/', pr:false},
 };
 function ctaHTML(key, lead){
@@ -892,7 +990,8 @@ const BADGES = [
   {id:'sbi',    label:'SBI 株アプリ'},
   {id:'ispeed', label:'楽天 iSPEED'},
   {id:'monex',  label:'マネックス'},
-  {id:'fx',     label:'FXの練習'},
+  {id:'fxneo',  label:'FXネオ'},
+  {id:'dmmfx',  label:'DMM FX'},
 ];
 function getBadges(){ try{return JSON.parse(localStorage.getItem('kabudojo_badges'))||{};}catch(e){return {};} }
 function earnBadge(id){ const b=getBadges(); b[id]=true; localStorage.setItem('kabudojo_badges', JSON.stringify(b)); renderBadges(); }
@@ -1014,7 +1113,306 @@ fx: {
   ],
   build: buildFX,
 },
+/* ---------------- FXネオ風 ---------------- */
+fxneo: {
+  cls:'t-neo', last:6,
+  guides:[
+    {g:'レート一覧です。<b>USD/JPY</b>の行をタップ', s:'左がBID(売る値段)、右がASK(買う値段)。真ん中の小さな数字がスプレッドです。',
+     l:'pipsの2桁だけ大きく表示するのはFXアプリ共通の作法。レートの矢印は<b>上昇=赤、下降=水色</b>です。BIDとASKの差(スプレッド)0.2銭が実質の取引コスト。'},
+    {g:'上がると思ったので、右の赤い<b>「(買) ASK」</b>パネルをタップ', s:'盾のような形の2枚パネルがFXネオの看板UIです。',
+     l:'下がると思ったときは左の青い「BID(売)」から。FXは<b>売りからも入れます</b>。下半分の「建玉サマリ」に保有中の取引(建玉=ポジション)が並びます。売買バッジは<b>買=赤、売=水色</b>。'},
+    {g:'数量は<b>0.1(=1,000通貨)</b>のまま、ティール色の<b>「確認画面へ」</b>をタップ', s:'注文タイプは「成行」が選ばれています。',
+     l:'FXネオは<b>0.1(1,000通貨)から</b>取引できます。1,000通貨=約15万円分の取引でも、必要証拠金は約6,000円——これがレバレッジ(最大25倍)。<b>数量を小さくすることが実質レバレッジを下げる唯一の方法</b>です。スリッページ欄は空欄=制限なし。「決済同時発注」は買うと同時に損切り・利確を予約する機能で、慣れたら便利です。'},
+    {g:'内容を確認して、オレンジの<b>「注文確定」</b>をタップ', s:'FXネオの最終確定ボタンはオレンジ色です。',
+     l:'キャンセル=グレー、進む=ティール、最終確定=オレンジ、という色の階層がFXネオの文法。確認画面は設定で省略できますが、事故のもとなので最初はこのままで。'},
+    {g:'約定しました。損益が動いています。<b>「決済」</b>をタップ', s:'建玉一覧に保有中の取引が表示されています。',
+     l:'評価損益は<b>プラス=白、マイナス=赤</b>。「累計SWAP」はスワップポイント(金利差の受け払い)の合計です。含み損益は決済するまで確定しません。'},
+    {g:'決済(成行)画面です。オレンジの<b>「注文確定」</b>をタップ', s:'売買区分が自動で「売」(反対売買)になっています。',
+     l:'決済は建玉と反対方向の注文。決済損益(参考)が事前に見えます。決済はBID(売値)側で行われるため、スプレッド分は最初から不利——数pips動いてはじめて利益になります。'},
+    {g:'取引完了。これがFXの1サイクルです', s:'',
+     l:'新規→建玉→決済で1周。<b>1pip=0.01円、1,000通貨なら1pipで10円</b>の損益です。生き残るための定番:①数量は小さく ②ロスカットに頼らず自分で損切り ③寝る前に大きな建玉を持たない。デモトレードのFXでも同じ画面で練習できます。'},
+  ],
+  build: buildNeo,
+},
+/* ---------------- DMM FX風 ---------------- */
+dmmfx: {
+  cls:'t-dmm', last:6,
+  guides:[
+    {g:'レート一覧です。<b>USD/JPY</b>の行をタップ', s:'Bid(売)とAsk(買)の下の色付きラインが売り/買いの目印です。',
+     l:'DMM FXは黒地に<b>ライム黄緑</b>がブランド色。通貨ペア名や選択中のタブがライムで光ります。数字のpips2桁が大きいのは他のFXアプリと同じ作法。'},
+    {g:'上がると思ったので、右の<b>Ask/買の円</b>をタップ', s:'2つの巨大な円形パネルがDMM FXの看板UIです。',
+     l:'<b>売=シアン→青、買=オレンジ→赤のグラデーションリング</b>。円の間の小さな丸がスプレッド。下のライム色の線は直近の値動き(スパークライン)です。'},
+    {g:'売買で<b>「買」</b>を選んで、<b>「確認画面」</b>をタップ', s:'「新規 即時注文」画面。即時=成行のことです。',
+     l:'DMMは<b>1Lot=1万通貨</b>(約151万円分の取引、必要証拠金 約6万円)が最小単位。1,000通貨から始めたい人は他社(FXネオ・松井FXなど)を選ぶ、という判断材料になります。スリッページ2.0pips、「損切:OFF」は予約損切り機能で慣れたらON推奨。'},
+    {g:'ライム緑の<b>「注 文」</b>をタップ', s:'選んだ「買」側の円だけ点灯し、反対側はグレーになります。',
+     l:'DMMの最終実行ボタンは<b>ライム地+黒文字</b>で統一。確認画面で方向(売/買)を視覚的にもう一度確かめさせる作りです。'},
+    {g:'約定しました。損益が動いています。<b>「クイック決済」</b>をタップ', s:'本物では建玉の行を左にスワイプすると決済ボタンが出ます。',
+     l:'ポジション照会の行には数量(Lot)・約定レート・評価レート・pips損益・損益合計が並びます。<b>マイナスはピンク赤</b>。1Lot(1万通貨)は1pipで100円動きます——1,000通貨の10倍速です。'},
+    {g:'内容を確認して、ライムの<b>「クイック決済」</b>をタップ', s:'クイック決済=成行で即決済する機能です。',
+     l:'ワンタップで決済できて便利な反面、誤タップで意図せず決済しがちな機能でもあります。本物のアプリでは確認ダイアログの表示設定を確認しておきましょう。'},
+    {g:'注文を受け付けました。これがDMM FXの1サイクルです', s:'',
+     l:'新規(即時)→ポジション→クイック決済で1周。<b>1Lot=1万通貨は初心者には大きめの単位</b>です。値動きが速いと感じたら、より小さい単位で取引できる会社で慣れるのも立派な戦略です。'},
+  ],
+  build: buildDMM,
+},
 };
+
+/* ---- FXネオ風ビルダー ---- */
+function neoNum(h,p,l,arr){ return `<span class="neo-num">${h}<b>${p}</b><sup>${l}</sup>${arr?`<span class="${arr==='up'?'arrup':'arrdn'}">${arr==='up'?'▲':'▼'}</span>`:''}</span>`; }
+function buildNeo(i){
+  const tabbar = (hl)=>`<div class="tabbar">
+    <div class="${hl===0?'on':''}">${ico('grid')}ホーム</div>
+    <div class="${hl===1?'on':''}">${ico('reload')}トレード</div>
+    <div><i style="font-style:italic; font-weight:800; font-size:12px; display:block;">SPEED</i>スピード注文</div>
+    <div>${ico('globe')}マーケット</div>
+    <div>${ico('chart')}チャート</div>
+    <div class="gold ${hl===5?'on':''}">${ico('coin')}通貨ペア</div></div>`;
+  const pairbar = `<div class="neo-pairbar"><span>USD/JPY</span><span class="hlv">前日比 +0.10　<span style="color:#de4f4f;">H:</span> 151.625　<span style="color:#0daddc;">L:</span> 151.084</span></div>`;
+  const panels = (mode)=>`<div class="neo-panels">
+      <div class="neo-shield bid ${mode==='tap'?'':''} ${mode==='dimbid'?'dim':''} ${mode==='goldbid'?'gold':''}" onclick="${mode==='tap'?'simWarnFxSell()':''}">
+        <span class="lab">BID (売) ⬇</span>${neoNum('151.','23','0')}</div>
+      <div class="neo-spread">0.2</div>
+      <div class="neo-shield ask ${mode==='tap'?'tap':''} ${mode==='dimask'?'dim':''} ${mode==='goldask'?'gold':''}" onclick="${mode==='tap'?'simNext()':''}">
+        <span class="lab">⬇ (買) ASK</span>${neoNum('151.','23','2')}</div>
+    </div>`;
+  const flap = (t)=>`<div class="neo-flap"><span class="f">${t}</span><span class="tick">米雇用統計は市場予想を上回る(サンプル)</span></div>`;
+  const subtabs = (on)=>`<div class="neo-subtabs"><div class="${on===0?'on':''}">建玉サマリ</div><div class="${on===1?'on':''}">建玉一覧</div><div class="${on===2?'on':''}">注文一覧</div><div class="${on===3?'on':''}">約定履歴</div></div>`;
+  const q = (sim.qty/10000).toFixed(1);
+
+  if(i===0) return sbarHTML('#000','#fff') + `<div class="aphead" style="font-size:12px;"><span>通貨ペア</span><span style="font-weight:400; letter-spacing:.2em;">BID　　ASK</span></div>
+    <div class="apbody">
+      <div class="neo-row tap" onclick="simNext()"><div class="nr-top">
+        <div class="nr-pair">USD/JPY<span class="nr-sp">0.2</span></div>
+        ${neoNum('151.','23','0','up')}${neoNum('151.','23','2','up')}
+      </div><span class="nr-sub">前日比 +0.10　<span style="color:#de4f4f;">H:</span> 151.625　<span style="color:#0daddc;">L:</span> 151.084</span></div>
+      <div class="neo-row"><div class="nr-top">
+        <div class="nr-pair">EUR/JPY<span class="nr-sp">0.4</span></div>
+        ${neoNum('163.','54','1','dn')}${neoNum('163.','54','5','dn')}
+      </div><span class="nr-sub">前日比 -0.21　<span style="color:#de4f4f;">H:</span> 163.882　<span style="color:#0daddc;">L:</span> 163.320</span></div>
+      <div class="neo-row"><div class="nr-top">
+        <div class="nr-pair">GBP/JPY<span class="nr-sp">0.9</span></div>
+        ${neoNum('192.','88','2','up')}${neoNum('192.','89','1','up')}
+      </div><span class="nr-sub">前日比 +0.35　<span style="color:#de4f4f;">H:</span> 193.101　<span style="color:#0daddc;">L:</span> 192.554</span></div>
+      <div class="neo-row"><div class="nr-top">
+        <div class="nr-pair">AUD/JPY<span class="nr-sp">0.6</span></div>
+        ${neoNum('98.','44','3','dn')}${neoNum('98.','44','9','dn')}
+      </div><span class="nr-sub">前日比 -0.08　<span style="color:#de4f4f;">H:</span> 98.712　<span style="color:#0daddc;">L:</span> 98.301</span></div>
+    </div>` + tabbar(5);
+
+  if(i===1) return sbarHTML('#000','#fff') + pairbar + panels('tap') + flap('トレード') + subtabs(0) + `
+    <div class="neo-th"><span>通貨ペア (売買)</span><span>建玉数量/発注中</span><span>評価損益/累計SW</span></div>
+    <div class="apbody"><div style="padding:16px 12px; font-size:12px; color:#8a93a5;">建玉はありません。上の(買) ASKパネルをタップすると新規注文へ進みます。</div></div>` + tabbar(1);
+
+  if(i===2) return sbarHTML('#000','#fff') + pairbar + flap('新規') + `
+    <div class="sbi-toptabs" style="border-bottom:1px solid #2a3040;"><div class="on" style="border-bottom-color:#a8e6fc; color:#fff;">成行</div><div onclick="simWarnFxLimit()">通常</div><div onclick="simWarnFxLimit()">OCO</div><div onclick="simWarnFxLimit()">IFD</div><div onclick="simWarnFxLimit()">IFD-OCO</div></div>
+    <div class="apbody">
+      <div class="fx-frow"><span class="fl">売買区分</span><span>買 <span class="neo-badge b">買</span></span></div>
+      <div class="fx-frow"><span class="fl">取引数量</span><span style="display:flex; align-items:center; gap:8px;"><span class="sbi-step"><button onclick="qtyChange(-1000)">−</button><span class="v">${q}</span><button onclick="qtyChange(1000)">+</button></span><span style="font-size:11px; color:#8a93a5;">×10,000<br>(=${sim.qty.toLocaleString()}通貨)</span></span></div>
+      <div class="fx-frow"><span class="fl">必要証拠金</span><span style="font-weight:700;">約${Math.round(151.232*sim.qty/25).toLocaleString()}円<span style="font-size:10px; color:#8a93a5;">(レバレッジ25倍)</span></span></div>
+      <div class="fx-frow"><span class="fl">スリッページ</span><span><input class="neo-in" value="" placeholder="—" readonly> <span style="font-size:10.5px; color:#8a93a5;">pips(空欄時は制限なし)</span></span></div>
+      <div class="fx-frow"><span class="fl">スワップ受渡</span><span>日本円</span></div>
+      <div class="fx-frow" style="background:#4b4f58; border-radius:4px; margin:8px 12px; padding:8px 12px;" onclick="simWarnKessai()"><span style="font-size:12px;">決済同時発注</span><span style="margin-left:auto; font-size:12px; color:#cfd3da;">OFF</span></div>
+      <div style="display:flex; justify-content:center; gap:12px; padding:14px 0;">
+        <button class="neo-pill gray" onclick="neoBack()">キャンセル</button>
+        <button class="neo-pill teal tap" onclick="simNext()">確認画面へ</button>
+      </div>
+    </div>` + tabbar(1);
+
+  if(i===3) return sbarHTML('#000','#fff') + pairbar + panels('dimbid') + `<div class="apbody" style="background:rgba(0,0,0,.4);">
+      <div class="menuovl center"><div class="neo-modal">
+        <div class="mh">注文確認</div>
+        <div style="padding:6px 16px 2px;">
+          <div class="neo-prow"><span>通貨ペア</span><b>USD/JPY</b></div>
+          <div class="neo-prow"><span>注文タイプ</span><b>成行</b></div>
+          <div class="neo-prow"><span>売買区分</span><b>買 <span class="neo-badge b">買</span></b></div>
+          <div class="neo-prow"><span>取引数量</span><b>${q}(${sim.qty.toLocaleString()}通貨)</b></div>
+          <div class="neo-prow"><span>スリッページ</span><b>制限なし</b></div>
+        </div>
+        <div style="display:flex; justify-content:center; gap:12px; padding:14px 0 18px;">
+          <button class="neo-pill gray" onclick="neoBackForm()">キャンセル</button>
+          <button class="neo-pill orange tap" onclick="simNext()">注文確定</button>
+        </div>
+      </div></div>
+    </div>`;
+
+  if(i===4) return sbarHTML('#000','#fff') + pairbar + panels('') + flap('トレード') + subtabs(0) + `
+    <div class="neo-th"><span>通貨ペア (売買)</span><span>数量/建玉レート・評価レート</span><span>評価損益</span></div>
+    <div class="apbody">
+      <div class="neo-prow">
+        <span>USD/JPY <span class="neo-badge b">買</span></span>
+        <span style="text-align:right; font-size:11.5px; color:#cfd3da;">${q} / 151.232<br><span id="fxNow" style="color:#fff;">151.245</span></span>
+        <span id="fxPL" style="font-weight:800; font-family:'Helvetica Neue',Arial,sans-serif;">+13円</span>
+      </div>
+      <div style="display:flex; justify-content:flex-end; padding:10px 12px;">
+        <button class="neo-pill teal tap" style="padding:9px 22px;" onclick="simNext()">決済</button>
+      </div>
+      <div class="fx-frow"><span class="fl">証拠金維持率</span><span style="font-weight:800; color:#66d2d0;">${Math.round(100000/(151.232*sim.qty/25)*100).toLocaleString()}%</span></div>
+    </div>` + tabbar(1);
+
+  if(i===5) return sbarHTML('#000','#fff') + pairbar + panels('goldbid') + flap('決済') + `
+    <div class="sbi-toptabs" style="border-bottom:1px solid #2a3040;"><div class="on" style="border-bottom-color:#a8e6fc; color:#fff;">成行</div><div onclick="simWarnFxLimit()">通常</div><div onclick="simWarnFxLimit()">OCO</div></div>
+    <div class="apbody">
+      <div class="fx-frow"><span class="fl">売買区分</span><span>売 <span class="neo-badge s">売</span><span class="neo-chip" style="margin-left:10px;">建玉レート 151.232</span></span></div>
+      <div class="fx-frow"><span class="fl">取引数量</span><span>${q} <span style="font-size:10.5px; color:#8a93a5;">(建玉数:${q} 発注数:0.0)</span></span></div>
+      <div class="fx-frow"><span class="fl">決済損益(参考)</span><span style="font-weight:800;">+${Math.round(0.035*sim.qty).toLocaleString()} 円</span></div>
+      <div style="display:flex; justify-content:center; gap:12px; padding:14px 0;">
+        <button class="neo-pill gray">キャンセル</button>
+        <button class="neo-pill orange tap" onclick="simNext()">注文確定</button>
+      </div>
+      <div style="padding:0 14px; font-size:10px; color:#8a93a5;">※練習用に確認画面を省略しています(本物では設定で選べます)</div>
+    </div>` + tabbar(1);
+
+  return sbarHTML('#000','#fff') + pairbar + panels('') + flap('トレード') + subtabs(3) + `
+    <div class="neo-th"><span>通貨ペア (売買)</span><span>数量/約定レート</span><span>実現損益</span></div>
+    <div class="apbody">
+      <div class="neo-prow">
+        <span>USD/JPY <span class="neo-badge s">売</span></span>
+        <span style="font-size:11.5px; color:#cfd3da;">${q} / 151.267</span>
+        <span style="font-weight:800; font-family:'Helvetica Neue',Arial,sans-serif;">+${Math.round(0.035*sim.qty).toLocaleString()}円</span>
+      </div>
+      <div style="padding:14px 12px; font-size:12px; color:#8a93a5;">お疲れさまでした。新規→建玉→決済の1サイクル完了です(+3.5pips)。</div>
+      <button class="exitbtn" onclick="exitSim()">ほかの練習にもどる</button>
+    </div>` + tabbar(1);
+}
+
+/* ---- DMM FX風ビルダー ---- */
+function buildDMM(i){
+  const tabbar = (hl)=>`<div class="tabbar">
+    <div class="${hl===0?'on':''}">${ico('chart')}トレード</div>
+    <div><i style="font-style:italic; font-weight:800; font-size:11px; display:block;">⇄</i>スピード注文</div>
+    <div class="${hl===2?'on':''}">${ico('coin')}レート</div>
+    <div>${ico('chart')}チャート</div>
+    <div>${ico('globe')}マーケット</div>
+    <div>${ico('doc')}資産状況</div></div>`;
+  const head = (t, x)=>sbarHTML('#0f1116','#fff')+`<div class="aphead"><span class="hl">${x?'':ico('menu')}</span><span>${t}</span><span class="hr">${x?'✕':''}</span></div>`;
+  const pairbar = `<div class="dmm-pairbar"><span class="dmm-pair">USD/JPY</span><span class="hlv">前日比 : +0.103<br><span style="color:#f26b34;">H</span> 151.594 / <span style="color:#11a1e8;">L</span> 151.278</span></div>`;
+  const circles = (mode, small)=>`<div class="dmm-circles" style="${small?'transform:scale(.72); margin:-16px 0 -22px;':''}">
+      <div class="dmm-c bid ${mode==='dim'?'dim':''}" onclick="${mode==='tap'?'simWarnFxSell()':''}"><div class="inner">
+        <span class="h">151.</span><span class="p">23<sup>0</sup></span><span class="lab">Bid / 売</span></div></div>
+      <div class="dmm-c ask ${mode==='tap'?'tap':''}" onclick="${mode==='tap'?'simNext()':''}"><div class="inner">
+        <span class="h">151.</span><span class="p">23<sup>2</sup></span><span class="lab">Ask / 買</span></div></div>
+      <div class="dmm-spread">0.2</div>
+    </div>`;
+  const spark = `<svg class="dmm-spark" viewBox="0 0 320 44" preserveAspectRatio="none" style="width:calc(100% - 24px);"><polyline points="0,30 20,26 40,29 60,22 80,25 100,18 120,22 140,15 160,19 180,12 200,16 220,10 240,14 260,8 280,12 300,6 320,9" fill="none" stroke="#8fd82e" stroke-width="1.8"/></svg>`;
+  const lots = sim.qty/10000;
+
+  if(i===0) return head('レート') + `<div class="apbody">
+      <div style="display:flex; justify-content:space-between; padding:7px 12px; font-size:10.5px; color:#9aa0ad; border-bottom:1px solid #262a37;"><span>通貨ペア</span><span>Bid</span><span>Ask</span></div>
+      <div class="dmm-row tap" onclick="simNext()"><div style="display:flex; justify-content:space-between; align-items:center;">
+        <span><span class="dmm-pair" style="font-size:14px;">USD/JPY</span><br><span style="font-size:9.5px; color:#9aa0ad;">前日比 : +0.103</span></span>
+        <span><span class="dmm-num">151.<b>23</b><sup>0</sup></span><div class="dmm-uline" style="background:linear-gradient(90deg,#00d7ff,#215ad7);"></div><span style="font-size:9px; color:#f26b34;">高値 : 151.594</span></span>
+        <span style="width:26px; height:26px; border:1px solid #6c7280; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:10px;">0.2</span>
+        <span><span class="dmm-num">151.<b>23</b><sup>2</sup></span><div class="dmm-uline" style="background:linear-gradient(90deg,#ff9125,#d40144);"></div><span style="font-size:9px; color:#f26b34;">安値 : 151.278</span></span>
+      </div></div>
+      <div class="dmm-row"><div style="display:flex; justify-content:space-between; align-items:center;">
+        <span><span class="dmm-pair" style="font-size:14px;">EUR/JPY</span><br><span style="font-size:9.5px; color:#9aa0ad;">前日比 : -0.214</span></span>
+        <span><span class="dmm-num">163.<b>54</b><sup>1</sup></span><div class="dmm-uline" style="background:linear-gradient(90deg,#00d7ff,#215ad7);"></div></span>
+        <span style="width:26px; height:26px; border:1px solid #6c7280; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:10px;">0.4</span>
+        <span><span class="dmm-num">163.<b>54</b><sup>5</sup></span><div class="dmm-uline" style="background:linear-gradient(90deg,#ff9125,#d40144);"></div></span>
+      </div></div>
+      <div class="dmm-row"><div style="display:flex; justify-content:space-between; align-items:center;">
+        <span><span class="dmm-pair" style="font-size:14px;">GBP/JPY</span><br><span style="font-size:9.5px; color:#9aa0ad;">前日比 : +0.352</span></span>
+        <span><span class="dmm-num">192.<b>88</b><sup>2</sup></span><div class="dmm-uline" style="background:linear-gradient(90deg,#00d7ff,#215ad7);"></div></span>
+        <span style="width:26px; height:26px; border:1px solid #6c7280; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:10px;">0.9</span>
+        <span><span class="dmm-num">192.<b>89</b><sup>1</sup></span><div class="dmm-uline" style="background:linear-gradient(90deg,#ff9125,#d40144);"></div></span>
+      </div></div>
+      <div class="dmm-updated">Updated 2026/08/07 15:00:00</div>
+    </div>` + tabbar(2);
+
+  if(i===1) return head('トレード') + pairbar + circles('tap') + spark + `
+    <div class="dmm-subtabs"><div class="on">ポジションサマリ</div><div>ポジション照会</div><div>注文照会</div><div>約定履歴</div></div>
+    <div class="apbody">
+      <div style="padding:14px 12px; font-size:12px; color:#9aa0ad;">ポジションはありません。上のAsk/買の円をタップすると新規注文へ。</div>
+      <div class="dmm-updated" style="margin-top:auto;">Updated 2026/08/07 15:00:00</div>
+    </div>` + tabbar(0);
+
+  if(i===2) return head('新規 即時注文', true) + circles(sim.otype?'dim-none':'', true) + `
+    <div class="dmm-subtabs"><div class="on">即時</div><div onclick="simWarnFxLimit()">指値/逆指値</div><div onclick="simWarnFxLimit()">IFD</div><div onclick="simWarnFxLimit()">OCO</div><div onclick="simWarnFxLimit()">IFO</div></div>
+    <div class="apbody">
+      <div class="fx-frow"><span class="fl">売買</span><span>
+        <span class="dmm-rad" onclick="simWarnFxSell()"><i></i><span style="color:#1b8eda; font-weight:800;">売</span></span>
+        <span class="dmm-rad ${sim.otype?'on':'tap'}" onclick="dmmSide()"><i></i><span style="color:#cb3138; font-weight:800;">買</span></span>
+      </span></div>
+      <div class="fx-frow"><span class="fl">注文数量(Lot)<br><span style="font-size:9.5px; color:#9aa0ad;">発注可能数量 : 16</span></span><span style="display:flex; align-items:center; gap:8px;">
+        <span class="dmm-stp"><button onclick="qtyChange(-10000)">−</button><span class="v">${lots}</span><button onclick="qtyChange(10000)">+</button></span>
+        <span style="font-size:10px; color:#9aa0ad;">1Lot=1万通貨<br>証拠金 約${Math.round(151.232*sim.qty/25/1000)}千円</span></span></div>
+      <div class="fx-frow"><span class="fl">スリッページ<br><span style="font-size:9.5px; color:#9aa0ad;">(0-99.9pips)</span></span><span class="dmm-stp"><button>−</button><span class="v">2.0</span><button>+</button></span></div>
+      <div class="fx-frow"><span class="fl">損切</span><span><button class="dmm-pill gray" style="padding:6px 20px;" onclick="simWarnSonkiri()">OFF</button></span></div>
+      <div style="display:flex; justify-content:center; gap:12px; padding:14px 0;">
+        <button class="dmm-pill gray" onclick="dmmBack()">キャンセル</button>
+        <button class="dmm-pill gray ${sim.otype?'tap':''}" style="${sim.otype?'border-color:#87ba22; color:#fff;':''}" onclick="confirmDmm()">確認画面</button>
+      </div>
+    </div>`;
+
+  if(i===3) return head('新規 即時注文', true) + circles('dim', true) + `
+    <div class="apbody">
+      <div class="fx-frow"><span class="fl">売買</span><span><span class="dmm-bbuy">買</span></span></div>
+      <div class="fx-frow"><span class="fl">注文数量(Lot)</span><span style="font-weight:700;">${lots}</span></div>
+      <div class="fx-frow"><span class="fl">スリッページ</span><span>2.0</span></div>
+      <div class="fx-frow"><span class="fl">損切(参考)</span><span>OFF</span></div>
+      <div style="display:flex; justify-content:center; gap:12px; padding:16px 0;">
+        <button class="dmm-pill gray" onclick="dmmBackForm()">キャンセル</button>
+        <button class="dmm-pill lime tap" onclick="simNext()">注　文</button>
+      </div>
+    </div>`;
+
+  if(i===4) return head('トレード') + pairbar + `
+    <div class="dmm-subtabs"><div>ポジションサマリ</div><div class="on">ポジション照会</div><div>注文照会</div><div>約定履歴</div></div>
+    <div style="display:flex; justify-content:space-between; padding:6px 12px; font-size:9px; color:#9aa0ad; border-bottom:1px solid #262a37;"><span>通貨ペア(売買)<br>約定日時</span><span>数量(Lot)<br>決済可能数量</span><span>約定レート<br>評価レート</span><span>pips損益<br>損益合計</span></div>
+    <div class="apbody">
+      <div class="dmm-posrow">
+        <span>USD/JPY <span class="dmm-bbuy">買</span><br><span style="font-size:9px; color:#9aa0ad;">26/08/07 15:00</span></span>
+        <span>${lots}<br>${lots}</span>
+        <span style="font-family:'Helvetica Neue',Arial,sans-serif;">151.232<br><span id="fxNow">151.245</span></span>
+        <span id="fxPL" style="font-weight:800; font-family:'Helvetica Neue',Arial,sans-serif; text-align:right;">+130円</span>
+      </div>
+      <div style="display:flex; justify-content:flex-end; padding:10px 12px;">
+        <button class="dmm-quick tap" onclick="simNext()">クイック決済</button>
+      </div>
+      <div class="dmm-updated" style="margin-top:auto;">Updated 2026/08/07 15:00:05</div>
+    </div>` + tabbar(0);
+
+  if(i===5) return head('トレード') + `<div class="apbody" style="background:rgba(0,0,0,.45);">
+      <div class="menuovl center"><div class="dmm-card">
+        <div style="text-align:center; font-weight:800; font-size:14px; margin-bottom:10px;">クイック決済</div>
+        <div class="fx-frow"><span class="fl">通貨ペア</span><span><b>USD/JPY</b></span></div>
+        <div class="fx-frow"><span class="fl">決済</span><span><span class="dmm-bsell">売</span></span></div>
+        <div class="fx-frow"><span class="fl">注文数量(Lot)</span><span>${lots}</span></div>
+        <div class="fx-frow"><span class="fl">損益合計(円)</span><span style="font-weight:800;">+${Math.round(0.035*sim.qty).toLocaleString()}</span></div>
+        <div style="display:flex; justify-content:center; gap:12px; padding-top:14px;">
+          <button class="dmm-pill gray" onclick="dmmBackPos()">キャンセル</button>
+          <button class="dmm-pill lime tap" onclick="simNext()">クイック決済</button>
+        </div>
+      </div></div>
+    </div>`;
+
+  return head('トレード') + pairbar + `
+    <div class="dmm-subtabs"><div>ポジションサマリ</div><div>ポジション照会</div><div>注文照会</div><div class="on">約定履歴</div></div>
+    <div class="apbody">
+      <div class="menuovl center" style="background:rgba(0,0,0,.35); position:absolute;"><div class="dmm-alert">
+        <div class="bd">注文を受け付けました。<br><span style="font-size:11.5px; color:#555;">USD/JPY 売 ${lots}Lot 実現損益 +${Math.round(0.035*sim.qty).toLocaleString()}円(+3.5pips)</span></div>
+        <div class="ok" onclick="exitSim()">OK</div>
+      </div></div>
+      <div class="dmm-posrow" style="background:transparent; box-shadow:none;">
+        <span>USD/JPY <span class="dmm-bsell">売</span></span>
+        <span>${lots}</span>
+        <span style="font-family:'Helvetica Neue',Arial,sans-serif;">151.267</span>
+        <span style="font-weight:800;">+${Math.round(0.035*sim.qty).toLocaleString()}円</span>
+      </div>
+    </div>` + tabbar(0);
+}
+function neoBack(){ sim.i = 1; renderSim(); }
+function neoBackForm(){ sim.i = 2; renderSim(); }
+function dmmSide(){ sim.otype = 'buy'; renderSim(); }
+function dmmBack(){ sim.i = 1; sim.otype = null; renderSim(); }
+function dmmBackForm(){ sim.i = 2; renderSim(); }
+function dmmBackPos(){ sim.i = 4; renderSim(); }
+function confirmDmm(){
+  if(!sim.otype){ toastGuide('先に売買で「買」を選んでください(今回は買いの練習です)'); return; }
+  simNext();
+}
+function simWarnKessai(){ toastGuide('「決済同時発注」は新規と同時に損切り・利確を予約する機能。慣れたら便利ですが、まずは基本の流れから'); }
+function simWarnSonkiri(){ toastGuide('「損切」は損失を自動で限定する予約機能。慣れてきたらONを推奨します'); }
 
 /* ---- FX(一般型) ---- */
 function buildFX(i){
@@ -1508,7 +1906,8 @@ function buildMX(i){
 
 /* ---- 進行制御 ---- */
 function startSim(broker){
-  sim = {broker, i:0, qty: broker==='fx'?1000:100, otype:null, kubun:null, sheet:false, origin: broker==='fx'?'fx':'order'};
+  const isFx = (broker==='fx'||broker==='fxneo'||broker==='dmmfx');
+  sim = {broker, i:0, qty: broker==='dmmfx'?10000 : (isFx?1000:100), otype:null, kubun:null, sheet:false, origin: isFx?'fx':'order'};
   showPage('sim');
   document.getElementById('phoneBox').className = 'phone ' + SIMS[broker].cls;
   renderSim();
@@ -1528,27 +1927,29 @@ function renderSim(){
   gb.innerHTML = guideHTML(g);
   let lesson = g.l;
   if(sim.i===S.last){
-    const ctaKey = sim.broker==='fx' ? 'gmofx' : sim.broker;
-    lesson += ctaHTML(ctaKey, '練習クリア。この流れのまま、本番へ。');
+    const ctaMap = {fx:'gmofx', fxneo:'gmofx', dmmfx:'dmmfx'};
+    lesson += ctaHTML(ctaMap[sim.broker] || sim.broker, '練習クリア。この流れのまま、本番へ。');
   }
   document.getElementById('lessonBox').innerHTML = lesson;
   const scr = document.getElementById('simScreen');
   scr.innerHTML = S.build(sim.i);
   const body = scr.querySelector('.apbody'); if(body) body.scrollTop = 0;
   clearInterval(window._fxT);
-  if(sim.broker==='fx' && sim.i===3){ startFxTick(); }
+  if((sim.broker==='fx' && sim.i===3) || ((sim.broker==='fxneo'||sim.broker==='dmmfx') && sim.i===4)){ startFxTick(); }
 }
 function startFxTick(){
   let bid = 151.245;
+  const colors = sim.broker==='dmmfx' ? {up:'#ffffff', dn:'#fc155b'} :
+                 sim.broker==='fxneo' ? {up:'#ffffff', dn:'#eb625d'} :
+                 {up:'#E8483F', dn:'#5aa2ff'};
   window._fxT = setInterval(()=>{
     bid = Math.max(151.20, Math.min(151.32, bid + (Math.random()-0.5)*0.012));
     const el = document.getElementById('fxNow'), pe = document.getElementById('fxPL');
     if(!el || !pe){ clearInterval(window._fxT); return; }
-    const pl = Math.round((bid - 151.232) * sim.qty / 1 * 1) / 1;
     const yen = Math.round((bid - 151.232) * sim.qty);
     el.textContent = bid.toFixed(3);
     pe.textContent = (yen>=0?'+':'') + yen.toLocaleString() + '円';
-    pe.style.color = yen>=0 ? '#E8483F' : '#5aa2ff';
+    pe.style.color = yen>=0 ? colors.up : colors.dn;
   }, 900);
 }
 function simNext(){
@@ -1558,7 +1959,8 @@ function simNext(){
   renderSim();
 }
 function qtyChange(d){
-  if(sim.broker==='fx'){ sim.qty = Math.max(1000, Math.min(10000, sim.qty + d)); }
+  if(sim.broker==='fx' || sim.broker==='fxneo'){ sim.qty = Math.max(1000, Math.min(10000, sim.qty + d)); }
+  else if(sim.broker==='dmmfx'){ sim.qty = Math.max(10000, Math.min(30000, sim.qty + d)); }
   else { sim.qty = Math.max(100, Math.min(1000, sim.qty + d)); }
   renderSim();
 }
@@ -1710,7 +2112,7 @@ function demoTick(){
   const st = document.getElementById('demoStats');
   if(st) st.innerHTML = demoStatsHTML();
 }
-function fxFmt(v){ const s = v.toFixed(3); return s.slice(0,4) + '<b>' + s.slice(4,6) + '</b>' + s.slice(6); }
+function fxFmt(v){ const s = v.toFixed(3); return s.slice(0,4) + '<b>' + s.slice(4,6) + '</b><sup>' + s.slice(6) + '</sup>'; }
 function sparkline(arr){
   if(arr.length<2) return '';
   const W=90, H=24, min=Math.min(...arr), max=Math.max(...arr), rng=(max-min)||1;
@@ -1740,8 +2142,8 @@ function renderDemo(){
     hint.textContent = D.day + '日目。売買は100株単位。画面下の「翌日の相場へ」で1日進みます(値動きは乱数です)。';
     scr.innerHTML = demoStockScreen();
   } else {
-    ph.className = 'phone t-fx';
-    hint.textContent = 'USD/JPYがリアルタイムに動いています。数量を選び、青(売)/赤(買)のパネルをタップすると注文できます。';
+    ph.className = 'phone t-neo';
+    hint.textContent = 'USD/JPYがリアルタイムに動いています(FXネオ風の画面)。数量を選び、青のBID(売)/赤のASK(買)パネルをタップすると注文できます。';
     scr.innerHTML = demoFxScreen();
   }
   document.getElementById('demoLog').innerHTML = D.log.map(l=>`<div>${l}</div>`).join('');
@@ -1782,34 +2184,36 @@ function demoFxScreen(){
   let pos = '';
   D.fxPos.forEach((p,i)=>{
     const pl = Math.round(p.side==='買' ? (bid-p.r)*p.u : (p.r-ask)*p.u);
-    pos += `<div class="fx-poscard" style="margin:8px 12px;">
-      <div style="display:flex; justify-content:space-between; font-size:12.5px;"><b>USD/JPY ${p.side}</b><span style="color:#8b95a3;">${p.u.toLocaleString()}通貨 @${p.r.toFixed(3)}</span></div>
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px;">
-        <span id="demoFxPl${i}" class="${pl>=0?'plus':'minus'}" style="font-size:19px; font-family:'Helvetica Neue',Arial,sans-serif;">${pl>=0?'+':''}${pl.toLocaleString()}円</span>
-        <button class="dm-close" onclick="demoFxClose(${i})">決済</button>
-      </div></div>`;
+    pos += `<div class="neo-prow">
+      <span>USD/JPY <span class="neo-badge ${p.side==='買'?'b':'s'}">${p.side}</span></span>
+      <span style="font-size:11px; color:#cfd3da;">${(p.u/10000).toFixed(1)} / @${p.r.toFixed(3)}</span>
+      <span id="demoFxPl${i}" class="${pl>=0?'plus':'minus'}" style="font-weight:800; font-family:'Helvetica Neue',Arial,sans-serif;">${pl>=0?'+':''}${pl.toLocaleString()}円</span>
+      <button class="neo-pill teal" style="padding:6px 14px; font-size:11.5px;" onclick="demoFxClose(${i})">決済</button>
+    </div>`;
   });
   const m = demoFxMargin();
   const mr = m>0 ? Math.round((D.cash + demoFxUnrealized())/m*100) : null;
-  return sbarHTML() + `<div class="aphead"><span>トレード(デモ)</span><span class="hicons">${ico('gear')}</span></div>
-    <div class="fx-frow"><span class="fl">数量(通貨)</span><span class="sbi-seg">
-      <button class="${D.fxUnits===1000?'sel':''}" onclick="demoFxUnitsSet(1000)">1,000</button>
-      <button class="${D.fxUnits===5000?'sel':''}" onclick="demoFxUnitsSet(5000)">5,000</button>
-      <button class="${D.fxUnits===10000?'sel':''}" onclick="demoFxUnitsSet(10000)">10,000</button>
-    </span></div>
-    <div class="fx-2btn">
-      <span class="fx-q bid" onclick="demoFxOpen('売')"><span class="side">売 Bid</span><span class="r" id="demoFxBid">${fxFmt(bid)}</span></span>
-      <span class="fx-sp">0.2</span>
-      <span class="fx-q ask" onclick="demoFxOpen('買')"><span class="side">買 Ask</span><span class="r" id="demoFxAsk">${fxFmt(ask)}</span></span>
+  return sbarHTML('#000','#fff') + `<div class="neo-pairbar"><span>USD/JPY</span><span class="hlv">デモ取引中</span></div>
+    <div class="neo-panels">
+      <div class="neo-shield bid" onclick="demoFxOpen('売')"><span class="lab">BID (売) ⬇</span><span class="neo-num" id="demoFxBid" style="font-size:16px; display:block; margin-top:3px;">${fxFmt(bid)}</span></div>
+      <div class="neo-spread">0.2</div>
+      <div class="neo-shield ask" onclick="demoFxOpen('買')"><span class="lab">⬇ (買) ASK</span><span class="neo-num" id="demoFxAsk" style="font-size:16px; display:block; margin-top:3px;">${fxFmt(ask)}</span></div>
     </div>
+    <div class="fx-frow" style="border-bottom:1px solid #202838;"><span class="fl">取引数量(×10,000)</span><span class="sbi-seg">
+      <button class="${D.fxUnits===1000?'sel':''}" onclick="demoFxUnitsSet(1000)">0.1</button>
+      <button class="${D.fxUnits===5000?'sel':''}" onclick="demoFxUnitsSet(5000)">0.5</button>
+      <button class="${D.fxUnits===10000?'sel':''}" onclick="demoFxUnitsSet(10000)">1.0</button>
+    </span></div>
+    <div class="neo-flap"><span class="f">トレード</span><span class="tick">デモ口座で取引中(値動きは乱数です)</span></div>
+    <div class="neo-th"><span>通貨ペア (売買)</span><span>数量/建玉レート</span><span>評価損益</span></div>
     <div class="apbody">
-      ${D.fxPos.length ? pos : '<div style="padding:14px; font-size:12px; color:#6f7885;">ポジションはありません。上の青(売)/赤(買)をタップで注文できます。</div>'}
+      ${D.fxPos.length ? pos : '<div style="padding:14px 12px; font-size:12px; color:#8a93a5;">建玉はありません。上のBID(売)/ASK(買)パネルをタップで成行注文。</div>'}
       <div class="fx-frow"><span class="fl">口座残高</span><span>${D.cash.toLocaleString()}円</span></div>
       <div class="fx-frow"><span class="fl">必要証拠金</span><span>${Math.round(m).toLocaleString()}円</span></div>
-      <div class="fx-frow"><span class="fl">証拠金維持率</span><span id="demoFxMr" style="font-weight:800; color:#6DE79E;">${mr?mr.toLocaleString()+'%':'—'}</span></div>
+      <div class="fx-frow"><span class="fl">証拠金維持率</span><span id="demoFxMr" style="font-weight:800; color:#66d2d0;">${mr?mr.toLocaleString()+'%':'—'}</span></div>
       <div class="fx-frow"><span class="fl">実現損益 累計</span><span class="${D.fxRealized>=0?'plus':'minus'}">${D.fxRealized>=0?'+':''}${D.fxRealized.toLocaleString()}円</span></div>
     </div>
-    <div class="tabbar"><div>${ico('chart')}レート</div><div>${ico('news')}ニュース</div><div class="on">${ico('cart')}トレード</div><div>${ico('doc')}ポジション</div><div>${ico('menu')}メニュー</div></div>`;
+    <div class="tabbar"><div>${ico('grid')}ホーム</div><div class="on">${ico('reload')}トレード</div><div><i style="font-style:italic; font-weight:800; font-size:12px; display:block;">SPEED</i>スピード注文</div><div>${ico('globe')}マーケット</div><div>${ico('chart')}チャート</div><div class="gold">${ico('coin')}通貨ペア</div></div>`;
 }
 
 /* ===== URLハッシュ(ページ直リンク) ===== */
