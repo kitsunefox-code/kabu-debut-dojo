@@ -8,7 +8,6 @@
   :root{
     --ink:#16181d; --sub:#666c75; --bg:#f7f7f5; --card:#ffffff;
     --line:#dcdee2; --navy:#1b3a68; --red:#c0392b;
-    --buy:#d63b3b; --sell:#2563eb;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   body{font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic UI",Meiryo,sans-serif; background:var(--bg); color:var(--ink); line-height:1.85; font-size:15px;}
@@ -109,7 +108,8 @@
 
   .phone{width:350px; margin:0 auto; border:11px solid #101012; border-radius:44px; overflow:hidden; background:#fff; box-shadow:0 22px 50px rgba(0,0,0,.3); position:relative;}
   .screen{height:660px; display:flex; flex-direction:column; font-size:13px; position:relative; background:#fff; color:#1c1e22; font-feature-settings:"tnum"; letter-spacing:.005em;}
-  .apbody{flex:1; overflow-y:auto; position:relative;}
+  .apbody{flex:1; overflow-y:auto; position:relative; display:flex; flex-direction:column;}
+  .grow{flex:1;}
   .tap{animation:pulse 1.5s infinite; cursor:pointer; position:relative;}
   @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,170,0,.75);}55%{box-shadow:0 0 0 7px rgba(255,170,0,0);}}
 
@@ -122,155 +122,250 @@
   .batt::before{content:""; position:absolute; inset:1.5px; right:5px; background:currentColor; border-radius:1px;}
   .batt::after{content:""; position:absolute; right:-3px; top:2.5px; width:2px; height:4px; background:currentColor; border-radius:0 1px 1px 0;}
 
-  .aphead{padding:8px 14px 10px; font-weight:700; font-size:15px; display:flex; justify-content:space-between; align-items:center; flex-shrink:0;}
-  .aphead .hicons{display:flex; gap:14px; align-items:center; font-weight:400;}
-  .aphead svg{width:19px; height:19px;}
-  .tabbar{display:flex; border-top:1px solid rgba(128,128,128,.28); flex-shrink:0; padding:3px 0 14px;}
-  .tabbar div{flex:1; text-align:center; padding-top:6px; font-size:9px; line-height:1.5; color:inherit;}
-  .tabbar svg{width:21px; height:21px; display:block; margin:0 auto 1px;}
-
+  .aphead{padding:8px 12px 10px; font-weight:700; font-size:15px; display:flex; justify-content:space-between; align-items:center; flex-shrink:0; gap:8px;}
+  .aphead .hicons{display:flex; gap:12px; align-items:center; font-weight:400;}
+  .aphead svg{width:18px; height:18px;}
+  .tabbar{display:flex; flex-shrink:0; padding:3px 0 14px;}
+  .tabbar div{flex:1; text-align:center; padding-top:6px; font-size:8.5px; line-height:1.5;}
+  .tabbar svg{width:20px; height:20px; display:block; margin:0 auto 1px;}
   svg.i{fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round;}
 
-  /* ----- SBI ----- */
-  .t-sbi .sbar{background:#0d5eae; color:#fff;}
-  .t-sbi .aphead{background:#0d5eae; color:#fff;}
-  .t-sbi .tabbar{background:#fbfbfb; color:#85898f;}
-  .t-sbi .tabbar .on{color:#0d5eae; font-weight:700;}
-  .t-sbi .idx{display:flex; border-bottom:1px solid #e4e6ea;}
-  .t-sbi .idx div{flex:1; padding:9px 10px; font-size:10px; color:#666; border-right:1px solid #e4e6ea;}
-  .t-sbi .idx b{display:block; font-size:13.5px; color:#1c1e22; font-weight:700;}
-  .t-sbi .idx .u{color:#d13030;}
-  .t-sbi .rankrow{display:flex; justify-content:space-between; padding:10px 14px; border-bottom:1px solid #eceef1; font-size:12px;}
-  .t-sbi .rankrow time{font-size:10px; color:#999; display:block;}
+  .menuovl{position:absolute; inset:0; background:rgba(0,0,0,.55); display:flex; align-items:flex-end; z-index:5;}
+  .menuovl.center{align-items:center; padding:0 12px;}
+  .menusheet{width:100%; border-radius:14px 14px 0 0; padding:10px 16px 22px;}
+  .menusheet .grip{width:36px; height:4px; border-radius:2px; background:rgba(128,128,128,.45); margin:2px auto 10px;}
+  .menusheet h5{font-size:11px; opacity:.65; margin-bottom:6px; font-weight:700;}
+  .menusheet button{display:block; width:100%; text-align:center; margin-top:8px; border:1px solid rgba(128,128,128,.35); background:transparent; color:inherit; border-radius:6px; padding:12px; font-size:14px; font-weight:700; cursor:pointer; font-family:inherit;}
 
-  /* ----- iSPEED ----- */
-  .t-ispeed .screen{background:#0d0d0f; color:#e8e9eb;}
-  .t-ispeed .sbar{background:#000; color:#fff;}
-  .t-ispeed .aphead{background:#000; color:#fff; border-bottom:1px solid #2a2a2c;}
-  .t-ispeed .tabbar{background:#131315; color:#7c8087; border-top-color:#2a2a2c;}
-  .t-ispeed .tabbar .on{color:#e33e3e; font-weight:700;}
-  .t-ispeed .blockh{padding:12px 14px 4px; font-size:11px; color:#e33e3e; font-weight:800; letter-spacing:.08em; display:flex; justify-content:space-between;}
-  .t-ispeed .blockh span{color:#5c6066; font-weight:400; letter-spacing:0;}
-  .t-ispeed .newsrow{padding:9px 14px; border-bottom:1px solid #1e1e21; font-size:12px; color:#c7c9cc;}
-  .t-ispeed .newsrow time{font-size:10px; color:#5c6066; display:block;}
-  .t-ispeed .mypage{margin:6px 12px; background:#17171a; border:1px solid #26262a; padding:11px 12px; font-size:11.5px; color:#c7c9cc;}
-  .t-ispeed .mypage b{font-size:16px; color:#4ccf6e; font-weight:700;}
-
-  /* ----- Monex ----- */
-  .t-monex .sbar{background:#00305e; color:#fff;}
-  .t-monex .aphead{background:#00305e; color:#fff;}
-  .t-monex .tabbar{background:#fbfbfb; color:#85898f;}
-  .t-monex .tabbar .on{color:#00305e; font-weight:700;}
-  .t-monex .assetcard{margin:12px; background:#fff; border:1px solid #dfe2e8; padding:13px 14px;}
-  .t-monex .assetcard small{font-size:10.5px; color:#767b83;}
-  .t-monex .assetcard .v{font-size:23px; font-weight:700;}
-  .t-monex .webish{background:#f2f2ee; min-height:100%;}
-  .t-monex .webish .whead{background:#00305e; padding:8px 14px; font-size:12px; font-weight:700; color:#fff;}
-  .t-monex .webish .crumbs{padding:7px 14px; font-size:10.5px; color:#767b83; background:#e9e9e4; border-bottom:1px solid #d8d8d2;}
-  .wtable{margin:12px; border:1px solid #c9cbc7; background:#fff; font-size:12.5px;}
-  .wtable .wr{display:flex; border-bottom:1px solid #dcded9;}
-  .wtable .wr:last-child{border-bottom:none;}
-  .wtable .wl{width:96px; flex-shrink:0; background:#eef0f4; padding:10px; font-weight:700; font-size:11.5px; color:#3c4046; border-right:1px solid #dcded9;}
-  .wtable .wv{flex:1; padding:8px 10px;}
-  .radio{display:inline-block; width:15px; height:15px; border:1px solid #9a9ea5; border-radius:50%; margin-right:6px; vertical-align:-3px; background:#fff; position:relative;}
-  .radio.on{border-color:#00305e;}
-  .radio.on::after{content:""; position:absolute; inset:3px; background:#00305e; border-radius:50%;}
-  .wlabel{margin-right:14px; cursor:pointer; display:inline-block; padding:3px 0;}
-
-  /* ----- app choose (monex step0) ----- */
-  .appgrid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; padding:26px 18px;}
-  .appicon{text-align:center; font-size:10px; color:#2c3038; cursor:pointer;}
-  .appicon .ic{width:60px; height:60px; border-radius:14px; margin:0 auto 6px; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:800; color:#fff; line-height:1.3; padding:5px; text-align:center; box-shadow:0 2px 6px rgba(0,0,0,.25);}
-
-  /* ----- shared in-app ----- */
-  .searchbar{margin:10px 12px; padding:9px 12px; font-size:12.5px; display:flex; align-items:center; gap:7px; border-radius:8px;}
-  .searchbar svg{width:15px; height:15px; opacity:.55; flex-shrink:0;}
-  .t-sbi .searchbar{background:#eef0f4; color:#8a8e95;}
-  .t-ispeed .searchbar{background:#1c1c1f; color:#7c8087; border:1px solid #2c2c30;}
-  .t-monex .searchbar{background:#eef0f4; color:#8a8e95;}
-  .seg{display:flex; margin:0 0 0 0; padding:0 8px; border-bottom:1px solid rgba(128,128,128,.28); font-size:11.5px; overflow-x:hidden;}
-  .seg div{padding:8px 9px; color:inherit; opacity:.6; white-space:nowrap;}
-  .seg .on{opacity:1; font-weight:700; border-bottom:2px solid currentColor;}
-  .stockhead{padding:10px 14px 8px;}
-  .stockhead .tr{display:flex; justify-content:space-between; align-items:flex-start;}
-  .stockhead .code{font-size:10.5px; opacity:.65;}
-  .stockhead .nm{font-size:16px; font-weight:800;}
-  .stockhead .px{font-size:27px; font-weight:700; margin-top:1px; font-family:"Helvetica Neue",Arial,sans-serif;}
-  .stockhead .px small{font-size:12px; font-weight:400;}
-  .stockhead .chg{font-size:12px; font-weight:700; color:#d13030;}
-  .t-ispeed .stockhead .chg{color:#4ccf6e;}
-  .ministat{display:flex; border-top:1px solid rgba(128,128,128,.18); border-bottom:1px solid rgba(128,128,128,.18); margin-top:8px;}
-  .ministat div{flex:1; padding:5px 8px; font-size:9.5px; opacity:.65; border-right:1px solid rgba(128,128,128,.18);}
-  .ministat div:last-child{border-right:none;}
-  .ministat b{display:block; font-size:11.5px; opacity:1; font-weight:700;}
-  .hbtn{border:none; border-radius:4px; padding:8px 16px; font-size:13px; font-weight:800; cursor:pointer; color:#fff; font-family:inherit;}
-
-  .chartbox{margin:8px 12px 4px; position:relative;}
+  /* ============ SBI (全画面ダーク #090A19系) ============ */
+  .t-sbi .screen{background:#0C0E22; color:#fff;}
+  .t-sbi .sbar{background:#0D0E29; color:#fff;}
+  .t-sbi .aphead{background:#0D0E29; color:#fff; font-size:15px; justify-content:center; position:relative;}
+  .t-sbi .aphead .hl{position:absolute; left:12px;} .t-sbi .aphead .hr{position:absolute; right:12px; display:flex; gap:12px;}
+  .t-sbi .tabbar{background:#0F0E1A; color:#7A7E8E;}
+  .t-sbi .tabbar .on{color:#fff; font-weight:700;}
+  .sbi-toptabs{display:flex; border-bottom:1px solid #23253d; font-size:12.5px; flex-shrink:0;}
+  .sbi-toptabs div{padding:9px 12px; color:#8a8ea0;}
+  .sbi-toptabs .on{color:#fff; font-weight:700; border-bottom:2px solid #6B80F7;}
+  .sbi-idxrow{display:flex; justify-content:space-between; align-items:center; padding:9px 12px; border-bottom:1px solid #1a1c30; font-size:12.5px;}
+  .sbi-idxrow .inm{color:#fff;}
+  .sbi-idxrow .itm{font-size:10px; color:#7A7E8E;}
+  .sbi-idxrow .ival{text-align:right; font-family:"Helvetica Neue",Arial,sans-serif; font-weight:700; font-size:15px;}
+  .sbi-idxrow .isub{font-size:11px; text-align:right;}
+  .up-sbi{color:#F5392B;} .dn-sbi{color:#3AA32A;}
+  .sbi-actbar{display:flex; gap:6px; padding:8px 10px; align-items:center; background:#0C0E22; flex-shrink:0;}
+  .sbi-pill{padding:5px 10px; font-size:12px; font-weight:700; border-radius:3px; background:#4C4F5C; color:#fff;}
+  .sbi-pill.blue{background:#6B80F7;}
+  .sbi-trade{padding:6px 16px; font-size:13px; font-weight:800; border-radius:3px; background:#E0455F; color:#fff; border:none; cursor:pointer; font-family:inherit; margin-left:auto;}
+  .sbi-price{display:flex; align-items:center; gap:10px; padding:4px 12px 8px; border-bottom:1px solid #1a1c30;}
+  .sbi-price .plab{font-size:10px; line-height:1.4; color:#cfd0da;}
+  .sbi-price .pv{font-size:30px; font-weight:800; font-family:"Helvetica Neue",Arial,sans-serif;}
+  .sbi-price .pd{font-size:15px; font-weight:700;}
+  .sbi-price .pr{font-size:11px; margin-left:auto;}
+  .sbi-seg{display:inline-flex; border-radius:4px; overflow:hidden; border:1px solid #3a3d52;}
+  .sbi-seg button{border:none; background:#787980; color:#fff; padding:7px 12px; font-size:12px; font-weight:700; cursor:pointer; font-family:inherit; border-left:1px solid #3a3d52;}
+  .sbi-seg button:first-child{border-left:none;}
+  .sbi-seg button.sel{background:#6B80F7;}
+  .sbi-banner{background:#E05A6E; color:#fff; text-align:center; font-size:13px; font-weight:700; padding:7px; flex-shrink:0;}
+  .sbi-frow{display:flex; align-items:center; padding:8px 12px; border-bottom:1px solid #1a1c30; min-height:46px; gap:8px;}
+  .sbi-frow .fl{width:82px; flex-shrink:0; font-size:11.5px; color:#93949C;}
+  .sbi-frow .fc{flex:1; display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
+  .sbi-step{display:inline-flex; align-items:stretch; height:34px;}
+  .sbi-step button{width:38px; border:none; background:#4C4F5C; color:#fff; font-size:17px; cursor:pointer; font-family:inherit;}
+  .sbi-step button:first-child{border-radius:3px 0 0 3px;} .sbi-step button:last-child{border-radius:0 3px 3px 0;}
+  .sbi-step .v{background:#F2F1F6; color:#111; min-width:86px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px; font-family:"Helvetica Neue",Arial,sans-serif;}
+  .sbi-note{font-size:10.5px; color:#b9bac4; width:100%;}
+  .sbi-input{background:#F2F1F6; color:#111; border:none; border-radius:3px; padding:8px 10px; font-size:13px; width:150px; letter-spacing:.25em; font-family:inherit;}
+  .sbi-chk{width:17px; height:17px; border:1.5px solid #6b6e80; border-radius:3px; display:inline-flex; align-items:center; justify-content:center; font-size:12px;}
+  .sbi-chk.on{background:#4a7cf0; border-color:#4a7cf0; color:#fff;}
+  .sbi-foot{display:flex; gap:8px; padding:10px 12px 12px; background:#0F0E1A; flex-shrink:0;}
+  .sbi-foot .bk{flex:1; background:#CFD0D2; color:#111; border:none; border-radius:4px; padding:12px; font-size:14px; font-weight:700; cursor:pointer; font-family:inherit;}
+  .sbi-foot .ok{flex:2; background:#E0455F; color:#fff; border:none; border-radius:4px; padding:12px; font-size:14px; font-weight:800; cursor:pointer; font-family:inherit;}
+  .sbi-foot .ok.dim{background:#E58C8F;}
+  .sbi-modal{background:#131530; border-radius:8px; overflow:hidden; width:100%; box-shadow:0 10px 40px rgba(0,0,0,.6);}
+  .sbi-modal .mh{background:#fff; color:#111; text-align:center; font-weight:700; font-size:14px; padding:9px;}
+  .sbi-modal .mtable{background:#000;}
+  .sbi-mrow{display:flex; border-bottom:1px solid #22243a; font-size:12.5px;}
+  .sbi-mrow .ml{width:110px; padding:8px 10px; background:#1E213A; color:#cfd0da; flex-shrink:0;}
+  .sbi-mrow .mv{flex:1; padding:8px 10px; text-align:right; color:#fff; font-weight:700;}
+  .sbi-menu{background:#15172e; color:#fff; width:100%; border-radius:14px 14px 0 0; padding:10px 16px 22px;}
+  .sbi-menu button{display:block; width:100%; margin-top:8px; border:none; border-radius:4px; padding:12px; font-size:14px; font-weight:800; cursor:pointer; font-family:inherit; background:#2a2d45; color:#fff;}
+  .sbi-menu .b-buy{background:#E0455F;} .sbi-menu .b-sell{background:#2E9E5B;}
+  table.ita{width:calc(100% - 24px); margin:8px 12px; border-collapse:collapse; font-size:11px; font-family:"Helvetica Neue",Arial,sans-serif;}
+  table.ita th{font-size:9.5px; font-weight:400; opacity:.55; padding:2px 6px; border-bottom:1px solid rgba(128,128,128,.35); font-family:inherit;}
+  table.ita td{padding:2.5px 6px; text-align:right; border-bottom:1px solid rgba(128,128,128,.14);}
+  table.ita td.pr{text-align:center; font-weight:700;}
+  .t-sbi .askq{color:#F5392B;} .t-sbi .bidq{color:#fff;}
+  .t-sbi td.pr.cur{background:#9A2820; color:#fff;}
+  .chartbox{margin:8px 12px 4px;}
   .chartbox svg{display:block; width:100%;}
   .itab{display:flex; padding:4px 12px 0; gap:4px; font-size:10px;}
-  .itab span{padding:3px 9px; border:1px solid rgba(128,128,128,.35); opacity:.7; border-radius:3px;}
-  .itab .on{opacity:1; font-weight:700; background:rgba(128,128,128,.15);}
+  .itab span{padding:3px 9px; border:1px solid rgba(128,128,128,.4); opacity:.7; border-radius:3px;}
+  .itab .on{opacity:1; font-weight:700; background:rgba(128,128,128,.2);}
+  .sbi-cards{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; padding:12px;}
+  .sbi-cards div{background:#1E213A; border-radius:6px; padding:12px 6px; text-align:center; font-size:10.5px; color:#cfd0da;}
+  .sbi-cards svg{width:20px; height:20px; display:block; margin:0 auto 4px; color:#8a92c8;}
 
-  table.ita{width:calc(100% - 24px); margin:8px 12px; border-collapse:collapse; font-size:11px; font-family:"Helvetica Neue",Arial,sans-serif;}
-  table.ita th{font-size:9.5px; font-weight:400; opacity:.55; padding:2px 6px; border-bottom:1px solid rgba(128,128,128,.3); font-family:inherit;}
-  table.ita td{padding:2.5px 6px; text-align:right; border-bottom:1px solid rgba(128,128,128,.12);}
-  table.ita td.pr{text-align:center; font-weight:700;}
-  .askq{color:#2f6fd1;} .bidq{color:#d13030;}
-  .t-ispeed .askq{color:#5aa2ff;} .t-ispeed .bidq{color:#ff6b5e;}
+  /* ============ iSPEED (#1B1B1B / 赤#FF5258 / ティール) ============ */
+  .t-isp .screen{background:#1B1B1B; color:#FBFBFB;}
+  .t-isp .sbar{background:#1B1B1B; color:#fff;}
+  .t-isp .sbar.red{background:#FF5258;}
+  .t-isp .aphead{background:#1B1B1B; color:#fff;}
+  .t-isp .aphead.red{background:#FF5258;}
+  .t-isp .tabbar{background:#000; color:#7A7A7A;}
+  .t-isp .tabbar .on{color:#fff; font-weight:700;}
+  .isp-segwrap{display:flex; justify-content:center; padding:2px 0 8px; background:#1B1B1B; flex-shrink:0;}
+  .isp-seg{display:inline-flex; background:#2C2C2E; border-radius:999px; padding:2.5px;}
+  .isp-seg span{padding:5px 13px; font-size:12px; color:#9a9a9a; border-radius:999px;}
+  .isp-seg .on{background:#fff; color:#111; font-weight:700;}
+  .isp-row{display:flex; justify-content:space-between; align-items:center; padding:9px 12px; border-bottom:1px solid #262626; font-size:12.5px;}
+  .isp-row .rnm{color:#fff;} .isp-row .rtm{font-size:10px; color:#7c8087;}
+  .isp-row .rv{font-family:"Helvetica Neue",Arial,sans-serif; font-weight:700; font-size:16px; text-align:right;}
+  .isp-row .rs{font-size:11px; text-align:right;}
+  .up-isp{color:#FF5258;} .dn-isp{color:#6DE79E;}
+  .isp-newsrow{padding:9px 14px; border-bottom:1px solid #262626; font-size:12px; color:#c7c9cc;}
+  .isp-newsrow time{font-size:10px; color:#5c6066; display:block;}
+  .isp-blockh{padding:12px 14px 4px; font-size:11px; color:#FF5258; font-weight:800; letter-spacing:.08em; display:flex; justify-content:space-between;}
+  .isp-blockh span{color:#5c6066; font-weight:400; letter-spacing:0;}
+  .isp-stockcard{background:#383838; padding:9px 12px; display:flex; justify-content:space-between; align-items:flex-start; flex-shrink:0;}
+  .isp-badge{display:inline-block; background:#2a2a2a; border:1px solid #555; color:#ddd; font-size:9.5px; padding:1px 6px; border-radius:2px; margin-right:4px;}
+  .isp-stockcard .snm{font-size:15px; font-weight:700; color:#fff;}
+  .isp-stockcard .spx{font-size:27px; font-weight:800; font-family:"Helvetica Neue",Arial,sans-serif; text-align:right; line-height:1.1;}
+  .isp-stockcard .ssub{font-size:12px; font-weight:700; text-align:right;}
+  .isp-tabs{display:flex; border-bottom:1px solid #2a2a2c; font-size:12px; overflow:hidden; flex-shrink:0;}
+  .isp-tabs div{padding:9px 11px; color:#8e8e8e; white-space:nowrap;}
+  .isp-tabs .on{color:#fff; font-weight:700; border-bottom:2.5px solid #7EC9CE;}
+  .isp-kv{display:flex; border-bottom:1px solid #242424; font-size:12px;}
+  .isp-kv div{flex:1; display:flex; justify-content:space-between; padding:7px 12px;}
+  .isp-kv .k{color:#6ADCDC;} .isp-kv .v{color:#fff; font-family:"Helvetica Neue",Arial,sans-serif;}
+  .isp-avail{background:#2b2b2b; display:flex; align-items:center; gap:18px; padding:8px 12px; font-size:11px; color:#ddd; flex-shrink:0;}
+  .isp-avail b{display:block; font-size:13px; color:#fff; font-family:"Helvetica Neue",Arial,sans-serif;}
+  .isp-ctrl{display:flex; gap:8px; padding:10px 12px; flex-shrink:0;}
+  .isp-toggle{display:inline-flex; background:#2B2B2B; border-radius:999px; padding:2.5px;}
+  .isp-toggle button{border:none; background:transparent; color:#9a9a9a; padding:6px 14px; font-size:13px; font-weight:700; border-radius:999px; cursor:pointer; font-family:inherit;}
+  .isp-toggle button.sel{background:#fff; color:#111;}
+  .isp-ddl{flex:1; background:#2B2B2B; border:none; border-radius:4px; color:#fff; font-size:12.5px; font-weight:700; padding:6px 10px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; font-family:inherit;}
+  .isp-big{ text-align:center; padding:6px 0 2px;}
+  .isp-big .lbl{font-size:12px; color:#9a9a9a;}
+  .isp-big .row{display:flex; align-items:center; justify-content:space-between; padding:0 26px;}
+  .isp-big .pm{font-size:26px; color:#8D8D8D; width:44px; cursor:pointer; font-family:"Helvetica Neue",Arial,sans-serif;}
+  .isp-big .num{font-size:38px; font-weight:700; color:#fff; font-family:"Helvetica Neue",Arial,sans-serif;}
+  .isp-big.off .num, .isp-big.off .pm{opacity:.3;}
+  .isp-est{text-align:center; padding:8px 0 4px;}
+  .isp-est .lbl{font-size:12px; color:#9a9a9a;}
+  .isp-est b{font-size:20px; color:#fff; font-family:"Helvetica Neue",Arial,sans-serif;}
+  .isp-white{display:block; width:calc(100% - 28px); margin:12px 14px 0; background:#FBFBFB; color:#111; border:none; border-radius:5px; padding:14px; font-size:15.5px; font-weight:800; cursor:pointer; font-family:inherit;}
+  .isp-red{display:block; width:calc(100% - 28px); margin:12px 14px 0; background:#FF5254; color:#fff; border:none; border-radius:5px; padding:14px; font-size:15.5px; font-weight:800; cursor:pointer; font-family:inherit;}
+  .isp-hbadges{display:flex; gap:5px; align-items:center;}
+  .isp-hbadge{width:26px; height:26px; border:1px solid rgba(255,255,255,.8); border-radius:4px; color:#fff; font-size:8px; font-weight:800; display:flex; align-items:center; justify-content:center; text-align:center; line-height:1.15; cursor:pointer;}
+  .isp-hbadge.sel{background:#fff; color:#FF5258; border-color:#fff;}
+  .isp-sheet{background:transparent; width:100%; padding:0 10px 14px;}
+  .isp-sheet .grp{background:#F2F2F6; border-radius:12px; overflow:hidden;}
+  .isp-sheet button{display:block; width:100%; border:none; background:transparent; color:#111; padding:14px; font-size:15px; cursor:pointer; font-family:inherit; border-top:1px solid #d8d8dc;}
+  .isp-sheet .grp button:first-child{border-top:none;}
+  .isp-sheet .cancel{margin-top:8px; background:#fff; border-radius:12px; font-weight:800;}
+  .isp-pin{flex:1; display:flex; flex-direction:column; align-items:center; padding-top:22px;}
+  .isp-pin .dots{display:flex; gap:16px; margin:14px 0 20px;}
+  .isp-pin .dots i{width:12px; height:12px; border-radius:50%; background:#fff;}
+  .isp-pad{display:grid; grid-template-columns:repeat(3,74px); gap:6px 26px; justify-content:center;}
+  .isp-pad div{text-align:center; font-size:26px; color:#fff; padding:9px 0; font-family:"Helvetica Neue",Arial,sans-serif;}
+  .isp-togrow{display:flex; justify-content:space-between; align-items:center; width:calc(100% - 48px); margin:14px auto 0; font-size:11.5px; color:#bbb;}
+  .togknob{width:42px; height:24px; border-radius:12px; background:rgba(128,128,128,.4); position:relative; display:inline-block;}
+  .togknob::after{content:""; position:absolute; top:2px; left:2px; width:20px; height:20px; border-radius:50%; background:#fff;}
+  .isp-done{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;}
+  .isp-done .okc{width:58px; height:58px; border-radius:50%; border:2.5px solid #fff; display:flex; align-items:center; justify-content:center;}
+  .isp-done .okc svg{width:28px; height:28px; stroke:#fff; stroke-width:2.5;}
+  .isp-done h4{font-size:17px; font-weight:700;}
+  .isp-newsopt{display:flex; justify-content:space-between; align-items:center; width:calc(100% - 48px); border-top:1px solid #2e2e2e; padding-top:12px; font-size:12px; color:#ccc;}
+  .isp-newsopt .tealc{width:22px; height:22px; border-radius:50%; background:#6DB3B3; color:#111; display:flex; align-items:center; justify-content:center; font-size:13px;}
 
-  .menuovl{position:absolute; inset:0; background:rgba(0,0,0,.5); display:flex; align-items:flex-end; z-index:5;}
-  .menusheet{background:#fff; color:#1c1e22; width:100%; border-radius:14px 14px 0 0; padding:10px 16px 22px;}
-  .t-ispeed .menusheet{background:#1b1b1e; color:#e8e9eb;}
-  .menusheet .grip{width:36px; height:4px; border-radius:2px; background:rgba(128,128,128,.4); margin:2px auto 10px;}
-  .menusheet h5{font-size:11px; opacity:.6; margin-bottom:6px; font-weight:700;}
-  .menusheet button{display:block; width:100%; text-align:center; margin-top:8px; border:1px solid rgba(128,128,128,.32); background:transparent; color:inherit; border-radius:6px; padding:12px; font-size:14px; font-weight:700; cursor:pointer; font-family:inherit;}
-  .menusheet button.buy{background:var(--bb,#d13030); color:#fff; border:none;}
-  .menusheet button small{font-weight:400; font-size:10px; opacity:.65; margin-left:6px;}
+  /* ============ マネックス (黄#FFC81A / Webフォーム) ============ */
+  .t-mx .screen{background:#fff; color:#1c1e22;}
+  .t-mx .sbar{background:#FFC81A; color:#111;}
+  .t-mx .aphead{background:#FFC81A; color:#111; font-weight:800;}
+  .t-mx .aphead .mypg{text-align:center; font-size:8.5px; font-weight:700; line-height:1.2;}
+  .t-mx .aphead .mypg .bx{width:26px; height:20px; background:#fff; border-radius:4px; margin:0 auto 1px; display:flex; align-items:center; justify-content:center;}
+  .t-mx .aphead .bx svg{width:13px; height:13px; color:#333;}
+  .t-mx .tabbar{background:#fff; color:#8C8C8C; border-top:1px solid #e5e5e5;}
+  .t-mx .tabbar .on{color:#DAAB00; font-weight:700;}
+  .t-mx .tabbar .on svg{color:#FFBD00;}
+  .mx-chips{display:flex; gap:7px; padding:11px 12px; flex-shrink:0; background:#fff;}
+  .mx-chips div{flex:1; border:1px solid #c9c9c9; background:#fff; text-align:center; padding:8px 2px; font-size:11.5px; font-weight:700; color:#222;}
+  .mx-search{display:flex; margin:4px 12px 10px;}
+  .mx-search .in{flex:1; border:1px solid #b9b9b9; padding:9px 10px; font-size:12px; color:#8a8e95; background:#fff;}
+  .mx-search .bt{background:#4A4A4A; color:#fff; font-size:12.5px; font-weight:700; padding:0 16px; display:flex; align-items:center; cursor:pointer;}
+  .mx-info{margin:0 12px 10px; background:#F5F5F5; border-left:4px solid #DAAB00; padding:9px 11px; font-size:11px; color:#333;}
+  .mx-info .imp{color:#D40000; font-weight:700;}
+  .mx-crumbs{padding:9px 14px 2px; font-size:11px; color:#8a8a8a; background:#fff;}
+  .mx-crumbs a{color:#0064C8; text-decoration:none;}
+  .mx-h1{font-size:18px; font-weight:800; padding:6px 14px 2px;}
+  .mx-steps{display:flex; justify-content:center; align-items:flex-start; gap:0; padding:10px 0 6px;}
+  .mx-steps .st{width:86px; text-align:center; font-size:10px; color:#666; position:relative;}
+  .mx-steps .st i{display:block; width:13px; height:13px; border-radius:50%; border:2px solid #999; background:#fff; margin:0 auto 3px;}
+  .mx-steps .st.on{color:#111; font-weight:700;}
+  .mx-steps .st.on i{background:#DAAB00; border-color:#DAAB00;}
+  .mx-steps .st::before{content:""; position:absolute; top:6px; left:-43px; width:86px; height:2px; background:#bbb; z-index:-1;}
+  .mx-steps .st:first-child::before{display:none;}
+  .mx-itable{margin:8px 12px; border:1px solid #ccc; font-size:12px;}
+  .mx-itable .r{display:flex; border-top:1px solid #ccc;}
+  .mx-itable .r:first-child{border-top:none;}
+  .mx-itable .l{width:118px; background:#EEEEEE; padding:9px 10px; font-weight:700; flex-shrink:0; font-size:11.5px;}
+  .mx-itable .v{flex:1; padding:9px 10px; display:flex; justify-content:space-between; align-items:center;}
+  .mx-itable a{color:#0064C8;}
+  .mx-ordtabs{display:flex; margin:8px 12px 0; font-size:11px; text-align:center;}
+  .mx-ordtabs div{flex:1; background:#D0D0D0; color:#333; padding:9px 4px; border:1px solid #bbb; border-left:none;}
+  .mx-ordtabs div:first-child{border-left:1px solid #bbb;}
+  .mx-ordtabs .on{background:#fff; font-weight:800; border-bottom:1px solid #fff;}
+  .mx-2tabs{display:flex; margin:10px 12px 0; font-size:12.5px; text-align:center;}
+  .mx-2tabs div{flex:1; padding:9px; border:1px solid #bbb;}
+  .mx-2tabs .on{background:#fff; font-weight:800;}
+  .mx-2tabs .off{background:#A0A0A0; color:#fff; border-left:none;}
+  .mx-pink{background:#FFF2F2; margin:0 12px 12px; border:1px solid #e5c9c9; border-top:none; padding:12px; font-size:12.5px;}
+  .mx-pink .flabel{font-weight:700; margin-top:12px; margin-bottom:4px;}
+  .mx-pink .flabel:first-child{margin-top:0;}
+  .mx-pink .qmark{display:inline-flex; width:15px; height:15px; border-radius:50%; background:#555; color:#fff; font-size:10px; align-items:center; justify-content:center; margin-left:5px; vertical-align:-2px;}
+  .mx-sel{display:inline-flex; align-items:center; border:1px solid #999; background:#fff; padding:7px 8px 7px 12px; font-size:13px; gap:14px;}
+  .mx-sel .sp{display:inline-flex; flex-direction:column; font-size:7px; color:#666; line-height:1;}
+  .mx-sorchk{display:inline-flex; align-items:center; gap:5px; margin-left:14px; font-size:13px;}
+  .mx-sorchk .cb{width:17px; height:17px; background:#5CB67B; border-radius:3px; color:#fff; display:inline-flex; align-items:center; justify-content:center; font-size:12px;}
+  .mx-refnote{font-size:11px; color:#555; margin-top:4px;}
+  .mx-refnote a{color:#0064C8;}
+  .mx-stepq{display:inline-flex; align-items:stretch; height:34px; vertical-align:middle;}
+  .mx-stepq button{width:36px; border:none; background:#595A60; color:#fff; font-size:17px; cursor:pointer; border-radius:4px; font-family:inherit;}
+  .mx-stepq .v{background:#fff; border:1px solid #999; min-width:76px; display:flex; align-items:center; justify-content:center; font-weight:700; margin:0 4px; font-family:"Helvetica Neue",Arial,sans-serif;}
+  .mx-radio{display:inline-flex; align-items:center; margin-right:16px; cursor:pointer; padding:3px 0;}
+  .mx-radio i{width:16px; height:16px; border:1.5px solid #888; border-radius:50%; background:#fff; margin-right:6px; position:relative;}
+  .mx-radio.on i::after{content:""; position:absolute; inset:3px; background:#1CB060; border-radius:50%;}
+  .mx-green{display:block; margin:14px auto 4px; background:#1CB060; color:#fff; border:none; border-radius:6px; padding:12px 34px; font-size:14.5px; font-weight:800; cursor:pointer; font-family:inherit;}
+  .mx-warn{margin:10px 12px; border:1px solid #ddd; border-left:5px solid #E01515; padding:10px 12px; font-size:11.5px; color:#333; background:#fff;}
+  .mx-warn .ex{color:#E01515; font-weight:800;}
+  .mx-ctable{margin:8px 12px; border:1px solid #ccc; font-size:12.5px;}
+  .mx-ctable .r{display:flex; border-top:1px solid #ddd;}
+  .mx-ctable .r:first-child{border-top:none;}
+  .mx-ctable .l{width:104px; background:#EEEEEE; padding:9px 10px; font-weight:700; flex-shrink:0; font-size:11.5px;}
+  .mx-ctable .v{flex:1; padding:9px 10px; text-align:right; font-family:"Helvetica Neue",Arial,sans-serif;}
+  .mx-goldbtn{display:block; margin:10px auto; background:#fff; border:2px solid #DAAB00; color:#B8900A; border-radius:6px; padding:11px 26px; font-size:13.5px; font-weight:800; cursor:pointer; font-family:inherit;}
+  .mx-graybox{background:#F0F0F0; margin:12px; padding:12px; font-size:12px; text-align:center;}
+  .mx-pw{border:1px solid #999; padding:8px 10px; font-size:13px; width:140px; letter-spacing:.25em; background:#fff; font-family:inherit;}
+  .appgrid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; padding:26px 18px;}
+  .appicon{text-align:center; font-size:10px; color:#2c3038; cursor:pointer;}
+  .appicon .ic{width:60px; height:60px; border-radius:14px; margin:0 auto 6px; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:800; line-height:1.3; padding:5px; text-align:center; box-shadow:0 2px 6px rgba(0,0,0,.25);}
 
-  .oform{padding:4px 0 18px;}
-  .orow{display:flex; align-items:center; justify-content:space-between; padding:10px 14px; border-bottom:1px solid rgba(128,128,128,.16); min-height:46px;}
-  .orow .ol{font-size:12px; font-weight:700; opacity:.8; flex-shrink:0; width:84px;}
-  .orow .oc{flex:1; text-align:right;}
-  .orow .ov{font-size:13px; font-weight:700;}
-  .orow .ov small{font-weight:400; opacity:.55; margin-left:4px;}
-  .qty{display:inline-flex; align-items:center; gap:0; border:1px solid rgba(128,128,128,.38); border-radius:6px; overflow:hidden;}
-  .qty button{width:38px; height:36px; border:none; background:rgba(128,128,128,.12); font-size:18px; cursor:pointer; color:inherit; font-family:inherit;}
-  .qty .qv{font-size:15px; font-weight:700; min-width:82px; text-align:center; font-family:"Helvetica Neue",Arial,sans-serif;}
-  .optrow{display:inline-flex; border:1px solid rgba(128,128,128,.38); border-radius:6px; overflow:hidden;}
-  .optrow button{border:none; background:transparent; color:inherit; padding:8px 13px; font-size:12.5px; font-weight:700; cursor:pointer; font-family:inherit; border-left:1px solid rgba(128,128,128,.25);}
-  .optrow button:first-child{border-left:none;}
-  .optrow button.sel{background:var(--selbg,#0d5eae); color:#fff;}
-  .t-ispeed .optrow button.sel{--selbg:#c22525;}
-  .t-monex .optrow button.sel{--selbg:#00305e;}
-  .limitrow{display:none;}
-  .limitrow.show{display:flex;}
-  .limitrow input{width:110px; border:1px solid rgba(128,128,128,.4); background:transparent; color:inherit; padding:8px; font-size:14px; font-weight:700; text-align:right; font-family:inherit;}
-  .togknob{width:42px; height:24px; border-radius:12px; background:rgba(128,128,128,.35); position:relative; display:inline-block; vertical-align:middle;}
-  .togknob::after{content:""; position:absolute; top:2px; left:2px; width:20px; height:20px; border-radius:50%; background:#fff; box-shadow:0 1px 2px rgba(0,0,0,.3);}
-  .togknob.onn{background:#34b055;}
-  .togknob.onn::after{left:auto; right:2px;}
-  .gonext{display:block; width:calc(100% - 28px); margin:16px 14px 0; border:none; border-radius:6px; background:var(--bb,#d13030); color:#fff; font-size:15px; font-weight:800; padding:14px; cursor:pointer; font-family:inherit;}
-  .pwin{width:100%; border:1px solid rgba(128,128,128,.4); border-radius:6px; padding:10px; font-size:14px; letter-spacing:.3em; background:rgba(128,128,128,.07); color:inherit; font-family:inherit;}
-  .done{padding:30px 18px 10px; text-align:center;}
-  .done .okmark{width:56px; height:56px; margin:0 auto 12px; border-radius:50%; border:2.5px solid #2e9e52; display:flex; align-items:center; justify-content:center;}
-  .done .okmark svg{width:28px; height:28px; stroke:#2e9e52; stroke-width:2.5;}
-  .done h4{font-size:16px; margin-bottom:6px; font-weight:700;}
-  .done p{font-size:12px; opacity:.8;}
-  .yakujo{margin:16px 14px 0; border:1px solid rgba(128,128,128,.3); text-align:left;}
-  .yakujo .yh{padding:7px 12px; font-size:11px; font-weight:800; background:rgba(128,128,128,.1); border-bottom:1px solid rgba(128,128,128,.25);}
-  .yakujo .yr{display:flex; justify-content:space-between; padding:10px 12px; font-size:12px; align-items:center;}
-  .yakujo .st{color:#2e9e52; font-weight:800; font-size:11px; border:1px solid #2e9e52; padding:1px 7px;}
-
+  /* shared misc */
+  .searchbar{margin:10px 12px; padding:9px 12px; font-size:12.5px; display:flex; align-items:center; gap:7px; border-radius:8px;}
+  .searchbar svg{width:15px; height:15px; opacity:.55; flex-shrink:0;}
+  .t-sbi .searchbar{background:#F2F1F6; color:#7b7f8a; border-radius:6px;}
+  .t-isp .searchbar{background:#2b2b2b; color:#8e8e8e; border:1px solid #3a3a3a;}
   .simfoot{max-width:430px; margin:14px auto 0;}
   .simfoot .card{margin-top:12px; padding:18px;}
   .simfoot h4{font-size:12px; font-weight:800; letter-spacing:.1em; color:var(--navy); margin-bottom:6px;}
-  .simfoot .card p, .simfoot .card div.lbody{font-size:13px; color:#2c3542;}
+  .simfoot .card div.lbody{font-size:13px; color:#2c3542;}
   .backlink{display:inline-block; margin-top:12px; color:var(--sub); font-weight:600; cursor:pointer; text-decoration:underline; text-underline-offset:3px; font-size:13px;}
-
   .cta{margin-top:16px; border:1px solid var(--line); border-top:3px solid var(--red); padding:16px; background:#fff;}
   .cta p{font-size:13.5px; font-weight:700;}
   .cta a{display:block; text-align:center; margin-top:12px; background:var(--red); color:#fff; padding:13px; font-size:14.5px; font-weight:800; text-decoration:none;}
   .cta small{display:block; margin-top:9px; font-size:11px; color:var(--sub); line-height:1.7;}
+  .exitbtn{display:block; width:calc(100% - 28px); margin:14px; border:1px solid rgba(128,128,128,.5); background:transparent; color:inherit; border-radius:5px; padding:12px; font-size:13.5px; font-weight:700; cursor:pointer; font-family:inherit;}
 
   dl.gloss dt{font-weight:800; margin-top:18px; font-size:14.5px; padding-bottom:4px;}
   dl.gloss dt .pill{display:inline-block; border:1px solid var(--navy); color:var(--navy); padding:0 8px; font-size:10.5px; font-weight:800; margin-left:8px; vertical-align:2px;}
@@ -373,7 +468,7 @@
             <td><a href="#" onclick="showPage('order'); startSim('ispeed'); return false;">iSPEEDを練習</a></td>
           </tr>
           <tr>
-            <td class="name"><span class="dot" style="background:#00305e"></span>マネックス証券</td>
+            <td class="name"><span class="dot" style="background:#FFC81A"></span>マネックス証券</td>
             <td>米国株の取扱いと分析ツール(銘柄スカウター)に定評。クレカ積立の還元も強い</td>
             <td>マネックス/dポイント</td><td>○(ワン株)</td>
             <td>米国株もやってみたい人。dポイント派</td>
@@ -473,13 +568,13 @@
   <div class="wrap">
     <div class="card" id="brokerChooser">
       <h2>はじめての注文シミュレーター</h2>
-      <p class="muted">架空の銘柄「サンプル食品(0000)」を100株、実際のアプリの画面遷移・ボタン名を再現した練習画面で買ってみます。自分が口座を持っている(持つ予定の)証券会社を選んでください。</p>
+      <p class="muted">架空の銘柄「サンプル食品(0000)」を100株、実際のアプリの画面構成・配色・ボタン名を再現した練習画面で買ってみます。自分が口座を持っている(持つ予定の)証券会社を選んでください。</p>
       <div class="brokerpick">
-        <button style="--bp:#0d5eae;" onclick="startSim('sbi')"><h3>SBI証券「株アプリ」</h3><p>5画面構成で情報量が多い本格派。「取引」→「現物買」→「確認」→「発注」の流れを再現。</p><span class="go">練習をはじめる →</span></button>
-        <button style="--bp:#bf0000;" onclick="startSim('ispeed')"><h3>楽天証券「iSPEED」</h3><p>黒基調のトレード画面。「確認画面へ」→「取引暗証番号入力へ」→「注文する」の3段階を再現。</p><span class="go">練習をはじめる →</span></button>
-        <button style="--bp:#00305e;" onclick="startSim('monex')"><h3>マネックス証券</h3><p>最大の関門「どのアプリで買うのか」問題から解説。マネックスで挫折した人はまずこれ。</p><span class="go">練習をはじめる →</span></button>
+        <button style="--bp:#0d5eae;" onclick="startSim('sbi')"><h3>SBI証券「株アプリ」</h3><p>黒に近い紺のダーク画面。「取引」→「現物買」→「確認」→「発注」の流れを再現。</p><span class="go">練習をはじめる →</span></button>
+        <button style="--bp:#bf0000;" onclick="startSim('ispeed')"><h3>楽天証券「iSPEED」</h3><p>黒基調+赤ヘッダーのシンプル注文。「確認画面へ」→「取引暗証番号」→「注文する」を再現。</p><span class="go">練習をはじめる →</span></button>
+        <button style="--bp:#DAAB00;" onclick="startSim('monex')"><h3>マネックス証券</h3><p>黄色い総合アプリ。最大の関門「どのアプリで買うのか」問題から解説。挫折した人はまずこれ。</p><span class="go">練習をはじめる →</span></button>
       </div>
-      <p class="muted" style="margin-top:12px;">※各社の公開情報(公式操作ガイド等)をもとにした非公式の再現イメージです。ロゴは使用しておらず、実際のアプリとは画面・文言が異なる場合があります(2026年8月時点)。</p>
+      <p class="muted" style="margin-top:12px;">※各社の公開情報(公式操作ガイド・ストア掲載画像等)をもとにした非公式の再現イメージです。ロゴは使用しておらず、実際のアプリとは画面・文言が異なる場合があります(2026年8月時点)。</p>
     </div>
 
     <div id="simArea">
@@ -506,7 +601,7 @@
         <dt>取引パスワード/取引暗証番号<span class="pill">初見殺し</span></dt><dd>ログインパスワードとは<b>別に</b>、注文の最後に入力するパスワード。SBI・マネックスは「取引パスワード」、楽天は4桁の「取引暗証番号」。口座開設時に設定したものを忘れて発注できない人が続出します。必ずメモを。</dd>
         <dt>預り区分/口座区分<span class="pill">超重要</span></dt><dd>注文画面で出てくる「特定/一般/NISA」の選択。特定口座を作っていれば「特定」を、NISA枠で買うなら「NISA」を選びます。<b>約定後の変更はできない</b>ため選び間違いに注意。</dd>
         <dt>執行条件(しっこうじょうけん)</dt><dd>「本日中」「今週中」「寄付」「引け」など、注文をいつまで・どのタイミングで有効にするかの条件。最初はデフォルト(本日中/当日中)のままで問題ありません。</dd>
-        <dt>SOR</dt><dd>SBIの注文画面に出てくる市場選択のデフォルト。複数の市場から最も有利な価格を自動で探して執行する仕組み。そのままで問題ありません。</dd>
+        <dt>SOR</dt><dd>SBI・マネックスの注文画面に出てくる市場選択のデフォルト。複数の市場から最も有利な価格を自動で探して執行する仕組み。そのままで問題ありません。</dd>
         <dt>単元株(たんげんかぶ)</dt><dd>売買の基本単位。日本株は原則100株=1単元。1株ずつ買える「単元未満株」(SBI「S株」、楽天「かぶミニ」、マネックス「ワン株」)なら少額で始められます。</dd>
         <dt>約定(やくじょう)</dt><dd>注文が成立すること。「注文を出す」と「約定する」は別で、成行ならほぼ即約定、指値は株価が届かなければ約定しません。注文照会画面で「約定」「約定済」となれば成立です。</dd>
         <dt>受渡日(うけわたしび)</dt><dd>実際にお金と株の受け渡しが完了する日。約定日から2営業日後。売ったお金を銀行に出金できるのはこの日以降です。</dd>
@@ -556,10 +651,8 @@
 <script>
 /* =====================================================================
    アフィリエイト設定
-   ASP提携が通ったら url をアフィリリンクに差し替え、pr を true にする。
-   pr:true にすると [PR] 表記が自動で付く(ステマ規制対応)。
+   ASP提携後: url をアフィリリンクに差し替え、pr:true にすると [PR] が自動付与。
    単価目安(2026年8月調査・要確認): マネックス約3,000円 > 松井約1,000円 > 楽天約500円 > SBI約300円
-   取扱ASP: アクセストレード / TCS / TG が中心
    ===================================================================== */
 const AFF = {
   sbi:    {name:'SBI証券',       url:'https://www.sbisec.co.jp/',      pr:false},
@@ -575,58 +668,65 @@ function ctaHTML(key, lead){
 
 /* ===== SVGアイコン ===== */
 const ICON = {
-  home:  '<path d="M4 11l8-7 8 7v9h-5v-6h-6v6H4z"/>',
+  globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.5 5.5 3.5 9s-1 6.5-3.5 9c-2.5-2.5-3.5-5.5-3.5-9s1-6.5 3.5-9z"/>',
   chart: '<path d="M3 17l5.5-6 4 3.5L21 7"/><path d="M15 7h6v6"/>',
   star:  '<path d="M12 3l2.7 5.6 6.3.8-4.6 4.2 1.2 6.1-5.6-3-5.6 3 1.2-6.1L3 9.4l6.3-.8z"/>',
-  case:  '<rect x="3" y="7" width="18" height="13" rx="1.5"/><path d="M9 7V5a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 5v2"/>',
+  wallet:'<rect x="3" y="7" width="18" height="13" rx="1.5"/><path d="M3 11h18"/>',
   doc:   '<rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9 8h6M9 12h6M9 16h4"/>',
   search:'<circle cx="11" cy="11" r="6.5"/><path d="M20.5 20.5L16 16"/>',
   bell:  '<path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10.5 19a1.8 1.8 0 0 0 3 0"/>',
   user:  '<circle cx="12" cy="8" r="4"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/>',
   menu:  '<path d="M4 7h16M4 12h16M4 17h16"/>',
+  grid:  '<circle cx="5" cy="5" r="1.6"/><circle cx="12" cy="5" r="1.6"/><circle cx="19" cy="5" r="1.6"/><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/><circle cx="5" cy="19" r="1.6"/><circle cx="12" cy="19" r="1.6"/><circle cx="19" cy="19" r="1.6"/>',
+  news:  '<rect x="3" y="5" width="18" height="15" rx="1.5"/><path d="M7 9h6M7 13h10M7 17h10"/>',
+  cart:  '<circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/><path d="M3 4h2l2.5 11h10L20 7H6"/>',
   gear:  '<circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3M4.9 4.9l2.1 2.1m10 10l2.1 2.1M19.1 4.9l-2.1 2.1m-10 10l-2.1 2.1"/>',
   reload:'<path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 3v4h-4"/>',
   check: '<path d="M5 13l5 5 9-11"/>',
+  back:  '<path d="M15 5l-7 7 7 7"/>',
+  info:  '<circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/>',
+  memo:  '<rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9 8h6M9 12h6"/>',
+  coin:  '<circle cx="10" cy="10" r="6"/><circle cx="14" cy="14" r="6"/>',
+  sq:    '<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 9h8M8 13h8M8 17h5"/>',
+  thumb: '<path d="M7 11v9H4v-9h3zm3 9h7.5a2 2 0 0 0 2-1.6l1.2-6A2 2 0 0 0 18.7 10H14l.8-4.2A1.6 1.6 0 0 0 12 4.6L10 11v9z"/>',
 };
 function ico(n){ return `<svg class="i" viewBox="0 0 24 24">${ICON[n]}</svg>`; }
 
 /* ===== ローソク足チャート ===== */
-function candleSVG(dark){
+function candleSVG(up, dn, bodyDn){
   const D=[[62,70,57,66],[66,72,60,63],[63,69,56,60],[60,66,54,64],[64,74,62,71],[71,77,65,68],[68,74,62,72],[72,80,70,77],[77,83,71,74],[74,80,68,78],[78,86,76,83],[83,89,77,80],[80,86,74,84],[84,92,82,89],[89,95,83,86],[86,92,80,90],[90,98,88,95],[95,101,89,92],[92,98,86,96],[96,104,94,101],[101,107,95,98],[98,104,92,102],[102,110,100,107],[107,112,101,110]];
   const W=326, H=104, n=D.length, cw=W/n, bw=cw*0.55, min=52, max=114;
   const y=v=>H-(v-min)/(max-min)*H;
-  const up = dark?'#ff5b4d':'#d13030', dn = dark?'#3ba7ff':'#2f6fd1';
-  const grid = dark?'rgba(255,255,255,.07)':'rgba(0,0,0,.06)';
   let s='';
-  for(let g=1; g<4; g++) s+=`<line x1="0" y1="${H/4*g}" x2="${W}" y2="${H/4*g}" stroke="${grid}"/>`;
+  for(let g=1; g<4; g++) s+=`<line x1="0" y1="${H/4*g}" x2="${W}" y2="${H/4*g}" stroke="rgba(128,128,128,.15)"/>`;
   D.forEach((c,i)=>{
-    const [o,h,l,cl]=c, x=i*cw+cw/2, col = cl>=o?up:dn;
+    const [o,h,l,cl]=c, x=i*cw+cw/2, rise=cl>=o, col=rise?up:dn;
     s+=`<line x1="${x}" y1="${y(h)}" x2="${x}" y2="${y(l)}" stroke="${col}" stroke-width="1"/>`;
     const top=y(Math.max(o,cl)), bh=Math.max(2, Math.abs(y(o)-y(cl)));
-    s+=`<rect x="${x-bw/2}" y="${top}" width="${bw}" height="${bh}" fill="${cl>=o?col:(dark?'#0d0d0f':'#fff')}" stroke="${col}" stroke-width="1"/>`;
+    s+=`<rect x="${x-bw/2}" y="${top}" width="${bw}" height="${bh}" fill="${rise?up:(bodyDn||dn)}" stroke="${col}" stroke-width="1"/>`;
   });
   return `<svg viewBox="0 0 ${W} ${H}" height="104">${s}</svg>`;
 }
 
-/* ===== 板(気配値) ===== */
-function itaHTML(){
+/* ===== 板(SBI気配値) ===== */
+function itaSBI(){
   return `<table class="ita">
-    <tr><th>売気配(株)</th><th style="text-align:center;">値段</th><th>買気配(株)</th></tr>
+    <tr><th>売数量</th><th style="text-align:center;">値段</th><th>買数量</th></tr>
     <tr><td class="askq">12,300</td><td class="pr">1,239</td><td></td></tr>
     <tr><td class="askq">8,700</td><td class="pr">1,238</td><td></td></tr>
     <tr><td class="askq">5,600</td><td class="pr">1,237</td><td></td></tr>
-    <tr><td class="askq">3,200</td><td class="pr">1,236</td><td></td></tr>
     <tr><td class="askq">1,400</td><td class="pr">1,235</td><td></td></tr>
+    <tr><td></td><td class="pr cur">1,234</td><td></td></tr>
     <tr><td></td><td class="pr">1,233</td><td class="bidq">2,100</td></tr>
     <tr><td></td><td class="pr">1,232</td><td class="bidq">4,800</td></tr>
-    <tr><td></td><td class="pr">1,231</td><td class="bidq">7,500</td></tr>
     <tr><td></td><td class="pr">1,230</td><td class="bidq">15,900</td></tr>
     <tr><td></td><td class="pr">1,229</td><td class="bidq">9,300</td></tr>
   </table>`;
 }
 
-/* ===== ステータスバー ===== */
-const SBAR = `<div class="sbar"><b>9:41</b><span class="sright"><span class="sig"><i></i><i></i><i></i><i></i></span><span style="font-size:10px; font-weight:600;">5G</span><span class="batt"></span></span></div>`;
+function sbarHTML(bg, fg){
+  return `<div class="sbar" style="${bg?`background:${bg};`:''}${fg?`color:${fg};`:''}"><b>9:41</b><span class="sright"><span class="sig"><i></i><i></i><i></i><i></i></span><span style="font-size:10px; font-weight:600;">5G</span><span class="batt"></span></span></div>`;
+}
 
 /* ===== tabs ===== */
 function showPage(id){
@@ -680,384 +780,465 @@ document.querySelectorAll('.wizstep .choice').forEach(ch=>{
 });
 
 /* =====================================================================
-   注文シミュレーター(実在アプリ再現・非公式)
+   注文シミュレーター(実在アプリ再現・非公式/実画面の視覚調査に基づく)
    ===================================================================== */
-let sim = {broker:null, i:0, qty:100, otype:null, kubun:null};
+let sim = {broker:null, i:0, qty:100, otype:null, kubun:null, sheet:false};
 
-const STOCK = {nm:'サンプル食品', code:'0000', px:'1,234', chg:'+12(+0.98%)'};
 function estAmt(){ return sim.otype==='sashine' ? '123,000円' : '約123,400円'; }
 function otypeLabel(){ return sim.otype==='sashine' ? '指値 1,230円' : '成行'; }
 
 const SIMS = {
+/* ---------------- SBI ---------------- */
 sbi: {
   cls:'t-sbi', last:6,
   guides:[
-    {g:'下メニュー右側の<b>「銘柄検索」</b>をタップ', s:'SBIの株アプリは「マーケット/登録銘柄/口座管理/注文照会/銘柄検索」の5画面構成。起動直後はマーケット画面です。',
-     l:'主要指標・ニュース・ランキングが並ぶ「マーケット」画面。情報量に圧倒されますが、<b>買うときに使うのは「銘柄検索」だけ</b>です。なお米国株はこのアプリでは買えません(別の「米国株アプリ」を使います)。'},
+    {g:'下メニューの<b>「銘柄検索」</b>をタップ', s:'SBIの株アプリは黒に近い紺のダーク画面。起動直後は「マーケット」で、下部に6つのメニューが並びます。',
+     l:'主要指標・ニュース・ランキングが並ぶマーケット画面。<b>数字は上昇=赤、下落=緑</b>という日本の証券アプリ流の色使いです。情報量に圧倒されますが、買うときに使うのは「銘柄検索」だけ。米国株はこのアプリでは買えません(別の米国株アプリ)。'},
     {g:'検索バーをタップ(「サンプル食品」と入力したことにします)', s:'銘柄名か4桁の証券コードで検索します。',
-     l:'キーワードのほか「テーマ」「株主優待」「決算」タブからも銘柄を探せます。最初は気になる会社名をそのまま入れれば問題ありません。'},
-    {g:'画面右上の<b>「取引」</b>をタップ', s:'SBIは銘柄画面の右上に注文への入口があります。',
-     l:'個別銘柄画面。チャート/気配値(=板)/歩み値/四季報など最大10タブをフリックで切り替えます。下に出ている表が「気配値」で、<b>青=売りたい人、赤=買いたい人</b>の注文量。全部読めなくて大丈夫、右上の「取引」だけ覚えれば買えます。'},
+     l:'キーワードのほか、株主優待・テーマ・決算日・チャート形状などからも銘柄を探せます。最初は気になる会社名をそのまま入れれば問題ありません。'},
+    {g:'株価の上にある赤い<b>「取引」</b>ボタンをタップ', s:'SBIは銘柄画面の上部バーに注文への入口があります。',
+     l:'個別銘柄画面。市場を選ぶ「東証*/PTS」、ウォッチリストに入れる「登録」、そして<b>赤い「取引」</b>が並びます。現在値は画面最大の文字で、上昇中は赤+「↑」。下の表が「気配値(板)」で、いくらで売りたい/買いたい人が何株いるかの一覧です。読めなくても買えます。'},
     {g:'<b>「現物買」</b>をタップ', s:'「信用〜」はお金を借りて取引する上級者向け。触らなくてOK。',
-     l:'取引メニュー。使うのは<b>現物買・現物売</b>の2つだけです。「スピード注文」はデイトレーダー向けの高速発注モードなので、これも当面スルーで問題ありません。'},
+     l:'取引メニュー。使うのは<b>現物買(赤)・現物売(緑)</b>の2つだけです。「スピード注文」はデイトレーダー向けの高速発注モードなので、当面スルーで問題ありません。'},
     {g:'預り区分<b>「特定」</b>、価格<b>「成行」</b>(か指値)を選び、下の<b>「確認」</b>をタップ', s:'項目が多いですが、触るのは預り区分・株数・価格の3つだけ。',
-     l:'SBIの注文入力は項目が多いのが特徴。触らなくていい項目:市場「SOR」(自動で有利な市場を選ぶ仕組み)、S株(1株だけ買いたいときにON)、執行条件「なし」、期間「当日中」。<br><b>要注意は「預り区分」</b>。特定口座で買うなら「特定」、NISA枠なら「NISA(成長)」。約定後は変更できません。取引パスワードは「保存」をONにすると次回から省略できます。'},
-    {g:'内容を確認して<b>「発注」</b>をタップ', s:'見るのは①銘柄 ②株数 ③価格 ④預り区分 の4つ。',
-     l:'最終確認画面。株数の桁間違い(100株のつもりが1,000株)が一番の事故ポイントなので、株数と概算金額は指差し確認を。'},
+     l:'SBIの注文入力は全証券アプリでも屈指の項目数。<b>触らなくていいもの</b>:注文種別「通常」(OCO/IFDは条件付き注文)、執行条件「なし」、期間「当日中」、S株(1株だけ買うときにON)。<b>要注意は預り区分</b>。特定口座なら「特定」、NISA枠なら「NISA」で、約定後は変更できません。取引パスワードは「保存」にチェックすると次回から省略できます。'},
+    {g:'内容を確認して<b>「発注」</b>をタップ', s:'確認画面は画面の上に重なるカード形式で出ます。',
+     l:'最終確認。見るのは①銘柄 ②株数 ③価格 ④預り区分 の4つ。株数の桁間違い(100株のつもりが1,000株)が一番の事故ポイントなので、概算約定代金もあわせて指差し確認を。'},
     {g:'発注完了。「注文照会」で約定を確認しましょう', s:'',
-     l:'注文の状況・訂正・取消は下メニューの<b>「注文照会」</b>画面で行います。状態が「約定」になれば購入成立、あなたはサンプル食品の株主です。実際のお金と株の受け渡しは2営業日後(受渡日)。'},
+     l:'注文の状況・訂正・取消は下メニューの<b>「注文照会」</b>で行います。状態が「約定済」になれば購入成立、あなたはサンプル食品の株主です。お金と株の受け渡しは2営業日後(受渡日)。'},
   ],
   build: buildSBI,
 },
+/* ---------------- iSPEED ---------------- */
 ispeed: {
-  cls:'t-ispeed', last:7,
+  cls:'t-isp', last:7,
   guides:[
-    {g:'下部メニューの<b>「検索」</b>をタップ', s:'起動直後は「TODAY」画面。ニュースやマイページが並びますが、買うときは検索へ。',
-     l:'iSPEEDのホーム「TODAY」。MyPage(カスタマイズ画面)・Market Today・トウシル(投資メディア)の3ブロック構成です。<b>下部メニューは自分で並び替えできる</b>ため、解説記事と自分の画面の並びが違うことがあります。「検索」が見当たらなければ右下の「メニュー」から。'},
+    {g:'下部メニューの<b>「検索」</b>をタップ', s:'起動直後は「TODAY」画面。My Page・Market Today・トウシルの3タブ構成です。',
+     l:'iSPEEDのホーム「TODAY」。上部の白いピルでMy Page(自分用ダッシュボード)/Market Today(市況)/トウシル(投資メディア)を切り替えます。<b>下部メニューは自分で並び替えできる</b>ため、解説記事と自分の画面の並びが違うことがあります。'},
     {g:'検索バーをタップ(「サンプル食品」と入力したことにします)', s:'銘柄名・銘柄コードのほか、ランキングやテーマからも探せます。',
-     l:'検索画面。キーワード検索のほか「最近チェックした銘柄」「ランキング」「業種」「テーマ」「チャートの形状」からも探せます。'},
-    {g:'画面右上の<b>「注文」</b>をタップ', s:'iSPEEDは銘柄画面の右上に注文ボタンがあります。',
-     l:'個別銘柄画面。「サマリー/板/チャート/ニュース」などのタブを横に切り替えます。黒地に赤や青の数字が並んで玄人向けに見えますが、使うのは右上の「注文」だけです。'},
+     l:'検索画面。キーワードのほか「ランキング」「業種」「テーマ」「スーパースクリーナー」からも探せます。'},
+    {g:'画面右上の<b>「注文」</b>をタップ', s:'iSPEEDは銘柄画面の右上に注文への入口があります。',
+     l:'個別銘柄画面。銘柄カードに現在値(<b>上昇=赤</b>)と前日比(<b>下落=ミント緑</b>)が出ます。タブの下線がティール(青緑)なのもiSPEEDの特徴。サマリーの水色の項目名、赤/シアンのローソク足まで含めて、黒い画面に慣れればこっちのものです。'},
     {g:'<b>「現物買い」</b>をタップ', s:'「信用新規」「信用返済」は上級者向け。触らなくてOK。',
-     l:'注文種別の選択。iSPEEDは注文機能だけで5系統以上ありますが(エクスプレス注文、アルゴ注文など)、初心者が使うのは<b>「現物買い」「現物売り」だけ</b>です。'},
-    {g:'<b>「成行」</b>(か指値)と口座区分<b>「特定」</b>を選び、<b>「確認画面へ」</b>をタップ', s:'画面右上の「シンプル|プロ」はシンプルのままで。',
-     l:'iSPEEDの注文画面には<b>「シンプル」と「プロ」の切替</b>(右上)があります。シンプルなら指値/成行・口座区分・数量だけで注文できます。執行条件は「本日中」のままで問題ありません(今週中・寄付・引け・不成などは慣れてから)。口座区分は特定口座なら「特定」、NISA枠なら「NISA」。'},
+     l:'注文種別の選択。<b>買い系=赤、売り系=ティール(青緑)</b>という色分けがiSPEEDの文法です。初心者が使うのは「現物買い」「現物売り」だけ。'},
+    {g:'<b>「成行」</b>(か指値)を選び、口座は<b>「特定口座」</b>を選択して<b>「確認画面へ」</b>', s:'画面上部の「プロ/シンプル/かぶミニ」はシンプルのままで。',
+     l:'シンプル注文画面。ヘッダーごと赤くなるのが現物買いのサインです。上の3つのコントロール(指値/成行・口座区分・執行条件)と中央の大きな数量・価格だけで完結します。<b>「確認画面へ」ボタンは白いのが本物</b>——赤い注文ボタンはもっと後に出てきます。口座区分をタップすると下からメニューが出ます。'},
     {g:'内容を確認して<b>「取引暗証番号入力へ」</b>をタップ', s:'楽天はここでワンクッションあります。',
-     l:'注文確認画面。①銘柄 ②数量 ③価格 ④口座区分 を指差し確認してから進みます。'},
-    {g:'取引暗証番号(練習用に入力済み)を確認し、<b>「注文する」</b>をタップ', s:'ログインパスワードとは別の4桁の番号です。',
-     l:'ここが初見殺しポイント。<b>取引暗証番号はログインパスワードとは別物</b>で、口座開設時に自分で決めた4桁です。忘れていると発注できず、ここで挫折する人が多数。忘れた場合は楽天証券のWebサイトから再設定できます。'},
-    {g:'注文受付完了', s:'',
+     l:'注文確認画面。概算約定代金と手数料、概算受渡代金を確認します。①銘柄 ②数量 ③価格 ④口座区分 の指差し確認を。'},
+    {g:'取引暗証番号(入力済み)を確認して、赤い<b>「注文する」</b>をタップ', s:'ログインパスワードとは別の4桁の番号です。',
+     l:'ここが初見殺しポイント。<b>取引暗証番号はログインパスワードとは別物</b>で、口座開設時に自分で決めた4桁です。忘れていると発注できず、ここで挫折する人が多数。忘れた場合は楽天証券のWebサイトから再設定できます。「30分間省略」をONにすると連続注文が楽になります。'},
+    {g:'注文完了', s:'',
      l:'注文の状況は「注文照会」で確認します。約定すれば購入成立です。なおiSPEEDでは<b>入金はアプリ内で完結しない</b>ため、入金だけは楽天証券のWebサイト(またはマネーブリッジの自動入出金)で行います。'},
   ],
-  build: buildISPEED,
+  build: buildISP,
 },
+/* ---------------- マネックス ---------------- */
 monex: {
-  cls:'t-monex', last:6,
+  cls:'t-mx', last:5,
   guides:[
-    {g:'国内株を買うなら総合アプリ<b>「マネックス証券アプリ」</b>をタップ', s:'マネックス最大の関門。アプリが複数ありますが、答えは1つです。',
-     l:'マネックスのアプリは役割分担制です。<br>・<b>マネックス証券アプリ(総合)…国内株はこれ</b><br>・マネックストレーダー株式…板発注などの上級者向け株専用アプリ<br>・米国株アプリ…米国株専用<br>「どれで買うのか」で迷って挫折する人が続出しますが、<b>最初は総合アプリだけ</b>で大丈夫です。'},
-    {g:'下部タブ<b>「マーケット」</b>にある検索窓をタップ', s:'「企業名、証券コードを入力して検索」と書いてある欄です。',
-     l:'総合アプリのホーム。下部タブは「マーケット/フィード/資産/お知らせ/MYPAGE」など(並び替え可能)。銘柄検索は<b>「マーケット」タブの中</b>にあります。資産や入出金の確認もこのアプリでできます。'},
+    {g:'国内株を買うなら<b>黄色いアイコンの「マネックス証券アプリ」</b>をタップ', s:'マネックス最大の関門。アプリが複数ありますが、答えは1つです。',
+     l:'マネックスのアプリは役割分担制です。<br>・<b>マネックス証券アプリ(総合・黄色)…国内株はこれ</b><br>・マネックストレーダー株式…板発注などの上級者向け<br>・米国株アプリ…米国株専用<br>「どれで買うのか」で迷って挫折する人が続出しますが、最初は総合アプリだけで大丈夫です。'},
+    {g:'銘柄検索バーをタップ(「サンプル食品」と入力したことにします)', s:'黄色いヘッダーが総合アプリの目印。検索バーの右の「注文」ボタンからも進めます。',
+     l:'総合アプリのホーム。上部の白いボタン(保有残高/建玉/注文照会/入出金)がよく使うショートカットです。下部タブは「マーケット/フィード/資産/お知らせ/メニュー」の5つで、選択中は黄色になります。'},
     {g:'検索結果の銘柄の右側にある<b>「注文」</b>をタップ', s:'',
-     l:'検索結果の画面。銘柄名をタップすると株価やチャートの詳細、右側の「注文」で直接注文画面へ進めます。'},
-    {g:'注文方法は<b>「スタンダード注文」</b>を選択', s:'ここから画面の雰囲気が「Webサイト風」に変わりますが、正常です。',
-     l:'第2の関門。マネックスの総合アプリの注文画面は、会員向けWebサイトと同じ画面がベースです。<b>「急にアプリらしくない画面になった…壊れた?」と不安になりますが、それで正常</b>。そのまま進みましょう。'},
-    {g:'株数100、<b>「成行」</b>(か指値)、口座区分<b>「特定」</b>を選び、<b>「次へ(注文内容確認)」</b>', s:'',
-     l:'スタンダード注文の入力画面。昔ながらのWebフォームの見た目ですが、触るのは株数(通常は100株単位)、価格(成行/指値)、口座区分(特定/NISA)の3点だけです。'},
-    {g:'取引パスワード(練習用に入力済み)を確認して<b>「実行する」</b>をタップ', s:'ログインパスワードとは別物です。',
-     l:'最大の初見殺しポイント。<b>取引パスワードはログインパスワードとは別</b>で、口座開設時に設定しています。しかもパスワードを変更・再設定すると「毎回入力する」設定に戻る仕様。忘れた場合はWebサイトから再設定を。ログインできない場合は、ワンタイムパスワードのメールが迷惑メールフォルダに入っていないかも確認してください。'},
-    {g:'発注完了。「注文約定一覧」で確認しましょう', s:'',
-     l:'「注文約定一覧」で状態が<b>「約定済」</b>になれば購入成立です。ここまで来られたら、本番でもう迷いません。'},
+     l:'検索結果の画面。銘柄名(青いリンク)をタップすると株価やチャートの詳細、右側の「注文」で直接注文画面へ進めます。'},
+    {g:'株数100、価格<b>「成行」</b>(か指値)、口座区分<b>「特定」</b>を選んで、緑の<b>「次へ(注文内容確認)」</b>', s:'ここから画面が「Webサイト風」に変わりますが、正常です。',
+     l:'第2の関門。マネックスの注文画面は会員向けWebサイトと同じ画面がベースで、<b>「急にアプリらしくない画面になった…壊れた?」と不安になりますが、それで正常</b>です。ピンク色のフォームに、市場「東証」+SORチェック(自動で有利な市場を選ぶ仕組み・そのままでOK)、株数、価格、口座区分が並びます。上の「注文情報入力→確認→完了」の丸が現在地を示します。'},
+    {g:'取引パスワード(入力済み)を確認して、緑の<b>「実行する」</b>をタップ', s:'ログインパスワードとは別物です。',
+     l:'確認画面。成行注文への赤い注意書きが出るのも本物どおりです。<b>取引パスワードはログインパスワードとは別</b>で、口座開設時に設定しています。パスワードを変更・再設定すると「毎回入力する」設定に戻る仕様なので要注意。ログインできない場合は、ワンタイムパスワードのメールが迷惑メールフォルダに入っていないかも確認を。'},
+    {g:'受付完了。「注文約定一覧」で状態を確認しましょう', s:'',
+     l:'「ご注文を受け付けました。」が出たら発注成功。<b>「注文約定一覧」で状態が「約定済」</b>になれば購入成立です。ここまで来られたら、本番でもう迷いません。'},
   ],
-  build: buildMonex,
+  build: buildMX,
 },
 };
 
-/* ---- 画面ビルダー:SBI ---- */
+/* ---- SBI ---- */
 function buildSBI(i){
   const tabbar = (hl)=>`<div class="tabbar">
-    <div class="${hl===0?'on':''}">${ico('chart')}マーケット</div>
+    <div class="${hl===0?'on':''}">${ico('globe')}マーケット</div>
     <div>${ico('star')}登録銘柄</div>
-    <div>${ico('case')}口座管理</div>
+    <div>${ico('wallet')}口座管理</div>
     <div class="${hl===3?'on':''}">${ico('doc')}注文照会</div>
-    <div class="${hl===4?'on tap':''}" ${hl===4?'onclick="simNext()"':''}>${ico('search')}銘柄検索</div></div>`;
-  const head = (t)=>SBAR+`<div class="aphead"><span>${t}</span><span class="hicons">${ico('reload')}${ico('menu')}</span></div>`;
+    <div class="${hl===4?'on tap':''}" ${hl===4?'onclick="simNext()"':''}>${ico('search')}銘柄検索</div>
+    <div>${ico('grid')}メニュー</div></div>`;
+  const head = (t, back)=>sbarHTML()+`<div class="aphead">${back?`<span class="hl">${ico('back')}</span>`:''}<span>${t}</span><span class="hr">${ico('reload')}</span></div>`;
+  const priceRow = ()=>`<div class="sbi-price"><div class="plab">現在値<br>15:00</div><div class="pv up-sbi">1,234<span style="font-size:18px;">↑</span></div><div class="pd up-sbi">+12</div><div class="pr up-sbi">(+0.98%)</div></div>`;
 
   if(i===0) return head('マーケット') + `<div class="apbody">
-      <div class="idx">
-        <div>日経平均<b class="u">39,876.54</b><span class="u" style="font-size:10px;">+180.24 (+0.45%)</span></div>
-        <div>TOPIX<b class="u">2,845.12</b><span class="u" style="font-size:10px;">+12.08 (+0.43%)</span></div>
-        <div>ドル/円<b>151.23</b><span style="font-size:10px;">-0.12</span></div>
-      </div>
-      <div class="seg"><div class="on">ニュース</div><div>ランキング</div><div>決算</div><div>適時開示</div></div>
-      <div class="rankrow"><span>サンプル食品、新商品を発表<time>14:32 サンプル通信</time></span></div>
-      <div class="rankrow"><span>日経平均、続伸で取引終了 前日比180円高<time>15:05 サンプル通信</time></span></div>
-      <div class="rankrow"><span>3月期決算発表スケジュールを更新<time>12:00</time></span></div>
-      <div class="rankrow"><span>値上がり率ランキング(東証プライム)<time>15:00</time></span></div>
+      <div class="sbi-toptabs"><div class="on">主要指標</div><div>ニュース</div><div>ランキング</div><div>市場概況</div></div>
+      <div class="sbi-idxrow"><div><div class="inm">日経平均</div><div class="itm">15:45</div></div><div><div class="ival up-sbi">39,876.54 ↑</div><div class="isub up-sbi">+180.24 (+0.45%)</div></div></div>
+      <div class="sbi-idxrow"><div><div class="inm">TOPIX</div><div class="itm">15:30</div></div><div><div class="ival up-sbi">2,845.12 ↑</div><div class="isub up-sbi">+12.08 (+0.43%)</div></div></div>
+      <div class="sbi-idxrow"><div><div class="inm">日経平均先物</div><div class="itm">16:20</div></div><div><div class="ival dn-sbi">39,820 ↓</div><div class="isub dn-sbi">-60 (-0.15%)</div></div></div>
+      <div class="sbi-idxrow"><div><div class="inm">米ドル/円</div><div class="itm">16:21</div></div><div><div class="ival dn-sbi">151.23 ↓</div><div class="isub dn-sbi">-0.12 (-0.08%)</div></div></div>
+      <div class="sbi-idxrow"><div><div class="inm">NYダウ</div><div class="itm">前日</div></div><div><div class="ival up-sbi">44,120.10 ↑</div><div class="isub up-sbi">+215.31 (+0.49%)</div></div></div>
+      <div class="sbi-idxrow"><div><div class="inm">NASDAQ</div><div class="itm">前日</div></div><div><div class="ival up-sbi">20,315.62 ↑</div><div class="isub up-sbi">+98.44 (+0.49%)</div></div></div>
     </div>` + tabbar(4);
 
   if(i===1) return head('銘柄検索') + `<div class="apbody">
-      <div class="searchbar tap" onclick="simNext()">${ico('search')}銘柄名・銘柄コード・キーワード</div>
-      <div class="seg"><div class="on">キーワード</div><div>テーマ</div><div>株主優待</div><div>決算</div><div>チャート形状</div></div>
-      <div class="rankrow"><span style="opacity:.55;">検索履歴はありません</span></div>
+      <div class="searchbar tap" onclick="simNext()">${ico('search')}銘柄名・コード・キーワードから探す</div>
+      <div class="sbi-cards">
+        <div>${ico('star')}株主優待</div><div>${ico('news')}テーマ</div><div>${ico('doc')}決算日</div>
+        <div>${ico('search')}スクリーニング</div><div>${ico('chart')}チャート形状</div><div>${ico('grid')}ランキング</div>
+      </div>
+      <div style="padding:6px 12px; font-size:11px; color:#7A7E8E;">閲覧した銘柄一覧</div>
+      <div style="padding:2px 12px; font-size:12px; color:#565a6b;">履歴はありません</div>
     </div>` + tabbar();
 
-  if(i===2) return head('サンプル食品') + `<div class="apbody">
-      <div class="stockhead"><div class="tr">
-        <div><div class="code">0000 東証プライム</div><div class="nm">サンプル食品</div>
-          <div class="px">1,234<small> 円</small></div><div class="chg">+12 (+0.98%) 15:00</div></div>
-        <button class="hbtn tap" style="background:#d13030;" onclick="simNext()">取引</button>
-      </div>
-      <div class="ministat"><div>始値<b>1,225</b></div><div>高値<b>1,241</b></div><div>安値<b>1,219</b></div><div>出来高<b>1,234千</b></div></div>
-      </div>
-      <div class="seg"><div class="on">チャート</div><div>気配値</div><div>歩み値</div><div>銘柄詳細</div><div>四季報</div></div>
+  if(i===2) return head('(0000) サンプル食品', true) + `
+    <div class="sbi-actbar">
+      <span class="sbi-pill blue">東証*</span><span class="sbi-pill">PTS</span><span class="sbi-pill">登録</span>
+      <button class="sbi-trade tap" onclick="simNext()">取引</button>
+      <span style="opacity:.8;">${ico('bell')}</span><span style="opacity:.8;">${ico('info')}</span>
+    </div>
+    ${priceRow()}
+    <div class="apbody">
+      <div class="sbi-toptabs"><div class="on">チャート</div><div>気配値</div><div>歩み値</div><div>銘柄詳細</div><div>四季報</div></div>
       <div class="itab"><span>日中</span><span class="on">日足</span><span>週足</span><span>月足</span></div>
-      <div class="chartbox">${candleSVG(false)}</div>
-      ${itaHTML()}
+      <div class="chartbox">${candleSVG('#68E73F','#D45B40','#0C0E22')}</div>
+      ${itaSBI()}
     </div>` + tabbar();
 
-  if(i===3) return head('サンプル食品') + `<div class="apbody">
-      <div class="stockhead"><div class="code">0000 東証プライム</div><div class="nm">サンプル食品</div>
-        <div class="px">1,234<small> 円</small></div></div>
-      <div class="menuovl"><div class="menusheet" style="--bb:#d13030;">
-        <div class="grip"></div>
-        <h5>取引メニュー</h5>
-        <button class="buy tap" onclick="simNext()">現物買</button>
-        <button onclick="simWarnSell()">現物売</button>
+  if(i===3) return head('(0000) サンプル食品', true) + priceRow() + `<div class="apbody">
+      <div class="menuovl"><div class="sbi-menu">
+        <div class="grip" style="width:36px; height:4px; border-radius:2px; background:rgba(255,255,255,.35); margin:2px auto 10px;"></div>
+        <h5 style="font-size:11px; opacity:.65; margin-bottom:6px;">取引メニュー</h5>
+        <button class="b-buy tap" onclick="simNext()">現物買</button>
+        <button class="b-sell" onclick="simWarnSell()">現物売</button>
         <button onclick="simWarnShinyo()">信用新規買</button>
         <button onclick="simWarnShinyo()">信用新規売</button>
-        <button onclick="simWarnSpeed()">スピード注文<small>登録が必要です</small></button>
+        <button onclick="simWarnSpeed()">スピード注文</button>
       </div></div>
     </div>`;
 
-  if(i===4) return head('現物買 注文入力') + `<div class="apbody"><div class="oform">
-      <div class="orow" style="background:rgba(128,128,128,.06);"><span style="font-size:12.5px; font-weight:700;">サンプル食品(0000)</span><span class="ov">1,234<small>円 15:00</small></span></div>
-      <div class="orow"><span class="ol">市場</span><span class="oc ov">SOR <small>▾</small></span></div>
-      <div class="orow"><span class="ol">単元未満株(S株)</span><span class="oc"><span class="togknob"></span></span></div>
-      <div class="orow"><span class="ol">預り区分</span><span class="oc"><span class="optrow">
+  if(i===4) return head('(0000) サンプル食品', true) + `
+    <div class="sbi-actbar" style="padding:6px 10px;">
+      <span class="sbi-pill blue" onclick="simWarnSOR()">SOR</span><span class="sbi-pill">東証*</span><span class="sbi-pill">PTS</span>
+      <span style="margin-left:auto; font-size:12px; display:inline-flex; align-items:center; gap:5px;" onclick="simWarnSkabu()">S株 <span class="sbi-chk"></span></span>
+    </div>
+    <div class="sbi-banner">現物買(注文入力)</div>
+    <div class="apbody"><div>
+      <div class="sbi-frow"><span class="fl">買付余力</span><span class="fc" style="justify-content:flex-end; font-weight:700;">300,000円 ›</span></div>
+      <div class="sbi-frow"><span class="fl">預り区分</span><span class="fc"><span class="sbi-seg">
         <button class="${sim.kubun==='特定'?'sel':''} ${sim.kubun?'':'tap'}" onclick="setKubun('特定')">特定</button>
         <button class="${sim.kubun==='一般'?'sel':''}" onclick="setKubun('一般')">一般</button>
-        <button class="${sim.kubun==='NISA(成長)'?'sel':''}" onclick="setKubun('NISA(成長)')">NISA</button>
+        <button class="${sim.kubun==='NISA'?'sel':''}" onclick="setKubun('NISA')">NISA</button>
       </span></span></div>
-      <div class="orow"><span class="ol">株数</span><span class="oc"><span class="qty">
-        <button onclick="qtyChange(-100)">−</button><span class="qv">${sim.qty.toLocaleString()} 株</span><button onclick="qtyChange(100)">+</button>
+      <div class="sbi-frow"><span class="fl">注文種別 <span style="opacity:.5;">?</span></span><span class="fc"><span class="sbi-seg">
+        <button class="sel">通常</button><button onclick="simWarnOCO()">OCO</button><button onclick="simWarnOCO()">IFD</button><button onclick="simWarnOCO()">IFDOCO</button>
       </span></span></div>
-      <div class="orow"><span class="ol">価格</span><span class="oc"><span class="optrow">
-        <button class="${sim.otype==='sashine'?'sel':''}" onclick="setOtype('sashine')">指値</button>
-        <button class="${sim.otype==='nariyuki'?'sel':''} ${sim.otype?'':'tap'}" onclick="setOtype('nariyuki')">成行</button>
-        <button onclick="simWarnGyaku()">逆指値</button>
+      <div class="sbi-frow"><span class="fl">株数</span><span class="fc"><span class="sbi-step">
+        <button onclick="qtyChange(-100)">−</button><span class="v">${sim.qty}株</span><button onclick="qtyChange(100)">+</button>
       </span></span></div>
-      <div class="orow limitrow ${sim.otype==='sashine'?'show':''}"><span class="ol">指値価格</span><span class="oc"><input value="1,230" readonly> 円</span></div>
-      <div class="orow"><span class="ol">執行条件</span><span class="oc ov">なし <small>▾</small></span></div>
-      <div class="orow"><span class="ol">期間</span><span class="oc ov">当日中 <small>▾</small></span></div>
-      <div class="orow"><span class="ol">取引パスワード</span><span class="oc"><input class="pwin" style="width:130px;" value="●●●●●●" readonly></span></div>
-      <div class="orow"><span class="ol">パスワード保存</span><span class="oc"><span class="togknob onn"></span></span></div>
-      <button class="gonext ${sim.otype&&sim.kubun?'tap':''}" style="--bb:#d13030;" onclick="confirmStep()">確認</button>
-    </div></div>`;
-
-  if(i===5) return head('注文確認') + `<div class="apbody"><div class="oform">
-      <div class="orow" style="background:rgba(128,128,128,.06);"><span style="font-size:12.5px; font-weight:700;">この内容で注文を発注します</span></div>
-      <div class="orow"><span class="ol">銘柄</span><span class="oc ov">サンプル食品(0000)</span></div>
-      <div class="orow"><span class="ol">取引</span><span class="oc ov" style="color:#d13030;">現物買</span></div>
-      <div class="orow"><span class="ol">市場</span><span class="oc ov">SOR</span></div>
-      <div class="orow"><span class="ol">預り区分</span><span class="oc ov">${sim.kubun}</span></div>
-      <div class="orow"><span class="ol">株数</span><span class="oc ov">${sim.qty.toLocaleString()}株</span></div>
-      <div class="orow"><span class="ol">価格</span><span class="oc ov">${otypeLabel()}</span></div>
-      <div class="orow"><span class="ol">概算注文金額</span><span class="oc ov">${estAmt()}</span></div>
-      <button class="gonext tap" style="--bb:#d13030;" onclick="simNext()">発注</button>
-    </div></div>`;
-
-  return head('注文照会') + `<div class="apbody"><div class="done">
-      <div class="okmark"><svg class="i" viewBox="0 0 24 24">${ICON.check}</svg></div>
-      <h4>ご注文を受け付けました</h4>
-      <p>受付番号:R-000123(練習用)</p>
-      <div class="yakujo"><div class="yh">本日の注文</div>
-        <div class="yr"><span>サンプル食品 / 現物買 / ${sim.qty}株 / ${otypeLabel()}</span><span class="st">約定</span></div></div>
-      <button class="gonext" style="--bb:#0d5eae;" onclick="exitSim()">ほかのアプリでも練習する</button>
-    </div></div>` + tabbar(3);
-}
-
-/* ---- 画面ビルダー:iSPEED ---- */
-function buildISPEED(i){
-  const tabbar = (hl)=>`<div class="tabbar">
-    <div class="${hl===0?'on':''}">${ico('home')}TODAY</div>
-    <div>${ico('chart')}マーケット</div>
-    <div class="${hl===2?'on tap':''}" ${hl===2?'onclick="simNext()"':''}>${ico('search')}検索</div>
-    <div>${ico('star')}お気に入り</div>
-    <div class="${hl===4?'on':''}">${ico('case')}資産・照会</div>
-    <div>${ico('menu')}メニュー</div></div>`;
-  const head = (t,r)=>SBAR+`<div class="aphead"><span>${t}</span><span class="hicons">${r===undefined?ico('bell')+ico('gear'):r}</span></div>`;
-
-  if(i===0) return head('TODAY') + `<div class="apbody">
-      <div class="blockh">MyPage<span>編集</span></div>
-      <div class="mypage">日経平均株価<br><b>39,876.54</b> <span style="color:#4ccf6e;">+180.24 (+0.45%)</span><br><span style="color:#5c6066; font-size:10px;">15:45 大阪取引所 日中</span></div>
-      <div class="blockh">MARKET TODAY<span>もっと見る</span></div>
-      <div class="newsrow">サンプル食品、新商品「れんしゅうチップス」発表<time>14:32 サンプル通信</time></div>
-      <div class="newsrow">日経平均、続伸で取引終了 前日比180円高<time>15:05 サンプル通信</time></div>
-      <div class="blockh">トウシル<span>もっと見る</span></div>
-      <div class="newsrow">はじめての株式投資 3つの心得<time>投資情報メディア</time></div>
-    </div>` + tabbar(2);
-
-  if(i===1) return head('検索') + `<div class="apbody">
-      <div class="searchbar tap" onclick="simNext()">${ico('search')}銘柄名・銘柄コードを入力</div>
-      <div class="seg"><div class="on">キーワード</div><div>ランキング</div><div>業種</div><div>テーマ</div><div>スクリーナー</div></div>
-      <div class="newsrow">最近チェックした銘柄はありません</div>
-    </div>` + tabbar();
-
-  if(i===2) return head('国内株式','') + `<div class="apbody">
-      <div class="stockhead"><div class="tr">
-        <div><div class="code">0000 東証プライム</div><div class="nm">サンプル食品</div>
-          <div class="px">1,234<small> 円</small></div><div class="chg">+12 (+0.98%) 15:00</div></div>
-        <button class="hbtn tap" style="background:#c22525;" onclick="simNext()">注文</button>
-      </div>
-      <div class="ministat"><div>始値<b>1,225</b></div><div>高値<b>1,241</b></div><div>安値<b>1,219</b></div><div>出来高<b>1,234千</b></div></div>
-      </div>
-      <div class="seg"><div class="on">サマリー</div><div>板</div><div>チャート</div><div>ニュース</div><div>四季報</div></div>
-      <div class="itab"><span>日中</span><span class="on">日足</span><span>週足</span><span>月足</span></div>
-      <div class="chartbox">${candleSVG(true)}</div>
-      ${itaHTML()}
+      <div class="sbi-frow"><span class="fl">価格</span><span class="fc">
+        <span class="sbi-seg">
+          <button class="${sim.otype==='sashine'?'sel':''}" onclick="setOtype('sashine')">指値</button>
+          <button class="${sim.otype==='nariyuki'?'sel':''} ${sim.otype?'':'tap'}" onclick="setOtype('nariyuki')">成行</button>
+          <button onclick="simWarnGyaku()">逆指値</button>
+        </span>
+        ${sim.otype==='sashine'?`<span class="sbi-step"><button>−</button><span class="v">1,230円</span><button>+</button></span><span class="sbi-pill">板入力</span>`:''}
+        <span class="sbi-note">制限値幅:934円〜1,534円</span>
+      </span></div>
+      <div class="sbi-frow"><span class="fl">執行条件</span><span class="fc"><span class="sbi-seg">
+        <button class="sel">なし</button><button onclick="simWarnCond()">寄指</button><button onclick="simWarnCond()">引指</button><button onclick="simWarnCond()">その他▼</button>
+      </span></span></div>
+      <div class="sbi-frow"><span class="fl">期間</span><span class="fc"><span class="sbi-seg">
+        <button class="sel">当日中</button><button onclick="simWarnCond()">今週中</button><button onclick="simWarnCond()">期間指定▼</button>
+      </span></span></div>
+      <div class="sbi-frow"><span class="fl">取引パスワード</span><span class="fc"><input class="sbi-input" value="●●●●●●" readonly><span style="font-size:11px; display:inline-flex; align-items:center; gap:4px;">保存 <span class="sbi-chk on">✓</span></span></span></div>
+      <div class="sbi-frow"><span class="fl">確認画面省略</span><span class="fc" style="font-size:11px; gap:4px;">省略する <span class="sbi-chk"></span></span></div>
+    </div></div>
+    <div class="sbi-foot">
+      <button class="bk" onclick="sbiBack()">戻る</button>
+      <button class="ok ${sim.otype&&sim.kubun?'tap':'dim'}" onclick="confirmStep()">確認</button>
     </div>`;
 
-  if(i===3) return head('注文') + `<div class="apbody">
-      <div class="stockhead"><div class="code">0000 東証プライム</div><div class="nm">サンプル食品</div></div>
-      <div class="menuovl"><div class="menusheet" style="--bb:#c22525;">
+  if(i===5) return head('(0000) サンプル食品', true) + `<div class="apbody" style="background:rgba(0,0,0,.55);">
+      <div class="menuovl center"><div class="sbi-modal">
+        <div class="mh">(0000) サンプル食品</div>
+        <div class="sbi-banner">現物買(注文確認)</div>
+        <div style="background:#22243a; color:#cfd0da; font-size:11px; padding:6px 10px;">${sim.kubun}預りとしてご注文を受付いたします。</div>
+        <div class="mtable">
+          <div class="sbi-mrow"><span class="ml">市場</span><span class="mv">SOR</span></div>
+          <div class="sbi-mrow"><span class="ml">預り区分</span><span class="mv">${sim.kubun}</span></div>
+          <div class="sbi-mrow"><span class="ml">注文種別</span><span class="mv">通常</span></div>
+          <div class="sbi-mrow"><span class="ml">株数</span><span class="mv">${sim.qty}株</span></div>
+          <div class="sbi-mrow"><span class="ml">価格</span><span class="mv">${otypeLabel()}</span></div>
+          <div class="sbi-mrow"><span class="ml">執行条件</span><span class="mv">なし</span></div>
+          <div class="sbi-mrow"><span class="ml">期間</span><span class="mv">当日中</span></div>
+          <div class="sbi-mrow"><span class="ml">概算約定代金</span><span class="mv">${estAmt()}</span></div>
+          <div class="sbi-mrow"><span class="ml">概算受渡金額</span><span class="mv">${estAmt()}</span></div>
+        </div>
+        <div class="sbi-foot" style="background:#131530;">
+          <button class="bk" onclick="sbiBackToForm()">キャンセル</button>
+          <button class="ok tap" onclick="simNext()">発注</button>
+        </div>
+      </div></div>
+    </div>`;
+
+  return head('注文照会') + `<div class="apbody">
+      <div class="sbi-banner" style="background:#2a2d45;">現物買(注文受付)</div>
+      <div style="padding:10px 12px; font-size:12px; color:#cfd0da;">26/08/07 15:01:02<br>${sim.kubun}預りとしてご注文を受付いたしました。</div>
+      <div class="sbi-mrow"><span class="ml">注文番号</span><span class="mv">285</span></div>
+      <div class="sbi-mrow"><span class="ml">株数</span><span class="mv">${sim.qty}株</span></div>
+      <div class="sbi-mrow"><span class="ml">価格</span><span class="mv">${otypeLabel()}</span></div>
+      <div class="sbi-toptabs" style="margin-top:14px;"><div class="on">注文照会</div><div>未約定一覧</div><div>当日約定一覧</div></div>
+      <div class="sbi-idxrow"><div><div class="inm">サンプル食品 <span style="font-size:10px; color:#7A7E8E;">0000 東証/特定</span></div><div class="itm">現物買 ${sim.qty}株 / ${otypeLabel()}</div></div>
+        <div class="ival" style="font-size:12px; color:#3AA32A;">[約定済]</div></div>
+      <button class="exitbtn" onclick="exitSim()">ほかのアプリでも練習する</button>
+    </div>` + tabbar(3);
+}
+
+/* ---- iSPEED ---- */
+function buildISP(i){
+  const tabbar = (hl)=>`<div class="tabbar">
+    <div class="${hl===0?'on':''}">${ico('news')}TODAY</div>
+    <div>${ico('star')}お気に入り</div>
+    <div class="${hl===2?'on tap':''}" ${hl===2?'onclick="simNext()"':''}>${ico('search')}検索</div>
+    <div class="${hl===3?'on':''}">${ico('cart')}注文</div>
+    <div>${ico('user')}資産・照会</div>
+    <div>${ico('menu')}メニュー</div></div>`;
+
+  if(i===0) return sbarHTML() + `<div class="aphead"><span style="opacity:.8;">${ico('doc')}</span>
+      <span class="isp-seg"><span>My Page</span><span class="on">Market Today</span><span>トウシル</span></span>
+      <span style="opacity:.8;">${ico('gear')}</span></div>
+    <div class="apbody">
+      <div class="isp-row"><div><div class="rnm">日経平均株価</div><div class="rtm">15:45 大取</div></div><div><div class="rv up-isp">39,876.54</div><div class="rs up-isp">+180.24 +0.45%</div></div></div>
+      <div class="isp-row"><div><div class="rnm">TOPIX</div><div class="rtm">15:30 東証</div></div><div><div class="rv up-isp">2,845.12</div><div class="rs up-isp">+12.08 +0.43%</div></div></div>
+      <div class="isp-row"><div><div class="rnm">ドル/円</div><div class="rtm">16:21</div></div><div><div class="rv dn-isp">151.23</div><div class="rs dn-isp">-0.12 -0.08%</div></div></div>
+      <div class="isp-blockh">MARKET TODAY<span>もっと見る</span></div>
+      <div class="isp-newsrow">サンプル食品、新商品「れんしゅうチップス」発表<time>14:32 サンプル通信</time></div>
+      <div class="isp-newsrow">日経平均、続伸で取引終了 前日比180円高<time>15:05 サンプル通信</time></div>
+      <div class="isp-blockh">トウシル<span>もっと見る</span></div>
+      <div class="isp-newsrow">はじめての株式投資 3つの心得<time>投資情報メディア</time></div>
+    </div>` + tabbar(2);
+
+  if(i===1) return sbarHTML() + `<div class="aphead"><span>検索</span><span class="hicons">${ico('gear')}</span></div>
+    <div class="apbody">
+      <div class="searchbar tap" onclick="simNext()">${ico('search')}銘柄名・銘柄コードを入力</div>
+      <div class="isp-tabs"><div class="on">キーワード</div><div>ランキング</div><div>業種</div><div>テーマ</div><div>スクリーナー</div></div>
+      <div class="isp-newsrow">最近チェックした銘柄はありません</div>
+    </div>` + tabbar();
+
+  if(i===2) return sbarHTML() + `<div class="aphead"><span style="opacity:.8;">${ico('back')}</span><span>0000</span>
+      <span class="hicons">${ico('memo')}${ico('bell')}<span style="color:#6DB3B3;">${ico('star')}</span><b class="tap" style="font-size:14px; cursor:pointer;" onclick="simNext()">注文</b></span></div>
+    <div class="isp-stockcard">
+      <div><div class="snm">サンプル食品</div><div style="margin-top:3px;"><span class="isp-badge">取引規制無</span><span class="isp-badge">東P</span><span style="font-size:10px; color:#8e8e8e;">15:00:00</span></div></div>
+      <div><div class="spx up-isp">1,234</div><div class="ssub up-isp">+12 +0.98%</div></div>
+    </div>
+    <div class="apbody">
+      <div class="isp-tabs"><div class="on">サマリー</div><div>板</div><div>チャート</div><div>ニュース</div><div>四季報</div></div>
+      <div class="isp-kv"><div><span class="k">前日終値</span><span class="v">1,222</span></div><div><span class="k">出来高</span><span class="v">1,234,500</span></div></div>
+      <div class="isp-kv"><div><span class="k">始値</span><span class="v">1,225</span></div><div><span class="k">売買代金</span><span class="v">1,523百万</span></div></div>
+      <div class="isp-kv"><div><span class="k">高値</span><span class="v">1,241</span></div><div><span class="k">時価総額</span><span class="v">45,600百万</span></div></div>
+      <div class="isp-kv"><div><span class="k">安値</span><span class="v">1,219</span></div><div><span class="k">売買単元</span><span class="v">100株</span></div></div>
+      <div class="itab" style="color:#9a9a9a;"><span>日中</span><span class="on">日足</span><span>週足</span><span>月足</span></div>
+      <div class="chartbox">${candleSVG('#FF5258','#8AE0E1','#1B1B1B')}</div>
+    </div>`;
+
+  if(i===3) return sbarHTML() + `<div class="aphead"><span>注文</span><span class="hicons">${ico('gear')}</span></div>
+    <div class="apbody">
+      <div class="isp-stockcard"><div><div class="snm">サンプル食品 (0000)</div></div><div><div class="spx up-isp" style="font-size:20px;">1,234</div></div></div>
+      <div class="menuovl"><div class="menusheet" style="background:#1b1b1e; color:#fff;">
         <div class="grip"></div>
-        <h5>注文種別を選択</h5>
-        <button class="buy tap" onclick="simNext()">現物買い</button>
-        <button onclick="simWarnSell()">現物売り</button>
+        <h5>国内株式</h5>
+        <button class="tap" style="background:#FF5258; color:#fff; border:none;" onclick="simNext()">現物買い</button>
+        <button style="background:#7BC9C9; color:#111; border:none;" onclick="simWarnSell()">現物売り</button>
         <button onclick="simWarnShinyo()">信用新規</button>
         <button onclick="simWarnShinyo()">信用返済</button>
       </div></div>
     </div>`;
 
-  if(i===4) return head('現物買い注文','<span style="font-size:10.5px; border:1px solid #444; border-radius:4px; padding:2px 7px; font-weight:700;">シンプル<span style="opacity:.4; cursor:pointer; font-weight:400;" onclick="simWarnPro()">｜プロ</span></span>') + `<div class="apbody"><div class="oform">
-      <div class="orow" style="background:rgba(255,255,255,.04);"><span style="font-size:12.5px; font-weight:700;">サンプル食品(0000)</span><span class="ov">1,234<small>円 15:00</small></span></div>
-      <div class="orow"><span class="ol">価格</span><span class="oc"><span class="optrow">
+  if(i===4){
+    const kubunLabel = sim.kubun ? sim.kubun+'口座' : '口座区分を選択';
+    return sbarHTML('#FF5258','#fff') + `<div class="aphead red"><span style="opacity:.9;">${ico('back')}</span><span>現物買い</span>
+      <span class="isp-hbadges"><span class="isp-hbadge" onclick="simWarnPro()">プロ</span><span class="isp-hbadge sel">シン<br>プル</span><span class="isp-hbadge" onclick="simWarnMini()">かぶ<br>ミニ</span>${ico('reload')}</span></div>
+    <div class="isp-stockcard">
+      <div><div class="snm">サンプル食品 (0000)</div><div style="margin-top:3px;"><span class="isp-badge">取引規制無</span><span class="isp-badge">東P</span><span style="font-size:10px; color:#8e8e8e;">15:00:00</span></div></div>
+      <div><div class="spx up-isp" style="font-size:22px;">1,234</div><div class="ssub up-isp" style="font-size:11px;">+12 +0.98%</div></div>
+    </div>
+    <div class="isp-avail"><span>買付可能額<b>292,768 円</b></span><span>NISA<b>292,768 円</b></span><span style="margin-left:auto;">⌄</span></div>
+    <div class="isp-ctrl">
+      <span class="isp-toggle">
         <button class="${sim.otype==='sashine'?'sel':''}" onclick="setOtype('sashine')">指値</button>
         <button class="${sim.otype==='nariyuki'?'sel':''} ${sim.otype?'':'tap'}" onclick="setOtype('nariyuki')">成行</button>
-      </span></span></div>
-      <div class="orow limitrow ${sim.otype==='sashine'?'show':''}"><span class="ol">指値価格</span><span class="oc"><input value="1,230" readonly> 円</span></div>
-      <div class="orow"><span class="ol">執行条件</span><span class="oc ov">本日中 <small>▾</small></span></div>
-      <div class="orow"><span class="ol">口座区分</span><span class="oc"><span class="optrow">
-        <button class="${sim.kubun==='特定'?'sel':''} ${sim.kubun?'':'tap'}" onclick="setKubun('特定')">特定</button>
-        <button class="${sim.kubun==='一般'?'sel':''}" onclick="setKubun('一般')">一般</button>
-        <button class="${sim.kubun==='NISA'?'sel':''}" onclick="setKubun('NISA')">NISA</button>
-      </span></span></div>
-      <div class="orow"><span class="ol">数量</span><span class="oc"><span class="qty">
-        <button onclick="qtyChange(-100)">−</button><span class="qv">${sim.qty.toLocaleString()} 株</span><button onclick="qtyChange(100)">+</button>
-      </span></span></div>
-      <div class="orow"><span class="ol">概算金額</span><span class="oc ov">${sim.otype?estAmt():'—'}</span></div>
-      <button class="gonext ${sim.otype&&sim.kubun?'tap':''}" style="--bb:#c22525;" onclick="confirmStep()">確認画面へ</button>
-    </div></div>`;
+      </span>
+      <button class="isp-ddl ${sim.otype&&!sim.kubun?'tap':''}" onclick="ispSheet()">${kubunLabel}<span>▾</span></button>
+      <button class="isp-ddl" onclick="simWarnCond()">本日中<span>▾</span></button>
+    </div>
+    <div class="apbody"><div class="grow" style="display:flex; flex-direction:column; justify-content:center;">
+      <div class="isp-big"><div class="lbl">数量</div><div class="row"><span class="pm" onclick="qtyChange(-100)">−</span><span class="num">${sim.qty}</span><span class="pm" onclick="qtyChange(100)">＋</span></div></div>
+      <div class="isp-big ${sim.otype==='nariyuki'?'off':''}"><div class="lbl">価格${sim.otype==='nariyuki'?'(成行)':''}</div><div class="row"><span class="pm">−</span><span class="num">${sim.otype==='sashine'?'1,230':'1,234'}</span><span class="pm">＋</span></div></div>
+      <div class="isp-est"><div class="lbl">概算約定代金</div><b>${sim.otype==='sashine'?'123,000':'123,400'} 円</b></div>
+    </div>
+    <button class="isp-white ${sim.otype&&sim.kubun?'tap':''}" onclick="confirmStep()">確認画面へ</button>
+    <div style="display:flex; justify-content:space-between; padding:10px 14px 12px; font-size:11.5px;"><span style="color:#fff; font-weight:700;">取引規制・注意銘柄</span><span style="color:#8e8e8e;">規制無し ›</span></div>
+    ${sim.sheet?`<div class="menuovl"><div class="isp-sheet">
+      <div class="grp">
+        <button class="tap" onclick="ispPick('特定')">特定口座</button>
+        <button onclick="ispPick('一般')">一般口座</button>
+        <button onclick="ispPick('NISA')">NISA口座</button>
+      </div>
+      <button class="cancel" onclick="ispSheetClose()">キャンセル</button>
+    </div></div>`:''}
+    </div>` + tabbar(3);
+  }
 
-  if(i===5) return head('注文確認') + `<div class="apbody"><div class="oform">
-      <div class="orow" style="background:rgba(255,255,255,.04);"><span style="font-size:12.5px; font-weight:700;">注文内容をご確認ください</span></div>
-      <div class="orow"><span class="ol">銘柄</span><span class="oc ov">サンプル食品(0000)</span></div>
-      <div class="orow"><span class="ol">売買</span><span class="oc ov" style="color:#ff6b5e;">現物買い</span></div>
-      <div class="orow"><span class="ol">数量</span><span class="oc ov">${sim.qty.toLocaleString()}株</span></div>
-      <div class="orow"><span class="ol">価格</span><span class="oc ov">${otypeLabel()}</span></div>
-      <div class="orow"><span class="ol">執行条件</span><span class="oc ov">本日中</span></div>
-      <div class="orow"><span class="ol">口座区分</span><span class="oc ov">${sim.kubun}</span></div>
-      <div class="orow"><span class="ol">概算金額</span><span class="oc ov">${estAmt()}</span></div>
-      <button class="gonext tap" style="--bb:#c22525;" onclick="simNext()">取引暗証番号入力へ</button>
-    </div></div>`;
+  if(i===5) return sbarHTML('#FF5258','#fff') + `<div class="aphead red"><span style="opacity:.9;">${ico('back')}</span><span>現物買い</span><span class="hicons">${ico('reload')}</span></div>
+    <div class="isp-stockcard">
+      <div><div class="snm">サンプル食品 (0000)</div></div>
+      <div><div class="spx up-isp" style="font-size:20px;">1,234</div><div class="ssub up-isp" style="font-size:11px;">+12 +0.98%</div></div>
+    </div>
+    <div class="apbody">
+      <div style="padding:10px 14px 2px; font-size:11px; color:#8e8e8e;">通常注文</div>
+      <div class="isp-row"><span>数量</span><span class="rv" style="font-size:14px;">${sim.qty}株</span></div>
+      <div class="isp-row"><span>価格</span><span class="rv" style="font-size:14px;">${otypeLabel()}</span></div>
+      <div class="isp-row"><span>口座区分</span><span class="rv" style="font-size:14px;">${sim.kubun}</span></div>
+      <div class="isp-row"><span>概算約定代金</span><span class="rv" style="font-size:14px;">${sim.otype==='sashine'?'123,000':'123,400'}円</span></div>
+      <div class="isp-row"><span>手数料(税込)</span><span class="rv" style="font-size:14px;">0円</span></div>
+      <div class="isp-row"><span>概算受渡代金</span><span class="rv" style="font-size:16px;">${sim.otype==='sashine'?'123,000':'123,400'}円</span></div>
+      <div style="padding:10px 14px; font-size:10.5px; color:#8e8e8e; line-height:1.7;">【概算代金表示のご注意】成行注文の場合、約定代金が概算と異なる場合があります。</div>
+      <button class="isp-white tap" onclick="simNext()">取引暗証番号入力へ</button>
+      <div style="padding:8px 14px; font-size:9.5px; color:#c9b458;">● 当該注文はインサイダー情報に基づく注文でないことを確約いたします。</div>
+    </div>`;
 
-  if(i===6) return head('取引暗証番号') + `<div class="apbody"><div class="oform" style="padding:16px;">
-      <p style="font-size:13px; font-weight:700; margin-bottom:10px;">取引暗証番号を入力してください</p>
-      <input class="pwin" value="●●●●" readonly>
-      <p style="font-size:11px; opacity:.6; margin-top:10px;">ログインパスワードとは別の、口座開設時に設定した4桁の番号です。</p>
-      <button class="gonext tap" style="--bb:#c22525; width:100%; margin:16px 0 0;" onclick="simNext()">注文する</button>
-    </div></div>`;
+  if(i===6) return sbarHTML() + `<div class="aphead"><span style="opacity:.8;">✕</span><span>取引暗証番号</span><span></span></div>
+    <div class="apbody"><div class="isp-pin">
+      <div style="font-size:14px;">取引暗証番号入力</div>
+      <div class="dots"><i></i><i></i><i></i><i></i></div>
+      <div class="isp-pad"><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div>9</div><div></div><div>0</div><div>⌫</div></div>
+      <div class="isp-togrow"><span>取引暗証番号の入力を30分間省略</span><span class="togknob"></span></div>
+      <div style="font-size:10px; color:#7a7a7a; width:calc(100% - 48px); margin:6px auto 0;">※ログインパスワードとは別の、口座開設時に設定した4桁の番号です</div>
+    </div>
+    <button class="isp-red tap" style="margin-bottom:16px;" onclick="simNext()">注文する</button>
+    </div>`;
 
-  return head('注文受付') + `<div class="apbody"><div class="done">
-      <div class="okmark"><svg class="i" viewBox="0 0 24 24">${ICON.check}</svg></div>
+  return sbarHTML() + `<div class="aphead"><span></span><span>注文完了</span><span></span></div>
+    <div class="apbody"><div class="isp-done">
+      <div class="okc"><svg class="i" viewBox="0 0 24 24">${ICON.thumb}</svg></div>
       <h4>注文を受け付けました</h4>
-      <p>サンプル食品 現物買い ${sim.qty}株 / ${otypeLabel()}</p>
-      <div class="yakujo"><div class="yh">注文照会</div>
-        <div class="yr"><span>サンプル食品 / 現物買 / ${sim.qty}株</span><span class="st">約定</span></div></div>
-      <button class="gonext" style="--bb:#c22525;" onclick="exitSim()">ほかのアプリでも練習する</button>
-    </div></div>` + tabbar(4);
+      <p style="font-size:12px; color:#aaa;">サンプル食品 現物買い ${sim.qty}株 / ${otypeLabel()}</p>
+      <div class="isp-newsopt"><span>この銘柄の関連ニュースを通知</span><span class="tealc">✓</span></div>
+    </div>
+    <button class="isp-white" onclick="exitSim()" style="margin-bottom:16px;">閉じる</button>
+    </div>`;
 }
 
-/* ---- 画面ビルダー:マネックス ---- */
-function buildMonex(i){
+/* ---- マネックス ---- */
+function buildMX(i){
   const tabbar = (hl)=>`<div class="tabbar">
-    <div class="${hl===0?'on':''}">${ico('chart')}マーケット</div>
-    <div>${ico('doc')}フィード</div>
-    <div class="${hl===2?'on':''}">${ico('case')}資産</div>
-    <div>${ico('bell')}お知らせ</div>
-    <div>${ico('user')}MYPAGE</div></div>`;
-  const head = (t)=>SBAR+`<div class="aphead"><span>${t}</span><span class="hicons">${ico('menu')}</span></div>`;
+    <div class="${hl===0?'on':''}">${ico('globe')}マーケット</div>
+    <div>${ico('news')}フィード</div>
+    <div class="${hl===2?'on':''}">${ico('coin')}資産</div>
+    <div style="position:relative;">${ico('bell')}お知らせ<span style="position:absolute; top:4px; right:26%; width:7px; height:7px; border-radius:50%; background:#E01515;"></span></div>
+    <div>${ico('sq')}メニュー</div></div>`;
+  const head = ()=>sbarHTML()+`<div class="aphead"><span style="width:30px;"></span><span style="font-size:16px; letter-spacing:.02em;">マネックス証券</span><span class="mypg"><span class="bx">${ico('user')}</span>MYPAGE</span></div>`;
 
   if(i===0) return `<div class="sbar" style="background:#8fa6c6; color:#fff;"><b>9:41</b><span class="sright"><span class="sig"><i></i><i></i><i></i><i></i></span><span style="font-size:10px; font-weight:600;">5G</span><span class="batt"></span></span></div>
     <div class="apbody" style="background:linear-gradient(165deg,#a8bcd8,#dde5ef);">
       <p style="padding:16px 18px 0; font-size:12px; color:#2c3038;">マネックスのアプリ、どれを開けばいい?</p>
       <div class="appgrid">
-        <div class="appicon tap" onclick="simNext()"><div class="ic" style="background:#00305e;">マネックス<br>証券</div>マネックス証券<br>(総合)</div>
-        <div class="appicon" onclick="simWarnTrader()"><div class="ic" style="background:#28517e;">トレーダー<br>株式</div>マネックス<br>トレーダー</div>
-        <div class="appicon" onclick="simWarnUS()"><div class="ic" style="background:#3a6ea5;">米国株</div>マネックス証券<br>米国株</div>
+        <div class="appicon tap" onclick="simNext()"><div class="ic" style="background:#FFC81A; color:#111;">マネックス<br>証券</div>総合(これ!)</div>
+        <div class="appicon" onclick="simWarnTrader()"><div class="ic" style="background:#2b2b2e; color:#fff;">トレーダー<br>株式</div>上級者向け</div>
+        <div class="appicon" onclick="simWarnUS()"><div class="ic" style="background:#1c3f6e; color:#fff;">米国株</div>米国株専用</div>
       </div>
-      <p style="padding:0 18px; font-size:11px; color:#4c525a;">国内株の注文は総合アプリ「マネックス証券アプリ」でできます。</p>
+      <p style="padding:0 18px; font-size:11px; color:#4c525a;">国内株の注文は黄色い総合アプリ「マネックス証券アプリ」でできます。</p>
     </div>`;
 
-  if(i===1) return head('マーケット') + `<div class="apbody" style="background:#f4f5f7;">
-      <div class="assetcard"><small>お預り資産合計</small><div class="v">100,000<span style="font-size:12px;"> 円</span></div><small>前日比 ±0円</small></div>
-      <div class="searchbar tap" style="margin:0 12px 10px; background:#fff; border:1px solid #d5d9df;" onclick="simNext()">${ico('search')}企業名、証券コードを入力して検索</div>
-      <div class="seg" style="background:#fff; margin:0;"><div class="on">国内株式</div><div>米国株式</div><div>投資信託</div><div>指数</div></div>
-      <div style="background:#fff;">
-        <div class="orow"><span class="ol" style="width:auto;">日経平均</span><span class="oc ov" style="color:#d13030;">39,876.54 <small style="color:#d13030;">+180.24</small></span></div>
-        <div class="orow"><span class="ol" style="width:auto;">TOPIX</span><span class="oc ov" style="color:#d13030;">2,845.12 <small style="color:#d13030;">+12.08</small></span></div>
-        <div class="orow"><span class="ol" style="width:auto;">ドル/円</span><span class="oc ov">151.23 <small>-0.12</small></span></div>
+  if(i===1) return head() + `<div class="apbody" style="background:#fff;">
+      <div class="mx-chips"><div>保有残高</div><div>建玉</div><div>注文照会</div><div>入出金</div></div>
+      <div class="mx-search"><span class="in tap" onclick="simNext()">銘柄/証券コード</span><span class="bt">注 文</span></div>
+      <div class="mx-info"><span class="imp">【重要】</span>システムメンテナンスのお知らせ(練習用サンプル)<br>ⓘ 最終ログイン:2026/08/07 09:41</div>
+      <div style="padding:4px 14px; font-size:13px; font-weight:800;">お客様へのご連絡 <span style="font-weight:400; font-size:11px; color:#0064C8;">[メッセージボード]</span></div>
+      <div style="padding:2px 14px; font-size:12px; color:#555;">新着メッセージはありません</div>
+    </div>` + tabbar(0);
+
+  if(i===2) return head() + `<div class="apbody" style="background:#fff;">
+      <div class="mx-crumbs"><a href="#" onclick="return false;">MY PAGE</a> &gt; 株式銘柄検索</div>
+      <div class="mx-search"><span class="in" style="color:#111;">サンプル食品</span><span class="bt">検 索</span></div>
+      <div class="mx-itable">
+        <div class="r"><div class="l" style="width:auto; flex:1; background:#fff; font-weight:400;">
+          <a href="#" onclick="return false;" style="color:#0064C8; font-weight:700;">[0000] サンプル食品</a><br>
+          <span style="font-size:11px; color:#666;">東証P 1,234円 <span style="color:#B22222;">+12(+0.98%)</span></span>
+        </div><div class="v" style="flex:0 0 auto;"><span class="bt tap" style="background:#4A4A4A; color:#fff; padding:8px 14px; font-size:12px; font-weight:700; cursor:pointer;" onclick="simNext()">注 文</span></div></div>
       </div>
     </div>` + tabbar(0);
 
-  if(i===2) return head('銘柄検索') + `<div class="apbody" style="background:#f4f5f7;">
-      <div class="searchbar" style="margin:10px 12px; background:#fff; border:1px solid #d5d9df; color:#1c1e22;">${ico('search')}サンプル食品</div>
-      <div style="margin:0 12px; background:#fff; border:1px solid #d5d9df; padding:12px 14px; display:flex; justify-content:space-between; align-items:center;">
-        <div><div style="font-size:10.5px; color:#767b83;">0000 東証プライム</div>
-          <div style="font-weight:800; font-size:14px;">サンプル食品</div>
-          <div style="font-size:16px; font-weight:700; font-family:'Helvetica Neue',Arial,sans-serif;">1,234円 <span style="font-size:11px; color:#d13030;">+12 (+0.98%)</span></div></div>
-        <button class="hbtn tap" style="background:#e35205;" onclick="simNext()">注文</button>
+  if(i===3) return head() + `<div class="apbody" style="background:#fff;">
+      <div class="mx-chips"><div>保有残高</div><div>建玉</div><div>注文照会</div><div>入出金</div></div>
+      <div class="mx-crumbs"><a href="#" onclick="return false;">MY PAGE</a> &gt; <a href="#" onclick="return false;">株式</a> &gt; 買注文</div>
+      <div class="mx-h1">スタンダード注文 買い注文</div>
+      <div class="mx-steps"><div class="st on"><i></i>注文情報<br>入力</div><div class="st"><i></i>確認</div><div class="st"><i></i>完了</div></div>
+      <div class="mx-itable">
+        <div class="r"><div class="l">買付可能額 <span class="mx-pink qmark" style="background:#555;">?</span></div><div class="v"><span>1,000,000 円</span><a href="#" onclick="return false;">入金する</a></div></div>
+        <div class="r"><div class="l">残りのNISA枠<br>(2026年)</div><div class="v"><span>2,400,000 円</span></div></div>
       </div>
+      <div style="padding:2px 14px; font-size:11.5px; color:#333;">ご注文は標準でSOR注文となります。SOR注文前に必ず画面下部のご注意をご確認ください。</div>
+      <div class="mx-ordtabs"><div class="on">スタンダ<br>ード注文</div><div onclick="simWarnCond()">条件付注文</div><div onclick="simWarnCond()">リバース注<br>文</div><div onclick="simWarnOne()">ワン株注文</div></div>
+      <div style="padding:8px 14px 0; font-size:12.5px;"><a href="#" onclick="return false;" style="color:#0064C8; font-weight:700;">[0000] サンプル食品</a> <span style="font-size:11px;">[SOR対象銘柄]</span></div>
+      <div class="mx-2tabs"><div class="on">注文入力</div><div class="off">株価</div></div>
+      <div class="mx-pink">
+        <div class="flabel">市場 <span class="qmark">?</span></div>
+        <span class="mx-sel">東証 <span class="sp">▲<br>▼</span></span>
+        <span class="mx-sorchk"><span class="cb">✓</span>SOR</span>
+        <div class="mx-refnote">※ 主市場は東証<br>参考:<a href="#" onclick="simWarnSOR(); return false;">SOR注文とは</a></div>
+        <div class="flabel">株数</div>
+        <span class="mx-stepq"><button onclick="qtyChange(100)">＋</button><span class="v">${sim.qty}</span><button onclick="qtyChange(-100)">−</button></span> 株
+        <div class="mx-refnote">(単位:100株)</div>
+        <div class="flabel">価格</div>
+        <span class="mx-radio ${sim.otype==='nariyuki'?'on':''} ${sim.otype?'':'tap'}" onclick="setOtype('nariyuki')"><i></i>成行</span>
+        <span class="mx-radio ${sim.otype==='sashine'?'on':''}" onclick="setOtype('sashine')"><i></i>指値</span>
+        ${sim.otype==='sashine'?`<div style="margin-top:6px;"><span class="mx-stepq"><button>＋</button><span class="v">1,230</span><button>−</button></span> 円</div>`:''}
+        <div class="mx-refnote">[制限値幅:934円〜1,534円]<br>参考:<a href="#" onclick="return false;">成行・指値とは</a></div>
+        <div class="flabel">有効期限</div>
+        <span class="mx-sel">当日中 <span class="sp">▲<br>▼</span></span>
+        <div class="flabel">執行条件 <span class="qmark">?</span></div>
+        <span class="mx-sel">なし <span class="sp">▲<br>▼</span></span>
+        <div class="flabel">口座区分 <span class="qmark">?</span></div>
+        <span class="mx-radio ${sim.kubun==='特定'?'on':''} ${sim.otype&&!sim.kubun?'tap':''}" onclick="setKubun('特定')"><i></i>特定</span>
+        <span class="mx-radio ${sim.kubun==='一般'?'on':''}" onclick="setKubun('一般')"><i></i>一般</span>
+        <span class="mx-radio ${sim.kubun==='NISA'?'on':''}" onclick="setKubun('NISA')"><i></i>NISA</span>
+      </div>
+      <button class="mx-green ${sim.otype&&sim.kubun?'tap':''}" onclick="confirmStep()" style="margin-bottom:16px;">次へ(注文内容確認)</button>
     </div>` + tabbar(0);
 
-  if(i===3) return head('注文') + `<div class="apbody">
-      <div class="stockhead"><div class="code">0000 東証プライム</div><div class="nm">サンプル食品</div></div>
-      <div class="menuovl"><div class="menusheet" style="--bb:#e35205;">
-        <div class="grip"></div>
-        <h5>注文方法を選択</h5>
-        <button class="buy tap" onclick="simNext()">スタンダード注文(買)</button>
-        <button onclick="simWarnSell()">スタンダード注文(売)</button>
-        <button onclick="simWarnTrader()">ツールで注文<small>マネックストレーダー</small></button>
-      </div></div>
-    </div>`;
-
-  if(i===4) return head('買い注文') + `<div class="apbody webish">
-      <div class="whead">国内株式 注文入力(現物買付)</div>
-      <div class="crumbs">ホーム &gt; 国内株式 &gt; 注文入力</div>
-      <div class="wtable">
-        <div class="wr"><div class="wl">銘柄</div><div class="wv"><b>サンプル食品(0000)</b><br><span style="font-size:11px; color:#767b83;">現在値 1,234円(15:00)</span></div></div>
-        <div class="wr"><div class="wl">株数</div><div class="wv"><span class="qty" style="background:#fff;"><button onclick="qtyChange(-100)">−</button><span class="qv">${sim.qty.toLocaleString()}</span><button onclick="qtyChange(100)">+</button></span> 株<br><span style="font-size:10.5px; color:#767b83;">単元株数:100株</span></div></div>
-        <div class="wr"><div class="wl">価格</div><div class="wv">
-          <span class="wlabel ${sim.otype?'':'tap'}" onclick="setOtype('nariyuki')"><span class="radio ${sim.otype==='nariyuki'?'on':''}"></span>成行</span>
-          <span class="wlabel" onclick="setOtype('sashine')"><span class="radio ${sim.otype==='sashine'?'on':''}"></span>指値</span>
-          <span class="limitrow ${sim.otype==='sashine'?'show':''}" style="margin-top:6px;"><input value="1,230" readonly style="background:#fff;"> 円</span></div></div>
-        <div class="wr"><div class="wl">口座区分</div><div class="wv">
-          <span class="wlabel ${sim.kubun?'':'tap'}" onclick="setKubun('特定')"><span class="radio ${sim.kubun==='特定'?'on':''}"></span>特定</span>
-          <span class="wlabel" onclick="setKubun('NISA')"><span class="radio ${sim.kubun==='NISA'?'on':''}"></span>NISA(成長投資枠)</span></div></div>
-        <div class="wr"><div class="wl">有効期間</div><div class="wv">当日</div></div>
+  if(i===4) return head() + `<div class="apbody" style="background:#fff;">
+      <div class="mx-crumbs"><a href="#" onclick="return false;">MY PAGE</a> &gt; <a href="#" onclick="return false;">株式</a> &gt; 買注文 &gt; 確認</div>
+      <div class="mx-h1" style="font-size:16px;">スタンダード注文 買い注文 内容確認</div>
+      <div class="mx-steps"><div class="st"><i></i>注文情報<br>入力</div><div class="st on"><i></i>確認</div><div class="st"><i></i>完了</div></div>
+      ${sim.otype==='nariyuki'?`<div class="mx-warn"><span class="ex">(!)</span> 価格を「<span class="ex">成行</span>」で発注する際は、想定より高い価格で約定する場合があります。ご注意ください。</div>`:''}
+      <div style="padding:2px 14px; font-size:12.5px;"><a href="#" onclick="return false;" style="color:#0064C8; font-weight:700;">[0000] サンプル食品</a> <span style="font-size:11px;">[SOR対象銘柄]</span></div>
+      <div class="mx-ctable">
+        <div class="r"><div class="l">口座区分</div><div class="v">${sim.kubun}</div></div>
+        <div class="r"><div class="l">市場</div><div class="v">東証(SOR)</div></div>
+        <div class="r"><div class="l">取引区分</div><div class="v">現物 買</div></div>
+        <div class="r"><div class="l">株数</div><div class="v">${sim.qty}株</div></div>
+        <div class="r"><div class="l">価格</div><div class="v">${otypeLabel()}</div></div>
+        <div class="r"><div class="l">有効期間</div><div class="v">当日</div></div>
+        <div class="r"><div class="l">概算約定代金</div><div class="v"><b>${estAmt()}</b></div></div>
+        <div class="r"><div class="l">取引<br>パスワード</div><div class="v" style="text-align:left;"><input class="mx-pw" value="●●●●●●" readonly><br><span style="font-size:10.5px; color:#666;">※ログインパスワードとは別です</span></div></div>
       </div>
-      <button class="gonext ${sim.otype&&sim.kubun?'tap':''}" style="--bb:#e35205;" onclick="confirmStep()">次へ(注文内容確認)</button>
-    </div>`;
+      <button class="mx-green tap" onclick="simNext()" style="margin-bottom:16px;">実行する</button>
+    </div>` + tabbar(0);
 
-  if(i===5) return head('注文内容確認') + `<div class="apbody webish">
-      <div class="whead">国内株式 注文内容確認</div>
-      <div class="crumbs">ホーム &gt; 国内株式 &gt; 注文入力 &gt; 確認</div>
-      <div class="wtable">
-        <div class="wr"><div class="wl">銘柄</div><div class="wv"><b>サンプル食品(0000)</b></div></div>
-        <div class="wr"><div class="wl">売買</div><div class="wv" style="color:#c0392b; font-weight:700;">買付</div></div>
-        <div class="wr"><div class="wl">株数</div><div class="wv">${sim.qty.toLocaleString()}株</div></div>
-        <div class="wr"><div class="wl">価格</div><div class="wv">${otypeLabel()}</div></div>
-        <div class="wr"><div class="wl">口座区分</div><div class="wv">${sim.kubun}</div></div>
-        <div class="wr"><div class="wl">概算金額</div><div class="wv"><b>${estAmt()}</b></div></div>
-        <div class="wr"><div class="wl">取引<br>パスワード</div><div class="wv"><input class="pwin" style="width:150px; background:#fff;" value="●●●●●●" readonly><br><span style="font-size:10.5px; color:#767b83;">ログインパスワードとは別です</span></div></div>
+  return head() + `<div class="apbody" style="background:#fff;">
+      <div class="mx-h1" style="font-size:16px;">スタンダード注文 買い注文 受付完了</div>
+      <div class="mx-steps"><div class="st"><i></i>注文情報<br>入力</div><div class="st"><i></i>確認</div><div class="st on"><i></i>完了</div></div>
+      <div style="padding:12px 14px 4px; text-align:center; font-size:14px; font-weight:700;">ご注文を受け付けました。</div>
+      <div style="text-align:center; font-size:11.5px; color:#666;">注文番号:12345678 受付:2026/08/07 15:01</div>
+      <div class="mx-graybox">ご注文内容は、[注文約定一覧]で必ずご確認ください。<button class="mx-goldbtn" onclick="return false;">注文約定一覧</button></div>
+      <div class="mx-ctable">
+        <div class="r"><div class="l" style="width:auto; flex:1; background:#fff;"><a href="#" onclick="return false;" style="color:#0064C8;">サンプル食品</a> <span style="font-size:11px; font-weight:400;">0000 東証(SOR)</span></div></div>
+        <div class="r"><div class="l">取引区分</div><div class="v">現物 買 ${sim.qty}株 / ${otypeLabel()}</div></div>
+        <div class="r"><div class="l">状態</div><div class="v" style="color:#0064C8; font-weight:700;">約定済</div></div>
       </div>
-      <button class="gonext tap" style="--bb:#e35205;" onclick="simNext()">実行する</button>
-    </div>`;
-
-  return head('注文約定一覧') + `<div class="apbody"><div class="done">
-      <div class="okmark"><svg class="i" viewBox="0 0 24 24">${ICON.check}</svg></div>
-      <h4>ご注文を受け付けました</h4>
-      <p>サンプル食品 買付 ${sim.qty}株 / ${otypeLabel()}</p>
-      <div class="yakujo"><div class="yh">注文約定一覧</div>
-        <div class="yr"><span>サンプル食品 / 買付 / ${sim.qty}株</span><span class="st">約定済</span></div></div>
-      <button class="gonext" style="--bb:#00305e;" onclick="exitSim()">ほかのアプリでも練習する</button>
-    </div></div>` + tabbar(2);
+      <button class="exitbtn" style="color:#333; border-color:#bbb;" onclick="exitSim()">ほかのアプリでも練習する</button>
+    </div>` + tabbar(0);
 }
 
 /* ---- 進行制御 ---- */
 function startSim(broker){
-  sim = {broker, i:0, qty:100, otype:null, kubun:null};
+  sim = {broker, i:0, qty:100, otype:null, kubun:null, sheet:false};
   document.getElementById('brokerChooser').style.display='none';
   document.getElementById('simArea').style.display='block';
   document.getElementById('phoneBox').className = 'phone ' + SIMS[broker].cls;
@@ -1097,20 +1278,31 @@ function setOtype(t){ sim.otype = t; renderSim(); }
 function setKubun(k){
   sim.kubun = k; renderSim();
   if(k==='一般') toastGuide('「一般」も選べますが、特定口座があるなら「特定」が基本です');
-  if(k.indexOf('NISA')===0) toastGuide('NISA枠で買うときはこれ。非課税で買えます(枠の上限に注意)');
+  if(k==='NISA') toastGuide('NISA枠で買うときはこれ。非課税で買えます(枠の上限に注意)');
 }
 function confirmStep(){
   if(!sim.otype){ toastGuide('先に価格(「成行」か「指値」)を選んでください'); return; }
   if(!sim.kubun){ toastGuide('預り区分/口座区分(まずは「特定」)を選んでください'); return; }
   simNext();
 }
+function sbiBack(){ sim.i = 2; renderSim(); }
+function sbiBackToForm(){ sim.i = 4; renderSim(); }
+function ispSheet(){ sim.sheet = true; renderSim(); }
+function ispSheetClose(){ sim.sheet = false; renderSim(); }
+function ispPick(k){ sim.sheet = false; setKubun(k); }
 function simWarnSell(){ toastGuide('いまは「買う」練習です。株をまだ持っていないので売りは出せません'); }
 function simWarnShinyo(){ toastGuide('「信用」はお金を借りて取引する上級者向け。初心者は触らなくて大丈夫です'); }
 function simWarnSpeed(){ toastGuide('「スピード注文」はデイトレ向けの高速発注。慣れてからで大丈夫です'); }
 function simWarnPro(){ toastGuide('「プロ」は逆指値やアルゴ注文などの上級者モード。今は「シンプル」のままで'); }
+function simWarnMini(){ toastGuide('「かぶミニ」は1株から買える単元未満株モード。少額で始めたくなったらここ'); }
 function simWarnGyaku(){ toastGuide('「逆指値」は損切り用の上級者向け注文。最初は成行か指値で大丈夫です'); }
 function simWarnTrader(){ toastGuide('「マネックストレーダー」は板発注などの上級者向け。最初は総合アプリで'); }
 function simWarnUS(){ toastGuide('それは米国株専用アプリです。日本株は総合アプリ「マネックス証券アプリ」で'); }
+function simWarnSOR(){ toastGuide('SOR=複数の市場から最も有利な価格を自動で探す仕組み。そのままでOK'); }
+function simWarnSkabu(){ toastGuide('S株=1株から買える単元未満株。今日は100株の練習なのでOFFのままで'); }
+function simWarnOCO(){ toastGuide('OCO/IFDは条件付きの上級者向け注文。最初は「通常」のままで大丈夫です'); }
+function simWarnCond(){ toastGuide('執行条件・期間はデフォルトのままで大丈夫。慣れたら使い分けましょう'); }
+function simWarnOne(){ toastGuide('「ワン株」=1株から買える単元未満株。少額で始めたくなったらここ'); }
 function toastGuide(msg){
   const gb = document.getElementById('guideBox');
   gb.classList.add('warn');
