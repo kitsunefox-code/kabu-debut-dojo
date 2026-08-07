@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://kusayakyu-navi.com/kabu-debut-dojo/sitemap.xml
+Sitemap: https://kabudebut.com/sitemap.xml
