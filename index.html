@@ -690,6 +690,7 @@
 
     <div class="card">
       <h2>練習が済んだら、本番の口座開設へ</h2>
+      <div class="note" style="margin-top:0;"><span class="notetag">PR</span>この項目には広告(アフィリエイトプログラム)を利用したリンクが含まれます。[PR]と表示されたリンクが該当します。掲載順は当サイトの判断によるもので、報酬額の多寡で順位を決めてはいません。</div>
       <p class="muted">口座開設はどこも無料です。開設だけして入金しなければ、費用は一切かかりません。</p>
       <div id="ctaCompare"></div>
     </div>
@@ -934,6 +935,11 @@
    単価目安(2026年8月調査・要確認): マネックス約3,000円 > 松井約1,000円 > 楽天約500円 > SBI約300円
    ===================================================================== */
 const AFF = {
+  // pr:true = アフィリエイトリンク(提携承認済み)。[PR]表記が自動で付く
+  matsui: {name:'松井証券', pr:true,
+           url:'https://px.a8.net/svt/ejp?a8mat=4BA05C+MMIJE+3XCC+5YRHE',
+           pixel:'https://www12.a8.net/0.gif?a8mat=4BA05C+MMIJE+3XCC+5YRHE'},
+  // pr:false = 提携前のため通常の公式リンク。承認され次第 url を差し替えて pr:true にする
   sbi:    {name:'SBI証券',       url:'https://www.sbisec.co.jp/',      pr:false},
   ispeed: {name:'楽天証券',      url:'https://www.rakuten-sec.co.jp/', pr:false},
   monex:  {name:'マネックス証券', url:'https://www.monex.co.jp/',      pr:false},
@@ -943,9 +949,10 @@ const AFF = {
 };
 function ctaHTML(key, lead){
   const a = AFF[key];
+  const px = a.pixel ? `<img src="${a.pixel}" width="1" height="1" alt="" style="border:0;">` : '';
   return `<div class="cta"><p>${lead||'練習した流れのまま、本番へ。'}</p>
-    <a href="${a.url}" target="_blank" rel="noopener nofollow">${a.pr?'[PR] ':''}${a.name}の口座開設(公式サイト)へ</a>
-    <small>口座開設は無料です。手数料・サービス内容は必ず公式サイトで最新情報をご確認ください。投資にはリスクがあります。</small></div>`;
+    <a href="${a.url}" target="_blank" rel="noopener nofollow sponsored">${a.pr?'[PR] ':''}${a.name}の口座開設(公式サイト)へ</a>${px}
+    <small>${a.pr?'この広告はアフィリエイトプログラムを利用しています。':''}口座開設は無料です。手数料・サービス内容は必ず公式サイトで最新情報をご確認ください。投資にはリスクがあります。</small></div>`;
 }
 
 /* ===== SVGアイコン ===== */
@@ -1058,6 +1065,7 @@ document.querySelectorAll('nav.tabs button, a.jump').forEach(el=>{
   el.addEventListener('click', ()=>showPage(el.dataset.page));
 });
 document.getElementById('ctaCompare').innerHTML =
+  ctaHTML('matsui','松井証券 — 電話サポートに定評。困ったとき人に聞ける安心感がほしい人へ') +
   ctaHTML('sbi','SBI証券 — 迷ったらの定番。口座数最大級') +
   ctaHTML('ispeed','楽天証券 — 楽天ポイント派はこちら') +
   ctaHTML('monex','マネックス証券 — 米国株・dポイント派はこちら');
