@@ -60,6 +60,10 @@
     background:var(--bg); color:var(--ink); line-height:1.8; font-size:var(--fs-base);
   }
   .hero h1, .card h2{letter-spacing:.02em;}
+  /* 価格・数量は欧文の等幅数字で揃える。桁がガタつくと見間違いの原因になる */
+  .num, .scr-row .dt b, .cmp td b{
+    font-family:var(--num); font-variant-numeric:tabular-nums; letter-spacing:0;
+  }
   /* 見出しは明朝。本文ゴシックとのペアリングで「組んだ」顔にする */
   .hero h1, .card h2, .logotype b, .dojonav .dn-title{
     font-family:var(--mincho); font-weight:600; letter-spacing:.06em;
