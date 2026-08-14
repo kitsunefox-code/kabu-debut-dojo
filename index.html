@@ -79,6 +79,22 @@
   ol.threestep p{font-size:13px; color:var(--sub);}
   ol.threestep a.jump{display:inline-block; margin-top:6px; font-size:13px; color:var(--navy); font-weight:700; cursor:pointer; text-decoration:underline; text-underline-offset:3px;}
 
+  /* ---------- 道場ナビ(進捗に応じた次の一歩) ---------- */
+  .dojonav{border-top:3px solid var(--navy);}
+  .dojonav .dn-label{font-size:11px; font-weight:800; letter-spacing:.16em; color:var(--navy);}
+  .dojonav .dn-title{font-size:20px; font-weight:800; margin:6px 0 6px; line-height:1.5;}
+  .dojonav .dn-why{font-size:13.5px; color:#3c4046; margin-bottom:14px;}
+  .dojonav .dn-go{display:inline-block; background:var(--navy); color:#fff; padding:13px 30px;
+    font-size:15px; font-weight:800; text-decoration:none; border:none; cursor:pointer; font-family:inherit;}
+  .dojonav .dn-skip{display:inline-block; margin-left:16px; font-size:13px; color:var(--sub);
+    cursor:pointer; text-decoration:underline; text-underline-offset:3px;}
+  .dn-steps{display:flex; flex-wrap:wrap; gap:6px; margin-top:18px; padding-top:14px; border-top:1px solid var(--line);}
+  .dn-steps span{font-size:11.5px; padding:4px 10px; border:1px solid var(--line); color:var(--sub); background:#fafaf8;}
+  .dn-steps span.done{border-color:var(--navy); background:var(--navy); color:#fff; font-weight:700;}
+  .dn-steps span.now{border-color:var(--navy); color:var(--navy); font-weight:700; background:#fff;}
+  .dn-bar{height:5px; background:var(--line); margin-top:12px;}
+  .dn-bar i{display:block; height:100%; background:var(--navy);}
+
   .badges{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;}
   .badge{border:1px solid var(--line); padding:6px 14px; font-size:12.5px; color:var(--sub); background:#fafaf8;}
   .badge.earned{border-color:var(--navy); background:var(--navy); color:#fff; font-weight:700;}
@@ -539,6 +555,12 @@
   .simfoot h4{font-size:12px; font-weight:800; letter-spacing:.1em; color:var(--navy); margin-bottom:6px;}
   .simfoot .card div.lbody{font-size:13px; color:#2c3542;}
   .backlink{display:inline-block; margin-top:12px; color:var(--sub); font-weight:600; cursor:pointer; text-decoration:underline; text-underline-offset:3px; font-size:13px;}
+  .nextstep{margin-top:16px; border:1px solid var(--line); border-top:3px solid var(--navy); padding:16px; background:#fafaf8;}
+  .nextstep .ns-label{font-size:10.5px; font-weight:800; letter-spacing:.16em; color:var(--navy);}
+  .nextstep .ns-title{font-size:15px; font-weight:800; margin:5px 0 12px; line-height:1.6;}
+  .nextstep .ns-go{background:var(--navy); color:#fff; border:none; padding:11px 24px; font-size:14px;
+    font-weight:800; cursor:pointer; font-family:inherit;}
+
   .cta{margin-top:16px; border:1px solid var(--line); border-top:3px solid var(--red); padding:16px; background:#fff;}
   .cta p{font-size:13.5px; font-weight:700;}
   .cta a{display:block; text-align:center; margin-top:12px; background:var(--red); color:#fff; padding:13px; font-size:14.5px; font-weight:800; text-decoration:none;}
@@ -582,6 +604,8 @@
     <p>証券アプリの「注文画面」は、初心者向けにできていません。このサイトでは、SBI証券・楽天証券(iSPEED)・マネックス証券の実際の画面遷移を再現した練習モードで、口座開設から最初の買い注文までを本番前に予習できます。FXの練習モードと、仮想資金100万円で売買を試せるデモトレードも用意しました。</p>
   </div></div>
   <div class="wrap">
+    <div class="card dojonav" id="dojoNav"></div>
+
     <div class="card">
       <h2>株を始める手順は3つだけ</h2>
       <p class="muted">「難しそう」の正体は、手続きの画面を見たことがないだけです。一度ここで練習しておけば、本番はただの答え合わせになります。</p>
@@ -765,6 +789,9 @@
     <div class="card" id="brokerChooser">
       <h2>はじめての注文シミュレーター</h2>
       <p class="muted">架空の銘柄「サンプル食品(0000)」を100株、実際のアプリの画面構成・配色・ボタン名を再現した練習画面で買ってみます。自分が口座を持っている(持つ予定の)証券会社を選んでください。</p>
+      <p class="muted" style="margin-top:6px;">分からない言葉が出てきたら
+        <a href="#" onclick="showPage('gloss'); return false;" style="color:var(--navy); font-weight:700;">用語辞典</a>
+        で引けます(成行・指値・預り区分・取引パスワードなど20語)。</p>
       <div class="brokerpick">
         <button style="--bp:#0d5eae;" onclick="startSim('sbi')"><h3>SBI証券「株アプリ」</h3><p>黒に近い紺のダーク画面。「取引」→「現物買」→「確認」→「発注」の流れを再現。</p><span class="go">練習をはじめる →</span></button>
         <button style="--bp:#bf0000;" onclick="startSim('ispeed')"><h3>楽天証券「iSPEED」</h3><p>黒基調+赤ヘッダーのシンプル注文。「確認画面へ」→「取引暗証番号」→「注文する」を再現。</p><span class="go">練習をはじめる →</span></button>
@@ -867,6 +894,11 @@
     <div class="card">
       <h2>これだけ用語辞典</h2>
       <p class="muted">注文画面に出てくる用語だけを厳選。すべて練習モードの中に登場します。</p>
+      <div class="note"><span class="notetag">使い方</span>読んで覚えるより、<b>実際の画面で出てきたときに引く</b>ほうが早く身につきます。
+        <a href="#" onclick="showPage('order'); return false;" style="color:var(--navy); font-weight:700;">株の注文練習</a>／
+        <a href="#" onclick="showPage('fx'); return false;" style="color:var(--navy); font-weight:700;">FXの練習</a>／
+        <a href="#" onclick="showPage('demo'); return false;" style="color:var(--navy); font-weight:700;">デモトレード</a>
+        を開きながら読んでください。</div>
       <dl class="gloss">
         <dt>現物(げんぶつ)取引<span class="pill">超重要</span></dt><dd>自分のお金の範囲で株を買う、いちばん普通の取引。初心者はこれ一択。「信用取引」はお金を借りて取引する上級者向けで、当面ボタンを押す必要はありません。</dd>
         <dt>成行(なりゆき)注文<span class="pill">超重要</span></dt><dd>「値段はいくらでもいいから今すぐ買う」注文。ほぼ確実にすぐ成立しますが、想定よりやや高く買えてしまうこともあります。</dd>
@@ -1079,16 +1111,90 @@ const BADGES = [
   {id:'sbi',    label:'SBI 株アプリ'},
   {id:'ispeed', label:'楽天 iSPEED'},
   {id:'monex',  label:'マネックス'},
+  {id:'demo',   label:'デモトレード'},
   {id:'fxneo',  label:'FXネオ'},
   {id:'dmmfx',  label:'DMM FX'},
 ];
+
+/* ===== 道場ナビ:進捗に応じて「次の一歩」を1つだけ出す ===== */
+const CURRICULUM = [
+  { key:'kaisetsu', chip:'口座開設',
+    done: b => b.kaisetsu,
+    title:'まずは口座開設の流れを予習する',
+    why:'申込みの途中で「特定口座」「NISA」の選択が出てきて、ほぼ全員がここで手を止めます。5分の予習で、本番は迷わず進めます。',
+    go:'showPage(\'kaisetsu\')', label:'口座開設の練習をはじめる' },
+
+  { key:'stock', chip:'株の注文',
+    done: b => b.sbi || b.ispeed || b.monex,
+    title:'自分の証券会社のアプリで、買い注文を練習する',
+    why:'口座ができてもアプリの注文画面で挫折する人がとても多い場所です。SBI・楽天iSPEED・マネックスの実際の画面構成を再現してあります。',
+    go:'showPage(\'order\')', label:'株の注文を練習する' },
+
+  { key:'demo', chip:'デモ',
+    done: b => b.demo,
+    title:'デモトレードで、値動きの中で判断してみる',
+    why:'操作を覚えたら次は「上がるか下がるか分からない状態で決める」練習です。仮想資金100万円なので、失敗しても痛くありません。',
+    go:'showPage(\'demo\')', label:'デモトレードを試す' },
+
+  { key:'fx', chip:'FX',
+    done: b => b.fxneo || b.dmmfx,
+    title:'FXの仕組みを、実際の画面で確かめる',
+    why:'FXは株と別物です。レバレッジ・証拠金維持率・ロスカットを、お金を賭ける前に画面で理解しておきましょう。興味がなければ飛ばして構いません。',
+    go:'showPage(\'fx\')', label:'FXの練習を見る' },
+
+  { key:'real', chip:'本番へ',
+    done: () => false,
+    title:'ひととおり終わりました。あとは本番だけです',
+    why:'ここまで練習した人が本番でつまずく要素は、ほぼ残っていません。証券会社を選んで、口座開設に進みましょう。',
+    go:'showPage(\'compare\')', label:'証券会社を選ぶ' },
+];
+
+// スキップはバッジと別管理(練習していないものを「練習した」と記録しないため)
+function getSkips(){ try{return JSON.parse(localStorage.getItem('kabudojo_skips'))||{};}catch(e){return {};} }
+function dojoSkip(key){
+  const s = getSkips(); s[key] = true;
+  localStorage.setItem('kabudojo_skips', JSON.stringify(s));
+  renderDojoNav();
+}
+function renderDojoNav(){
+  const el = document.getElementById('dojoNav');
+  if(!el) return;
+  const b = getBadges(), sk = getSkips();
+  const state = s => s.done(b) ? 'done' : (sk[s.key] ? 'skip' : 'todo');
+  const idx = CURRICULUM.findIndex(s => state(s) === 'todo');
+  const cur = CURRICULUM[idx < 0 ? CURRICULUM.length-1 : idx];
+  const doneCount = CURRICULUM.filter(s => s.done(b)).length;
+  const total = CURRICULUM.length - 1; // 「本番へ」は達成対象外
+  const pct = Math.round(Math.min(doneCount, total) / total * 100);
+
+  const chips = CURRICULUM.map(s => {
+    const st = state(s);
+    const cls = st === 'done' ? 'done' : (s.key === cur.key ? 'now' : '');
+    const mark = st === 'done' ? '✓ ' : (st === 'skip' ? '— ' : '');
+    return `<span class="${cls}">${mark}${s.chip}</span>`;
+  }).join('');
+
+  el.innerHTML = `
+    <div class="dn-label">${doneCount === 0 ? 'ここからはじめます' : 'つぎの一歩'}</div>
+    <div class="dn-title">${cur.title}</div>
+    <div class="dn-why">${cur.why}</div>
+    <button class="dn-go" onclick="${cur.go}">${cur.label}</button>
+    ${idx >= 0 && idx < CURRICULUM.length-1 ? `<span class="dn-skip" onclick="dojoSkip('${cur.key}')">これは飛ばす</span>` : ''}
+    <div class="dn-bar"><i style="width:${pct}%"></i></div>
+    <div class="dn-steps">${chips}</div>`;
+}
 function getBadges(){ try{return JSON.parse(localStorage.getItem('kabudojo_badges'))||{};}catch(e){return {};} }
 function earnBadge(id){ const b=getBadges(); b[id]=true; localStorage.setItem('kabudojo_badges', JSON.stringify(b)); renderBadges(); }
-function resetBadges(){ localStorage.removeItem('kabudojo_badges'); renderBadges(); }
+function resetBadges(){
+  localStorage.removeItem('kabudojo_badges');
+  localStorage.removeItem('kabudojo_skips');
+  renderBadges();
+}
 function renderBadges(){
   const b=getBadges();
   document.getElementById('badgeBox').innerHTML = BADGES.map(x=>
     `<div class="badge ${b[x.id]?'earned':''}">${x.label}${b[x.id]?' ✓':''}</div>`).join('');
+  renderDojoNav();
 }
 renderBadges();
 
@@ -2042,6 +2148,16 @@ function exitSim(){
 function guideHTML(g){
   return `<span class="gtag">つぎの操作</span>${g.g}` + (g.s?`<div class="gsub">${g.s}</div>`:'');
 }
+// 練習を完走したときに「次にやること」を出す(行き止まりにしない)
+function nextStepHTML(){
+  const b = getBadges(), sk = getSkips();
+  const next = CURRICULUM.find(s => !s.done(b) && !sk[s.key]) || CURRICULUM[CURRICULUM.length-1];
+  return `<div class="nextstep">
+    <div class="ns-label">つぎにおすすめ</div>
+    <div class="ns-title">${next.title}</div>
+    <button class="ns-go" onclick="${next.go}">${next.label}</button>
+  </div>`;
+}
 function renderSim(){
   const S = SIMS[sim.broker];
   const g = S.guides[sim.i];
@@ -2050,6 +2166,7 @@ function renderSim(){
   gb.innerHTML = guideHTML(g);
   let lesson = g.l;
   if(sim.i===S.last){
+    lesson += nextStepHTML();
     const ctaMap = {fx:'gmofx', fxneo:'gmofx', dmmfx:'dmmfx'};
     lesson += ctaHTML(ctaMap[sim.broker] || sim.broker, '練習クリア。この流れのまま、本番へ。');
   }
@@ -2175,6 +2292,7 @@ function demoSell(k){
   h.q -= 100; if(h.q===0) h.avg = 0;
   D.cash += D.px[k]*100;
   demoLog(`${DST[k].n} 100株を売却(実現損益 ${pl>=0?'+':''}${pl.toLocaleString()}円)`);
+  earnBadge('demo'); // 買って売るまで一周したら達成
   demoSave(); renderDemo();
 }
 function demoFxBidAsk(){ return {bid: demoFxRate-0.001, ask: demoFxRate+0.001}; }
@@ -2201,6 +2319,7 @@ function demoFxClose(idx){
   D.cash += pl; D.fxRealized += pl;
   D.fxPos.splice(idx,1);
   demoLog(`USD/JPY ${p.side} ${p.u.toLocaleString()}通貨 を決済(実現損益 ${pl>=0?'+':''}${pl.toLocaleString()}円)`);
+  earnBadge('demo'); // 建てて決済するまで一周したら達成
   demoSave(); renderDemo();
 }
 function demoSparkPts(){
