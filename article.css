@@ -57,6 +57,10 @@ th{background:#f4f4f1; font-size:12.5px; font-weight:700; color:#3c4046;}
 .cta p{font-size:14px; color:#3c4046; margin-bottom:12px;}
 .cta a.btn{display:block; text-align:center; background:var(--navy); color:#fff; padding:14px;
   font-size:15px; font-weight:800; text-decoration:none;}
+.cta a.btn.sub{background:#fff; color:var(--navy); border:1px solid var(--navy); margin-top:10px;}
+
+/* 出典行。本文より一段引いて、根拠の所在だけを示す */
+.src{font-size:12.5px; color:var(--sub); line-height:1.8; margin:-6px 0 18px;}
 
 .related{background:#fff; border:1px solid var(--line); padding:22px 24px; margin:18px auto 0; max-width:760px;}
 .related b{display:block; font-size:13px; letter-spacing:.08em; margin-bottom:10px;}
