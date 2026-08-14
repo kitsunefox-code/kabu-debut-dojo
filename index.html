@@ -10,6 +10,9 @@
 <meta name="theme-color" content="#16181d">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="株デビュー道場">
 <meta property="og:title" content="株デビュー道場|株とFXの注文画面を、本番そっくりに練習">
@@ -37,9 +40,27 @@
   :root{
     --ink:#16181d; --sub:#666c75; --bg:#f7f7f5; --card:#ffffff;
     --line:#dcdee2; --navy:#1b3a68; --red:#c0392b;
+    --fs-xs:12px; --fs-s:14px; --fs-base:16px; --fs-m:20px; --fs-l:24px; --fs-xl:30px;
+    /* 数字専用の欧文書体。株価とレートが主役の画面なので和文と分ける */
+    --num:"DM Sans","Helvetica Neue",Arial,sans-serif;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
-  body{font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic UI",Meiryo,sans-serif; background:var(--bg); color:var(--ink); line-height:1.85; font-size:15px;}
+  body{
+    font-family:"Yu Gothic Medium","游ゴシック Medium",YuGothic,"游ゴシック体",
+                -apple-system,BlinkMacSystemFont,
+                "ヒラギノ角ゴ ProN W3","Hiragino Kaku Gothic ProN",
+                "Noto Sans JP","メイリオ",Meiryo,sans-serif;
+    font-feature-settings:"palt" 1;   /* 約物のアキを詰める（和文組版の基本） */
+    letter-spacing:.05em;
+    line-break:strict;                /* 禁則を厳密に。行頭に句読点を落とさない */
+    overflow-wrap:break-word; word-break:normal;
+    background:var(--bg); color:var(--ink); line-height:1.8; font-size:var(--fs-base);
+  }
+  .hero h1, .card h2{letter-spacing:.02em;}
+  /* 見出しは明朝。本文ゴシックとのペアリングで「組んだ」顔にする */
+  .hero h1, .card h2, .logotype b, .dojonav .dn-title{
+    font-family:var(--mincho); font-weight:600; letter-spacing:.06em;
+  }
   .wrap{max-width:920px; margin:0 auto; padding:0 18px;}
 
   /* ---------- site shell ---------- */
@@ -58,18 +79,46 @@
   section.page{display:none; padding-bottom:72px;}
   section.page.active{display:block;}
 
-  .card{background:var(--card); border:1px solid var(--line); padding:24px 22px; margin-top:20px;}
-  .card h2{font-size:17px; margin-bottom:12px; padding-left:12px; border-left:4px solid var(--navy); line-height:1.5;}
-  .card h3{font-size:14.5px; margin:18px 0 6px;}
+  .card{background:var(--card); border:1px solid var(--line); padding:28px 26px; margin-top:24px;}
+  /* 見出しは幅いっぱいの細罫。左に色棒を立てる型はAI生成デザインの代表的な指紋なので使わない */
+  .card h2{font-size:var(--fs-m); margin:0 0 20px; padding:0 0 12px;
+    border-bottom:1px solid var(--ink); line-height:1.5;}
+  .card h3{font-size:18px; margin:26px 0 6px;}
+
+  /* カードは3系統。全部同じパディングで並べると「作者のいない画面」になる */
+  .card--feature{padding:44px 36px; margin-top:44px;}          /* 主役 */
+  .card--plain{background:transparent; border:none; padding:14px 0 0;
+    margin-top:56px; border-top:2px solid var(--ink);}          /* 読み物。地に落とす */
+  .card--minor{padding:18px 20px; margin-top:14px; background:#fafaf8; border-color:#e6e7ea;}
+  .card--minor h2{font-size:15px; color:var(--sub); border-bottom-color:var(--line);}
+
+  /* 用途別の見出しアイコン。編集側が中身に合わせて選ぶ運用にする */
+  h2[data-ic]{padding-left:38px; position:relative; min-height:30px;}
+  h2[data-ic]::before{content:""; position:absolute; left:0; top:-1px; width:26px; height:26px;
+    background:no-repeat center/contain;}
+  h2[data-ic="kouza"]::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none' stroke='%231b3a68' stroke-width='2'%3E%3Cpath d='M4 12l12-6 12 6M6 12v14h20V12M11 26v-8h4v8M19 18h4v4h-4z'/%3E%3C/svg%3E");}
+  h2[data-ic="chumon"]::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none' stroke='%231b3a68' stroke-width='2'%3E%3Crect x='6' y='3' width='20' height='26' rx='3'/%3E%3Cpath d='M11 11h10M11 16h10M11 21h6'/%3E%3C/svg%3E");}
+  h2[data-ic="chui"]::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none' stroke='%23b8860b' stroke-width='2'%3E%3Cpath d='M16 4L2 28h28L16 4z'/%3E%3Cpath d='M16 13v7' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='24' r='1.4' fill='%23b8860b' stroke='none'/%3E%3C/svg%3E");}
+  h2[data-ic="jitsurei"]::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none' stroke='%231b3a68' stroke-width='2'%3E%3Cpath d='M3 22l7-8 5 5 6-9 8 10'/%3E%3Cpath d='M3 28h26' stroke-linecap='round'/%3E%3C/svg%3E");}
+  h2[data-ic="yougo"]::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none' stroke='%231b3a68' stroke-width='2'%3E%3Ccircle cx='14' cy='14' r='9'/%3E%3Cpath d='M21 21l7 7' stroke-linecap='round'/%3E%3C/svg%3E");}
   .muted{color:var(--sub); font-size:13px;}
   .note{background:#f4f4f1; border:1px solid var(--line); border-left:3px solid var(--ink); padding:12px 14px; font-size:12.5px; margin-top:14px; color:#3c4046;}
   .note b{color:var(--ink);}
   .notetag{display:inline-block; font-size:10.5px; font-weight:800; letter-spacing:.1em; color:#fff; background:var(--ink); padding:1px 8px; margin-right:8px; vertical-align:1px;}
 
   .hero{background:#fff; border-bottom:1px solid var(--line);}
-  .hero .wrap{padding:44px 18px 40px;}
-  .hero h1{font-size:25px; line-height:1.55; letter-spacing:.01em;}
-  .hero p{margin-top:12px; font-size:14px; color:var(--sub); max-width:640px;}
+  .hero .wrap{padding:56px 18px 48px; display:grid; grid-template-columns:1fr 260px;
+    gap:40px; align-items:center;}
+  .hero h1{font-size:var(--fs-xl); line-height:1.55;}
+  .hero p{margin-top:16px; font-size:15px; color:var(--sub); max-width:34em;}
+  .hero-shot{justify-self:center;}
+  @media(max-width:760px){
+    .hero .wrap{grid-template-columns:1fr; gap:28px;}
+    .hero h1{font-size:23px;}
+    .hero-shot{display:none;}
+  }
+  /* 本文の行長を詰める。和文は35〜45字が適正で、現状の56字は長い */
+  .card p, .card li, .card .muted, .card dd{max-width:38em;}
 
   ol.threestep{list-style:none; counter-reset:st; margin-top:6px;}
   ol.threestep li{counter-increment:st; display:flex; gap:16px; padding:16px 2px; border-bottom:1px solid var(--line); align-items:flex-start;}
@@ -79,7 +128,7 @@
   ol.threestep p{font-size:13px; color:var(--sub);}
   ol.threestep a.jump{display:inline-block; margin-top:6px; font-size:13px; color:var(--navy); font-weight:700; cursor:pointer; text-decoration:underline; text-underline-offset:3px;}
 
-  /* ---------- 道場ナビ(進捗に応じた次の一歩) ---------- */
+  /* ---------- 道場ナビ（進捗に応じた次の一歩） ---------- */
   .dojonav{border-top:3px solid var(--navy);}
   .dojonav .dn-label{font-size:11px; font-weight:800; letter-spacing:.16em; color:var(--navy);}
   .dojonav .dn-title{font-size:20px; font-weight:800; margin:6px 0 6px; line-height:1.5;}
@@ -294,7 +343,37 @@
   .t-neo .plus{color:#fff;} .t-neo .minus{color:#eb625d;}
 
   /* ---------- sim shell ---------- */
-  .guide{background:#fff; border:1px solid var(--line); border-left:4px solid var(--navy); padding:12px 16px; margin:18px auto 14px; max-width:430px; font-size:14px;}
+  /* ===== 銘柄の探し方(スクリーニング練習) ===== */
+  .kenricalc{background:#fafaf8; border:1px solid var(--line); padding:16px 18px; margin:12px 0 4px; max-width:38em;}
+  .kc-row{display:flex; align-items:center; gap:12px;}
+  .kc-row label{font-size:14px; font-weight:700;}
+  .kc-row input[type=date]{font-family:inherit; font-size:15px; padding:6px 10px; border:1px solid var(--line); background:#fff;}
+  .kc-out{margin-top:12px; font-size:14.5px; line-height:1.9;}
+  .kc-out b{color:var(--navy);}
+  .scr{display:grid; grid-template-columns:240px 1fr; gap:0; border:1px solid var(--line); margin-top:16px; background:#fff;}
+  @media(max-width:700px){ .scr{grid-template-columns:1fr;} }
+  .scr-panel{border-right:1px solid var(--line); padding:16px;}
+  @media(max-width:700px){ .scr-panel{border-right:none; border-bottom:1px solid var(--line);} }
+  .scr-h{font-size:13px; font-weight:700; color:var(--sub); margin-bottom:12px; letter-spacing:.08em;}
+  .scr-f{margin-bottom:12px;}
+  .scr-f label{display:block; font-size:12.5px; color:var(--sub); margin-bottom:3px;}
+  .scr-f select{width:100%; font-family:inherit; font-size:14px; padding:7px 8px; border:1px solid var(--line); background:#fff;}
+  .scr-reset{font-family:inherit; font-size:13px; padding:7px 14px; background:none; border:1px solid var(--line); cursor:pointer; color:var(--sub); margin-top:4px;}
+  .scr-res{padding:16px; min-height:300px;}
+  .scr-row{display:flex; justify-content:space-between; align-items:baseline; gap:10px; padding:10px 2px; border-bottom:1px solid #eef0f2; font-size:14px;}
+  .scr-row .nm{font-weight:700;}
+  .scr-row .nm small{font-weight:400; color:var(--sub); margin-left:6px;}
+  .scr-row .dt{color:var(--sub); font-size:12.5px; text-align:right; white-space:nowrap;}
+  .scr-row .yu{display:inline-block; font-size:11px; border:1px solid var(--navy); color:var(--navy); padding:0 5px; margin-left:6px;}
+  .scr-hint{margin-top:14px; font-size:13px; color:var(--sub); line-height:1.8;}
+  .gl dt{font-weight:700; margin-top:16px;}
+  .gl dd{margin-top:2px;}
+
+  /* 偽サイトと誤認されないための常時表示。フッターの小さな注記だけでは足りない */
+  .simwarn{max-width:430px; margin:18px auto 0; background:#fff8e6; border:1px solid #e3c86a;
+    padding:10px 14px; font-size:12.5px; color:#5c4708; line-height:1.75;}
+
+  .guide{background:#fff; border:1px solid var(--line); border-left:4px solid var(--navy); padding:12px 16px; margin:14px auto; max-width:430px; font-size:14px;}
   .guide .gtag{display:block; font-size:10px; font-weight:800; letter-spacing:.16em; color:var(--navy); margin-bottom:2px;}
   .guide .gsub{font-weight:400; font-size:12px; color:var(--sub); margin-top:3px; line-height:1.7;}
   .guide.warn{border-left-color:var(--red);}
@@ -594,80 +673,84 @@
   <button data-page="order">株の注文練習</button>
   <button data-page="fx">FXの練習</button>
   <button data-page="demo">デモトレード</button>
+  <button data-page="screen">銘柄の探し方</button>
   <button data-page="gloss">用語辞典</button>
 </div></nav>
 
 <!-- ================= HOME ================= -->
 <section class="page active" id="page-home">
   <div class="hero"><div class="wrap">
+    <div>
     <h1>口座は作った。アプリも入れた。<br>その先で挫折した人のための、練習場。</h1>
-    <p>証券アプリの「注文画面」は、初心者向けにできていません。このサイトでは、SBI証券・楽天証券(iSPEED)・マネックス証券の実際の画面遷移を再現した練習モードで、口座開設から最初の買い注文までを本番前に予習できます。FXの練習モードと、仮想資金100万円で売買を試せるデモトレードも用意しました。</p>
+    <p>証券アプリの「注文画面」は、初心者向けにできていません。このサイトでは、SBI証券・楽天証券（iSPEED）・マネックス証券の実際の画面遷移を再現した練習モードで、口座開設から最初の買い注文までを本番前に予習できます。FXの練習モードと、仮想資金100万円で売買を試せるデモトレードも用意しました。</p>
+    </div>
+    <div class="hero-shot" id="heroShot"></div>
   </div></div>
   <div class="wrap">
     <div class="card dojonav" id="dojoNav"></div>
 
-    <div class="card">
-      <h2>株を始める手順は3つだけ</h2>
+    <div class="card card--feature">
+      <h2 data-ic="chumon">株を始める手順は3つだけ</h2>
       <p class="muted">「難しそう」の正体は、手続きの画面を見たことがないだけです。一度ここで練習しておけば、本番はただの答え合わせになります。</p>
       <ol class="threestep">
         <li><div><h3>証券会社を選ぶ</h3><p>銀行の窓口ではなく「ネット証券」が主流。手数料が安く、スマホだけで完結します。</p><a class="jump" data-page="compare">選び方を見る</a></div></li>
         <li><div><h3>口座を開設する</h3><p>スマホで10分ほど。途中に出てくる「特定口座」「NISA」の選択だけ、先に予習しておくと迷いません。</p><a class="jump" data-page="kaisetsu">開設の流れを練習する</a></div></li>
         <li><div><h3>はじめての注文を出す</h3><p>自分の証券会社のアプリの画面遷移を再現した練習モードで、買い注文を一度通しで体験します。</p><a class="jump" data-page="order">注文を練習する</a></div></li>
       </ol>
-      <p class="muted" style="margin-top:10px;">株の注文に慣れたら:<a class="jump" data-page="fx" style="color:var(--navy); font-weight:700; cursor:pointer; text-decoration:underline;">FXの練習</a> ／ 実戦の感覚をつかむ:<a class="jump" data-page="demo" style="color:var(--navy); font-weight:700; cursor:pointer; text-decoration:underline;">デモトレード(仮想資金100万円)</a></p>
+      <p class="muted" style="margin-top:10px;">株の注文に慣れたら:<a class="jump" data-page="fx" style="color:var(--navy); font-weight:700; cursor:pointer; text-decoration:underline;">FXの練習</a> ／ 実戦の感覚をつかむ:<a class="jump" data-page="demo" style="color:var(--navy); font-weight:700; cursor:pointer; text-decoration:underline;">デモトレード（仮想資金100万円）</a></p>
     </div>
 
-    <div class="card">
+    <div class="card card--minor">
       <h2>練習の記録</h2>
       <p class="muted">練習をひと通り終えると記録が残ります。すべて埋まったら、本番デビューして大丈夫です。</p>
       <div class="badges" id="badgeBox"></div>
     </div>
 
-    <div class="card">
-      <h2>始める前の、よくある不安</h2>
-      <details class="qa"><summary>いくらから始められる?</summary>
-        <div class="a">通常の株は「100株単位(単元)」で数万〜数十万円ですが、主要ネット証券には1株から買える「単元未満株」サービス(SBIの「S株」、楽天の「かぶミニ」、マネックスの「ワン株」など)があり、数百円〜数千円から始められます。最初は失っても痛くない金額で1株買ってみるのが現実的な練習方法です。</div>
+    <div class="card card--plain">
+      <h2 data-ic="chui">始める前の、よくある不安</h2>
+      <details class="qa"><summary>いくらから始められる？</summary>
+        <div class="a">通常の株は「100株単位（単元）」で数万〜数十万円ですが、主要ネット証券には1株から買える「単元未満株」サービス（SBIの「S株」、楽天の「かぶミニ」、マネックスの「ワン株」など）があり、数百円〜数千円から始められます。最初は失っても痛くない金額で1株買ってみるのが現実的な練習方法です。</div>
       </details>
       <details class="qa"><summary>損をするのが怖い</summary>
         <div class="a">株価は上下するので、短期では損をすることも普通にあります。だからこそ「生活費ではなく余裕資金で」「一つの銘柄に全額入れない」「長い目で見る」が基本ルール。少額で始めれば、勉強代も少額で済みます。</div>
       </details>
       <details class="qa"><summary>確定申告や税金がややこしそう</summary>
-        <div class="a">口座開設のときに「特定口座(源泉徴収あり)」を選べば、税金は証券会社が自動で計算・納付するため、原則確定申告は不要です。NISA口座なら利益にそもそも税金がかかりません。「口座開設の練習」で選ぶ場面を体験できます。</div>
+        <div class="a">口座開設のときに「特定口座（源泉徴収あり）」を選べば、税金は証券会社が自動で計算・納付するため、原則確定申告は不要です。NISA口座なら利益にそもそも税金がかかりません。「口座開設の練習」で選ぶ場面を体験できます。</div>
       </details>
       <details class="qa"><summary>アプリを入れたけど難しくて挫折した</summary>
         <div class="a">それはあなたのせいではありません。証券アプリは中上級者向けの機能がぎっしりで、初心者が最初に使うボタンは実は数個だけです。マネックスのように「アプリが複数あってどれで買うのか分からない」構造の会社もあります。「注文の練習」で、自分の証券会社の画面遷移をそのまま予習してください。</div>
       </details>
-      <details class="qa"><summary>FXと株、どっちから始めればいい?</summary>
-        <div class="a">性質がまったく違います。株の現物取引は、損しても投資した金額まで。FXはレバレッジ(てこ)で資金の何倍もの取引ができるぶん、利益も損失も速く動きます。迷うならまず株の現物か、FXをやるなら数量を小さくして実質レバレッジを低く抑えるのが定石です。どちらも「FXの練習」「デモトレード」で感覚を試してから決められます。</div>
+      <details class="qa"><summary>FXと株、どっちから始めればいい？</summary>
+        <div class="a">性質がまったく違います。株の現物取引は、損しても投資した金額まで。FXはレバレッジ（てこ）で資金の何倍もの取引ができるぶん、利益も損失も速く動きます。迷うならまず株の現物か、FXをやるなら数量を小さくして実質レバレッジを低く抑えるのが定石です。どちらも「FXの練習」「デモトレード」で感覚を試してから決められます。</div>
       </details>
-      <details class="qa"><summary>証券会社が倒産したらお金は消える?</summary>
-        <div class="a">証券会社は顧客の資産を自社の資産と分けて管理すること(分別管理)が法律で義務付けられています。さらに万一に備えて、投資者保護基金により1人あたり1,000万円まで補償される仕組みがあります。</div>
+      <details class="qa"><summary>証券会社が倒産したらお金は消える？</summary>
+        <div class="a">証券会社は顧客の資産を自社の資産と分けて管理すること（分別管理）が法律で義務付けられています。さらに万一に備えて、投資者保護基金により1人あたり1,000万円まで補償される仕組みがあります。</div>
       </details>
-      <details class="qa"><summary>どのタイミングで買えばいい?</summary>
+      <details class="qa"><summary>どのタイミングで買えばいい？</summary>
         <div class="a">プロでも底値は当てられません。初心者の定番は「タイミングを当てにいかず、少額ずつ回数を分けて買う」こと。まずは金額より、注文の操作に慣れることを目標にするのがおすすめです。</div>
       </details>
     </div>
 
-    <div class="card">
-      <h2>つまずきやすいところの解説</h2>
+    <div class="card card--plain">
+      <h2 data-ic="chui">つまずきやすいところの解説</h2>
       <p class="muted">「アプリのこの画面で止まった」を解決する記事です。練習モードとあわせて読むと理解が早くなります。</p>
       <ol class="threestep" style="counter-reset:none;">
-        <li style="padding-left:0;"><div><h3><a href="/monex-app/" style="color:var(--navy);">マネックス証券のアプリはどれを使えばいい?3つの違いと、国内株を買うときの正解</a></h3><p>アプリが3つあって迷う問題に決着。注文画面が急にWebサイト風になる理由と、取引パスワードの罠まで。</p></div></li>
+        <li style="padding-left:0;"><div><h3><a href="/monex-app/" style="color:var(--navy);">マネックス証券のアプリはどれを使えばいい？3つの違いと、国内株を買うときの正解</a></h3><p>アプリが3つあって迷う問題に決着。注文画面が急にWebサイト風になる理由と、取引パスワードの罠まで。</p></div></li>
         <li style="padding-left:0;"><div><h3><a href="/sbi-kabu-app/" style="color:var(--navy);">SBI証券 株アプリでの買い方:項目が多い注文画面で触るのは3つだけ</a></h3><p>SOR・S株・執行条件など「触らなくていい項目」の正体を仕分けします。</p></div></li>
         <li style="padding-left:0;"><div><h3><a href="/ispeed-order/" style="color:var(--navy);">iSPEEDで株を買う手順と、取引暗証番号を忘れたときの対処</a></h3><p>最後に必ず求められる4桁の番号。ログインパスワードとは別物です。</p></div></li>
-        <li style="padding-left:0;"><div><h3><a href="/azukari-kubun/" style="color:var(--navy);">預り区分は「特定」と「NISA」どっち?約定後は変更できません</a></h3><p>注文画面で必ず出てくるのに誰も説明してくれない項目を、選べるようになるまで整理。</p></div></li>
+        <li style="padding-left:0;"><div><h3><a href="/azukari-kubun/" style="color:var(--navy);">預り区分は「特定」と「NISA」どっち？約定後は変更できません</a></h3><p>注文画面で必ず出てくるのに誰も説明してくれない項目を、選べるようになるまで整理。</p></div></li>
       </ol>
     </div>
 
-    <div class="note"><span class="notetag">免責</span>このサイトは操作に慣れるための<b>非公式の学習用シミュレーター</b>です。SBI証券・楽天証券・マネックス証券をはじめ、掲載する各社とは一切関係ありません。練習画面は各社の公開情報をもとにした再現イメージであり、実際のアプリとは画面・文言・仕様が異なる場合があります(2026年8月時点)。特定の銘柄・投資行動を推奨するものではなく、投資の最終判断はご自身でお願いします。</div>
+    <div class="note"><span class="notetag">免責</span>このサイトは操作に慣れるための<b>非公式の学習用シミュレーター</b>です。SBI証券・楽天証券・マネックス証券をはじめ、掲載する各社とは一切関係ありません。練習画面は各社の公開情報をもとにした再現イメージであり、実際のアプリとは画面・文言・仕様が異なる場合があります（2026年8月時点）。特定の銘柄・投資行動を推奨するものではなく、投資の最終判断はご自身でお願いします。</div>
   </div>
 </section>
 
 <!-- ================= COMPARE ================= -->
 <section class="page" id="page-compare">
   <div class="wrap">
-    <div class="card">
-      <h2>主要ネット証券の比較</h2>
+    <div class="card card--feature">
+      <h2 data-ic="jitsurei">主要ネット証券の比較</h2>
       <p class="muted">2026年8月時点の一般的な傾向です。手数料・ポイント・キャンペーンは変わるため、申し込む直前に必ず公式サイトで最新情報を確認してください。</p>
       <div class="tblwrap">
         <table class="cmp">
@@ -681,14 +764,14 @@
           </tr>
           <tr>
             <td class="name"><span class="dot" style="background:#bf0000"></span>楽天証券</td>
-            <td>楽天ポイントで投資可。楽天銀行との連携(マネーブリッジ)で金利優遇。アプリで日経新聞が読める</td>
+            <td>楽天ポイントで投資可。楽天銀行との連携（マネーブリッジ）で金利優遇。アプリで日経新聞が読める</td>
             <td>楽天ポイント</td><td>○(かぶミニ)</td>
             <td>楽天市場・楽天カードを使っている人</td>
             <td><a href="#" onclick="showPage('order'); startSim('ispeed'); return false;">iSPEEDを練習</a></td>
           </tr>
           <tr>
             <td class="name"><span class="dot" style="background:#FFC81A"></span>マネックス証券</td>
-            <td>米国株の取扱いと分析ツール(銘柄スカウター)に定評。クレカ積立の還元も強い</td>
+            <td>米国株の取扱いと分析ツール（銘柄スカウター）に定評。クレカ積立の還元も強い</td>
             <td>マネックス/dポイント</td><td>○(ワン株)</td>
             <td>米国株もやってみたい人。dポイント派</td>
             <td><a href="#" onclick="showPage('order'); startSim('monex'); return false;">アプリを練習</a></td>
@@ -709,12 +792,12 @@
           </tr>
         </table>
       </div>
-      <div class="note"><span class="notetag">選び方</span>①普段使っているポイント・銀行・カードで絞る → ②残ったらSBIか楽天の2強から選ぶ、で大きく外しません。口座開設は無料で、複数持っても構いません(NISA口座だけは1人1社)。</div>
+      <div class="note"><span class="notetag">選び方</span>①普段使っているポイント・銀行・カードで絞る → ②残ったらSBIか楽天の2強から選ぶ、で大きく外しません。口座開設は無料で、複数持っても構いません（NISA口座だけは1人1社）。</div>
     </div>
 
     <div class="card">
       <h2>練習が済んだら、本番の口座開設へ</h2>
-      <div class="note" style="margin-top:0;"><span class="notetag">PR</span>この項目には広告(アフィリエイトプログラム)を利用したリンクが含まれます。[PR]と表示されたリンクが該当します。掲載順は当サイトの判断によるもので、報酬額の多寡で順位を決めてはいません。</div>
+      <div class="note" style="margin-top:0;"><span class="notetag">PR</span>この項目には広告（アフィリエイトプログラム）を利用したリンクが含まれます。[PR]と表示されたリンクが該当します。掲載順は当サイトの判断によるもので、報酬額の多寡で順位を決めてはいません。</div>
       <p class="muted">口座開設はどこも無料です。開設だけして入金しなければ、費用は一切かかりません。</p>
       <div id="ctaCompare"></div>
     </div>
@@ -724,27 +807,27 @@
 <!-- ================= 口座開設 ================= -->
 <section class="page" id="page-kaisetsu">
   <div class="wrap">
-    <div class="card">
-      <h2>口座開設シミュレーター</h2>
+    <div class="card card--feature">
+      <h2 data-ic="kouza">口座開設シミュレーター</h2>
       <p class="muted">実際の申込みで必ず出てくる、初心者が手を止めるポイントだけを抜き出した練習です。<b>本物の個人情報は入力しないでください</b>(入力欄はダミーです)。</p>
       <div class="wizbar" id="wizbar"><span class="on"></span><span></span><span></span><span></span><span></span></div>
 
       <div class="wizstep active" data-step="1">
         <h3>STEP 1/5 基本情報の入力</h3>
         <p class="muted">氏名・住所・職業など。ここは普通の入力なので省略しますが、1つだけ注意があります。</p>
-        <div class="dummyfield"><label>氏名(ダミー)</label><input value="道場 太郎" readonly></div>
-        <div class="dummyfield"><label>住所(ダミー)</label><input value="北海道サンプル郡れんしゅう町1-2-3" readonly></div>
+        <div class="dummyfield"><label>氏名（ダミー）</label><input value="道場 太郎" readonly></div>
+        <div class="dummyfield"><label>住所（ダミー）</label><input value="北海道サンプル郡れんしゅう町1-2-3" readonly></div>
         <div class="note"><span class="notetag">注意</span>氏名・住所は<b>本人確認書類と完全に一致</b>させること。引っ越し後に免許証の住所変更をしていない、などが審査落ちの定番原因です。</div>
         <div class="btnrow"><span></span><button class="primary" onclick="wizGo(2)">次へ</button></div>
       </div>
 
       <div class="wizstep" data-step="2">
-        <h3>STEP 2/5 口座の種類を選ぶ — 最初のつまずきポイント</h3>
+        <h3>STEP 2/5 口座の種類を選ぶ。最初に手が止まる場所</h3>
         <p class="muted">全員ここで一度手が止まります。落ち着いて選びましょう。</p>
-        <button class="choice" data-fb="fb-tokutei-ari"><span class="reco">迷ったらこれ</span>特定口座(源泉徴収あり)<small>税金の計算も納付も証券会社におまかせ。確定申告は原則不要</small></button>
-        <button class="choice" data-fb="fb-tokutei-nashi">特定口座(源泉徴収なし)<small>計算はしてくれるが、納税(確定申告)は自分でやる</small></button>
+        <button class="choice" data-fb="fb-tokutei-ari"><span class="reco">迷ったらこれ</span>特定口座（源泉徴収あり）<small>税金の計算も納付も証券会社におまかせ。確定申告は原則不要</small></button>
+        <button class="choice" data-fb="fb-tokutei-nashi">特定口座（源泉徴収なし）<small>計算はしてくれるが、納税（確定申告）は自分でやる</small></button>
         <button class="choice" data-fb="fb-ippan">一般口座<small>計算も申告もすべて自分。初心者が選ぶメリットはほぼ無い</small></button>
-        <div class="feedback" id="fb-tokutei-ari">正解です。ほとんどの初心者はこれ一択。利益が出たら証券会社が税金(約20%)を自動で天引き・納付してくれるので、確定申告を気にせず始められます。</div>
+        <div class="feedback" id="fb-tokutei-ari">正解です。ほとんどの初心者はこれ一択。利益が出たら証券会社が税金（約20%）を自動で天引き・納付してくれるので、確定申告を気にせず始められます。</div>
         <div class="feedback" id="fb-tokutei-nashi">選べますが、利益が出ると自分で確定申告が必要になります。「年間の利益が少額なら申告不要になるケースを使いたい」など明確な理由がある人向け。迷っているなら「源泉徴収あり」が無難です。</div>
         <div class="feedback" id="fb-ippan">これは選ばないでください。年間の損益計算を自分ですべてやることになります。未公開株など特殊な事情がある人向けの口座です。</div>
         <div class="btnrow"><button class="ghost" onclick="wizGo(1)">戻る</button><button class="primary" id="wiz2next" disabled onclick="wizGo(3)">次へ</button></div>
@@ -752,7 +835,7 @@
 
       <div class="wizstep" data-step="3">
         <h3>STEP 3/5 NISA口座を同時に開設するか</h3>
-        <p class="muted">NISA=利益に税金(約20%)がかからなくなる制度。年間の投資枠に上限があります。</p>
+        <p class="muted">NISA=利益に税金（約20%）がかからなくなる制度。年間の投資枠に上限があります。</p>
         <button class="choice" data-fb="fb-nisa-yes"><span class="reco">おすすめ</span>同時に開設する<small>審査に数日かかるだけで費用ゼロ。使わなくても損はない</small></button>
         <button class="choice" data-fb="fb-nisa-no">あとで考える<small>あとから開設も可能。ただしNISA口座は1人1社まで</small></button>
         <div class="feedback" id="fb-nisa-yes">開いておいて損のない口座です。NISA口座内の取引は利益が非課税。「つみたて投資枠」(投資信託の積立向け)と「成長投資枠」(株も買える)の2つの枠があり、株を買うなら成長投資枠を使います。</div>
@@ -774,8 +857,8 @@
 
       <div class="wizstep" data-step="5">
         <h3>STEP 5/5 申込み完了</h3>
-        <p>実際はこのあと審査(最短翌営業日〜1週間)があり、完了メールが届いたら:</p>
-        <p style="margin-top:8px; font-size:14px;">① ログインID・パスワードを設定(<b>取引用のパスワード・暗証番号が別にある</b>会社が多いので、両方メモしておく)<br>② 銀行から証券口座へ入金(「即時入金」なら手数料無料・即反映が主流)<br>③ 注文へ — このサイトの「注文の練習」で予習</p>
+        <p>実際はこのあと審査（最短翌営業日〜1週間）があり、完了メールが届いたら:</p>
+        <p style="margin-top:8px; font-size:14px;">① ログインID・パスワードを設定(<b>取引用のパスワード・暗証番号が別にある</b>会社が多いので、両方メモしておく)<br>② 銀行から証券口座へ入金（「即時入金」なら手数料無料・即反映が主流）<br>③ 注文へ。このサイトの「注文の練習」で予習</p>
         <div class="note"><span class="notetag">記録</span>「口座開設の練習」クリア。本番の申込み画面もこの流れとほぼ同じです。</div>
         <div class="btnrow"><button class="ghost" onclick="wizGo(1)">もう一度練習</button><button class="primary" onclick="showPage('order')">注文の練習へ進む</button></div>
       </div>
@@ -786,18 +869,18 @@
 <!-- ================= 注文練習 ================= -->
 <section class="page" id="page-order">
   <div class="wrap">
-    <div class="card" id="brokerChooser">
-      <h2>はじめての注文シミュレーター</h2>
-      <p class="muted">架空の銘柄「サンプル食品(0000)」を100株、実際のアプリの画面構成・配色・ボタン名を再現した練習画面で買ってみます。自分が口座を持っている(持つ予定の)証券会社を選んでください。</p>
+    <div class="card card--feature" id="brokerChooser">
+      <h2 data-ic="chumon">はじめての注文シミュレーター</h2>
+      <p class="muted">架空の銘柄「サンプル食品（0000）」を100株、実際のアプリの画面構成・配色・ボタン名を再現した練習画面で買ってみます。自分が口座を持っている（持つ予定の）証券会社を選んでください。</p>
       <p class="muted" style="margin-top:6px;">分からない言葉が出てきたら
         <a href="#" onclick="showPage('gloss'); return false;" style="color:var(--navy); font-weight:700;">用語辞典</a>
-        で引けます(成行・指値・預り区分・取引パスワードなど20語)。</p>
+        で引けます（成行・指値・預り区分・取引パスワードなど20語）。</p>
       <div class="brokerpick">
         <button style="--bp:#0d5eae;" onclick="startSim('sbi')"><h3>SBI証券「株アプリ」</h3><p>黒に近い紺のダーク画面。「取引」→「現物買」→「確認」→「発注」の流れを再現。</p><span class="go">練習をはじめる →</span></button>
         <button style="--bp:#bf0000;" onclick="startSim('ispeed')"><h3>楽天証券「iSPEED」</h3><p>黒基調+赤ヘッダーのシンプル注文。「確認画面へ」→「取引暗証番号」→「注文する」を再現。</p><span class="go">練習をはじめる →</span></button>
         <button style="--bp:#DAAB00;" onclick="startSim('monex')"><h3>マネックス証券</h3><p>黄色い総合アプリ。最大の関門「どのアプリで買うのか」問題から解説。挫折した人はまずこれ。</p><span class="go">練習をはじめる →</span></button>
       </div>
-      <p class="muted" style="margin-top:12px;">※各社の公開情報(公式操作ガイド・ストア掲載画像等)をもとにした非公式の再現イメージです。ロゴは使用しておらず、実際のアプリとは画面・文言が異なる場合があります(2026年8月時点)。</p>
+      <p class="muted" style="margin-top:12px;">※各社の公開情報（公式操作ガイド・ストア掲載画像等）をもとにした非公式の再現イメージです。ロゴは使用しておらず、実際のアプリとは画面・文言が異なる場合があります（2026年8月時点）。</p>
     </div>
   </div>
 </section>
@@ -805,43 +888,43 @@
 <!-- ================= FX ================= -->
 <section class="page" id="page-fx">
   <div class="wrap">
-    <div class="card">
-      <h2>FXとは — 株と何が違う?</h2>
+    <div class="card card--plain">
+      <h2 data-ic="yougo">FXとは。株と何が違うのか</h2>
       <p class="muted">FX(外国為替証拠金取引)は、通貨を交換して差益を狙う取引です。株とは性質がまったく違うので、違いを知ってから触るのが安全です。</p>
       <div class="tblwrap">
         <table class="cmp" style="min-width:560px;">
-          <tr><th style="width:110px;"></th><th>株(現物)</th><th>FX</th></tr>
-          <tr><td class="name">取引するもの</td><td>会社の株式</td><td>通貨ペア(米ドル/円など)</td></tr>
+          <tr><th style="width:110px;"></th><th>株（現物）</th><th>FX</th></tr>
+          <tr><td class="name">取引するもの</td><td>会社の株式</td><td>通貨ペア（米ドル/円など）</td></tr>
           <tr><td class="name">取引時間</td><td>平日 9:00〜15:30</td><td>平日ほぼ24時間</td></tr>
-          <tr><td class="name">必要資金</td><td>株価×100株(単元未満株なら少額)</td><td>数千円から(証拠金)</td></tr>
-          <tr><td class="name">レバレッジ</td><td>なし(現物)</td><td>最大25倍</td></tr>
+          <tr><td class="name">必要資金</td><td>株価×100株（単元未満株なら少額）</td><td>数千円から（証拠金）</td></tr>
+          <tr><td class="name">レバレッジ</td><td>なし（現物）</td><td>最大25倍</td></tr>
           <tr><td class="name">最大損失</td><td>投資した金額まで</td><td>急変時は預けた証拠金を超えることも</td></tr>
-          <tr><td class="name">売りから入る</td><td>できない(現物)</td><td>できる(下落でも利益を狙える)</td></tr>
+          <tr><td class="name">売りから入る</td><td>できない（現物）</td><td>できる（下落でも利益を狙える）</td></tr>
         </table>
       </div>
       <div class="note"><span class="notetag">重要</span>レバレッジは「少ないお金で大きな取引ができる」仕組みですが、<b>損失も同じ倍率で速くなります</b>。初心者は取引数量を小さくして、実質レバレッジを数倍以内に抑えるのが定石です。FXは資金を失う速度が株より速い取引だと理解してから始めてください。</div>
     </div>
 
-    <div class="card">
-      <h2>FX注文シミュレーター</h2>
+    <div class="card card--feature">
+      <h2 data-ic="chumon">FX注文シミュレーター</h2>
       <p class="muted">一般的なFXアプリに共通する画面構成(レート一覧 → 売Bid/買Askの2大ボタン → 新規注文 → ポジション → 決済)で、「新規→保有→決済」の1サイクルを練習します。レバレッジとスプレッドの意味も、この練習の中で体感できます。</p>
       <div class="brokerpick">
         <button style="--bp:#4491d3;" onclick="startSim('fxneo')"><h3>GMOクリック証券「FXネオ」</h3><p>盾形のBID/ASKパネルが目印。0.1(1,000通貨)で「新規→建玉→決済」を再現。</p><span class="go">練習をはじめる →</span></button>
         <button style="--bp:#87bb22;" onclick="startSim('dmmfx')"><h3>DMM FX</h3><p>2つの巨大な円形Bid/Askが看板。1Lot(1万通貨)の「即時注文→クイック決済」を再現。</p><span class="go">練習をはじめる →</span></button>
       </div>
-      <p class="muted" style="margin-top:12px;">※各社の公開情報(公式操作マニュアル・ストア掲載画像等)をもとにした非公式の再現イメージです。ロゴは使用しておらず、実際のアプリとは画面・文言が異なる場合があります(2026年8月時点)。</p>
+      <p class="muted" style="margin-top:12px;">※各社の公開情報（公式操作マニュアル・ストア掲載画像等）をもとにした非公式の再現イメージです。ロゴは使用しておらず、実際のアプリとは画面・文言が異なる場合があります（2026年8月時点）。</p>
     </div>
 
-    <div class="card">
-      <h2>FX会社の選び方(ざっくり)</h2>
-      <p class="muted">国内の主要FX会社は、スプレッド(取引コスト)・最小取引単位・アプリの使いやすさで比べます。2026年8月時点の一般的な傾向です。最新の条件は必ず公式サイトで確認してください。</p>
+    <div class="card card--minor">
+      <h2 data-ic="jitsurei">FX会社の選び方（ざっくり）</h2>
+      <p class="muted">国内の主要FX会社は、スプレッド（取引コスト）・最小取引単位・アプリの使いやすさで比べます。2026年8月時点の一般的な傾向です。最新の条件は必ず公式サイトで確認してください。</p>
       <div class="tblwrap">
         <table class="cmp" style="min-width:560px;">
           <tr><th>会社</th><th>特徴</th><th>最小取引単位</th></tr>
-          <tr><td class="name">GMOクリック証券(FXネオ)</td><td>取引高で世界有数。ツール・アプリの評価が高い定番</td><td>1,000通貨</td></tr>
+          <tr><td class="name">GMOクリック証券（FXネオ）</td><td>取引高で世界有数。ツール・アプリの評価が高い定番</td><td>1,000通貨</td></tr>
           <tr><td class="name">DMM FX</td><td>口座数最大級。シンプルなアプリで初心者に人気</td><td>10,000通貨</td></tr>
           <tr><td class="name">外為どっとコム</td><td>情報コンテンツ・学習素材が充実。1,000通貨から</td><td>1,000通貨</td></tr>
-          <tr><td class="name">松井証券(MATSUI FX)</td><td>1通貨から取引可能。超少額で練習したい人向け</td><td>1通貨</td></tr>
+          <tr><td class="name">松井証券（MATSUI FX）</td><td>1通貨から取引可能。超少額で練習したい人向け</td><td>1通貨</td></tr>
           <tr><td class="name">LIGHT FX</td><td>トレイダーズ証券が運営。スプレッドの狭さを打ち出すシンプルな設計</td><td>1,000通貨</td></tr>
           <tr><td class="name">三菱UFJ eスマート証券<br><span class="muted" style="font-weight:400;">(旧auカブコム証券)</span></td><td>Pontaポイントとの連携。株の口座と同じIDで管理できる</td><td>1,000通貨</td></tr>
         </table>
@@ -857,19 +940,20 @@
 <!-- ================= デモトレード ================= -->
 <section class="page" id="page-demo">
   <div class="wrap">
-    <div class="card">
-      <h2>デモトレード — 仮想資金100万円</h2>
-      <p class="muted">練習画面で操作を覚えたら、次は「値動きの中で売買する感覚」です。仮想資金100万円で、株(1日ずつ進めるターン制)とFX(リアルタイムに動くレート)を体験できます。記録はこのブラウザにだけ保存されます。</p>
+    <div class="card card--feature">
+      <h2 data-ic="jitsurei">仮想資金100万円で試すデモトレード</h2>
+      <p class="muted">練習画面で操作を覚えたら、次は「値動きの中で売買する感覚」です。仮想資金100万円で、株（1日ずつ進めるターン制）とFX(リアルタイムに動くレート)を体験できます。記録はこのブラウザにだけ保存されます。</p>
       <div class="demo-stats" id="demoStats"></div>
       <div class="demo-tabs">
         <button id="demoTabStock" onclick="demoMode('stock')">株デモ</button>
         <button id="demoTabFx" onclick="demoMode('fx')">FXデモ</button>
       </div>
+      <div class="simwarn" style="max-width:none;">これは<b>練習用の画面</b>です。実在の証券会社のアプリではありません。<b>本物のIDやパスワードは絶対に入力しないでください。</b></div>
       <p class="muted" id="demoHint" style="margin-top:12px;"></p>
       <div class="phone" id="demoPhone" style="margin-top:8px;"><div class="screen" id="demoScreen"></div></div>
       <div class="demo-log" id="demoLog"></div>
       <div class="btnrow" style="margin-top:12px;"><button class="ghost" onclick="demoReset()">最初からやり直す</button><span></span></div>
-      <div class="note"><span class="notetag">注意</span>これは学習用のゲームです。値動きは乱数で、実際の相場はもっと荒く、思い通りに約定しないこともあります。デモで勝てても本番で勝てるとは限りません——逆に、デモで負けたときの「嫌な感覚」は本物です。よく覚えておいてください。</div>
+      <div class="note"><span class="notetag">注意</span>これは学習用のゲームです。値動きは乱数で、実際の相場はもっと荒く、思い通りに約定しないこともあります。デモで勝てても本番で勝てるとは限りません。逆に、デモで負けたときの「嫌な感覚」は本物です。よく覚えておいてください。</div>
     </div>
   </div>
 </section>
@@ -878,6 +962,7 @@
 <section class="page" id="page-sim">
   <div class="wrap">
     <div id="simArea">
+      <div class="simwarn">これは<b>練習用の画面</b>です。実在の証券会社のアプリではありません。<b>本物のIDやパスワードは絶対に入力しないでください。</b></div>
       <div class="guide" id="guideBox"></div>
       <div class="phone" id="phoneBox"><div class="screen" id="simScreen"></div></div>
       <div class="simfoot">
@@ -889,10 +974,130 @@
 </section>
 
 <!-- ================= 用語辞典 ================= -->
+<section class="page" id="page-screen">
+  <div class="wrap">
+
+    <div class="card card--plain">
+      <h2 data-ic="chui">このページに「おすすめ銘柄」は載せません</h2>
+      <p>「初心者はこの銘柄を買うといい」と個別の銘柄を挙げることは、金融商品取引法の<b>投資助言業</b>にあたります。登録のない人が業として行うと違法で、金融庁が取り締まりを強化している領域です。当サイトは登録業者ではないので、やりません。</p>
+      <p style="margin-top:14px;">代わりに、<b>自分で探せるようにします。</b>優待株や安定株を「どの画面で」「どの条件で」絞り込むのか。その操作と、条件欄に出てくる指標が何を意味するのかを、ここで練習します。銘柄はすべて<b>架空の会社</b>です。実在の銘柄を推奨しないためと、値動きの予測に見せないためです。</p>
+    </div>
+
+    <div class="card card--feature">
+      <h2 data-ic="kouza">株主優待の、知らないと損する3つの条件</h2>
+      <p class="muted">優待は「その株を持っていればもらえる」ものではありません。条件を外すと1円ももらえないので、探す前にここだけ押さえてください。</p>
+
+      <h3>1. ほとんどの優待は「100株以上」が条件</h3>
+      <p>日本株は原則100株＝1単元で取引します。1株から買える単元未満株(SBIのS株、楽天のかぶミニなど)は少額で始められますが、<b>99株以下では優待の対象外</b>の企業がほとんどです。「優待が欲しくて1株ずつ買い集めていたが、100株に届くまで何ももらえなかった」は実際によくある話です。</p>
+
+      <h3>2. 買う日は「権利確定日」ではなく「権利付最終売買日」</h3>
+      <p><b>権利付最終売買日は、権利確定日の2営業日前です。</b>この日の大引け時点で持っていないと権利は得られません。翌営業日が権利落ち日で、そこで買ってもその回の優待・配当はもらえません。カレンダーの「権利確定日」だけ見て当日に買うと、まるごと外します。</p>
+      <div class="kenricalc">
+        <div class="kc-row">
+          <label>権利確定日</label>
+          <input type="date" id="kcDate" onchange="calcKenri()">
+        </div>
+        <div class="kc-out" id="kcOut">日付を入れると、いつまでに買えばいいか計算します。</div>
+        <p class="muted" style="font-size:12.5px; margin-top:10px;">※土日は除いて計算します。祝日は自動判定していないので、実際の営業日カレンダーで確認してください。</p>
+      </div>
+
+      <h3>3. NISAの配当は、受取方法を変えないと課税される</h3>
+      <p>NISA口座で買っても、配当金の受取方法が<b>「株式数比例配分方式」以外</b>になっていると、配当に20%課税されます。「配当金領収証方式」「登録配当金受領口座方式」だと非課税になりません。しかもこの設定は注文画面ではなく、口座情報の設定メニューにあります。<b>権利付最終日までに変更を済ませる</b>必要があり、手続きに1週間かかることもあります。</p>
+      <div class="note"><span class="notetag">出典</span>日本証券業協会「NISA口座を利用した上場株式等の配当金等の受領方法」／各社FAQ。優待の権利日ルールは各証券会社の解説と一致しています。</div>
+    </div>
+
+    <div class="card card--feature">
+      <h2 data-ic="chumon">スクリーニングの練習</h2>
+      <p class="muted">証券アプリには「条件を入れて銘柄を絞り込む」画面があります。名前も置き場所も会社ごとに違いますが(スクリーナー／銘柄検索／条件検索)、入れる条件はどこもほぼ同じです。ここで操作を体に入れておくと、本番でどの会社を使っても迷いません。</p>
+      <div class="simwarn" style="max-width:none;">下の会社はすべて<b>架空</b>です。実在の企業ではなく、数値にも意味はありません。<b>操作を覚えるための画面</b>です。</div>
+
+      <div class="scr">
+        <div class="scr-panel">
+          <div class="scr-h">絞り込み条件</div>
+          <div class="scr-f">
+            <label>配当利回り</label>
+            <select id="fYield" onchange="runScreen()">
+              <option value="0">指定なし</option>
+              <option value="2">2.0%以上</option>
+              <option value="3">3.0%以上</option>
+              <option value="4">4.0%以上</option>
+            </select>
+          </div>
+          <div class="scr-f">
+            <label>株主優待</label>
+            <select id="fYutai" onchange="runScreen()">
+              <option value="">指定なし</option>
+              <option value="1">優待あり</option>
+            </select>
+          </div>
+          <div class="scr-f">
+            <label>自己資本比率</label>
+            <select id="fEquity" onchange="runScreen()">
+              <option value="0">指定なし</option>
+              <option value="40">40%以上</option>
+              <option value="60">60%以上</option>
+            </select>
+          </div>
+          <div class="scr-f">
+            <label>連続増配</label>
+            <select id="fStreak" onchange="runScreen()">
+              <option value="0">指定なし</option>
+              <option value="5">5年以上</option>
+              <option value="10">10年以上</option>
+            </select>
+          </div>
+          <div class="scr-f">
+            <label>最低投資金額</label>
+            <select id="fBudget" onchange="runScreen()">
+              <option value="0">指定なし</option>
+              <option value="100000">10万円以下</option>
+              <option value="300000">30万円以下</option>
+              <option value="500000">50万円以下</option>
+            </select>
+          </div>
+          <button class="scr-reset" onclick="resetScreen()">条件をクリア</button>
+        </div>
+        <div class="scr-res">
+          <div class="scr-h">結果 <span id="scrCount" class="num"></span></div>
+          <div id="scrList"></div>
+          <div class="scr-hint" id="scrHint"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card card--plain">
+      <h2 data-ic="yougo">条件欄に出てくる指標の意味</h2>
+      <p class="muted">「安定している株」を探すときに使われる指標です。ここに書くのは各指標が何を計算した数字かという事実だけで、<b>どの数値なら上がるという話ではありません。</b>高い低いの解釈は人によって違いますし、業種によって適正値も違います。</p>
+      <dl class="gl">
+        <dt>配当利回り</dt>
+        <dd>1株あたりの年間配当 ÷ 株価 × 100。株価が下がると利回りは上がるので、<b>利回りが高い＝良い会社とは限りません</b>。業績悪化で株価が下がっているだけの場合も、同じように高く表示されます。</dd>
+        <dt>自己資本比率</dt>
+        <dd>総資産のうち、返済不要の自己資本が占める割合。借金への依存度を見る数字です。業種差が大きく、設備投資の重い業種は低めに出ます。</dd>
+        <dt>配当性向</dt>
+        <dd>配当の総額 ÷ 純利益 × 100。稼いだ利益のうち何%を配当に回したか。100%を超えていれば、その年は利益以上に配当を出しています。</dd>
+        <dt>連続増配年数</dt>
+        <dd>配当を前年より増やし続けている年数。過去の実績であって、来期も増える約束ではありません。</dd>
+        <dt>時価総額</dt>
+        <dd>株価 × 発行済株式数。会社の規模です。小さいほど1日の売買が少なく、売りたいときに売れないことがあります。</dd>
+        <dt>最低投資金額</dt>
+        <dd>株価 × 100株。日本株は100株単位なので、株価3,000円の会社は1単元30万円必要です。ここで予算に合わないと、そもそも買えません。</dd>
+      </dl>
+    </div>
+
+    <div class="card card--plain">
+      <h2 data-ic="chui">練習で防げること、防げないこと</h2>
+      <p>ここで身につくのは<b>操作と、制度の理解</b>です。単元未満株で優待を逃す、権利付最終日を1日間違える、NISAの配当受取方法を変え忘れる。この種の失敗は、知っていれば確実に避けられます。</p>
+      <p style="margin-top:14px;">一方で、<b>買った後に値下がりすることは、練習では防げません。</b>指標が良い会社の株が下がることは普通にあります。それはルールを決めて対処するしかない領域で、当サイトが教えられることではありません。そこは正直に線を引いておきます。</p>
+      <div id="ctaScreen"></div>
+    </div>
+
+  </div>
+</section>
+
 <section class="page" id="page-gloss">
   <div class="wrap">
-    <div class="card">
-      <h2>これだけ用語辞典</h2>
+    <div class="card card--plain">
+      <h2 data-ic="yougo">これだけ用語辞典</h2>
       <p class="muted">注文画面に出てくる用語だけを厳選。すべて練習モードの中に登場します。</p>
       <div class="note"><span class="notetag">使い方</span>読んで覚えるより、<b>実際の画面で出てきたときに引く</b>ほうが早く身につきます。
         <a href="#" onclick="showPage('order'); return false;" style="color:var(--navy); font-weight:700;">株の注文練習</a>／
@@ -900,26 +1105,26 @@
         <a href="#" onclick="showPage('demo'); return false;" style="color:var(--navy); font-weight:700;">デモトレード</a>
         を開きながら読んでください。</div>
       <dl class="gloss">
-        <dt>現物(げんぶつ)取引<span class="pill">超重要</span></dt><dd>自分のお金の範囲で株を買う、いちばん普通の取引。初心者はこれ一択。「信用取引」はお金を借りて取引する上級者向けで、当面ボタンを押す必要はありません。</dd>
-        <dt>成行(なりゆき)注文<span class="pill">超重要</span></dt><dd>「値段はいくらでもいいから今すぐ買う」注文。ほぼ確実にすぐ成立しますが、想定よりやや高く買えてしまうこともあります。</dd>
-        <dt>指値(さしね)注文<span class="pill">超重要</span></dt><dd>「この値段以下なら買う」と値段を指定する注文。高値づかみを防げますが、株価が下りてこなければいつまでも成立しません。「逆指値」は損切り用の上級者向け注文です。</dd>
+        <dt>現物（げんぶつ）取引<span class="pill">超重要</span></dt><dd>自分のお金の範囲で株を買う、いちばん普通の取引。初心者はこれ一択。「信用取引」はお金を借りて取引する上級者向けで、当面ボタンを押す必要はありません。</dd>
+        <dt>成行（なりゆき）注文<span class="pill">超重要</span></dt><dd>「値段はいくらでもいいから今すぐ買う」注文。ほぼ確実にすぐ成立しますが、想定よりやや高く買えてしまうこともあります。</dd>
+        <dt>指値（さしね）注文<span class="pill">超重要</span></dt><dd>「この値段以下なら買う」と値段を指定する注文。高値づかみを防げますが、株価が下りてこなければいつまでも成立しません。「逆指値」は損切り用の上級者向け注文です。</dd>
         <dt>取引パスワード/取引暗証番号<span class="pill">初見殺し</span></dt><dd>ログインパスワードとは<b>別に</b>、注文の最後に入力するパスワード。SBI・マネックスは「取引パスワード」、楽天は4桁の「取引暗証番号」。口座開設時に設定したものを忘れて発注できない人が続出します。必ずメモを。</dd>
         <dt>預り区分/口座区分<span class="pill">超重要</span></dt><dd>注文画面で出てくる「特定/一般/NISA」の選択。特定口座を作っていれば「特定」を、NISA枠で買うなら「NISA」を選びます。<b>約定後の変更はできない</b>ため選び間違いに注意。</dd>
-        <dt>執行条件(しっこうじょうけん)</dt><dd>「本日中」「今週中」「寄付」「引け」など、注文をいつまで・どのタイミングで有効にするかの条件。最初はデフォルト(本日中/当日中)のままで問題ありません。</dd>
+        <dt>執行条件（しっこうじょうけん）</dt><dd>「本日中」「今週中」「寄付」「引け」など、注文をいつまで・どのタイミングで有効にするかの条件。最初はデフォルト（本日中/当日中）のままで問題ありません。</dd>
         <dt>SOR</dt><dd>SBI・マネックスの注文画面に出てくる市場選択のデフォルト。複数の市場から最も有利な価格を自動で探して執行する仕組み。そのままで問題ありません。</dd>
-        <dt>単元株(たんげんかぶ)</dt><dd>売買の基本単位。日本株は原則100株=1単元。1株ずつ買える「単元未満株」(SBI「S株」、楽天「かぶミニ」、マネックス「ワン株」)なら少額で始められます。</dd>
-        <dt>約定(やくじょう)</dt><dd>注文が成立すること。「注文を出す」と「約定する」は別で、成行ならほぼ即約定、指値は株価が届かなければ約定しません。注文照会画面で「約定」「約定済」となれば成立です。</dd>
-        <dt>受渡日(うけわたしび)</dt><dd>実際にお金と株の受け渡しが完了する日。約定日から2営業日後。売ったお金を銀行に出金できるのはこの日以降です。</dd>
-        <dt>特定口座(源泉徴収あり)</dt><dd>税金の計算・納付を証券会社が代行してくれる口座。確定申告が原則不要になる、初心者の標準装備。</dd>
-        <dt>NISA(ニーサ)</dt><dd>投資の利益(通常は約20%課税)が非課税になる制度。株を買うなら「成長投資枠」を使います。NISA口座は1人1社まで。</dd>
-        <dt>板(いた)/気配値(けはいね)</dt><dd>「いくらで買いたい/売りたい人が何株いるか」の一覧表。SBIでは「気配値」タブ。最初は読めなくても問題ありません。</dd>
+        <dt>単元株（たんげんかぶ）</dt><dd>売買の基本単位。日本株は原則100株=1単元。1株ずつ買える「単元未満株」(SBI「S株」、楽天「かぶミニ」、マネックス「ワン株」)なら少額で始められます。</dd>
+        <dt>約定（やくじょう）</dt><dd>注文が成立すること。「注文を出す」と「約定する」は別で、成行ならほぼ即約定、指値は株価が届かなければ約定しません。注文照会画面で「約定」「約定済」となれば成立です。</dd>
+        <dt>受渡日（うけわたしび）</dt><dd>実際にお金と株の受け渡しが完了する日。約定日から2営業日後。売ったお金を銀行に出金できるのはこの日以降です。</dd>
+        <dt>特定口座（源泉徴収あり）</dt><dd>税金の計算・納付を証券会社が代行してくれる口座。確定申告が原則不要になる、初心者の標準装備。</dd>
+        <dt>NISA(ニーサ)</dt><dd>投資の利益（通常は約20%課税）が非課税になる制度。株を買うなら「成長投資枠」を使います。NISA口座は1人1社まで。</dd>
+        <dt>板（いた）/気配値（けはいね）</dt><dd>「いくらで買いたい/売りたい人が何株いるか」の一覧表。SBIでは「気配値」タブ。最初は読めなくても問題ありません。</dd>
         <dt>即時入金</dt><dd>ネットバンキングから証券口座へ手数料無料・即時反映で入金できるサービス。注文の前に、まずこれでお金を入れます。</dd>
         <dt>レバレッジ<span class="pill">FX・超重要</span></dt><dd>証拠金を担保に、資金の何倍もの金額を取引できる仕組み。国内FXは最大25倍。利益も損失も同じ倍率で速くなるため、初心者は取引数量を小さくして実質レバレッジを低く抑えるのが基本。</dd>
-        <dt>スプレッド<span class="pill">FX</span></dt><dd>売値(Bid)と買値(Ask)の差。FXの実質的な取引コストで、買った瞬間はスプレッド分だけマイナスから始まる。ドル/円で0.2銭なら1万通貨で20円。</dd>
-        <dt>pips(ピップス)<span class="pill">FX</span></dt><dd>FXの値動きの単位。ドル/円では1pip=0.01円(1銭)。1,000通貨持っていれば、1pip動くと10円の損益。</dd>
-        <dt>ポジション/建玉(たてぎょく)<span class="pill">FX</span></dt><dd>保有中の未決済の取引。「買いポジションを持つ」=買って、まだ決済(反対売買)していない状態。決済して初めて損益が確定する。</dd>
+        <dt>スプレッド<span class="pill">FX</span></dt><dd>売値（Bid）と買値（Ask）の差。FXの実質的な取引コストで、買った瞬間はスプレッド分だけマイナスから始まる。ドル/円で0.2銭なら1万通貨で20円。</dd>
+        <dt>pips(ピップス)<span class="pill">FX</span></dt><dd>FXの値動きの単位。ドル/円では1pip=0.01円（1銭）。1,000通貨持っていれば、1pip動くと10円の損益。</dd>
+        <dt>ポジション/建玉（たてぎょく）<span class="pill">FX</span></dt><dd>保有中の未決済の取引。「買いポジションを持つ」=買って、まだ決済（反対売買）していない状態。決済して初めて損益が確定する。</dd>
         <dt>証拠金維持率<span class="pill">FX</span></dt><dd>預けた証拠金が、取引に必要な証拠金に対してどれだけ余裕があるかを示す%。下がるほど危険信号。</dd>
-        <dt>ロスカット<span class="pill">FX</span></dt><dd>損失が膨らんで証拠金維持率が一定水準(例:50%)を下回ったとき、FX会社が強制的に全ポジションを決済する仕組み。資金を守る最後の安全装置だが、これに頼る前に自分で損切りするのが基本。</dd>
+        <dt>ロスカット<span class="pill">FX</span></dt><dd>損失が膨らんで証拠金維持率が一定水準（例:50%）を下回ったとき、FX会社が強制的に全ポジションを決済する仕組み。資金を守る最後の安全装置だが、これに頼る前に自分で損切りするのが基本。</dd>
       </dl>
     </div>
   </div>
@@ -928,7 +1133,7 @@
 <!-- ================= 運営者情報・ポリシー ================= -->
 <section class="page" id="page-about">
   <div class="wrap">
-    <div class="card">
+    <div class="card card--minor">
       <h2>運営者情報</h2>
       <table class="cmp" style="min-width:0; margin-top:10px;">
         <tr><th style="width:130px;">サイト名</th><td>株デビュー道場</td></tr>
@@ -939,14 +1144,14 @@
       <p class="muted" style="margin-top:12px;">当サイトは、株式投資をこれから始める方向けに、証券会社のアプリ操作を疑似体験できる学習コンテンツを提供する個人運営のサイトです。金融商品取引業者ではなく、投資助言・代理業も行いません。</p>
     </div>
 
-    <div class="card">
+    <div class="card card--minor">
       <h2>プライバシーポリシー</h2>
       <h3>広告について</h3>
-      <p style="font-size:13.5px;">当サイトは、アフィリエイトプログラム(ASP)を利用した広告を掲載する場合があります。広告リンクには「PR」の表記を行います。リンク先のサービス内容・取引条件は、必ず各社公式サイトで最新の情報をご確認ください。</p>
+      <p style="font-size:13.5px;">当サイトは、アフィリエイトプログラム（ASP）を利用した広告を掲載する場合があります。広告リンクには「PR」の表記を行います。リンク先のサービス内容・取引条件は、必ず各社公式サイトで最新の情報をご確認ください。</p>
       <h3>アクセス解析について</h3>
       <p style="font-size:13.5px;">当サイトでは、サイト改善のためにアクセス解析ツールを利用する場合があります。これらはCookieを使用して匿名のトラフィックデータを収集するもので、個人を特定するものではありません。</p>
       <h3>データの保存について</h3>
-      <p style="font-size:13.5px;">練習の記録(バッジ)はお使いのブラウザ内(localStorage)にのみ保存され、当サイトのサーバーに送信されることはありません。練習画面の入力欄はすべてダミーであり、入力内容が送信されることもありません。</p>
+      <p style="font-size:13.5px;">練習の記録（バッジ）はお使いのブラウザ内（localStorage）にのみ保存され、当サイトのサーバーに送信されることはありません。練習画面の入力欄はすべてダミーであり、入力内容が送信されることもありません。</p>
       <h3>免責事項</h3>
       <p style="font-size:13.5px;">当サイトは非公式の学習用シミュレーターであり、掲載する証券会社各社とは一切関係ありません。掲載情報の正確性・最新性は保証されません。投資は元本割れのリスクがあります。当サイトの情報に基づく行動により生じたいかなる損害についても、運営者は責任を負いません。投資の最終判断はご自身の責任でお願いします。</p>
     </div>
@@ -954,7 +1159,7 @@
 </section>
 
 <footer><div class="wrap">
-  株デビュー道場(非公式・学習用シミュレーター)。SBI証券・楽天証券・マネックス証券ほか掲載各社とは一切関係ありません。練習画面は公開情報に基づく再現イメージであり、実際のアプリとは異なる場合があります。掲載情報は2026年8月時点の一般的な内容であり、正確性・最新性を保証しません。投資判断はご自身の責任でお願いします。<br>
+  株デビュー道場（非公式・学習用シミュレーター）。SBI証券・楽天証券・マネックス証券ほか掲載各社とは一切関係ありません。練習画面は公開情報に基づく再現イメージであり、実際のアプリとは異なる場合があります。掲載情報は2026年8月時点の一般的な内容であり、正確性・最新性を保証しません。投資判断はご自身の責任でお願いします。<br>
   <a href="#" onclick="showPage('about'); return false;">運営者情報・プライバシーポリシー</a> ／
   <a href="#" onclick="resetBadges(); return false;">練習の記録をリセット</a><br>
   最終更新:2026年8月7日
@@ -964,10 +1169,10 @@
 /* =====================================================================
    アフィリエイト設定
    ASP提携後: url をアフィリリンクに差し替え、pr:true にすると [PR] が自動付与。
-   単価目安(2026年8月調査・要確認): マネックス約3,000円 > 松井約1,000円 > 楽天約500円 > SBI約300円
+   単価目安（2026年8月調査・要確認）: マネックス約3,000円 > 松井約1,000円 > 楽天約500円 > SBI約300円
    ===================================================================== */
 const AFF = {
-  // pr:true = アフィリエイトリンク(提携承認済み)。[PR]表記が自動で付く
+  // pr:true = アフィリエイトリンク（提携承認済み）。[PR]表記が自動で付く
   matsui: {name:'松井証券', pr:true,
            url:'https://px.a8.net/svt/ejp?a8mat=4BA05C+MMIJE+3XCC+5YRHE',
            pixel:'https://www12.a8.net/0.gif?a8mat=4BA05C+MMIJE+3XCC+5YRHE'},
@@ -975,15 +1180,15 @@ const AFF = {
   sbi:    {name:'SBI証券',       url:'https://www.sbisec.co.jp/',      pr:false},
   ispeed: {name:'楽天証券',      url:'https://www.rakuten-sec.co.jp/', pr:false},
   monex:  {name:'マネックス証券', url:'https://www.monex.co.jp/',      pr:false},
-  gmofx:  {name:'GMOクリック証券(FXネオ)', url:'https://www.click-sec.com/', pr:false},
+  gmofx:  {name:'GMOクリック証券（FXネオ）', url:'https://www.click-sec.com/', pr:false},
   dmmfx:  {name:'DMM FX', url:'https://fx.dmm.com/', pr:false},
-  matsuifx:{name:'松井証券(MATSUI FX・1通貨から)', url:'https://www.matsui.co.jp/fx/', pr:false},
+  matsuifx:{name:'松井証券（MATSUI FX・1通貨から）', url:'https://www.matsui.co.jp/fx/', pr:false},
 };
 function ctaHTML(key, lead){
   const a = AFF[key];
   const px = a.pixel ? `<img src="${a.pixel}" width="1" height="1" alt="" style="border:0;">` : '';
   return `<div class="cta"><p>${lead||'練習した流れのまま、本番へ。'}</p>
-    <a href="${a.url}" target="_blank" rel="noopener nofollow sponsored">${a.pr?'[PR] ':''}${a.name}の口座開設(公式サイト)へ</a>${px}
+    <a href="${a.url}" target="_blank" rel="noopener nofollow sponsored">${a.pr?'[PR] ':''}${a.name}の口座開設（公式サイト）へ</a>${px}
     <small>${a.pr?'この広告はアフィリエイトプログラムを利用しています。':''}口座開設は無料です。手数料・サービス内容は必ず公式サイトで最新情報をご確認ください。投資にはリスクがあります。</small></div>`;
 }
 
@@ -1044,7 +1249,7 @@ function macdSVG(){
     ${line('0,40 40,37 80,33 120,29 160,26 200,26 240,23 280,20 326,17','#ff9125')}</svg>`;
 }
 
-/* ===== ミニローソク足(デモ用・終値履歴から擬似OHLC) ===== */
+/* ===== ミニローソク足（デモ用・終値履歴から擬似OHLC） ===== */
 function candleMini(hist, up, dn){
   if(hist.length<2) return '<span style="font-size:9px; opacity:.5;">(値動きなし)</span>';
   const W=96, H=30, n=hist.length-1, cw=W/Math.max(n,8);
@@ -1063,7 +1268,7 @@ function candleMini(hist, up, dn){
   return `<svg width="${W}" height="${H}" style="display:block; margin-top:3px;">${s}</svg>`;
 }
 
-/* ===== 板(SBI気配値) ===== */
+/* ===== 板（SBI気配値） ===== */
 function itaSBI(){
   return `<table class="ita">
     <tr><th>売数量</th><th style="text-align:center;">値段</th><th>買数量</th></tr>
@@ -1097,13 +1302,14 @@ document.querySelectorAll('nav.tabs button, a.jump').forEach(el=>{
   el.addEventListener('click', ()=>showPage(el.dataset.page));
 });
 document.getElementById('ctaCompare').innerHTML =
-  ctaHTML('matsui','松井証券 — 電話サポートに定評。困ったとき人に聞ける安心感がほしい人へ') +
-  ctaHTML('sbi','SBI証券 — 迷ったらの定番。口座数最大級') +
-  ctaHTML('ispeed','楽天証券 — 楽天ポイント派はこちら') +
-  ctaHTML('monex','マネックス証券 — 米国株・dポイント派はこちら');
+  ctaHTML('matsui','困ったとき電話で聞ける安心感がほしいなら、松井証券') +
+  ctaHTML('sbi','迷ったらここ。口座数最大級のSBI証券') +
+  ctaHTML('ispeed','楽天ポイントを使いたいなら楽天証券') +
+  ctaHTML('monex','米国株もやるなら、マネックス証券') +
+  ctaHTML('gmofx','株とFXを1つのIDでまとめたいなら、GMOクリック証券');
 document.getElementById('ctaFx').innerHTML =
-  ctaHTML('gmofx','練習が済んだら — 定番のFXネオ(1,000通貨から)') +
-  ctaHTML('matsuifx','超少額で試したい人 — 1通貨から取引できる');
+  ctaHTML('gmofx','FXの定番。1,000通貨から始められるGMOクリック証券') +
+  ctaHTML('matsuifx','1通貨から試せる松井証券のMATSUI FX');
 
 /* ===== badges ===== */
 const BADGES = [
@@ -1114,7 +1320,19 @@ const BADGES = [
   {id:'demo',   label:'デモトレード'},
   {id:'fxneo',  label:'FXネオ'},
   {id:'dmmfx',  label:'DMM FX'},
+  {id:'screen', label:'銘柄の探し方'},
 ];
+
+/* ===== ヒーローに実物のスマホ画面を静止表示（テキストだけの画面を壊す） ===== */
+function renderHeroShot(){
+  const el = document.getElementById('heroShot');
+  if(!el) return;
+  const save = sim;
+  sim = {broker:'sbi', i:2, qty:100, otype:null, kubun:null, sheet:false};
+  el.innerHTML = `<div class="phone t-sbi" style="width:230px; border-width:8px; border-radius:32px; box-shadow:0 14px 34px rgba(0,0,0,.22);">
+      <div class="screen" style="height:430px; font-size:11px;">${buildSBI(2)}</div></div>`;
+  sim = save;
+}
 
 /* ===== 道場ナビ:進捗に応じて「次の一歩」を1つだけ出す ===== */
 const CURRICULUM = [
@@ -1142,6 +1360,12 @@ const CURRICULUM = [
     why:'FXは株と別物です。レバレッジ・証拠金維持率・ロスカットを、お金を賭ける前に画面で理解しておきましょう。興味がなければ飛ばして構いません。',
     go:'showPage(\'fx\')', label:'FXの練習を見る' },
 
+  { key:'screen', chip:'銘柄探し',
+    done: () => { try{ return !!JSON.parse(localStorage.getItem('kabudojo_badges')).screen; }catch(e){ return false; } },
+    title:'買いたい株を、自分で探せるようになる',
+    why:'優待株・安定株は「探し方」さえ覚えれば自分で見つけられます。権利日のルールと、スクリーニングの操作をここで練習しておきましょう。',
+    go:'showPage(\'screen\')', label:'銘柄の探し方を練習する' },
+
   { key:'real', chip:'本番へ',
     done: () => false,
     title:'ひととおり終わりました。あとは本番だけです',
@@ -1149,7 +1373,7 @@ const CURRICULUM = [
     go:'showPage(\'compare\')', label:'証券会社を選ぶ' },
 ];
 
-// スキップはバッジと別管理(練習していないものを「練習した」と記録しないため)
+// スキップはバッジと別管理（練習していないものを「練習した」と記録しないため）
 function getSkips(){ try{return JSON.parse(localStorage.getItem('kabudojo_skips'))||{};}catch(e){return {};} }
 function dojoSkip(key){
   const s = getSkips(); s[key] = true;
@@ -1197,6 +1421,7 @@ function renderBadges(){
   renderDojoNav();
 }
 renderBadges();
+// renderHeroShot() は sim の宣言より後で呼ぶ必要があるため、スクリプト末尾で実行
 
 /* ===== 口座開設 wizard ===== */
 function wizGo(n){
@@ -1231,19 +1456,19 @@ sbi: {
   cls:'t-sbi', last:6,
   guides:[
     {g:'下メニューの<b>「銘柄検索」</b>をタップ', s:'SBIの株アプリは黒に近い紺のダーク画面。起動直後は「マーケット」で、下部に6つのメニューが並びます。',
-     l:'主要指標・ニュース・ランキングが並ぶマーケット画面。<b>数字は上昇=赤、下落=緑</b>という日本の証券アプリ流の色使いです。情報量に圧倒されますが、買うときに使うのは「銘柄検索」だけ。米国株はこのアプリでは買えません(別の米国株アプリ)。'},
-    {g:'検索バーをタップ(「サンプル食品」と入力したことにします)', s:'銘柄名か4桁の証券コードで検索します。',
+     l:'主要指標・ニュース・ランキングが並ぶマーケット画面。<b>数字は上昇=赤、下落=緑</b>という日本の証券アプリ流の色使いです。情報量に圧倒されますが、買うときに使うのは「銘柄検索」だけ。米国株はこのアプリでは買えません（別の米国株アプリ）。'},
+    {g:'検索バーをタップ（「サンプル食品」と入力したことにします）', s:'銘柄名か4桁の証券コードで検索します。',
      l:'キーワードのほか、株主優待・テーマ・決算日・チャート形状などからも銘柄を探せます。最初は気になる会社名をそのまま入れれば問題ありません。'},
     {g:'株価の上にある赤い<b>「取引」</b>ボタンをタップ', s:'SBIは銘柄画面の上部バーに注文への入口があります。',
-     l:'個別銘柄画面。市場を選ぶ「東証*/PTS」、ウォッチリストに入れる「登録」、そして<b>赤い「取引」</b>が並びます。現在値は画面最大の文字で、上昇中は赤+「↑」。下の表が「気配値(板)」で、いくらで売りたい/買いたい人が何株いるかの一覧です。読めなくても買えます。'},
+     l:'個別銘柄画面。市場を選ぶ「東証*/PTS」、ウォッチリストに入れる「登録」、そして<b>赤い「取引」</b>が並びます。現在値は画面最大の文字で、上昇中は赤+「↑」。下の表が「気配値（板）」で、いくらで売りたい/買いたい人が何株いるかの一覧です。読めなくても買えます。'},
     {g:'<b>「現物買」</b>をタップ', s:'「信用〜」はお金を借りて取引する上級者向け。触らなくてOK。',
-     l:'取引メニュー。使うのは<b>現物買(赤)・現物売(緑)</b>の2つだけです。「スピード注文」はデイトレーダー向けの高速発注モードなので、当面スルーで問題ありません。'},
+     l:'取引メニュー。使うのは<b>現物買（赤）・現物売（緑）</b>の2つだけです。「スピード注文」はデイトレーダー向けの高速発注モードなので、当面スルーで問題ありません。'},
     {g:'預り区分<b>「特定」</b>、価格<b>「成行」</b>(か指値)を選び、下の<b>「確認」</b>をタップ', s:'項目が多いですが、触るのは預り区分・株数・価格の3つだけ。',
-     l:'SBIの注文入力は全証券アプリでも屈指の項目数。<b>触らなくていいもの</b>:注文種別「通常」(OCO/IFDは条件付き注文)、執行条件「なし」、期間「当日中」、S株(1株だけ買うときにON)。<b>要注意は預り区分</b>。特定口座なら「特定」、NISA枠なら「NISA」で、約定後は変更できません。取引パスワードは「保存」にチェックすると次回から省略できます。'},
+     l:'SBIの注文入力は全証券アプリでも屈指の項目数。<b>触らなくていいもの</b>:注文種別「通常」(OCO/IFDは条件付き注文)、執行条件「なし」、期間「当日中」、S株（1株だけ買うときにON）。<b>要注意は預り区分</b>。特定口座なら「特定」、NISA枠なら「NISA」で、約定後は変更できません。取引パスワードは「保存」にチェックすると次回から省略できます。'},
     {g:'内容を確認して<b>「発注」</b>をタップ', s:'確認画面は画面の上に重なるカード形式で出ます。',
-     l:'最終確認。見るのは①銘柄 ②株数 ③価格 ④預り区分 の4つ。株数の桁間違い(100株のつもりが1,000株)が一番の事故ポイントなので、概算約定代金もあわせて指差し確認を。'},
+     l:'最終確認。見るのは①銘柄 ②株数 ③価格 ④預り区分 の4つ。株数の桁間違い（100株のつもりが1,000株）が一番の事故ポイントなので、概算約定代金もあわせて指差し確認を。'},
     {g:'発注完了。「注文照会」で約定を確認しましょう', s:'',
-     l:'注文の状況・訂正・取消は下メニューの<b>「注文照会」</b>で行います。状態が「約定済」になれば購入成立、あなたはサンプル食品の株主です。お金と株の受け渡しは2営業日後(受渡日)。'},
+     l:'注文の状況・訂正・取消は下メニューの<b>「注文照会」</b>で行います。状態が「約定済」になれば購入成立、あなたはサンプル食品の株主です。お金と株の受け渡しは2営業日後（受渡日）。'},
   ],
   build: buildSBI,
 },
@@ -1252,21 +1477,21 @@ ispeed: {
   cls:'t-isp', last:7,
   guides:[
     {g:'下部メニューの<b>「検索」</b>をタップ', s:'起動直後は「TODAY」画面。My Page・Market Today・トウシルの3タブ構成です。',
-     l:'iSPEEDのホーム「TODAY」。上部の白いピルでMy Page(自分用ダッシュボード)/Market Today(市況)/トウシル(投資メディア)を切り替えます。<b>下部メニューは自分で並び替えできる</b>ため、解説記事と自分の画面の並びが違うことがあります。'},
-    {g:'検索バーをタップ(「サンプル食品」と入力したことにします)', s:'銘柄名・銘柄コードのほか、ランキングやテーマからも探せます。',
+     l:'iSPEEDのホーム「TODAY」。上部の白いピルでMy Page(自分用ダッシュボード)/Market Today(市況)/トウシル（投資メディア）を切り替えます。<b>下部メニューは自分で並び替えできる</b>ため、解説記事と自分の画面の並びが違うことがあります。'},
+    {g:'検索バーをタップ（「サンプル食品」と入力したことにします）', s:'銘柄名・銘柄コードのほか、ランキングやテーマからも探せます。',
      l:'検索画面。キーワードのほか「ランキング」「業種」「テーマ」「スーパースクリーナー」からも探せます。'},
     {g:'画面右上の<b>「注文」</b>をタップ', s:'iSPEEDは銘柄画面の右上に注文への入口があります。',
-     l:'個別銘柄画面。銘柄カードに現在値(<b>上昇=赤</b>)と前日比(<b>下落=ミント緑</b>)が出ます。タブの下線がティール(青緑)なのもiSPEEDの特徴。サマリーの水色の項目名、赤/シアンのローソク足まで含めて、黒い画面に慣れればこっちのものです。'},
+     l:'個別銘柄画面。銘柄カードに現在値(<b>上昇=赤</b>)と前日比(<b>下落=ミント緑</b>)が出ます。タブの下線がティール（青緑）なのもiSPEEDの特徴。サマリーの水色の項目名、赤/シアンのローソク足まで含めて、黒い画面に慣れればこっちのものです。'},
     {g:'<b>「現物買い」</b>をタップ', s:'「信用新規」「信用返済」は上級者向け。触らなくてOK。',
-     l:'注文種別の選択。<b>買い系=赤、売り系=ティール(青緑)</b>という色分けがiSPEEDの文法です。初心者が使うのは「現物買い」「現物売り」だけ。'},
+     l:'注文種別の選択。<b>買い系=赤、売り系=ティール（青緑）</b>という色分けがiSPEEDの文法です。初心者が使うのは「現物買い」「現物売り」だけ。'},
     {g:'<b>「成行」</b>(か指値)を選び、口座は<b>「特定口座」</b>を選択して<b>「確認画面へ」</b>', s:'画面上部の「プロ/シンプル/かぶミニ」はシンプルのままで。',
-     l:'シンプル注文画面。ヘッダーごと赤くなるのが現物買いのサインです。上の3つのコントロール(指値/成行・口座区分・執行条件)と中央の大きな数量・価格だけで完結します。<b>「確認画面へ」ボタンは白いのが本物</b>——赤い注文ボタンはもっと後に出てきます。口座区分をタップすると下からメニューが出ます。'},
+     l:'シンプル注文画面。ヘッダーごと赤くなるのが現物買いのサインです。上の3つのコントロール（指値/成行・口座区分・執行条件）と中央の大きな数量・価格だけで完結します。<b>「確認画面へ」ボタンは白いのが本物</b>。赤い注文ボタンはもっと後に出てきます。口座区分をタップすると下からメニューが出ます。'},
     {g:'内容を確認して<b>「取引暗証番号入力へ」</b>をタップ', s:'楽天はここでワンクッションあります。',
      l:'注文確認画面。概算約定代金と手数料、概算受渡代金を確認します。①銘柄 ②数量 ③価格 ④口座区分 の指差し確認を。'},
-    {g:'取引暗証番号(入力済み)を確認して、赤い<b>「注文する」</b>をタップ', s:'ログインパスワードとは別の4桁の番号です。',
+    {g:'取引暗証番号（入力済み）を確認して、赤い<b>「注文する」</b>をタップ', s:'ログインパスワードとは別の4桁の番号です。',
      l:'ここが初見殺しポイント。<b>取引暗証番号はログインパスワードとは別物</b>で、口座開設時に自分で決めた4桁です。忘れていると発注できず、ここで挫折する人が多数。忘れた場合は楽天証券のWebサイトから再設定できます。「30分間省略」をONにすると連続注文が楽になります。'},
     {g:'注文完了', s:'',
-     l:'注文の状況は「注文照会」で確認します。約定すれば購入成立です。なおiSPEEDでは<b>入金はアプリ内で完結しない</b>ため、入金だけは楽天証券のWebサイト(またはマネーブリッジの自動入出金)で行います。'},
+     l:'注文の状況は「注文照会」で確認します。約定すれば購入成立です。なおiSPEEDでは<b>入金はアプリ内で完結しない</b>ため、入金だけは楽天証券のWebサイト（またはマネーブリッジの自動入出金）で行います。'},
   ],
   build: buildISP,
 },
@@ -1275,14 +1500,14 @@ monex: {
   cls:'t-mx', last:5,
   guides:[
     {g:'国内株を買うなら<b>黄色いアイコンの「マネックス証券アプリ」</b>をタップ', s:'マネックス最大の関門。アプリが複数ありますが、答えは1つです。',
-     l:'マネックスのアプリは役割分担制です。<br>・<b>マネックス証券アプリ(総合・黄色)…国内株はこれ</b><br>・マネックストレーダー株式…板発注などの上級者向け<br>・米国株アプリ…米国株専用<br>「どれで買うのか」で迷って挫折する人が続出しますが、最初は総合アプリだけで大丈夫です。'},
-    {g:'銘柄検索バーをタップ(「サンプル食品」と入力したことにします)', s:'黄色いヘッダーが総合アプリの目印。検索バーの右の「注文」ボタンからも進めます。',
-     l:'総合アプリのホーム。上部の白いボタン(保有残高/建玉/注文照会/入出金)がよく使うショートカットです。下部タブは「マーケット/フィード/資産/お知らせ/メニュー」の5つで、選択中は黄色になります。'},
+     l:'マネックスのアプリは役割分担制です。<br>・<b>マネックス証券アプリ（総合・黄色）…国内株はこれ</b><br>・マネックストレーダー株式…板発注などの上級者向け<br>・米国株アプリ…米国株専用<br>「どれで買うのか」で迷って挫折する人が続出しますが、最初は総合アプリだけで大丈夫です。'},
+    {g:'銘柄検索バーをタップ（「サンプル食品」と入力したことにします）', s:'黄色いヘッダーが総合アプリの目印。検索バーの右の「注文」ボタンからも進めます。',
+     l:'総合アプリのホーム。上部の白いボタン（保有残高/建玉/注文照会/入出金）がよく使うショートカットです。下部タブは「マーケット/フィード/資産/お知らせ/メニュー」の5つで、選択中は黄色になります。'},
     {g:'検索結果の銘柄の右側にある<b>「注文」</b>をタップ', s:'',
-     l:'検索結果の画面。銘柄名(青いリンク)をタップすると株価やチャートの詳細、右側の「注文」で直接注文画面へ進めます。'},
-    {g:'株数100、価格<b>「成行」</b>(か指値)、口座区分<b>「特定」</b>を選んで、緑の<b>「次へ(注文内容確認)」</b>', s:'ここから画面が「Webサイト風」に変わりますが、正常です。',
-     l:'第2の関門。マネックスの注文画面は会員向けWebサイトと同じ画面がベースで、<b>「急にアプリらしくない画面になった…壊れた?」と不安になりますが、それで正常</b>です。ピンク色のフォームに、市場「東証」+SORチェック(自動で有利な市場を選ぶ仕組み・そのままでOK)、株数、価格、口座区分が並びます。上の「注文情報入力→確認→完了」の丸が現在地を示します。'},
-    {g:'取引パスワード(入力済み)を確認して、緑の<b>「実行する」</b>をタップ', s:'ログインパスワードとは別物です。',
+     l:'検索結果の画面。銘柄名（青いリンク）をタップすると株価やチャートの詳細、右側の「注文」で直接注文画面へ進めます。'},
+    {g:'株数100、価格<b>「成行」</b>(か指値)、口座区分<b>「特定」</b>を選んで、緑の<b>「次へ（注文内容確認）」</b>', s:'ここから画面が「Webサイト風」に変わりますが、正常です。',
+     l:'第2の関門。マネックスの注文画面は会員向けWebサイトと同じ画面がベースで、<b>「急にアプリらしくない画面になった…壊れた？」と不安になりますが、それで正常</b>です。ピンク色のフォームに、市場「東証」+SORチェック（自動で有利な市場を選ぶ仕組み・そのままでOK）、株数、価格、口座区分が並びます。上の「注文情報入力→確認→完了」の丸が現在地を示します。'},
+    {g:'取引パスワード（入力済み）を確認して、緑の<b>「実行する」</b>をタップ', s:'ログインパスワードとは別物です。',
      l:'確認画面。成行注文への赤い注意書きが出るのも本物どおりです。<b>取引パスワードはログインパスワードとは別</b>で、口座開設時に設定しています。パスワードを変更・再設定すると「毎回入力する」設定に戻る仕様なので要注意。ログインできない場合は、ワンタイムパスワードのメールが迷惑メールフォルダに入っていないかも確認を。'},
     {g:'受付完了。「注文約定一覧」で状態を確認しましょう', s:'',
      l:'「ご注文を受け付けました。」が出たら発注成功。<b>「注文約定一覧」で状態が「約定済」</b>になれば購入成立です。ここまで来られたら、本番でもう迷いません。'},
@@ -1293,18 +1518,18 @@ monex: {
 fx: {
   cls:'t-fx', last:5, tick:3,
   guides:[
-    {g:'まずはレート一覧。<b>USD/JPY(米ドル/円)</b>の行をタップ', s:'FXは通貨の交換。左の青が売る値段(Bid)、右の赤が買う値段(Ask)です。',
+    {g:'まずはレート一覧。<b>USD/JPY(米ドル/円)</b>の行をタップ', s:'FXは通貨の交換。左の青が売る値段（Bid）、右の赤が買う値段（Ask）です。',
      l:'BidとAskの差を<b>スプレッド</b>といい、これがFXの実質的な取引コストです。「0.2」は0.2銭のこと。1万通貨の取引なら20円に相当します。ほとんどのFXアプリはこの「青・赤の2枚板」でレートを表示します。'},
     {g:'上がると思ったので、右の赤い<b>「買 Ask」</b>をタップ', s:'下がると思ったときは左の「売 Bid」。FXは売りからも入れます。',
-     l:'株(現物)と違い、FXは<b>「売り」から入って下落で利益を狙うこともできます</b>。チャートはローソク足で、見方は株と同じ。まずは上がるか下がるかの2択に賭ける、と考えれば十分です。'},
-    {g:'数量はそのまま(1,000通貨)、<b>「買 注文確定」</b>をタップ', s:'1,000通貨=約15万円分の取引。でも必要証拠金は約6,000円です。',
-     l:'これが<b>レバレッジ(国内最大25倍)</b>。約6,000円の証拠金で15万円分の取引ができる=損益も15万円分の値動きで発生します。<b>数量を小さくすることが、実質レバレッジを下げる唯一の方法</b>です。「スリッページ」は注文時の価格ズレの許容幅で、最初はデフォルトのままで問題ありません。'},
+     l:'株（現物）と違い、FXは<b>「売り」から入って下落で利益を狙うこともできます</b>。チャートはローソク足で、見方は株と同じ。まずは上がるか下がるかの2択に賭ける、と考えれば十分です。'},
+    {g:'数量はそのまま（1,000通貨）、<b>「買 注文確定」</b>をタップ', s:'1,000通貨=約15万円分の取引。でも必要証拠金は約6,000円です。',
+     l:'これが<b>レバレッジ（国内最大25倍）</b>。約6,000円の証拠金で15万円分の取引ができる=損益も15万円分の値動きで発生します。<b>数量を小さくすることが、実質レバレッジを下げる唯一の方法</b>です。「スリッページ」は注文時の価格ズレの許容幅で、最初はデフォルトのままで問題ありません。'},
     {g:'損益が動いています。頃合いを見て<b>「決済」</b>をタップ', s:'含み損益は、決済するまで確定しません。',
-     l:'保有中の取引を<b>ポジション(建玉)</b>といいます。下の「証拠金維持率」が下がるとロスカット(強制決済)に近づきます——この画面のように数千%あれば余裕ですが、数量を増やすほど余裕は消えます。'},
+     l:'保有中の取引を<b>ポジション（建玉）</b>といいます。下の「証拠金維持率」が下がるとロスカット（強制決済）に近づきます。この画面のように数千%あれば余裕ですが、数量を増やすほど余裕は消えます。'},
     {g:'<b>「決済注文確定」</b>をタップ', s:'決済=反対売買。買いポジションは「売って」終了します。',
-     l:'決済は売値(Bid)側で行われるため、<b>買った瞬間はスプレッド分だけマイナスから始まっています</b>。数pips動いてはじめて利益になる、という感覚を覚えてください。'},
+     l:'決済は売値（Bid）側で行われるため、<b>買った瞬間はスプレッド分だけマイナスから始まっています</b>。数pips動いてはじめて利益になる、という感覚を覚えてください。'},
     {g:'取引完了。これがFXの1サイクルです', s:'',
-     l:'新規→保有→決済で1サイクル。<b>1pip=0.01円、1,000通貨なら1pipで10円</b>の損益です。生き残るための定番ルール:①数量は小さく(実質レバレッジ数倍以内)②ロスカットに頼らず自分で損切り③寝る前に大きなポジションを持たない。デモトレードでもFXを体験できます。'},
+     l:'新規→保有→決済で1サイクル。<b>1pip=0.01円、1,000通貨なら1pipで10円</b>の損益です。生き残るための定番ルール:①数量は小さく（実質レバレッジ数倍以内）②ロスカットに頼らず自分で損切り③寝る前に大きなポジションを持たない。デモトレードでもFXを体験できます。'},
   ],
   build: buildFX,
 },
@@ -1313,19 +1538,19 @@ fxneo: {
   cls:'t-neo', last:7, tick:5,
   guides:[
     {g:'レート一覧です。<b>USD/JPY</b>の行をタップ', s:'左がBID(売る値段)、右がASK(買う値段)。真ん中の小さな数字がスプレッドです。',
-     l:'pipsの2桁だけ大きく表示するのはFXアプリ共通の作法。レートの矢印は<b>上昇=赤、下降=水色</b>です。BIDとASKの差(スプレッド)0.2銭が実質の取引コスト。'},
+     l:'pipsの2桁だけ大きく表示するのはFXアプリ共通の作法。レートの矢印は<b>上昇=赤、下降=水色</b>です。BIDとASKの差（スプレッド）0.2銭が実質の取引コスト。'},
     {g:'ローソク足で流れを確認したら、下の<b>「トレード」</b>タブをタップ', s:'FXネオのチャートは黒背景。陽線=赤、陰線=シアンです。',
-     l:'ローソク1本が一定時間の値動き(始値・高値・安値・終値)を表します。<b>赤い陽線=その時間で上がった、シアンの陰線=下がった</b>。上のSMA(5/13/25)は移動平均線=平均の流れ、右端のオレンジのタグが現在値です。全部読めなくても、「いま上り調子か下り調子か」が見えれば十分。'},
+     l:'ローソク1本が一定時間の値動き（始値・高値・安値・終値）を表します。<b>赤い陽線=その時間で上がった、シアンの陰線=下がった</b>。上のSMA(5/13/25)は移動平均線=平均の流れ、右端のオレンジのタグが現在値です。全部読めなくても、「いま上り調子か下り調子か」が見えれば十分。'},
     {g:'上がると思ったので、右の赤い<b>「(買) ASK」</b>パネルをタップ', s:'盾のような形の2枚パネルがFXネオの看板UIです。',
-     l:'下がると思ったときは左の青い「BID(売)」から。FXは<b>売りからも入れます</b>。下半分の「建玉サマリ」に保有中の取引(建玉=ポジション)が並びます。売買バッジは<b>買=赤、売=水色</b>。'},
+     l:'下がると思ったときは左の青い「BID(売)」から。FXは<b>売りからも入れます</b>。下半分の「建玉サマリ」に保有中の取引（建玉=ポジション）が並びます。売買バッジは<b>買=赤、売=水色</b>。'},
     {g:'数量は<b>0.1(=1,000通貨)</b>のまま、ティール色の<b>「確認画面へ」</b>をタップ', s:'注文タイプは「成行」が選ばれています。',
-     l:'FXネオは<b>0.1(1,000通貨)から</b>取引できます。1,000通貨=約15万円分の取引でも、必要証拠金は約6,000円——これがレバレッジ(最大25倍)。<b>数量を小さくすることが実質レバレッジを下げる唯一の方法</b>です。スリッページ欄は空欄=制限なし。「決済同時発注」は買うと同時に損切り・利確を予約する機能で、慣れたら便利です。'},
+     l:'FXネオは<b>0.1(1,000通貨)から</b>取引できます。1,000通貨=約15万円分の取引でも、必要証拠金は約6,000円。これがレバレッジ（最大25倍）。<b>数量を小さくすることが実質レバレッジを下げる唯一の方法</b>です。スリッページ欄は空欄=制限なし。「決済同時発注」は買うと同時に損切り・利確を予約する機能で、慣れたら便利です。'},
     {g:'内容を確認して、オレンジの<b>「注文確定」</b>をタップ', s:'FXネオの最終確定ボタンはオレンジ色です。',
      l:'キャンセル=グレー、進む=ティール、最終確定=オレンジ、という色の階層がFXネオの文法。確認画面は設定で省略できますが、事故のもとなので最初はこのままで。'},
     {g:'約定しました。損益が動いています。<b>「決済」</b>をタップ', s:'建玉一覧に保有中の取引が表示されています。',
-     l:'評価損益は<b>プラス=白、マイナス=赤</b>。「累計SWAP」はスワップポイント(金利差の受け払い)の合計です。含み損益は決済するまで確定しません。'},
-    {g:'決済(成行)画面です。オレンジの<b>「注文確定」</b>をタップ', s:'売買区分が自動で「売」(反対売買)になっています。',
-     l:'決済は建玉と反対方向の注文。決済損益(参考)が事前に見えます。決済はBID(売値)側で行われるため、スプレッド分は最初から不利——数pips動いてはじめて利益になります。'},
+     l:'評価損益は<b>プラス=白、マイナス=赤</b>。「累計SWAP」はスワップポイント（金利差の受け払い）の合計です。含み損益は決済するまで確定しません。'},
+    {g:'決済（成行）画面です。オレンジの<b>「注文確定」</b>をタップ', s:'売買区分が自動で「売」(反対売買)になっています。',
+     l:'決済は建玉と反対方向の注文。決済損益（参考）が事前に見えます。決済はBID(売値)側で行われるため、スプレッド分は最初から不利。数pips動いてはじめて利益になります。'},
     {g:'取引完了。これがFXの1サイクルです', s:'',
      l:'新規→建玉→決済で1周。<b>1pip=0.01円、1,000通貨なら1pipで10円</b>の損益です。生き残るための定番:①数量は小さく ②ロスカットに頼らず自分で損切り ③寝る前に大きな建玉を持たない。デモトレードのFXでも同じ画面で練習できます。'},
   ],
@@ -1337,18 +1562,18 @@ dmmfx: {
   guides:[
     {g:'レート一覧です。<b>USD/JPY</b>の行をタップ', s:'Bid(売)とAsk(買)の下の色付きラインが売り/買いの目印です。',
      l:'DMM FXは黒地に<b>ライム黄緑</b>がブランド色。通貨ペア名や選択中のタブがライムで光ります。数字のpips2桁が大きいのは他のFXアプリと同じ作法。'},
-    {g:'上がると思ったので、右の<b>Ask/買の円</b>をタップ', s:'右上の「切替」でローソク足チャート表示にもできます(陽線=赤/陰線=青)。',
-     l:'<b>売=シアン→青、買=オレンジ→赤のグラデーションリング</b>。円の間の小さな丸がスプレッド。下のライム色の線は直近の値動き(スパークライン)です。「切替」をタップするとチャート+横長のBid/Askボタンに切り替わるのも本物どおり。現在値のタグはライム色です。'},
+    {g:'上がると思ったので、右の<b>Ask/買の円</b>をタップ', s:'右上の「切替」でローソク足チャート表示にもできます（陽線=赤/陰線=青）。',
+     l:'<b>売=シアン→青、買=オレンジ→赤のグラデーションリング</b>。円の間の小さな丸がスプレッド。下のライム色の線は直近の値動き（スパークライン）です。「切替」をタップするとチャート+横長のBid/Askボタンに切り替わるのも本物どおり。現在値のタグはライム色です。'},
     {g:'売買で<b>「買」</b>を選んで、<b>「確認画面」</b>をタップ', s:'「新規 即時注文」画面。即時=成行のことです。',
-     l:'DMMは<b>1Lot=1万通貨</b>(約151万円分の取引、必要証拠金 約6万円)が最小単位。1,000通貨から始めたい人は他社(FXネオ・松井FXなど)を選ぶ、という判断材料になります。スリッページ2.0pips、「損切:OFF」は予約損切り機能で慣れたらON推奨。'},
+     l:'DMMは<b>1Lot=1万通貨</b>(約151万円分の取引、必要証拠金 約6万円)が最小単位。1,000通貨から始めたい人は他社（FXネオ・松井FXなど）を選ぶ、という判断材料になります。スリッページ2.0pips、「損切:OFF」は予約損切り機能で慣れたらON推奨。'},
     {g:'ライム緑の<b>「注 文」</b>をタップ', s:'選んだ「買」側の円だけ点灯し、反対側はグレーになります。',
-     l:'DMMの最終実行ボタンは<b>ライム地+黒文字</b>で統一。確認画面で方向(売/買)を視覚的にもう一度確かめさせる作りです。'},
+     l:'DMMの最終実行ボタンは<b>ライム地+黒文字</b>で統一。確認画面で方向（売/買）を視覚的にもう一度確かめさせる作りです。'},
     {g:'約定しました。損益が動いています。<b>「クイック決済」</b>をタップ', s:'本物では建玉の行を左にスワイプすると決済ボタンが出ます。',
-     l:'ポジション照会の行には数量(Lot)・約定レート・評価レート・pips損益・損益合計が並びます。<b>マイナスはピンク赤</b>。1Lot(1万通貨)は1pipで100円動きます——1,000通貨の10倍速です。'},
+     l:'ポジション照会の行には数量（Lot）・約定レート・評価レート・pips損益・損益合計が並びます。<b>マイナスはピンク赤</b>。1Lot(1万通貨)は1pipで100円動きます。1,000通貨の10倍速です。'},
     {g:'内容を確認して、ライムの<b>「クイック決済」</b>をタップ', s:'クイック決済=成行で即決済する機能です。',
      l:'ワンタップで決済できて便利な反面、誤タップで意図せず決済しがちな機能でもあります。本物のアプリでは確認ダイアログの表示設定を確認しておきましょう。'},
     {g:'注文を受け付けました。これがDMM FXの1サイクルです', s:'',
-     l:'新規(即時)→ポジション→クイック決済で1周。<b>1Lot=1万通貨は初心者には大きめの単位</b>です。値動きが速いと感じたら、より小さい単位で取引できる会社で慣れるのも立派な戦略です。'},
+     l:'新規（即時）→ポジション→クイック決済で1周。<b>1Lot=1万通貨は初心者には大きめの単位</b>です。値動きが速いと感じたら、より小さい単位で取引できる会社で慣れるのも立派な戦略です。'},
   ],
   build: buildDMM,
 },
@@ -1372,7 +1597,7 @@ function buildNeo(i){
       <div class="neo-shield ask ${mode==='tap'?'tap':''} ${mode==='dimask'?'dim':''} ${mode==='goldask'?'gold':''}" onclick="${mode==='tap'?'simNext()':''}">
         <span class="lab">⬇ (買) ASK</span>${neoNum('151.','23','2')}</div>
     </div>`;
-  const flap = (t)=>`<div class="neo-flap"><span class="f">${t}</span><span class="tick">米雇用統計は市場予想を上回る(サンプル)</span></div>`;
+  const flap = (t)=>`<div class="neo-flap"><span class="f">${t}</span><span class="tick">米雇用統計は市場予想を上回る（サンプル）</span></div>`;
   const subtabs = (on)=>`<div class="neo-subtabs"><div class="${on===0?'on':''}">建玉サマリ</div><div class="${on===1?'on':''}">建玉一覧</div><div class="${on===2?'on':''}">注文一覧</div><div class="${on===3?'on':''}">約定履歴</div></div>`;
   const q = (sim.qty/10000).toFixed(1);
 
@@ -1414,7 +1639,7 @@ function buildNeo(i){
 
   if(i===2) return sbarHTML('#000','#fff') + pairbar + panels('tap') + flap('トレード') + subtabs(0) + `
     <div class="neo-th"><span>通貨ペア (売買)</span><span>建玉数量/発注中</span><span>評価損益/累計SW</span></div>
-    <div class="apbody"><div style="padding:16px 12px; font-size:12px; color:#8a93a5;">建玉はありません。上の(買) ASKパネルをタップすると新規注文へ進みます。</div></div>` + tabbar(1);
+    <div class="apbody"><div style="padding:16px 12px; font-size:12px; color:#8a93a5;">建玉はありません。上の（買） ASKパネルをタップすると新規注文へ進みます。</div></div>` + tabbar(1);
 
   if(i===3) return sbarHTML('#000','#fff') + pairbar + flap('新規') + `
     <div class="sbi-toptabs" style="border-bottom:1px solid #2a3040;"><div class="on" style="border-bottom-color:#a8e6fc; color:#fff;">成行</div><div onclick="simWarnFxLimit()">通常</div><div onclick="simWarnFxLimit()">OCO</div><div onclick="simWarnFxLimit()">IFD</div><div onclick="simWarnFxLimit()">IFD-OCO</div></div>
@@ -1467,12 +1692,12 @@ function buildNeo(i){
     <div class="apbody">
       <div class="fx-frow"><span class="fl">売買区分</span><span>売 <span class="neo-badge s">売</span><span class="neo-chip" style="margin-left:10px;">建玉レート 151.232</span></span></div>
       <div class="fx-frow"><span class="fl">取引数量</span><span>${q} <span style="font-size:10.5px; color:#8a93a5;">(建玉数:${q} 発注数:0.0)</span></span></div>
-      <div class="fx-frow"><span class="fl">決済損益(参考)</span><span style="font-weight:800;">+${Math.round(0.035*sim.qty).toLocaleString()} 円</span></div>
+      <div class="fx-frow"><span class="fl">決済損益（参考）</span><span style="font-weight:800;">+${Math.round(0.035*sim.qty).toLocaleString()} 円</span></div>
       <div style="display:flex; justify-content:center; gap:12px; padding:14px 0;">
         <button class="neo-pill gray">キャンセル</button>
         <button class="neo-pill orange tap" onclick="simNext()">注文確定</button>
       </div>
-      <div style="padding:0 14px; font-size:10px; color:#8a93a5;">※練習用に確認画面を省略しています(本物では設定で選べます)</div>
+      <div style="padding:0 14px; font-size:10px; color:#8a93a5;">※練習用に確認画面を省略しています（本物では設定で選べます）</div>
     </div>` + tabbar(1);
 
   return sbarHTML('#000','#fff') + pairbar + panels('') + flap('トレード') + subtabs(3) + `
@@ -1483,7 +1708,7 @@ function buildNeo(i){
         <span style="font-size:11.5px; color:#cfd3da;">${q} / 151.267</span>
         <span style="font-weight:800; font-family:'Helvetica Neue',Arial,sans-serif;">+${Math.round(0.035*sim.qty).toLocaleString()}円</span>
       </div>
-      <div style="padding:14px 12px; font-size:12px; color:#8a93a5;">お疲れさまでした。新規→建玉→決済の1サイクル完了です(+3.5pips)。</div>
+      <div style="padding:14px 12px; font-size:12px; color:#8a93a5;">お疲れさまでした。新規→建玉→決済の1サイクル完了です（+3.5pips）。</div>
       <button class="exitbtn" onclick="exitSim()">ほかの練習にもどる</button>
     </div>` + tabbar(1);
 }
@@ -1561,7 +1786,7 @@ function buildDMM(i){
         <span class="dmm-rad" onclick="simWarnFxSell()"><i></i><span style="color:#1b8eda; font-weight:800;">売</span></span>
         <span class="dmm-rad ${sim.otype?'on':'tap'}" onclick="dmmSide()"><i></i><span style="color:#cb3138; font-weight:800;">買</span></span>
       </span></div>
-      <div class="fx-frow"><span class="fl">注文数量(Lot)<br><span style="font-size:9.5px; color:#9aa0ad;">発注可能数量 : 16</span></span><span style="display:flex; align-items:center; gap:8px;">
+      <div class="fx-frow"><span class="fl">注文数量（Lot）<br><span style="font-size:9.5px; color:#9aa0ad;">発注可能数量 : 16</span></span><span style="display:flex; align-items:center; gap:8px;">
         <span class="dmm-stp"><button onclick="qtyChange(-10000)">−</button><span class="v">${lots}</span><button onclick="qtyChange(10000)">+</button></span>
         <span style="font-size:10px; color:#9aa0ad;">1Lot=1万通貨<br>証拠金 約${Math.round(151.232*sim.qty/25/1000)}千円</span></span></div>
       <div class="fx-frow"><span class="fl">スリッページ<br><span style="font-size:9.5px; color:#9aa0ad;">(0-99.9pips)</span></span><span class="dmm-stp"><button>−</button><span class="v">2.0</span><button>+</button></span></div>
@@ -1575,9 +1800,9 @@ function buildDMM(i){
   if(i===3) return head('新規 即時注文', true) + circles('dim', true) + `
     <div class="apbody">
       <div class="fx-frow"><span class="fl">売買</span><span><span class="dmm-bbuy">買</span></span></div>
-      <div class="fx-frow"><span class="fl">注文数量(Lot)</span><span style="font-weight:700;">${lots}</span></div>
+      <div class="fx-frow"><span class="fl">注文数量（Lot）</span><span style="font-weight:700;">${lots}</span></div>
       <div class="fx-frow"><span class="fl">スリッページ</span><span>2.0</span></div>
-      <div class="fx-frow"><span class="fl">損切(参考)</span><span>OFF</span></div>
+      <div class="fx-frow"><span class="fl">損切（参考）</span><span>OFF</span></div>
       <div style="display:flex; justify-content:center; gap:12px; padding:16px 0;">
         <button class="dmm-pill gray" onclick="dmmBackForm()">キャンセル</button>
         <button class="dmm-pill lime tap" onclick="simNext()">注　文</button>
@@ -1586,7 +1811,7 @@ function buildDMM(i){
 
   if(i===4) return head('トレード') + pairbar + `
     <div class="dmm-subtabs"><div>ポジションサマリ</div><div class="on">ポジション照会</div><div>注文照会</div><div>約定履歴</div></div>
-    <div style="display:flex; justify-content:space-between; padding:6px 12px; font-size:9px; color:#9aa0ad; border-bottom:1px solid #262a37;"><span>通貨ペア(売買)<br>約定日時</span><span>数量(Lot)<br>決済可能数量</span><span>約定レート<br>評価レート</span><span>pips損益<br>損益合計</span></div>
+    <div style="display:flex; justify-content:space-between; padding:6px 12px; font-size:9px; color:#9aa0ad; border-bottom:1px solid #262a37;"><span>通貨ペア（売買）<br>約定日時</span><span>数量（Lot）<br>決済可能数量</span><span>約定レート<br>評価レート</span><span>pips損益<br>損益合計</span></div>
     <div class="apbody">
       <div class="dmm-posrow">
         <span>USD/JPY <span class="dmm-bbuy">買</span><br><span style="font-size:9px; color:#9aa0ad;">26/08/07 15:00</span></span>
@@ -1605,8 +1830,8 @@ function buildDMM(i){
         <div style="text-align:center; font-weight:800; font-size:14px; margin-bottom:10px;">クイック決済</div>
         <div class="fx-frow"><span class="fl">通貨ペア</span><span><b>USD/JPY</b></span></div>
         <div class="fx-frow"><span class="fl">決済</span><span><span class="dmm-bsell">売</span></span></div>
-        <div class="fx-frow"><span class="fl">注文数量(Lot)</span><span>${lots}</span></div>
-        <div class="fx-frow"><span class="fl">損益合計(円)</span><span style="font-weight:800;">+${Math.round(0.035*sim.qty).toLocaleString()}</span></div>
+        <div class="fx-frow"><span class="fl">注文数量（Lot）</span><span>${lots}</span></div>
+        <div class="fx-frow"><span class="fl">損益合計（円）</span><span style="font-weight:800;">+${Math.round(0.035*sim.qty).toLocaleString()}</span></div>
         <div style="display:flex; justify-content:center; gap:12px; padding-top:14px;">
           <button class="dmm-pill gray" onclick="dmmBackPos()">キャンセル</button>
           <button class="dmm-pill lime tap" onclick="simNext()">クイック決済</button>
@@ -1618,7 +1843,7 @@ function buildDMM(i){
     <div class="dmm-subtabs"><div>ポジションサマリ</div><div>ポジション照会</div><div>注文照会</div><div class="on">約定履歴</div></div>
     <div class="apbody">
       <div class="menuovl center" style="background:rgba(0,0,0,.35); position:absolute;"><div class="dmm-alert">
-        <div class="bd">注文を受け付けました。<br><span style="font-size:11.5px; color:#555;">USD/JPY 売 ${lots}Lot 実現損益 +${Math.round(0.035*sim.qty).toLocaleString()}円(+3.5pips)</span></div>
+        <div class="bd">注文を受け付けました。<br><span style="font-size:11.5px; color:#555;">USD/JPY 売 ${lots}Lot 実現損益 +${Math.round(0.035*sim.qty).toLocaleString()}円（+3.5pips）</span></div>
         <div class="ok" onclick="exitSim()">OK</div>
       </div></div>
       <div class="dmm-posrow" style="background:transparent; box-shadow:none;">
@@ -1637,7 +1862,7 @@ function dmmBack(){ sim.i = 1; sim.otype = null; renderSim(); }
 function dmmBackForm(){ sim.i = 2; renderSim(); }
 function dmmBackPos(){ sim.i = 4; renderSim(); }
 function confirmDmm(){
-  if(!sim.otype){ toastGuide('先に売買で「買」を選んでください(今回は買いの練習です)'); return; }
+  if(!sim.otype){ toastGuide('先に売買で「買」を選んでください（今回は買いの練習です）'); return; }
   simNext();
 }
 function simWarnKessai(){ toastGuide('「決済同時発注」は新規と同時に損切り・利確を予約する機能。慣れたら便利ですが、まずは基本の流れから'); }
@@ -1701,7 +1926,7 @@ function buildFX(i){
       <div class="fx-frow"><span class="fl">注文方式</span><span class="sbi-seg">
         <button class="sel">ストリーミング</button><button onclick="simWarnFxLimit()">指値</button><button onclick="simWarnFxLimit()">逆指値</button>
       </span></div>
-      <div class="fx-frow"><span class="fl">数量(通貨)</span><span class="sbi-step">
+      <div class="fx-frow"><span class="fl">数量（通貨）</span><span class="sbi-step">
         <button onclick="qtyChange(-1000)">−</button><span class="v">${sim.qty.toLocaleString()}</span><button onclick="qtyChange(1000)">+</button>
       </span></div>
       <div class="fx-frow"><span class="fl">概算取引額</span><span style="font-weight:700; font-family:'Helvetica Neue',Arial,sans-serif;">${gross.toLocaleString()}円</span></div>
@@ -1717,7 +1942,7 @@ function buildFX(i){
       <div class="fx-poscard">
         <div style="display:flex; justify-content:space-between; font-size:13px;"><b>USD/JPY 買</b><span style="color:#8b95a3;">${sim.qty.toLocaleString()}通貨</span></div>
         <div style="display:flex; justify-content:space-between; font-size:12px; margin-top:6px; color:#8b95a3;">
-          <span>建値 151.232</span><span>現在(Bid) <b id="fxNow" style="color:#e8eaee;">151.245</b></span>
+          <span>建値 151.232</span><span>現在（Bid） <b id="fxNow" style="color:#e8eaee;">151.245</b></span>
         </div>
         <div style="margin-top:10px; font-size:11px; color:#8b95a3;">評価損益</div>
         <div class="plv" id="fxPL" style="color:#E8483F;">+13円</div>
@@ -1730,7 +1955,7 @@ function buildFX(i){
   }
 
   if(i===4) return head('決済注文') + `<div class="apbody">
-      <div class="fx-frow"><span class="fl">対象</span><span><b>USD/JPY 買</b> ${sim.qty.toLocaleString()}通貨(建値 151.232)</span></div>
+      <div class="fx-frow"><span class="fl">対象</span><span><b>USD/JPY 買</b> ${sim.qty.toLocaleString()}通貨（建値 151.232）</span></div>
       <div class="fx-frow"><span class="fl">決済方式</span><span class="sbi-seg"><button class="sel">成行</button><button onclick="simWarnFxLimit()">指値</button></span></div>
       <div class="fx-frow"><span class="fl">数量</span><span>全量(${sim.qty.toLocaleString()}通貨)</span></div>
       <div class="fx-frow"><span class="fl">決済レート</span><span style="font-weight:700; font-family:'Helvetica Neue',Arial,sans-serif;">売 Bid 151.267</span></div>
@@ -1813,7 +2038,7 @@ function buildSBI(i){
       <span class="sbi-pill blue" onclick="simWarnSOR()">SOR</span><span class="sbi-pill">東証*</span><span class="sbi-pill">PTS</span>
       <span style="margin-left:auto; font-size:12px; display:inline-flex; align-items:center; gap:5px;" onclick="simWarnSkabu()">S株 <span class="sbi-chk"></span></span>
     </div>
-    <div class="sbi-banner">現物買(注文入力)</div>
+    <div class="sbi-banner">現物買（注文入力）</div>
     <div class="apbody"><div>
       <div class="sbi-frow"><span class="fl">買付余力</span><span class="fc" style="justify-content:flex-end; font-weight:700;">300,000円 ›</span></div>
       <div class="sbi-frow"><span class="fl">預り区分</span><span class="fc"><span class="sbi-seg">
@@ -1853,7 +2078,7 @@ function buildSBI(i){
   if(i===5) return head('(0000) サンプル食品', true) + `<div class="apbody" style="background:rgba(0,0,0,.55);">
       <div class="menuovl center"><div class="sbi-modal">
         <div class="mh">(0000) サンプル食品</div>
-        <div class="sbi-banner">現物買(注文確認)</div>
+        <div class="sbi-banner">現物買（注文確認）</div>
         <div style="background:#22243a; color:#cfd0da; font-size:11px; padding:6px 10px;">${sim.kubun}預りとしてご注文を受付いたします。</div>
         <div class="mtable">
           <div class="sbi-mrow"><span class="ml">市場</span><span class="mv">SOR</span></div>
@@ -1874,7 +2099,7 @@ function buildSBI(i){
     </div>`;
 
   return head('注文照会') + `<div class="apbody">
-      <div class="sbi-banner" style="background:#2a2d45;">現物買(注文受付)</div>
+      <div class="sbi-banner" style="background:#2a2d45;">現物買（注文受付）</div>
       <div style="padding:10px 12px; font-size:12px; color:#cfd0da;">26/08/07 15:01:02<br>${sim.kubun}預りとしてご注文を受付いたしました。</div>
       <div class="sbi-mrow"><span class="ml">注文番号</span><span class="mv">285</span></div>
       <div class="sbi-mrow"><span class="ml">株数</span><span class="mv">${sim.qty}株</span></div>
@@ -1992,7 +2217,7 @@ function buildISP(i){
       <div class="isp-row"><span>価格</span><span class="rv" style="font-size:14px;">${otypeLabel()}</span></div>
       <div class="isp-row"><span>口座区分</span><span class="rv" style="font-size:14px;">${sim.kubun}</span></div>
       <div class="isp-row"><span>概算約定代金</span><span class="rv" style="font-size:14px;">${sim.otype==='sashine'?'123,000':'123,400'}円</span></div>
-      <div class="isp-row"><span>手数料(税込)</span><span class="rv" style="font-size:14px;">0円</span></div>
+      <div class="isp-row"><span>手数料（税込）</span><span class="rv" style="font-size:14px;">0円</span></div>
       <div class="isp-row"><span>概算受渡代金</span><span class="rv" style="font-size:16px;">${sim.otype==='sashine'?'123,000':'123,400'}円</span></div>
       <div style="padding:10px 14px; font-size:10.5px; color:#8e8e8e; line-height:1.7;">【概算代金表示のご注意】成行注文の場合、約定代金が概算と異なる場合があります。</div>
       <button class="isp-white tap" onclick="simNext()">取引暗証番号入力へ</button>
@@ -2033,9 +2258,9 @@ function buildMX(i){
 
   if(i===0) return `<div class="sbar" style="background:#8fa6c6; color:#fff;"><b>9:41</b><span class="sright"><span class="sig"><i></i><i></i><i></i><i></i></span><span style="font-size:10px; font-weight:600;">5G</span><span class="batt"></span></span></div>
     <div class="apbody" style="background:linear-gradient(165deg,#a8bcd8,#dde5ef);">
-      <p style="padding:16px 18px 0; font-size:12px; color:#2c3038;">マネックスのアプリ、どれを開けばいい?</p>
+      <p style="padding:16px 18px 0; font-size:12px; color:#2c3038;">マネックスのアプリ、どれを開けばいい？</p>
       <div class="appgrid">
-        <div class="appicon tap" onclick="simNext()"><div class="ic" style="background:#FFC81A; color:#111;">マネックス<br>証券</div>総合(これ!)</div>
+        <div class="appicon tap" onclick="simNext()"><div class="ic" style="background:#FFC81A; color:#111;">マネックス<br>証券</div>総合（これ!）</div>
         <div class="appicon" onclick="simWarnTrader()"><div class="ic" style="background:#2b2b2e; color:#fff;">トレーダー<br>株式</div>上級者向け</div>
         <div class="appicon" onclick="simWarnUS()"><div class="ic" style="background:#1c3f6e; color:#fff;">米国株</div>米国株専用</div>
       </div>
@@ -2045,7 +2270,7 @@ function buildMX(i){
   if(i===1) return head() + `<div class="apbody" style="background:#fff;">
       <div class="mx-chips"><div>保有残高</div><div>建玉</div><div>注文照会</div><div>入出金</div></div>
       <div class="mx-search"><span class="in tap" onclick="simNext()">銘柄/証券コード</span><span class="bt">注 文</span></div>
-      <div class="mx-info"><span class="imp">【重要】</span>システムメンテナンスのお知らせ(練習用サンプル)<br>ⓘ 最終ログイン:2026/08/07 09:41</div>
+      <div class="mx-info"><span class="imp">【重要】</span>システムメンテナンスのお知らせ（練習用サンプル）<br>ⓘ 最終ログイン:2026/08/07 09:41</div>
       <div style="padding:4px 14px; font-size:13px; font-weight:800;">お客様へのご連絡 <span style="font-weight:400; font-size:11px; color:#0064C8;">[メッセージボード]</span></div>
       <div style="padding:2px 14px; font-size:12px; color:#555;">新着メッセージはありません</div>
     </div>` + tabbar(0);
@@ -2096,7 +2321,7 @@ function buildMX(i){
         <span class="mx-radio ${sim.kubun==='一般'?'on':''}" onclick="setKubun('一般')"><i></i>一般</span>
         <span class="mx-radio ${sim.kubun==='NISA'?'on':''}" onclick="setKubun('NISA')"><i></i>NISA</span>
       </div>
-      <button class="mx-green ${sim.otype&&sim.kubun?'tap':''}" onclick="confirmStep()" style="margin-bottom:16px;">次へ(注文内容確認)</button>
+      <button class="mx-green ${sim.otype&&sim.kubun?'tap':''}" onclick="confirmStep()" style="margin-bottom:16px;">次へ（注文内容確認）</button>
     </div>` + tabbar(0);
 
   if(i===4) return head() + `<div class="apbody" style="background:#fff;">
@@ -2107,7 +2332,7 @@ function buildMX(i){
       <div style="padding:2px 14px; font-size:12.5px;"><a href="#" onclick="return false;" style="color:#0064C8; font-weight:700;">[0000] サンプル食品</a> <span style="font-size:11px;">[SOR対象銘柄]</span></div>
       <div class="mx-ctable">
         <div class="r"><div class="l">口座区分</div><div class="v">${sim.kubun}</div></div>
-        <div class="r"><div class="l">市場</div><div class="v">東証(SOR)</div></div>
+        <div class="r"><div class="l">市場</div><div class="v">東証（SOR）</div></div>
         <div class="r"><div class="l">取引区分</div><div class="v">現物 買</div></div>
         <div class="r"><div class="l">株数</div><div class="v">${sim.qty}株</div></div>
         <div class="r"><div class="l">価格</div><div class="v">${otypeLabel()}</div></div>
@@ -2125,7 +2350,7 @@ function buildMX(i){
       <div style="text-align:center; font-size:11.5px; color:#666;">注文番号:12345678 受付:2026/08/07 15:01</div>
       <div class="mx-graybox">ご注文内容は、[注文約定一覧]で必ずご確認ください。<button class="mx-goldbtn" onclick="return false;">注文約定一覧</button></div>
       <div class="mx-ctable">
-        <div class="r"><div class="l" style="width:auto; flex:1; background:#fff;"><a href="#" onclick="return false;" style="color:#0064C8;">サンプル食品</a> <span style="font-size:11px; font-weight:400;">0000 東証(SOR)</span></div></div>
+        <div class="r"><div class="l" style="width:auto; flex:1; background:#fff;"><a href="#" onclick="return false;" style="color:#0064C8;">サンプル食品</a> <span style="font-size:11px; font-weight:400;">0000 東証（SOR）</span></div></div>
         <div class="r"><div class="l">取引区分</div><div class="v">現物 買 ${sim.qty}株 / ${otypeLabel()}</div></div>
         <div class="r"><div class="l">状態</div><div class="v" style="color:#0064C8; font-weight:700;">約定済</div></div>
       </div>
@@ -2148,7 +2373,7 @@ function exitSim(){
 function guideHTML(g){
   return `<span class="gtag">つぎの操作</span>${g.g}` + (g.s?`<div class="gsub">${g.s}</div>`:'');
 }
-// 練習を完走したときに「次にやること」を出す(行き止まりにしない)
+// 練習を完走したときに「次にやること」を出す（行き止まりにしない）
 function nextStepHTML(){
   const b = getBadges(), sk = getSkips();
   const next = CURRICULUM.find(s => !s.done(b) && !sk[s.key]) || CURRICULUM[CURRICULUM.length-1];
@@ -2208,11 +2433,11 @@ function setOtype(t){ sim.otype = t; renderSim(); }
 function setKubun(k){
   sim.kubun = k; renderSim();
   if(k==='一般') toastGuide('「一般」も選べますが、特定口座があるなら「特定」が基本です');
-  if(k==='NISA') toastGuide('NISA枠で買うときはこれ。非課税で買えます(枠の上限に注意)');
+  if(k==='NISA') toastGuide('NISA枠で買うときはこれ。非課税で買えます（枠の上限に注意）');
 }
 function confirmStep(){
-  if(!sim.otype){ toastGuide('先に価格(「成行」か「指値」)を選んでください'); return; }
-  if(!sim.kubun){ toastGuide('預り区分/口座区分(まずは「特定」)を選んでください'); return; }
+  if(!sim.otype){ toastGuide('先に価格（「成行」か「指値」）を選んでください'); return; }
+  if(!sim.kubun){ toastGuide('預り区分/口座区分（まずは「特定」）を選んでください'); return; }
   simNext();
 }
 function sbiBack(){ sim.i = 2; renderSim(); }
@@ -2229,8 +2454,8 @@ function simWarnGyaku(){ toastGuide('「逆指値」は損切り用の上級者�
 function simWarnTrader(){ toastGuide('「マネックストレーダー」は板発注などの上級者向け。最初は総合アプリで'); }
 function simWarnUS(){ toastGuide('それは米国株専用アプリです。日本株は総合アプリ「マネックス証券アプリ」で'); }
 function simWarnSOR(){ toastGuide('SOR=複数の市場から最も有利な価格を自動で探す仕組み。そのままでOK'); }
-function simWarnFxSell(){ toastGuide('今回は「買い」の練習。売り(ショート)は下がると思ったときに使います。売りから入れるのが株との大きな違い'); }
-function simWarnFxLimit(){ toastGuide('指値・逆指値は価格を指定する予約注文。まずは成行(ストリーミング)で流れをつかみましょう'); }
+function simWarnFxSell(){ toastGuide('今回は「買い」の練習。売り（ショート）は下がると思ったときに使います。売りから入れるのが株との大きな違い'); }
+function simWarnFxLimit(){ toastGuide('指値・逆指値は価格を指定する予約注文。まずは成行（ストリーミング）で流れをつかみましょう'); }
 function simWarnSkabu(){ toastGuide('S株=1株から買える単元未満株。今日は100株の練習なのでOFFのままで'); }
 function simWarnOCO(){ toastGuide('OCO/IFDは条件付きの上級者向け注文。最初は「通常」のままで大丈夫です'); }
 function simWarnCond(){ toastGuide('執行条件・期間はデフォルトのままで大丈夫。慣れたら使い分けましょう'); }
@@ -2247,7 +2472,7 @@ function toastGuide(msg){
 }
 
 /* =====================================================================
-   デモトレード(仮想資金100万円/localStorage保存)
+   デモトレード（仮想資金100万円/localStorage保存）
    ===================================================================== */
 const DST = {s1:{n:'サンプル食品',c:'0001'}, s2:{n:'れんしゅう自動車',c:'0002'}, s3:{n:'ダミー電機',c:'0003'}};
 let D = null;
@@ -2261,7 +2486,7 @@ function demoInitState(){
 }
 function demoLoad(){ if(D) return; try{ D = JSON.parse(localStorage.getItem('kabudojo_demo')); }catch(e){} if(!D || !D.px) demoInitState(); }
 function demoSave(){ localStorage.setItem('kabudojo_demo', JSON.stringify(D)); }
-function demoReset(){ if(!confirm('デモトレードを最初からやり直しますか?(記録は消えます)')) return; demoInitState(); demoSave(); renderDemo(); }
+function demoReset(){ if(!confirm('デモトレードを最初からやり直しますか？(記録は消えます)')) return; demoInitState(); demoSave(); renderDemo(); }
 function demoLog(m){ D.log.unshift(`【${D.day}日目】` + m); D.log = D.log.slice(0,14); }
 function demoMode(m){ demoLoad(); D.mode = m; demoSave(); renderDemo(); }
 function demoStart(){ demoLoad(); renderDemo(); clearInterval(window._demoT); window._demoT = setInterval(demoTick, 1000); }
@@ -2273,7 +2498,7 @@ function demoNextDay(){
     D.px[k] = np; D.hist[k].push(np); if(D.hist[k].length>30) D.hist[k].shift();
   });
   D.day++;
-  demoLog('相場が動きました(値動きは乱数です)');
+  demoLog('相場が動きました（値動きは乱数です）');
   demoSave(); renderDemo();
 }
 function demoBuy(k){
@@ -2379,7 +2604,7 @@ function demoStockValue(){ return ['s1','s2','s3'].reduce((s,k)=> s + D.px[k]*D.
 function demoStatsHTML(){
   const total = D.cash + demoStockValue() + demoFxUnrealized();
   const diff = total - 1000000;
-  return `<div><small>総資産(評価額)</small><b>${total.toLocaleString()}円</b></div>
+  return `<div><small>総資産（評価額）</small><b>${total.toLocaleString()}円</b></div>
     <div><small>現金</small><b>${D.cash.toLocaleString()}円</b></div>
     <div><small>スタートからの損益</small><b class="${diff>=0?'plus':'minus'}">${diff>=0?'+':''}${diff.toLocaleString()}円</b></div>`;
 }
@@ -2394,11 +2619,11 @@ function renderDemo(){
   const hint = document.getElementById('demoHint');
   if(D.mode==='stock'){
     ph.className = 'phone t-sbi';
-    hint.textContent = D.day + '日目。売買は100株単位。画面下の「翌日の相場へ」で1日進みます(値動きは乱数です)。';
+    hint.textContent = D.day + '日目。売買は100株単位。画面下の「翌日の相場へ」で1日進みます（値動きは乱数です）。';
     scr.innerHTML = demoStockScreen();
   } else {
     ph.className = 'phone t-neo';
-    hint.textContent = 'USD/JPYがリアルタイムに動いています(FXネオ風の画面)。数量を選び、青のBID(売)/赤のASK(買)パネルをタップすると注文できます。';
+    hint.textContent = 'USD/JPYがリアルタイムに動いています（FXネオ風の画面）。数量を選び、青のBID(売)/赤のASK(買)パネルをタップすると注文できます。';
     scr.innerHTML = demoFxScreen();
   }
   document.getElementById('demoLog').innerHTML = D.log.map(l=>`<div>${l}</div>`).join('');
@@ -2425,7 +2650,7 @@ function demoStockScreen(){
         ${h.q>0 ? `<div class="isub ${pl>=0?'up-sbi':'dn-sbi'}" style="margin-top:3px;">評価損益 ${pl>=0?'+':''}${pl.toLocaleString()}円</div>` : ''}
       </div></div>`;
   });
-  return sbarHTML() + `<div class="aphead"><span>口座管理(デモ)</span><span class="hr">${ico('reload')}</span></div>
+  return sbarHTML() + `<div class="aphead"><span>口座管理（デモ）</span><span class="hr">${ico('reload')}</span></div>
     <div class="sbi-toptabs"><div class="on">保有証券</div><div>評価損益</div><div>余力</div></div>
     <div class="apbody">
       <div class="sbi-frow"><span class="fl">買付余力</span><span class="fc" style="justify-content:flex-end; font-weight:700;">${D.cash.toLocaleString()}円</span></div>
@@ -2457,14 +2682,14 @@ function demoFxScreen(){
     </div>
     <div style="padding:2px 12px 0; flex-shrink:0;">
       <svg id="demoFxSpark" viewBox="0 0 320 40" preserveAspectRatio="none" style="display:block; width:100%; height:40px; background:rgba(255,255,255,.03);"><polyline points="${demoSparkPts()}" fill="none" stroke="#66d2d0" stroke-width="1.5"/></svg>
-      <div style="font-size:9px; color:#8a93a5; text-align:right;">値動き(ライブ)</div>
+      <div style="font-size:9px; color:#8a93a5; text-align:right;">値動き（ライブ）</div>
     </div>
-    <div class="fx-frow" style="border-bottom:1px solid #202838;"><span class="fl">取引数量(×10,000)</span><span class="sbi-seg">
+    <div class="fx-frow" style="border-bottom:1px solid #202838;"><span class="fl">取引数量（×10,000）</span><span class="sbi-seg">
       <button class="${D.fxUnits===1000?'sel':''}" onclick="demoFxUnitsSet(1000)">0.1</button>
       <button class="${D.fxUnits===5000?'sel':''}" onclick="demoFxUnitsSet(5000)">0.5</button>
       <button class="${D.fxUnits===10000?'sel':''}" onclick="demoFxUnitsSet(10000)">1.0</button>
     </span></div>
-    <div class="neo-flap"><span class="f">トレード</span><span class="tick">デモ口座で取引中(値動きは乱数です)</span></div>
+    <div class="neo-flap"><span class="f">トレード</span><span class="tick">デモ口座で取引中（値動きは乱数です）</span></div>
     <div class="neo-th"><span>通貨ペア (売買)</span><span>数量/建玉レート</span><span>評価損益</span></div>
     <div class="apbody">
       ${D.fxPos.length ? pos : '<div style="padding:14px 12px; font-size:12px; color:#8a93a5;">建玉はありません。上のBID(売)/ASK(買)パネルをタップで成行注文。</div>'}
@@ -2476,13 +2701,82 @@ function demoFxScreen(){
     <div class="tabbar"><div>${ico('grid')}ホーム</div><div class="on">${ico('reload')}トレード</div><div><i style="font-style:italic; font-weight:800; font-size:12px; display:block;">SPEED</i>スピード注文</div><div>${ico('globe')}マーケット</div><div>${ico('chart')}チャート</div><div class="gold">${ico('coin')}通貨ペア</div></div>`;
 }
 
-/* ===== URLハッシュ(ページ直リンク) ===== */
+/* ===== URLハッシュ（ページ直リンク） ===== */
+/* ===== 銘柄の探し方: 権利日計算 + スクリーニング練習(全銘柄が架空) ===== */
+function calcKenri(){
+  const v = document.getElementById('kcDate').value;
+  const out = document.getElementById('kcOut');
+  if(!v){ out.textContent = '日付を入れると、いつまでに買えばいいか計算します。'; return; }
+  // 権利確定日の2営業日前(土日のみ考慮)
+  let d = new Date(v + 'T00:00:00'), back = 0;
+  while(back < 2){
+    d.setDate(d.getDate() - 1);
+    if(d.getDay() !== 0 && d.getDay() !== 6) back++;
+  }
+  const f = x => `${x.getFullYear()}年${x.getMonth()+1}月${x.getDate()}日(${'日月火水木金土'[x.getDay()]})`;
+  const rakuochi = new Date(d);
+  do { rakuochi.setDate(rakuochi.getDate()+1); } while(rakuochi.getDay()===0 || rakuochi.getDay()===6);
+  out.innerHTML = `この日の優待・配当が欲しいなら、<b>${f(d)}の大引けまで</b>に100株持っている必要があります。翌営業日の${f(rakuochi)}が権利落ち日で、この日に買っても対象外です。`;
+}
+
+/* 架空銘柄。実在企業を連想させない名前にし、値動き・チャートは一切持たせない */
+const SCR_DB = [
+  {nm:'青葉フーズ',        sec:'食品',      pr:1840,  yd:2.3, yu:1, eq:58, st:6},
+  {nm:'みなと運輸',        sec:'物流',      pr:920,   yd:3.4, yu:1, eq:41, st:3},
+  {nm:'第一こもれび銀行',  sec:'銀行',      pr:640,   yd:4.2, yu:0, eq:12, st:2},
+  {nm:'サクラ精機',        sec:'機械',      pr:4380,  yd:2.8, yu:0, eq:66, st:12},
+  {nm:'ひまわり石油',      sec:'エネルギー', pr:2150, yd:4.8, yu:0, eq:35, st:0},
+  {nm:'つばめ商事',        sec:'商社',      pr:3120,  yd:3.6, yu:0, eq:44, st:8},
+  {nm:'もみじ外食HD',      sec:'外食',      pr:2890,  yd:0.7, yu:1, eq:52, st:0},
+  {nm:'しらかば製薬',      sec:'医薬',      pr:5460,  yd:2.1, yu:0, eq:74, st:15},
+  {nm:'こだま通信',        sec:'通信',      pr:1480,  yd:3.1, yu:1, eq:47, st:11},
+  {nm:'わかば住宅',        sec:'建設',      pr:780,   yd:5.1, yu:1, eq:38, st:1},
+  {nm:'あさひ電材',        sec:'電子部品',  pr:6820,  yd:1.4, yu:0, eq:71, st:9},
+  {nm:'ゆずりは保険HD',    sec:'保険',      pr:2340,  yd:3.9, yu:0, eq:18, st:7},
+  {nm:'かもめ鉄道',        sec:'鉄道',      pr:8100,  yd:1.8, yu:1, eq:29, st:4},
+  {nm:'すずらん化粧品',    sec:'化粧品',    pr:1120,  yd:2.6, yu:1, eq:63, st:5},
+  {nm:'いちょうリース',    sec:'リース',    pr:940,   yd:3.8, yu:1, eq:14, st:13},
+];
+function runScreen(){
+  const yd = +document.getElementById('fYield').value;
+  const yu = document.getElementById('fYutai').value;
+  const eq = +document.getElementById('fEquity').value;
+  const st = +document.getElementById('fStreak').value;
+  const bg = +document.getElementById('fBudget').value;
+  const hit = SCR_DB.filter(x =>
+    x.yd >= yd && (!yu || x.yu) && x.eq >= eq && x.st >= st && (!bg || x.pr*100 <= bg));
+  // 条件を1つでも触ったら「探し方を練習した」と記録(開いただけでは付けない)
+  if(yd || yu || eq || st || bg){ try{ earnBadge('screen'); }catch(e){} }
+  document.getElementById('scrCount').textContent = `${hit.length}件 / ${SCR_DB.length}件`;
+  document.getElementById('scrList').innerHTML = hit.length ? hit.map(x => `
+    <div class="scr-row">
+      <span class="nm">${x.nm}<small>${x.sec}</small>${x.yu?'<span class="yu">優待</span>':''}</span>
+      <span class="dt">最低 <b class="num">${(x.pr*100).toLocaleString()}</b>円<br>
+        利回り<span class="num">${x.yd.toFixed(1)}</span>%・自己資本<span class="num">${x.eq}</span>%・増配<span class="num">${x.st}</span>年</span>
+    </div>`).join('')
+    : '<p class="muted" style="padding:20px 0;">条件に合う銘柄がありません。条件を1つ緩めてみてください。実際のスクリーナーでも「絞りすぎて0件」はよく起きます。</p>';
+  const msgs = [];
+  if(yd >= 4) msgs.push('利回り4%以上に絞ると、業績悪化で株価が下がって利回りが上がっているだけの会社も混ざります。実際の画面では配当性向とセットで見る人が多いです。');
+  if(yu && bg && bg <= 100000) msgs.push('「優待あり×10万円以下」は現実でも人気の条件なので、該当銘柄は少なめです。');
+  if(eq >= 60) msgs.push('自己資本比率は業種差が大きい指標です。銀行・保険・リースが消えたのは業態上そうなるためで、危険という意味ではありません。');
+  document.getElementById('scrHint').innerHTML = msgs.length ? '<b>気づきましたか？</b> ' + msgs.join('<br>') : '';
+}
+function resetScreen(){
+  for(const id of ['fYield','fYutai','fEquity','fStreak','fBudget']) document.getElementById(id).selectedIndex = 0;
+  runScreen();
+}
+runScreen();
+document.getElementById('ctaScreen').innerHTML =
+  ctaHTML('matsui','本物のスクリーナーは、口座があれば無料で使えます。電話サポートつきの松井証券') +
+  ctaHTML('sbi','スクリーナーの条件項目が多い定番、SBI証券');
+
 function routeHash(){
   const h = location.hash.replace('#','');
   if(h && h!=='sim' && document.getElementById('page-'+h) && !document.getElementById('page-'+h).classList.contains('active')){ showPage(h); }
 }
 window.addEventListener('hashchange', routeHash);
 routeHash();
+renderHeroShot();
 </script>
 </body>
 </html>
