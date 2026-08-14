@@ -12,7 +12,10 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<!-- 数字用の欧文フォント。描画を止めないよう非同期で読み込む(本文は端末のフォントで即描画される) -->
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet"
+      media="print" onload="this.media='all'; this.onload=null;">
+<noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet"></noscript>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="株デビュー道場">
 <meta property="og:title" content="株デビュー道場|株とFXの注文画面を、本番そっくりに練習">
@@ -1145,6 +1148,32 @@
         <tr><th>開設</th><td>2026年8月</td></tr>
       </table>
       <p class="muted" style="margin-top:12px;">当サイトは、株式投資をこれから始める方向けに、証券会社のアプリ操作を疑似体験できる学習コンテンツを提供する個人運営のサイトです。金融商品取引業者ではなく、投資助言・代理業も行いません。</p>
+
+      <h3 style="margin-top:26px;">なぜこのサイトを作ったか</h3>
+      <p>証券口座を開設してアプリを入れたのに、注文画面の前で手が止まって、そのまま何も買わずに終わった。この経験が出発点です。</p>
+      <p style="margin-top:10px;">それが特殊な話でないことは、あとから数字で分かりました。金融庁の調査では、NISA口座2,820万件のうち<b>36.6%(約1,045万口座)が2025年中の買付額0円</b>です。3人に1人以上が、口座を作ったところで止まっています。原因のすべてが資金不足とは思えません。<b>操作が分からなくて止まった人が、相当数いるはずです。</b></p>
+      <p style="margin-top:10px;">投資の判断は教えられません。資格もありませんし、そもそも他人が決めることではないと思っています。ただ<b>「どのボタンをどの順番で押すか」は、事前に練習できます。</b>それだけを提供するサイトです。</p>
+
+      <h3 style="margin-top:26px;">記事の書き方について</h3>
+      <ul style="margin-top:8px;">
+        <li>数字は<b>金融庁・日本証券業協会・日本取引所グループ(JPX)・各証券会社の公式ページ</b>など、一次資料から取っています。記事中に出典を明記します。</li>
+        <li>当サイトが計算した数値(割り戻しや構成比)は、<b>「当サイトの計算」と明記</b>し、一次資料の公表値と区別します。</li>
+        <li><b>個別銘柄の推奨は行いません。</b>金融商品取引法上の投資助言業にあたるためです。銘柄は「探し方」だけを扱い、練習画面の銘柄はすべて架空です。</li>
+        <li>手数料や制度は変わります。<b>確認した時点を記事に書き</b>、最新は公式で確認するようご案内しています。</li>
+        <li>証券会社のロゴ・スクリーンショットは使用していません。画面は公開情報をもとにした<b>自作の再現</b>で、掲載各社とは一切関係がありません。</li>
+      </ul>
+
+      <h3 style="margin-top:26px;">できること・できないこと</h3>
+      <div class="tblwrap" style="margin-top:8px;">
+        <table class="cmp" style="min-width:0;">
+          <tr><th style="width:46%;">練習で減らせるもの</th><th>練習では減らせないもの</th></tr>
+          <tr>
+            <td>桁の打ち間違い／売買の取り違え／預り区分の選び間違い／注文が通らないときの原因切り分け</td>
+            <td>相場の値動き。買った株が下がることは、どれだけ練習しても防げません</td>
+          </tr>
+        </table>
+      </div>
+      <p class="muted" style="margin-top:10px;">デモで上手くいっても本番で同じ結果になるとは限りません。当サイトで身につくのは<b>操作</b>であって、損失の痛みや相場の判断ではない、という点は正直にお伝えしておきます。</p>
     </div>
 
     <div class="card card--minor">
