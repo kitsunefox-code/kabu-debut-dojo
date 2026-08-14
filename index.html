@@ -380,6 +380,13 @@
   .simwarn{max-width:430px; margin:18px auto 0; background:#fff8e6; border:1px solid #e3c86a;
     padding:10px 14px; font-size:12.5px; color:#5c4708; line-height:1.75;}
 
+  /* FXの元本超過損失リスク。ページを開いた最初に必ず目に入る位置に置く */
+  .riskbar{margin-top:24px; background:#fdf3f2; border:1px solid #d9a9a3; border-left:4px solid var(--red);
+    padding:16px 18px; font-size:13.5px; line-height:1.9; color:#5a2823;}
+  .riskbar b{color:var(--red);}
+  .riskbar b:first-child{display:block; font-size:14.5px; margin-bottom:4px;}
+  .riskbar a{color:var(--red); font-weight:700;}
+
   .guide{background:#fff; border:1px solid var(--line); border-left:4px solid var(--navy); padding:12px 16px; margin:14px auto; max-width:430px; font-size:14px;}
   .guide .gtag{display:block; font-size:10px; font-weight:800; letter-spacing:.16em; color:var(--navy); margin-bottom:2px;}
   .guide .gsub{font-weight:400; font-size:12px; color:var(--sub); margin-top:3px; line-height:1.7;}
@@ -898,6 +905,12 @@
 <!-- ================= FX ================= -->
 <section class="page" id="page-fx">
   <div class="wrap">
+    <div class="riskbar">
+      <b>はじめにお読みください</b>
+      FXは<b>預けた資金(証拠金)を超える損失が生じる可能性がある</b>取引です。相場の急変時にはロスカットが間に合わず、口座残高がマイナスになって追加の支払い(追証)が発生することがあります。
+      当サイトは練習用であり、FXを勧めるものではありません。<a href="#" onclick="showPage('fx'); document.getElementById('fxrisk').scrollIntoView({behavior:'smooth'}); return false;">リスクの詳細はこちら</a>
+    </div>
+
     <div class="card card--plain">
       <h2 data-ic="yougo">FXとは。株と何が違うのか</h2>
       <p class="muted">FX(外国為替証拠金取引)は、通貨を交換して差益を狙う取引です。株とは性質がまったく違うので、違いを知ってから触るのが安全です。</p>
@@ -923,6 +936,32 @@
         <button style="--bp:#87bb22;" onclick="startSim('dmmfx')"><h3>DMM FX</h3><p>2つの巨大な円形Bid/Askが看板。1Lot(1万通貨)の「即時注文→クイック決済」を再現。</p><span class="go">練習をはじめる →</span></button>
       </div>
       <p class="muted" style="margin-top:12px;">※各社の公開情報（公式操作マニュアル・ストア掲載画像等）をもとにした非公式の再現イメージです。ロゴは使用しておらず、実際のアプリとは画面・文言が異なる場合があります（2026年8月時点）。</p>
+    </div>
+
+    <div class="card card--feature" id="fxrisk">
+      <h2 data-ic="chui">FXのリスク。始める前に必ず知っておくこと</h2>
+      <p class="muted">練習画面では絶対に体験できないのが、この5つです。デモで上手くいっても、本番ではこれらが起きます。</p>
+
+      <h3>1. 預けた資金を超えて損をすることがある</h3>
+      <p>株の現物取引なら、最悪でも投資した金額がゼロになるだけです。<b>FXは違います。</b>相場が急変すると、証拠金以上の損失が発生し、口座残高がマイナスになります。この不足金は<b>あなたが支払う義務を負います</b>。FX会社は不足金の発生日から数営業日以内の入金を求めるのが一般的です。</p>
+
+      <h3>2. ロスカットは「その価格」を保証しない</h3>
+      <p>「証拠金維持率100%で自動的に決済されるから安心」ではありません。FX会社の説明にも、<b>ロスカットは維持率100%となる価格での約定や損失額を保証するものではない</b>と明記されています。流動性が下がると決済注文自体が約定せず、損失がさらに拡大します。</p>
+
+      <h3>3. 週明けに価格が飛ぶ(窓開け)</h3>
+      <p>為替は土日に取引が止まりますが、世界では出来事が起き続けます。月曜の始値が金曜の終値から大きく離れることがあり、<b>その間に置いた損切り注文は機能しません</b>。逆指値は週明けの始値で執行されるため、想定より大きく不利な価格で決済されます。週をまたいでポジションを持つのは、それ自体がリスクです。</p>
+
+      <h3>4. スプレッドは「原則固定」であって固定ではない</h3>
+      <p>広告に出ている「0.2銭」は平常時の数字です。<b>早朝・経済指標の発表時・週明け・相場急変時には大きく開きます。</b>拡大の最大値を公表している会社もあり、平常時の何十倍という水準になることがあります。さらにレート配信が一時停止して、その間は新規注文も決済もできなくなる場合があります。</p>
+
+      <h3>5. 証拠金いっぱいに建てると、建てた瞬間に終わる</h3>
+      <p>資金の全額を使ってポジションを持つと、<b>スプレッド分の評価損が即座に発生して必要証拠金を下回り、その場でロスカットされます。</b>これはFX会社が公式に注意喚起している事象です。証拠金には必ず余裕を持たせてください。</p>
+
+      <div class="note"><span class="notetag">目安</span>FX会社や解説では、<b>1回の取引の損失を証拠金の2%以内に抑える</b>という考え方がよく紹介されています。また、レバレッジは最大25倍ですが、初心者が実質レバレッジを数倍以内に抑えるのは、この余裕を確保するためです。</div>
+
+      <div class="note"><span class="notetag">業者選び</span>FX取引を行えるのは<b>金融庁の登録を受けた業者</b>だけです。SNSや知人経由で紹介される未登録業者(海外業者を含む)は、出金できない・破綻時に資産が戻らないなどの被害が報告されています。<b>必ず金融庁の登録業者一覧で確認してください。</b></div>
+
+      <p class="muted" style="margin-top:14px;">当サイトは非公式の学習用サイトで、金融商品取引業者ではありません。特定のFX会社・通貨ペア・取引タイミングを推奨するものではなく、投資助言・代理業も行いません。取引条件やルールは各社で異なり変更されるため、必ず公式サイトの取引説明書・契約締結前交付書面をご確認ください。</p>
     </div>
 
     <div class="card card--minor">
@@ -1344,7 +1383,8 @@ document.getElementById('ctaCompare').innerHTML =
   ctaHTML('monex','米国株もやるなら、マネックス証券') +
   ctaHTML('gmofx','株とFXを1つのIDでまとめたいなら、GMOクリック証券');
 document.getElementById('ctaFx').innerHTML =
-  ctaHTML('gmofx','FXの定番。1,000通貨から始められるGMOクリック証券') +
+  '<p class="muted" style="margin-top:18px;">※FXは預けた証拠金を超える損失が生じる可能性のある取引です。上のリスク説明を読んだうえで、余裕資金の範囲でご検討ください。</p>' +
+  ctaHTML('gmofx','1,000通貨から始められるGMOクリック証券') +
   ctaHTML('matsuifx','1通貨から試せる松井証券のMATSUI FX');
 
 /* ===== badges ===== */
