@@ -381,6 +381,38 @@
     padding:10px 14px; font-size:12.5px; color:#5c4708; line-height:1.75;}
 
   /* FXの元本超過損失リスク。ページを開いた最初に必ず目に入る位置に置く */
+
+  /* ===== フィッシング判別の練習 ===== */
+  .ph-case{background:var(--card); border:1px solid var(--line); margin-top:22px; overflow:hidden;}
+  .ph-scene{background:#eef0f3; padding:14px;}
+  /* 偽サイトの見分けは「アドレスバー」から始まるので、まずそこを再現する */
+  .ph-bar{display:flex; align-items:center; gap:8px; background:#fff; border:1px solid #cfd3da;
+    border-radius:999px; padding:7px 14px; font-size:12.5px; color:#3c4046;
+    font-family:var(--num); overflow-x:auto; white-space:nowrap;}
+  .ph-bar .lk{font-size:12px; flex:none;}
+  .ph-bar .lk.no{color:var(--red); font-weight:700;}
+  .ph-bar .lk.ok{color:#38843a;}
+  .ph-body{background:#fff; border:1px solid #cfd3da; border-top:none; padding:18px 16px;}
+  .ph-brand{font-size:15px; font-weight:800; color:#1b3a68; margin-bottom:10px;}
+  .ph-msg{font-size:13.5px; line-height:1.9;}
+  .ph-fld{margin-top:12px;}
+  .ph-fld label{display:block; font-size:11.5px; color:var(--sub); margin-bottom:3px;}
+  .ph-fld div{border:1px solid #cfd3da; border-radius:3px; padding:8px 10px; font-size:12.5px; color:#9a9a9a; background:#fafafa;}
+  .ph-btn{margin-top:12px; background:#1b3a68; color:#fff; text-align:center; padding:10px;
+    border-radius:3px; font-size:13px; font-weight:700;}
+  .ph-ask{display:flex; gap:10px; padding:16px; border-top:1px solid var(--line);}
+  .ph-ask button{flex:1; padding:12px; font-size:14px; font-weight:800; cursor:pointer;
+    border:1px solid var(--navy); background:#fff; color:var(--navy); font-family:inherit;}
+  .ph-ask button:hover{background:#f0f3f8;}
+  .ph-ans{padding:0 16px 16px; font-size:13.5px; line-height:1.95;}
+  .ph-ans .verdict{display:inline-block; font-weight:800; padding:3px 12px; margin-bottom:8px; font-size:13px;}
+  .ph-ans .verdict.ng{background:#fdf3f2; color:var(--red); border:1px solid #d9a9a3;}
+  .ph-ans .verdict.ok{background:#f2f8f2; color:#2c6b2e; border:1px solid #a9c9ab;}
+  .ph-ans ul{margin:8px 0 0; padding-left:20px;}
+  .ph-ans li{margin-bottom:4px;}
+  .ph-score{background:#fafaf8; border:1px solid var(--line); padding:14px 18px; margin-top:24px;
+    font-size:14px; font-weight:700;}
+
   .riskbar{margin-top:24px; background:#fdf3f2; border:1px solid #d9a9a3; border-left:4px solid var(--red);
     padding:16px 18px; font-size:13.5px; line-height:1.9; color:#5a2823;}
   .riskbar b{color:var(--red);}
@@ -688,6 +720,7 @@
   <button data-page="fx">FXの練習</button>
   <button data-page="demo">デモトレード</button>
   <button data-page="screen">銘柄の探し方</button>
+  <button data-page="phish">偽サイト判別</button>
   <button data-page="gloss">用語辞典</button>
 </div></nav>
 
@@ -1144,6 +1177,42 @@
   </div>
 </section>
 
+<!-- ================= フィッシング判別の練習 ================= -->
+<section class="page" id="page-phish">
+  <div class="wrap">
+
+    <div class="riskbar">
+      <b>なぜこの練習を作ったか</b>
+      金融庁のまとめでは、2025年の1年間で証券口座への不正アクセスは17,559件、不正に取引された金額は<b>約7,393億円</b>にのぼりました。原因の多くは、実在の証券会社を装った<b>偽サイト(フィッシング)</b>にIDとパスワードを入力してしまうことです。
+      口座の操作を覚えるのと同じくらい、<b>偽物を見抜く目</b>が要ります。
+    </div>
+
+    <div class="card card--plain">
+      <h2 data-ic="chui">偽サイトを見抜く練習</h2>
+      <p class="muted">下の画面が<b>本物か偽物か</b>を判断してください。全6問です。答えると、どこを見れば分かったのかを解説します。</p>
+      <div class="simwarn" style="max-width:none;">登場する会社はすべて<b>架空</b>です。実在の証券会社の偽ログイン画面は、たとえ教材でも作りません(それ自体が悪用できてしまうため)。<b>見抜き方の型</b>を覚えるための画面です。</div>
+    </div>
+
+    <div id="phList"></div>
+    <div class="ph-score" id="phScore"></div>
+
+    <div class="card card--feature" style="margin-top:36px;">
+      <h2 data-ic="kouza">結局どうすれば安全か</h2>
+      <p class="muted">見抜く練習をした上で、そもそも見抜かなくて済む習慣を持つのが一番確実です。</p>
+      <ul class="steps">
+        <li><b>メールやSMSのリンクからログインしない</b><br>これだけで、フィッシングの大半は防げます。ログインは<b>ブックマークか公式アプリから</b>と決めてしまってください。「リンクを踏んでも、そこではログインしない」が守れれば十分です。</li>
+        <li><b>アドレスバーのドメインを、末尾から読む</b><br>偽サイトは本物に似た文字列を<b>前半に</b>置きます。重要なのは「/」の直前、いちばん右側のドメインです。ここが公式と1文字でも違えば偽物です。</li>
+        <li><b>急かされたら、いったん閉じる</b><br>「24時間以内に」「口座を凍結しました」は、考える時間を奪うための定番の文句です。本物の重要連絡なら、公式サイトにログインすれば同じ通知が出ています。</li>
+        <li><b>パスキーなど、フィッシングに強い認証を使う</b><br>日本証券業協会は2025年10月にガイドラインを改定し、フィッシング耐性のある多要素認証を必須としました。各社が対応を進めているので、選べるなら有効にしてください。</li>
+        <li><b>それでも入力してしまったら、すぐ動く</b><br>心当たりがあれば、パスワードの変更と証券会社への連絡を最優先に。時間が経つほど被害は広がります。</li>
+      </ul>
+      <div class="note"><span class="notetag">出典</span>金融庁「証券会社や日本証券業協会を騙ったSNS上の偽広告等にご注意ください」「インターネット取引サービスへの不正アクセス・不正取引にご注意ください」／日本証券業協会のガイドライン改定(2025年10月)／報道各社。</div>
+    </div>
+
+    <div id="ctaPhish"></div>
+  </div>
+</section>
+
 <section class="page" id="page-gloss">
   <div class="wrap">
     <div class="card card--plain">
@@ -1405,6 +1474,7 @@ const BADGES = [
   {id:'fxneo',  label:'FXネオ'},
   {id:'dmmfx',  label:'DMM FX'},
   {id:'screen', label:'銘柄の探し方'},
+  {id:'phish',  label:'偽サイト判別'},
 ];
 
 /* ===== ヒーローに実物のスマホ画面を静止表示（テキストだけの画面を壊す） ===== */
@@ -2853,6 +2923,136 @@ runScreen();
 document.getElementById('ctaScreen').innerHTML =
   ctaHTML('matsui','本物のスクリーナーは、口座があれば無料で使えます。電話サポートつきの松井証券') +
   ctaHTML('sbi','スクリーナーの条件項目が多い定番、SBI証券');
+
+/* ===== フィッシング判別の練習(登場する会社はすべて架空) =====
+   実在の証券会社を模した偽ログイン画面は、教材であっても作らない。
+   悪用可能な成果物になるため、架空ブランドで「手口の型」だけを再現する。 */
+const PHISH = [
+  {
+    fake:true, https:true,
+    url:'minato-shoken-login.com/auth',
+    brand:'みなと証券',
+    msg:'【重要】お客様の口座に<b>不正なログイン</b>を検知しました。<br>24時間以内にご確認いただけない場合、口座を凍結いたします。',
+    form:true,
+    tells:[
+      '<b>ドメインが公式と別物。</b>本物が minato-sec.co.jp なら、minato-shoken-login.com は完全な別サイトです。前半に社名らしい文字を並べて、それらしく見せています',
+      '<b>「24時間以内」「凍結」で急かしている。</b>考える時間を奪うのが目的です',
+      'https:// になっていても<b>安全の証明にはなりません。</b>暗号化されているだけで、相手が本物という意味ではありません'
+    ]
+  },
+  {
+    fake:false, https:true,
+    url:'minato-sec.co.jp/login',
+    brand:'みなと証券',
+    msg:'ログインしてお取引にお進みください。',
+    form:true,
+    tells:[
+      '<b>ドメインが公式そのもの。</b>「/」の直前が minato-sec.co.jp で、余計な文字が付いていません',
+      '<b>急かす文言がない。</b>ただログインを促すだけです',
+      '<b>ただし、これが本物だと確信できるのは自分でブックマークから開いたときだけ。</b>メールのリンクから来た場合は、URLが本物に見えても一度閉じて公式から入り直すのが安全です'
+    ]
+  },
+  {
+    fake:true, https:false,
+    url:'aoba-shoken.co.jp.secure-login.net/',
+    brand:'青葉証券',
+    msg:'システムメンテナンスのため、再度ログインをお願いします。',
+    form:true,
+    tells:[
+      '<b>これが一番だまされやすい型です。</b>aoba-shoken.co.jp と書いてありますが、これはドメインではなく<b>サブドメイン</b>。実際のドメインは末尾の secure-login.net です',
+      '<b>ドメインは右から読む。</b>「/」の直前にある最後の2つ(secure-login.net)が本体で、その左は何とでも書けます',
+      '<b>http:// で暗号化すらされていません。</b>正規の金融機関のログイン画面では、まず起こりません'
+    ]
+  },
+  {
+    fake:true, https:true,
+    url:'sakura-sec.co.jp/verify',
+    brand:'さくら証券',
+    msg:'ログインが完了しました。セキュリティ強化のため、<b>ワンタイムパスワード(6桁)</b>と<b>取引暗証番号</b>をあわせてご入力ください。',
+    form:true, formLabel:'ワンタイムパスワード / 取引暗証番号',
+    tells:[
+      '<b>ドメインは本物でも、要求内容が異常です。</b>URLだけ見ていると見抜けない型で、正規サイトが乗っ取られた場合や、中継されている場合に起こります',
+      '<b>ワンタイムパスワードと取引暗証番号を同時に聞くのは危険な兆候。</b>ワンタイムパスワードは、その場の1回の操作を認証するためのものです。「あとで使うから」と預ける性質のものではありません',
+      '<b>「セキュリティ強化のため」は万能の口実。</b>この言葉が出てきたら、いったん止まって公式アプリから確認してください'
+    ]
+  },
+  {
+    fake:true, https:true,
+    url:'minato-sec.co.jp.jp-account.info/mypage',
+    brand:'みなと証券',
+    msg:'お客様のNISA口座に<b>未受取の配当金</b>があります。受け取り手続きにお進みください。',
+    form:true,
+    tells:[
+      '<b>また末尾が別ドメインです。</b>本体は jp-account.info。co.jp を途中に挟むのは典型的な手口で、「.co.jp があるから日本の正規企業だ」と思わせようとしています',
+      '<b>「未受取のお金がある」で釣っている。</b>脅す型と誘う型があり、これは後者です。得をしそうな話ほど、いったん止まってください',
+      '本物の配当金の連絡なら、<b>公式アプリにログインすれば同じ通知が出ています。</b>リンクを踏む必要がありません'
+    ]
+  },
+  {
+    fake:true, https:true,
+    url:'kabu-support-center.com/reissue',
+    brand:'株式サポートセンター',
+    msg:'ご利用の証券会社にかわり、パスワードの再発行を代行いたします。<br>ご利用の証券会社名・ID・パスワードをご入力ください。',
+    form:true, formLabel:'証券会社名 / ログインID / パスワード',
+    tells:[
+      '<b>そもそも存在しない立場です。</b>証券会社に「かわって」パスワードを扱う第三者機関はありません',
+      '<b>複数社のIDとパスワードをまとめて集めようとしている。</b>これは業者を装った収集そのものです',
+      '<b>社名で検索しても実体が出てこない。</b>迷ったら、その名前を検索して、金融庁の登録業者一覧に載っているかを確かめてください'
+    ]
+  }
+];
+
+let phAnswered = {};
+function renderPhish(){
+  document.getElementById('phList').innerHTML = PHISH.map((c,i) => {
+    const done = phAnswered[i];
+    const proto = c.https
+      ? '<span class="lk ok">🔒 https://</span>'
+      : '<span class="lk no">⚠ 保護されていない通信 http://</span>';
+    return `
+    <div class="ph-case">
+      <div class="ph-scene">
+        <div class="ph-bar">${proto}<span>${c.url}</span></div>
+        <div class="ph-body">
+          <div class="ph-brand">${c.brand}</div>
+          <div class="ph-msg">${c.msg}</div>
+          ${c.form ? `<div class="ph-fld"><label>${c.formLabel || 'ログインID / パスワード'}</label><div>入力欄（練習用のため入力できません）</div></div>` : ''}
+          <div class="ph-btn">ログイン</div>
+        </div>
+      </div>
+      ${done ? phAnswerHTML(c, i) : `
+      <div class="ph-ask">
+        <button onclick="phAnswer(${i}, true)">これは偽物だと思う</button>
+        <button onclick="phAnswer(${i}, false)">これは本物だと思う</button>
+      </div>`}
+    </div>`;
+  }).join('');
+  const n = Object.keys(phAnswered).length;
+  const ok = Object.values(phAnswered).filter(v => v.correct).length;
+  const el = document.getElementById('phScore');
+  if(n === 0){ el.textContent = `全${PHISH.length}問。上から順に判断してみてください。`; return; }
+  el.innerHTML = n < PHISH.length
+    ? `${n} / ${PHISH.length}問 回答済み（正解 ${ok}）`
+    : `<b>全${PHISH.length}問おわり。正解 ${ok} / ${PHISH.length}。</b><br>
+       <span style="font-weight:400; font-size:13.5px;">${ok === PHISH.length
+         ? '全問正解です。ただし本番では、こんなに落ち着いて見られないことのほうが多い。だからこそ「メールのリンクからログインしない」を習慣にしておくのが確実です。'
+         : '間違えた問題の解説をもう一度読んでみてください。とくに<b>ドメインは右から読む</b>——ここだけで大半は見抜けます。'}</span>`;
+}
+function phAnswerHTML(c, i){
+  const a = phAnswered[i];
+  return `<div class="ph-ans">
+    <span class="verdict ${c.fake ? 'ng' : 'ok'}">${c.fake ? '偽物' : '本物'}${a.correct ? '（正解）' : '（不正解）'}</span>
+    <ul>${c.tells.map(t => `<li>${t}</li>`).join('')}</ul>
+  </div>`;
+}
+function phAnswer(i, saidFake){
+  phAnswered[i] = { correct: saidFake === PHISH[i].fake };
+  if(Object.keys(phAnswered).length === PHISH.length){ try{ earnBadge('phish'); }catch(e){} }
+  renderPhish();
+}
+renderPhish();
+document.getElementById('ctaPhish').innerHTML =
+  '<p class="muted" style="margin-top:22px;">※当サイトは非公式の学習用サイトです。実際の不正アクセスに関する対応は、必ずご利用の証券会社と公的機関の案内に従ってください。</p>';
 
 function routeHash(){
   const h = location.hash.replace('#','');
